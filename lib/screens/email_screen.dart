@@ -3,6 +3,7 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
 import "package:hessa/constants/app_colors.dart";
 import "package:hessa/screens/login-screen.dart";
+import "package:hessa/screens/register_screen.dart";
 import "package:hessa/widgets/custom_button.dart";
 import "package:hessa/widgets/custom_circular_button.dart";
 import "package:hessa/widgets/custom_text_field.dart";
@@ -84,7 +85,11 @@ class _EmailScreenState extends State<EmailScreen> {
                            height: 50,
                            text: "Continue",
                            onTap: () {
-                             Get.to(LoginScreen());
+                             if (emailAddressController.text == "mostafa3132004@gmail.com") {
+                               Get.to(LoginScreen(emailAddress: emailAddressController.text,));
+                             } else {
+                               Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
+                             }
                            }
                          ),
                        ],
@@ -93,7 +98,6 @@ class _EmailScreenState extends State<EmailScreen> {
                    customCircularButton(
                        child: SvgPicture.asset("assets/images/google.svg", width: 30, height: 30,)
                    )
-
                  ],
                ),
              ))

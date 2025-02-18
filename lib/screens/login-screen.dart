@@ -7,7 +7,9 @@ import '../widgets/custom_circular_button.dart';
 import '../widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final String emailAddress;
+
+  const LoginScreen({super.key, required this.emailAddress});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -71,35 +73,32 @@ class _LoginScreenState extends State<LoginScreen> {
                                 padding: EdgeInsets.symmetric(
                                   vertical: screenHeight * 0.03,
                                 ),
-                                child: Container(
-                                  // color: AppColors.white2,
-                                  child: Column(
-                                    children: [
-                                      customTextField(
-                                          controller: emailAddressController,
-                                          icon: Icons.email_rounded,
-                                          iconColor: AppColors.green800,
-                                          inputColor: AppColors.white2,
-                                          iconBackgroundColor: AppColors.green100,
-                                          placeholder: "example@gmail.com",
-                                          screenWidth: screenWidth,
-                                          type: TextInputType.emailAddress
-                                      ),
-                                      SizedBox(height: 15,),
-                                      customTextField(
-                                          controller: passwordController,
-                                          icon: Icons.lock,
-                                          iconColor: AppColors.purple950,
-                                          inputColor: AppColors.white2,
-                                          iconBackgroundColor: AppColors.purple100,
-                                          placeholder: "Password",
-                                          screenWidth: screenWidth,
-                                          type: TextInputType.text,
-                                          obscure: true
-                                      ),
-                                      SizedBox(height: 15,),
-                                    ],
-                                  ),
+                                child: Column(
+                                  children: [
+                                    customTextField(
+                                        controller: emailAddressController,
+                                        icon: Icons.email_rounded,
+                                        iconColor: AppColors.green800,
+                                        inputColor: AppColors.white2,
+                                        iconBackgroundColor: AppColors.green100,
+                                        placeholder: "example@gmail.com",
+                                        screenWidth: screenWidth,
+                                        type: TextInputType.emailAddress
+                                    ),
+                                    SizedBox(height: 15,),
+                                    customTextField(
+                                        controller: passwordController,
+                                        icon: Icons.lock,
+                                        iconColor: AppColors.purple950,
+                                        inputColor: AppColors.white2,
+                                        iconBackgroundColor: AppColors.purple100,
+                                        placeholder: "Password",
+                                        screenWidth: screenWidth,
+                                        type: TextInputType.text,
+                                        obscure: true
+                                    ),
+                                    SizedBox(height: 15,),
+                                  ],
                                 ),
                               ),
 

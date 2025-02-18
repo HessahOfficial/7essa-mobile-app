@@ -9,8 +9,10 @@ Widget customTextField({
   required String placeholder,
   required double screenWidth,
   required TextEditingController controller,
+  void Function(String val)? onChanged,
   double? height,
   double? borderRadius,
+  double? iconSize,
   TextInputType? type,
   bool? obscure,
 }) {
@@ -31,13 +33,14 @@ Widget customTextField({
             radius: borderRadius?? 20,
             child: Icon(
                 icon,
-                size: 17,
+                size: iconSize?? 17,
                 color: iconColor
             ),
           ),),
         SizedBox(
           width: screenWidth * 0.7,
           child: TextFormField(
+            onChanged: onChanged,
             obscureText: obscure?? false,
             controller: controller,
             keyboardType: TextInputType.text,
