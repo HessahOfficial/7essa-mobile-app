@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget textButton({
+Widget customTextButton({
   required String text,
   required Color color,
   void Function()? onTap
