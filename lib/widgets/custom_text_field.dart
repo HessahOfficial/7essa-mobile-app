@@ -12,6 +12,7 @@ Widget customTextField({
   double? height,
   double? borderRadius,
   TextInputType? type,
+  bool? obscure,
 }) {
   return Container(
     margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
@@ -37,6 +38,7 @@ Widget customTextField({
         SizedBox(
           width: screenWidth * 0.7,
           child: TextFormField(
+            obscureText: obscure?? false,
             controller: controller,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(

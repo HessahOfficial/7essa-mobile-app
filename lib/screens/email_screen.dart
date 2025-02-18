@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
 import "package:hessa/constants/app_colors.dart";
+import "package:hessa/screens/login-screen.dart";
 import "package:hessa/widgets/custom_button.dart";
 import "package:hessa/widgets/custom_circular_button.dart";
 import "package:hessa/widgets/custom_text_field.dart";
@@ -83,7 +84,7 @@ class _EmailScreenState extends State<EmailScreen> {
                            height: 50,
                            text: "Continue",
                            onTap: () {
-                             print("email: ${emailAddressController.text}");
+                             Get.to(LoginScreen());
                            }
                          ),
                        ],
