@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hessa/screens/splash_screen.dart';
-import 'package:get/get.dart';
 
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 void main() {
   runApp(const MyApp());
@@ -20,14 +20,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-            fontFamily: "SF-Mono"
-        ),
+        theme: ThemeData(fontFamily: "SF-Mono"),
         debugShowCheckedModeBanner: false,
         scaffoldMessengerKey: scaffoldMessengerKey,
-        home: SplashScreen()
-    );
+        home: SplashScreen());
   }
 }
-
-
