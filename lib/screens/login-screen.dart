@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+
+import 'package:hessa/screens/matched_property_screen.dart';
 
 import '../constants/app_colors.dart';
 import '../utils/validator.dart';
@@ -141,7 +144,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         width: 150,
                                         height: 50,
                                         text: "Login",
-                                        onTap: () {}
+                                        onTap: () {
+                                          if (emailAddressController.text.isNotEmpty && passwordController.text.isNotEmpty
+                                          && errorEmailAddress.isEmpty && errorPassword.isEmpty) {
+                                            Get.to(MatchedPropertyScreen());
+                                          }
+                                        }
                                     )
                                   ],
                                 )
