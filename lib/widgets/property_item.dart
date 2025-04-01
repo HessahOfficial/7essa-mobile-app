@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:hessa/constants/app_colors.dart';
+import 'package:hessa/screens/property_screen.dart';
+
+import '../constants/property_data.dart';
 
 class PropertyItem extends StatefulWidget {
   final double screenWidth;
   final double screenHeight;
+  final PropertyModel property;
+  final bool isMatched;
 
   const PropertyItem({
     super.key,
     required this.screenWidth,
-    required this.screenHeight
+    required this.screenHeight,
+    required this.property,
+    this.isMatched = true
   });
 
   @override
@@ -20,8 +28,14 @@ class _PropertyItemState extends State<PropertyItem> {
   @override
   Widget build(BuildContext context) {
 
+    PropertyModel property = widget.property;
+
     return GestureDetector(
-      onTap: (){ print("Inside Property Item!"); },
+      onTap: (){
+        if (widget.isMatched) {
+          Get.to(PropertyScreen(property: widget.property,));
+        }
+      },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: widget.screenHeight * 0.01),
         // height: 340,
@@ -37,18 +51,18 @@ class _PropertyItemState extends State<PropertyItem> {
                   borderRadius: BorderRadius.circular(20)
               ),
               width: double.infinity,
-              child: SvgPicture.asset("assets/images/google.svg", height: 220, ),
+              child: SvgPicture.asset(property.image, height: 220, ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Deluxe Apartment", style: TextStyle(
+                  Text(property.name, style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25
                   ),),
-                  Text("\$276000", style: TextStyle(
+                  Text("\$${property.price}", style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                       color: AppColors.accentColor
@@ -64,13 +78,13 @@ class _PropertyItemState extends State<PropertyItem> {
                   Row(
                     children: [
                       Icon(Icons.location_on, color: AppColors.gray),
-                      Text("2BW Street NY, New York", style: TextStyle(
+                      Text(property.location, style: TextStyle(
                           color: AppColors.gray,
                           fontSize: 17
                       ),)
                     ],
                   ),
-                  Text("(2000sqft)", style: TextStyle(
+                  Text("(${property.area}sqft)", style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontSize: 17,
                       color: AppColors.gray
@@ -87,21 +101,21 @@ class _PropertyItemState extends State<PropertyItem> {
                     children: [
                       SvgPicture.asset("assets/images/bed.svg", width: 17, height: 17,),
                       SizedBox(width: 5,),
-                      Text("4 Bed", style: TextStyle(
+                      Text("${property.beds} Bed", style: TextStyle(
                           color: AppColors.gray,
                           fontSize: 17
                       ),),
                       SizedBox(width: 30,),
                       SvgPicture.asset("assets/images/bath.svg", width: 17, height: 17,),
                       SizedBox(width: 5,),
-                      Text("4 Bath", style: TextStyle(
+                      Text("${property.baths} Bath", style: TextStyle(
                           color: AppColors.gray,
                           fontSize: 17
                       ),),
                       SizedBox(width: 30,),
                       SvgPicture.asset("assets/images/kitchen.svg", width: 17, height: 17,),
                       SizedBox(width: 5,),
-                      Text("4 Kitchen", style: TextStyle(
+                      Text("${property.kitchens} Kitchen", style: TextStyle(
                           color: AppColors.gray,
                           fontSize: 17
                       ),)
