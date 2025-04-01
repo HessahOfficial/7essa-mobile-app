@@ -5,6 +5,7 @@ import 'package:hessa/constants/app_colors.dart';
 import 'package:hessa/constants/property_data.dart';
 import 'package:hessa/widgets/custom_chart.dart';
 import 'package:hessa/widgets/property_item.dart';
+import 'package:get/get.dart';
 
 class PropertyScreen extends StatefulWidget {
   final PropertyModel property;
@@ -41,7 +42,12 @@ class _PropertyScreenState extends State<PropertyScreen> {
             child: Container()
           )
         ],
-        leading: Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.accentColor,),
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.accentColor,),
+        ),
         title: Text("Property Details", style: TextStyle(
           fontWeight: FontWeight.bold
         ),),
