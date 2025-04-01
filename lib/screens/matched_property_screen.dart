@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
+import "package:hessa/constants/property_data.dart";
 import "package:hessa/widgets/custom_search_bar.dart";
 import "package:hessa/widgets/fixed_header_delegate.dart";
 import "package:hessa/widgets/property_item.dart";
@@ -24,6 +25,8 @@ class _MatchedPropertyScreenState extends State<MatchedPropertyScreen> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    List<PropertyModel> list = data;
 
     return Scaffold(
       backgroundColor: AppColors.white1,
@@ -87,9 +90,13 @@ class _MatchedPropertyScreenState extends State<MatchedPropertyScreen> {
                   top: screenHeight * 0.01
               ),
               sliver: SliverList.builder(
-                itemCount: 30,
+                itemCount: list.length,
                 itemBuilder: (context , index) {
-                  return PropertyItem(screenWidth: screenWidth, screenHeight: screenHeight);
+                  return PropertyItem(
+                      screenWidth: screenWidth,
+                      screenHeight: screenHeight,
+                      property: list[index],
+                  );
               })
           )
         ],
