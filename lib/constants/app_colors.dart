@@ -22,4 +22,11 @@ class AppColors {
   static const Color chartLine = Color(0xFFEAAB6E);
   static const Color belowChartLine = Color(0xFFF6E6D7);
   static const Color horizontalGridLine = Color(0xFFDFDFE3);
+  static const Color orange = Color(0xFFF0635A);
+  static const Color hover = Color(0xFFF3F1F6);
+  static const Color darkGray = Color(0xFF828282);
+  static const Color lightOrange = Color(0xFFFBEAE2);
+  static const Color purple = Color(0xFF9747FF);
+  static const Color skyBlue = Color(0xFF7DD3FC);
+  static const Color skyBlue300 = Color(0xFF93C5FD);
 }
