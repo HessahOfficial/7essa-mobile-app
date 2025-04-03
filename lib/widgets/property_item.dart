@@ -36,7 +36,7 @@ class _PropertyItemState extends State<PropertyItem> {
           Get.to(PropertyScreen(property: widget.property,));
         }
       },
-      child: Container(
+      child: Expanded(child: Container(
         margin: EdgeInsets.symmetric(vertical: widget.screenHeight * 0.01),
         // height: 340,
         decoration: BoxDecoration(
@@ -60,11 +60,11 @@ class _PropertyItemState extends State<PropertyItem> {
                 children: [
                   Text(property.name, style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 25
+                      fontSize: 20
                   ),),
                   Text("\$${property.price}", style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontSize: 20,
                       color: AppColors.accentColor
                   ),),
                 ],
@@ -75,27 +75,23 @@ class _PropertyItemState extends State<PropertyItem> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Icon(Icons.location_on, color: AppColors.gray),
-                      Text(property.location, style: TextStyle(
-                          color: AppColors.gray,
-                          fontSize: 17
-                      ),)
-                    ],
-                  ),
-                  Text("(${property.area}sqft)", style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 17,
-                      color: AppColors.gray
-                  ),),
+                  Icon(Icons.location_on, color: AppColors.gray),
+                  Expanded(
+                    child: Text("${property.location} (${property.area}sqft)",
+                      style: TextStyle(
+                        color: AppColors.gray,
+                        fontSize: 15
+                      ),
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                    )
+                  )
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+              child: Wrap(
                 children: [
                   Row(
                     children: [
@@ -103,21 +99,21 @@ class _PropertyItemState extends State<PropertyItem> {
                       SizedBox(width: 5,),
                       Text("${property.beds} Bed", style: TextStyle(
                           color: AppColors.gray,
-                          fontSize: 17
+                          fontSize: 15
                       ),),
-                      SizedBox(width: 30,),
+                      SizedBox(width: 20,),
                       SvgPicture.asset("assets/images/bath.svg", width: 17, height: 17,),
                       SizedBox(width: 5,),
                       Text("${property.baths} Bath", style: TextStyle(
                           color: AppColors.gray,
-                          fontSize: 17
+                          fontSize: 15
                       ),),
-                      SizedBox(width: 30,),
+                      SizedBox(width: 20,),
                       SvgPicture.asset("assets/images/kitchen.svg", width: 17, height: 17,),
                       SizedBox(width: 5,),
                       Text("${property.kitchens} Kitchen", style: TextStyle(
                           color: AppColors.gray,
-                          fontSize: 17
+                          fontSize: 15
                       ),)
                     ],
                   ),
@@ -126,7 +122,7 @@ class _PropertyItemState extends State<PropertyItem> {
             )
           ],
         ),),
-      ),
+      )),
     );
   }
 }

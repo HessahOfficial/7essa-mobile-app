@@ -42,7 +42,7 @@ class _SettingItemState extends State<SettingItem> {
       child: GestureDetector(
         onLongPressStart: (value) {
           setState(() {
-            background = AppColors.hover;
+            background = AppColors.gray;
           });
         },
         onLongPressEnd: (value) {
