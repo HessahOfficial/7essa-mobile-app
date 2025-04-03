@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hessa/screens/login-screen.dart';
+import 'package:hessa/screens/notifications_screen.dart';
 import 'package:hessa/widgets/setting_item.dart';
 
 import '../constants/app_colors.dart';
@@ -68,6 +69,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: "Notifications",
                   backgroundColor: AppColors.skyBlue,
                   icon: Icons.notifications,
+                  onTap: () {
+                    Get.to(NotificationsScreen());
+                  },
                 ),
               ],
             ),
