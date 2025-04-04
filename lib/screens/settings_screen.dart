@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hessa/screens/contact_us_screen.dart';
 import 'package:hessa/screens/login-screen.dart';
 import 'package:hessa/screens/notifications_screen.dart';
+import 'package:hessa/screens/privacy_policy_screen.dart';
 import 'package:hessa/widgets/setting_item.dart';
 
 import '../constants/app_colors.dart';
@@ -33,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           onTap: () {
             Get.back();
           },
-          child: Icon(Icons.arrow_back_ios_new_rounded,),
+          child: Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.accentColor,),
         ),
         title: Text("Settings", style: TextStyle(
             fontWeight: FontWeight.bold
@@ -59,7 +60,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: "Privacy Policy",
                   backgroundColor: AppColors.lightOrange,
                   iconWidget: FaIcon(FontAwesomeIcons.checkCircle, color: AppColors.orange, size: 20,),
-
+                  onTap: () {
+                    Get.to(PrivacyPolicyScreen());
+                  },
                 ),
                 SettingItem(
                   title: "Contact Us",
