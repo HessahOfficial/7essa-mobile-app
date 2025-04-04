@@ -31,4 +31,26 @@ class Validator {
     }
     return message;
   }
+
+  static String validatePhone({required String phone}) {
+    String message = "";
+    RegExp regex = RegExp(r'^\+?[1-9]\d{0,2}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$');
+    if (phone.isEmpty) {
+      message = "Phone field is required!";
+    } else if (!regex.hasMatch(phone)) {
+      message = "Invalid Phone Number!";
+    }
+    return message;
+  }
+
+  static String validateMessage({required String message}) {
+    String anotherMessage = "";
+    if (message.isEmpty) {
+      anotherMessage = "Message field is required!";
+    }
+    return anotherMessage;
+  }
+
+
+
 }
