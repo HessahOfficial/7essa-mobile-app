@@ -24,6 +24,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.white1,
+        surfaceTintColor: AppColors.white1,
         leading: GestureDetector(
           onTap: () {
             Get.back();

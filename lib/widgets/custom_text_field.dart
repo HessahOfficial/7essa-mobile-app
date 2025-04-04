@@ -15,7 +15,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? type;
   final bool? obscure;
   final int? maxLines;
-  final int? maxLenght;
+  final int? maxLength;
 
   const CustomTextField({
     Key? key,
@@ -33,7 +33,7 @@ class CustomTextField extends StatefulWidget {
     this.type,
     this.obscure,
     this.maxLines,
-    this.maxLenght
+    this.maxLength
   }) : super(key: key);
 
   @override
@@ -83,7 +83,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ),
                     minLines: 1,
                     maxLines: widget.maxLines ?? 1,
-                    maxLength: widget.maxLenght,
+                    maxLength: widget.maxLength,
                   )
               ),
             )),

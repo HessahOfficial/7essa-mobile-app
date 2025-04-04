@@ -169,7 +169,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         screenWidth: screenWidth,
                         type: TextInputType.multiline,
                         maxLines: 5,
-                        maxLenght: 500,
+                        maxLength: 500,
                         onChanged: (value) {
                           setState(() {
                             message = value;
