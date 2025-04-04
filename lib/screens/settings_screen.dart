@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:hessa/screens/contact_us_screen.dart';
 import 'package:hessa/screens/login-screen.dart';
 import 'package:hessa/screens/notifications_screen.dart';
 import 'package:hessa/widgets/setting_item.dart';
@@ -64,6 +65,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: "Contact Us",
                   backgroundColor: AppColors.purple,
                   icon: Icons.alternate_email_rounded,
+                  onTap: () {
+                    Get.to(ContactUsScreen());
+                  }
                 ),
                 SettingItem(
                   title: "Notifications",
