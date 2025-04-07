@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hessa/screens/notifications_screen.dart';
+import 'package:hessa/screens/settings_screen.dart';
 import 'package:hessa/screens/wallet-page.dart';
 import 'package:provider/provider.dart';
 
@@ -212,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SavedPropertiesPage(),
               _buildInvestPage(),
               WalletPage(),
-              _buildSettingsPage(),
+              SettingsScreen(),
             ],
           ),
         ),
@@ -261,23 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildWalletPage() {
-    return Center(
-      child: Text(
-        'Wallet',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
 
-  Widget _buildSettingsPage() {
-    return Center(
-      child: Text(
-        'Settings',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
   Widget _buildBottomNavigationBar() {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
     final double screenWidth = mediaQuery.size.width;
@@ -525,7 +512,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             IconButton(
               icon: Icon(Icons.notifications_outlined, color: Colors.grey[700], size: 28),
-              onPressed: () {},
+              onPressed: () {
+                Get.to(NotificationsScreen());
+              },
             ),
           ],
         ),

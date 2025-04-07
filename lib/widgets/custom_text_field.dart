@@ -1,61 +1,95 @@
 import 'package:flutter/material.dart';
-import 'package:hessa/constants/app_colors.dart';
 
-Widget customTextField({
-  required IconData icon,
-  required Color iconColor,
-  required Color inputColor,
-  required Color iconBackgroundColor,
-  required String placeholder,
-  required double screenWidth,
-  required TextEditingController controller,
-  void Function(String val)? onChanged,
-  double? height,
-  double? borderRadius,
-  double? iconSize,
-  TextInputType? type,
-  bool? obscure,
-}) {
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
-    width:  screenWidth,
-    height: height?? 60,
-    decoration: BoxDecoration(
-      color: inputColor,
-      borderRadius: BorderRadius.circular(borderRadius?? 20)
-    ),
-    child: Row(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: CircleAvatar(
-            backgroundColor: iconBackgroundColor,
-            radius: borderRadius?? 20,
-            child: Icon(
-                icon,
-                size: iconSize?? 17,
-                color: iconColor
-            ),
-          ),),
-        SizedBox(
-          width: screenWidth * 0.7,
-          child: TextFormField(
-            onChanged: onChanged,
-            obscureText: obscure?? false,
-            controller: controller,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderSide: BorderSide.none
+class CustomTextField extends StatefulWidget {
+  final IconData? icon;
+  final Color? iconColor;
+  final Color inputColor;
+  final Color? iconBackgroundColor;
+  final String placeholder;
+  final double screenWidth;
+  final TextEditingController controller;
+  final void Function(String val)? onChanged;
+  final double? height;
+  final double? borderRadius;
+  final double? iconSize;
+  final TextInputType? type;
+  final bool? obscure;
+  final int? maxLines;
+  final int? maxLength;
+
+  const CustomTextField({
+    Key? key,
+    this.icon,
+    this.iconColor,
+    required this.inputColor,
+    this.iconBackgroundColor,
+    required this.placeholder,
+    required this.screenWidth,
+    required this.controller,
+    this.onChanged,
+    this.height,
+    this.borderRadius,
+    this.iconSize,
+    this.type,
+    this.obscure,
+    this.maxLines,
+    this.maxLength
+  }) : super(key: key);
+
+  @override
+  _CustomTextFieldState createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Container(
+        width: widget.screenWidth,
+        decoration: BoxDecoration(
+          color: widget.inputColor,
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 20),
+        ),
+        child: Row(
+          children: [
+            widget.icon != null ? Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: CircleAvatar(
+                backgroundColor: widget.iconBackgroundColor,
+                radius: widget.borderRadius ?? 20,
+                child: Icon(
+                  widget.icon,
+                  size: widget.iconSize ?? 17,
+                  color: widget.iconColor,
                 ),
-                hintText: placeholder,
-                hintStyle: TextStyle(
-                    color: AppColors.gray
-                )
-            ),
-          ),
-        )
-      ],
-    ),
-  );
+              ),
+            ) : Container(),
+            Expanded(child: SizedBox(
+              width: widget.screenWidth * 0.7,
+              child: Expanded(
+                  child: TextField(
+                    onChanged: widget.onChanged,
+                    obscureText: widget.obscure ?? false,
+                    controller: widget.controller,
+                    keyboardType: widget.type ?? TextInputType.text,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: widget.placeholder,
+                      hintStyle: const TextStyle(
+                        color: Colors.grey, // Replace with your AppColors.gray
+                      ),
+                    ),
+                    minLines: 1,
+                    maxLines: widget.maxLines ?? 1,
+                    maxLength: widget.maxLength,
+                  )
+              ),
+            )),
+          ],
+        ),
+      ),
+    );
+  }
 }

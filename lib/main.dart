@@ -31,13 +31,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-            fontFamily: "SF-Mono"
-        ),
+        theme: ThemeData(fontFamily: "SF-Mono"),
         debugShowCheckedModeBanner: false,
         scaffoldMessengerKey: scaffoldMessengerKey,
-        home: SplashScreen()
-    );
+        home: SplashScreen());
   }
 }
 
