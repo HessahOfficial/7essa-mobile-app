@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hessa/screens/splash_screen.dart';
 import 'package:get/get.dart';
-
+import 'package:hessa/screens/wallet-page.dart';
+import 'package:provider/provider.dart';
+import 'saved_properties_provider.dart';
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SavedPropertiesProvider()),
+        ChangeNotifierProvider(create: (_) => WalletProvider()),
+
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

@@ -8,6 +8,10 @@ import "package:hessa/widgets/custom_button.dart";
 import "package:hessa/widgets/custom_circular_button.dart";
 import "package:hessa/widgets/custom_text_field.dart";
 
+import "home_screen.dart";
+
+
+
 
 class EmailScreen extends StatefulWidget {
   const EmailScreen({super.key});
@@ -30,8 +34,7 @@ class _EmailScreenState extends State<EmailScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: AppColors.secondary,
-        body: Expanded(
-         child: Column(
+        body: Column(
            crossAxisAlignment: CrossAxisAlignment.center,
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
@@ -88,7 +91,8 @@ class _EmailScreenState extends State<EmailScreen> {
                              if (emailAddressController.text == "mostafa3132004@gmail.com") {
                                Get.to(LoginScreen(emailAddress: emailAddressController.text,));
                              } else {
-                               Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
+                               // Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
+                               Get.to(HomeScreen());
                              }
                            }
                          ),
@@ -103,7 +107,6 @@ class _EmailScreenState extends State<EmailScreen> {
              ))
            ],
          ),
-        )
       ),
     );
   }

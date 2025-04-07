@@ -34,8 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       home: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.secondary,
-          body: Expanded(
-            child: Column(
+          body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -160,10 +159,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                         ],
                       ),
-                    ))
+                    )
+                )
               ],
-            ),
-          )
+          ),
       ),
     );
   }
