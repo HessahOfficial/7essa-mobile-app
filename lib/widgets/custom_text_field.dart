@@ -5,7 +5,9 @@ class CustomTextField extends StatefulWidget {
   final Color? iconColor;
   final Color inputColor;
   final Color? iconBackgroundColor;
-  final String placeholder;
+  final String? placeholder;
+  final String? label;
+  final Color? labelColor;
   final double screenWidth;
   final TextEditingController controller;
   final void Function(String val)? onChanged;
@@ -23,7 +25,9 @@ class CustomTextField extends StatefulWidget {
     this.iconColor,
     required this.inputColor,
     this.iconBackgroundColor,
-    required this.placeholder,
+    this.placeholder,
+    this.label,
+    this.labelColor,
     required this.screenWidth,
     required this.controller,
     this.onChanged,
@@ -64,29 +68,46 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
               ),
             ) : Container(),
-            Expanded(child: SizedBox(
-              width: widget.screenWidth * 0.7,
-              child: Expanded(
-                  child: TextField(
-                    onChanged: widget.onChanged,
-                    obscureText: widget.obscure ?? false,
-                    controller: widget.controller,
-                    keyboardType: widget.type ?? TextInputType.text,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide.none,
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      onChanged: widget.onChanged,
+                      obscureText: widget.obscure ?? false,
+                      controller: widget.controller,
+                      keyboardType: widget.type ?? TextInputType.text,
+                      decoration: widget.placeholder != null ? InputDecoration(
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: widget.placeholder ?? "",
+                        hintStyle: const TextStyle(
+                          color: Colors.grey, // Replace with your AppColors.gray
+                        ),
+                      ) : InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: widget.labelColor ?? Colors.transparent,
+                          ),
+                          borderRadius: BorderRadius.circular(widget.borderRadius ?? 20),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none
+                        ),
+                        labelText: widget.label ?? "",
+                        labelStyle: TextStyle(
+                          color: widget.labelColor ?? Colors.grey, // Replace with your AppColors.gray
+                        ),
                       ),
-                      hintText: widget.placeholder,
-                      hintStyle: const TextStyle(
-                        color: Colors.grey, // Replace with your AppColors.gray
-                      ),
-                    ),
-                    minLines: 1,
-                    maxLines: widget.maxLines ?? 1,
-                    maxLength: widget.maxLength,
+                      minLines: 1,
+                      maxLines: widget.maxLines ?? 1,
+                      maxLength: widget.maxLength,
+                    )
                   )
-              ),
-            )),
+                ] ,
+              )
+            ),
           ],
         ),
       ),

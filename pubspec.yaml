@@ -42,6 +42,8 @@ dependencies:
   fl_chart: ^0.70.2
   google_maps_flutter: ^2.12.0
   font_awesome_flutter: ^10.8.0
+  image_picker: ^1.1.2
+  path: ^1.9.1
 
 dev_dependencies:
 

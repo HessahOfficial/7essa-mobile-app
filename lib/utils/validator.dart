@@ -51,6 +51,17 @@ class Validator {
     return anotherMessage;
   }
 
+  static String validateNationalId({required String nationalId}) {
+    String message = "";
+    RegExp regex = RegExp(r'^[1-9]\d{13}$');
+    if (nationalId.isEmpty) {
+      message = "Phone field is required!";
+    } else if (!regex.hasMatch(nationalId)) {
+      message = "Invalid National Id!";
+    }
+    return message;
+  }
+
 
 
 }
