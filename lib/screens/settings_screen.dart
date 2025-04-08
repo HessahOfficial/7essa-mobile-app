@@ -5,6 +5,7 @@ import 'package:hessa/screens/contact_us_screen.dart';
 import 'package:hessa/screens/login-screen.dart';
 import 'package:hessa/screens/notifications_screen.dart';
 import 'package:hessa/screens/privacy_policy_screen.dart';
+import 'package:hessa/screens/profile_screen.dart';
 import 'package:hessa/widgets/setting_item.dart';
 
 import '../constants/app_colors.dart';
@@ -51,6 +52,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: "Profile Settings",
                   backgroundColor: AppColors.orange,
                   icon: Icons.person,
+                  onTap: () {
+                    Get.to(ProfileScreen());
+                  },
                 ),
                 SettingItem(
                   title: "Privacy Policy",

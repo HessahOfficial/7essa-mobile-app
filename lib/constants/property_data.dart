@@ -1,4 +1,3 @@
-
 class PropertyModel {
   late String name;
   late int price;

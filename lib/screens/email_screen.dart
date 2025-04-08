@@ -2,16 +2,16 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
 import "package:hessa/constants/app_colors.dart";
+import "package:hessa/screens/become_investor_screen.dart";
 import "package:hessa/screens/login-screen.dart";
+import "package:hessa/screens/matched_property_screen.dart";
+import "package:hessa/screens/profile_screen.dart";
 import "package:hessa/screens/register_screen.dart";
+import "package:hessa/screens/settings_screen.dart";
 import "package:hessa/utils/validator.dart";
 import "package:hessa/widgets/custom_button.dart";
 import "package:hessa/widgets/custom_circular_button.dart";
 import "package:hessa/widgets/custom_text_field.dart";
-
-import "home_screen.dart";
-
-
 
 
 class EmailScreen extends StatefulWidget {
@@ -101,14 +101,14 @@ class _EmailScreenState extends State<EmailScreen> {
                                 height: 50,
                                 text: "Continue",
                                 onTap: () {
-                                  if (errorEmailAddress.isEmpty && emailAddressController.text.isNotEmpty) {
-                                    if (emailAddressController.text == "mostafa3132004@gmail.com") {
-                                      Get.to(LoginScreen(emailAddress: emailAddressController.text,));
-                                    } else {
-                                      // Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
-                                      Get.to(HomeScreen());
-                                    }
-                                  }
+                                  Get.to(BecomeInvestorScreen());
+                                  // if (errorEmailAddress.isEmpty && emailAddressController.text.isNotEmpty) {
+                                  //   if (emailAddressController.text == "mostafa3132004@gmail.com") {
+                                  //     Get.to(LoginScreen(emailAddress: emailAddressController.text,));
+                                  //   } else {
+                                  //     Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
+                                  //   }
+                                  // }
                                 }
                             )
                           ],
@@ -129,3 +129,8 @@ class _EmailScreenState extends State<EmailScreen> {
     );
   }
 }
+
+
+
+
+

@@ -70,7 +70,7 @@ class _SettingItemState extends State<SettingItem> {
                 SizedBox(width: 10),
                 Text(widget.title, style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 23
+                    fontSize: 20
                 ),),
                 Spacer(),
                 Icon(Icons.arrow_forward_ios_rounded, color: AppColors.darkGray,)
