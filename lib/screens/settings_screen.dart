@@ -31,12 +31,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: AppColors.white1,
       appBar: AppBar(
         backgroundColor: AppColors.white1,
-        leading: GestureDetector(
-          onTap: () {
-            Get.back();
-          },
-          child: Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.accentColor,),
-        ),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         title: Text("Settings", style: TextStyle(
             fontWeight: FontWeight.bold
         ),),
