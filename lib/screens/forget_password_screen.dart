@@ -38,7 +38,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       ),
       backgroundColor: AppColors.accentColor,
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: screenHeight * 0.11),
+        padding: EdgeInsets.only(top: screenHeight * 0.2),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -60,58 +60,58 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ),
                 child: Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            children: [
-                              Text("Forget Password", style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25
-                              ),),
-                              Text("Please enter your email", style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18
-                              ))
-                            ],
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Column(
+                              children: [
+                                Text("Forget Password", style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25
+                                ),),
+                                Text("Please enter your email", style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18
+                                ))
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 20,),
-                        CustomTextField(
-                          controller: emailAddressController,
-                          icon: Icons.email_rounded,
-                          iconColor: AppColors.green800,
-                          inputColor: AppColors.white2,
-                          iconBackgroundColor: AppColors.green100,
-                          placeholder: "Email Address",
-                          screenWidth: screenWidth,
-                          type: TextInputType.emailAddress,
-                          onChanged: (value) {
-                            setState(() {
-                              emailAddress = value;
-                              errorEmailAddress = Validator.validateEmailAddress(email: emailAddress);
-                            });
-                          },
-                        ),
-                        SizedBox(height: 2,),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text(errorEmailAddress, style: TextStyle(
-                              color: Colors.redAccent,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18
-                          ),),
-                        ),
-                        SizedBox(height: 10,),
-                        CustomButton(
-                            width: double.infinity,
-                            height: 50,
-                            text: "Send",
-                            onTap: () {}
-                        )
-                      ],
-                    )
+                          SizedBox(height: 50,),
+                          CustomTextField(
+                            controller: emailAddressController,
+                            icon: Icons.email_rounded,
+                            iconColor: AppColors.green800,
+                            inputColor: AppColors.white2,
+                            iconBackgroundColor: AppColors.green100,
+                            placeholder: "Email Address",
+                            screenWidth: screenWidth,
+                            type: TextInputType.emailAddress,
+                            onChanged: (value) {
+                              setState(() {
+                                emailAddress = value;
+                                errorEmailAddress = Validator.validateEmailAddress(email: emailAddress);
+                              });
+                            },
+                          ),
+                          SizedBox(height: 2,),
+                          Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(errorEmailAddress, style: TextStyle(
+                                color: Colors.redAccent,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18
+                            ),),
+                          ),
+                          SizedBox(height: 10,),
+                          CustomButton(
+                              width: double.infinity,
+                              height: 50,
+                              text: "Send",
+                              onTap: () {}
+                          )
+                        ],
+                    ),
                 ),
               ),
             ),
