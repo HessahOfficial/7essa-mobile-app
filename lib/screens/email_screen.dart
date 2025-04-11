@@ -102,13 +102,13 @@ class _EmailScreenState extends State<EmailScreen> {
                                 text: "Continue",
                                 onTap: () {
                                   Get.to(BecomeInvestorScreen());
-                                  // if (errorEmailAddress.isEmpty && emailAddressController.text.isNotEmpty) {
-                                  //   if (emailAddressController.text == "mostafa3132004@gmail.com") {
-                                  //     Get.to(LoginScreen(emailAddress: emailAddressController.text,));
-                                  //   } else {
-                                  //     Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
-                                  //   }
-                                  // }
+                                   if (errorEmailAddress.isEmpty && emailAddressController.text.isNotEmpty) {
+                                     if (emailAddressController.text == "mostafa3132004@gmail.com") {
+                                       Get.to(LoginScreen(emailAddress: emailAddressController.text,));
+                                     } else {
+                                       Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
+                                     }
+                                   }
                                 }
                             )
                           ],
