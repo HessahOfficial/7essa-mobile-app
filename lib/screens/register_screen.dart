@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hessa/screens/home_screen.dart';
 import 'package:hessa/screens/login-screen.dart';
 
 import '../constants/app_colors.dart';
@@ -174,7 +175,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       width: double.infinity,
                                       height: 50,
                                       text: "Register",
-                                      onTap: () {}
+                                      onTap: () {
+                                        Get.to(HomeScreen());
+                                      }
                                   )
                                 ],
                             ),

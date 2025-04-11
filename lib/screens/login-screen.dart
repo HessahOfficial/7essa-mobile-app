@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hessa/screens/forget_password_screen.dart';
+import 'package:hessa/screens/home_screen.dart';
 
 import 'package:hessa/screens/matched_property_screen.dart';
 import 'package:hessa/screens/settings_screen.dart';
@@ -136,10 +138,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("I forgot my password", style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        decoration: TextDecoration.underline
-                                    ),),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(ForgetPasswordScreen());
+                                      },
+                                      child: Text("I forgot my password", style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          decoration: TextDecoration.underline
+                                      ),),
+                                    ),
 
                                     CustomButton(
                                         width: 150,
@@ -148,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         onTap: () {
                                           if (emailAddressController.text.isNotEmpty && passwordController.text.isNotEmpty
                                           && errorEmailAddress.isEmpty && errorPassword.isEmpty) {
-                                            Get.to(SettingsScreen());
+                                            Get.to(HomeScreen());
                                           }
                                         }
                                     )
