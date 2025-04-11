@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hessa/screens/home_screen.dart';
 
-import 'package:hessa/screens/matched_property_screen.dart';
+import 'package:hessa/screens/forgot_password_screen.dart';
 import 'package:hessa/screens/settings_screen.dart';
 
 import '../constants/app_colors.dart';
@@ -136,25 +137,36 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("I forgot my password", style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        decoration: TextDecoration.underline
-                                    ),),
-
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(() => ForgotPasswordScreen());
+                                      },
+                                      splashColor: AppColors.green100.withOpacity(0.3),
+                                      highlightColor: AppColors.green800.withOpacity(0.1),
+                                      child: Text(
+                                        "I forgot my password",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          decoration: TextDecoration.underline,
+                                          color: AppColors.blue800,
+                                        ),
+                                      ),
+                                    ),
                                     CustomButton(
-                                        width: 150,
-                                        height: 50,
-                                        text: "Login",
-                                        onTap: () {
-                                          if (emailAddressController.text.isNotEmpty && passwordController.text.isNotEmpty
-                                          && errorEmailAddress.isEmpty && errorPassword.isEmpty) {
-                                            Get.to(SettingsScreen());
-                                          }
+                                      width: 150,
+                                      height: 50,
+                                      text: "Login",
+                                      onTap: () {
+                                        if (emailAddressController.text.isNotEmpty &&
+                                            passwordController.text.isNotEmpty &&
+                                            errorEmailAddress.isEmpty &&
+                                            errorPassword.isEmpty) {
+                                          Get.to(HomeScreen());
                                         }
-                                    )
+                                      },
+                                    ),
                                   ],
-                                )
-                              ],
+                                ),                              ],
                             ),
                             SizedBox(height: screenHeight / 8),
                             CustomCircularButton(

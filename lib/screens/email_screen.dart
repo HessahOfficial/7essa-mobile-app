@@ -3,6 +3,7 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
 import "package:hessa/constants/app_colors.dart";
 import "package:hessa/screens/become_investor_screen.dart";
+import "package:hessa/screens/home_screen.dart";
 import "package:hessa/screens/login-screen.dart";
 import "package:hessa/screens/matched_property_screen.dart";
 import "package:hessa/screens/profile_screen.dart";
@@ -101,14 +102,14 @@ class _EmailScreenState extends State<EmailScreen> {
                                 height: 50,
                                 text: "Continue",
                                 onTap: () {
-                                  Get.to(BecomeInvestorScreen());
-                                  // if (errorEmailAddress.isEmpty && emailAddressController.text.isNotEmpty) {
-                                  //   if (emailAddressController.text == "mostafa3132004@gmail.com") {
-                                  //     Get.to(LoginScreen(emailAddress: emailAddressController.text,));
-                                  //   } else {
-                                  //     Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
-                                  //   }
-                                  // }
+                                  // Get.to(HomeScreen());
+                                  if (errorEmailAddress.isEmpty && emailAddressController.text.isNotEmpty) {
+                                    if (emailAddressController.text == "mostafa3132004@gmail.com") {
+                                      Get.to(LoginScreen(emailAddress: emailAddressController.text,));
+                                    } else {
+                                      Get.to(RegisterScreen(emailAddress: emailAddressController.text,));
+                                    }
+                                  }
                                 }
                             )
                           ],
