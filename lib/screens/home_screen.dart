@@ -3,14 +3,17 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hessa/screens/investment_screen.dart';
 import 'package:hessa/screens/notifications_screen.dart';
 import 'package:hessa/screens/settings_screen.dart';
 import 'package:hessa/screens/wallet-page.dart';
+import 'package:hessa/screens/property_screen.dart'; // Added import
 import 'package:provider/provider.dart';
 
 import 'developer_profile_screen.dart';
 import 'SavedPropertiesPage.dart';
 import 'package:hessa/saved_properties_provider.dart';
+import 'package:hessa/constants/property_data.dart'; // Ensure PropertyModel is imported
 
 class FilterOptions {
   final double maxSize;
@@ -52,15 +55,18 @@ class _HomeScreenState extends State<HomeScreen> {
       'properties': [
         {
           'name': 'Dup Apartment',
-          'price': 2670, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1,
+          'price': 2670,
+          'size': 2000,
+          'bedrooms': 4,
+          'bathrooms': 1,
           'location': '28W Street, NY, New York',
           'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
         },
         {
           'name': 'Dup p',
           'location': '28W Street, NY, New York',
-          'size': '2000sqft',
-          'price': '\$267000',
+          'size': 2000,
+          'price': 267000,
           'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
           'bedrooms': 3,
           'bathrooms': 2,
@@ -68,8 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'name': 'Dup h',
           'location': '28W Street, NY, New York',
-          'size': '2000sqft',
-          'price': '\$267000',
+          'size': 2000,
+          'price': 267000,
           'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
           'bedrooms': 3,
           'bathrooms': 2,
@@ -83,8 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'name': 'Dup Apartment',
           'location': '28W Street, NY, New York',
-          'size': '2000sqft',
-          'price': '\$267000',
+          'size': 2000,
+          'price': 267000,
           'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
           'bedrooms': 3,
           'bathrooms': 2,
@@ -92,8 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'name': 'Dup p',
           'location': '28W Street, NY, New York',
-          'size': '2000sqft',
-          'price': '\$267000',
+          'size': 2000,
+          'price': 267000,
           'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
           'bedrooms': 3,
           'bathrooms': 2,
@@ -101,8 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'name': 'Dup h',
           'location': '28W Street, NY, New York',
-          'size': '2000sqft',
-          'price': '\$267000',
+          'size': 2000,
+          'price': 267000,
           'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
           'bedrooms': 3,
           'bathrooms': 2,
@@ -117,12 +123,12 @@ class _HomeScreenState extends State<HomeScreen> {
       {'name': 'Apartment B', 'price': 2550, 'size': 2100, 'bedrooms': 3, 'bathrooms': 2},
       {'name': 'Apartment C', 'price': 29400, 'size': 1900, 'bedrooms': 4, 'bathrooms': 1},
       {'name': 'Apartment D', 'price': 28900, 'size': 2200, 'bedrooms': 5, 'bathrooms': 2},
-      {'name': 'Apartment E', 'price': 2656, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1},{'name': 'Apartment 5', 'price': 2656, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1},{'name': 'Apartment 7', 'price': 2656, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1},{'name': 'Apartment 9', 'price': 2656, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1}
+      {'name': 'Apartment E', 'price': 2656, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1},
+      {'name': 'Apartment 5', 'price': 2656, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1},
+      {'name': 'Apartment 7', 'price': 2656, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1},
+      {'name': 'Apartment 9', 'price': 2656, 'size': 2000, 'bedrooms': 4, 'bathrooms': 1},
     ],
-
-    'Developers': [
-
-    ],
+    'Developers': [],
     'New Added': [
       {'name': 'Studio M', 'price': 1500, 'size': 800, 'bedrooms': 1, 'bathrooms': 1},
       {'name': 'Studio N', 'price': 1600, 'size': 850, 'bedrooms': 1, 'bathrooms': 1},
@@ -149,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     });
   }
+
   List<Map<String, dynamic>> _filterProperties(List<Map<String, dynamic>> properties) {
     return properties.where((property) {
       final bool matchesSearch = _searchQuery.isEmpty ||
@@ -188,11 +195,13 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
+
   void _onPageChanged(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -213,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               _buildHomePage(),
               SavedPropertiesPage(),
-              _buildInvestPage(),
+              InvestmentChartPage(),
               WalletPage(),
               SettingsScreen(),
             ],
@@ -223,6 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   Widget _buildHomePage() {
     return Column(
       children: [
@@ -252,9 +262,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Placeholder Pages
-
-
   Widget _buildInvestPage() {
     return Center(
       child: Text(
@@ -263,7 +270,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 
   Widget _buildBottomNavigationBar() {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -605,17 +611,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildSectionContent() {
-    // Ensure selectedCategory is valid
     String selectedCategory = _categories.isNotEmpty
         ? _categories[_selectedCategoryIndex]
         : 'DefaultCategory';
 
-    // Get properties for the selected category
     List<Map<String, dynamic>> properties = _properties[selectedCategory] ?? [];
     List<Map<String, dynamic>> filteredProperties = _filterProperties(properties);
 
     if (selectedCategory == 'Developers') {
-      // Ensure _developers is properly passed
       return _buildDeveloperProperties(context, _developers);
     } else {
       return Column(
@@ -633,7 +636,6 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
   }
-
 
   Widget _buildSectionTitle(String title) {
     if (title.contains('HOT')) {
@@ -803,115 +805,280 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<SavedPropertiesProvider>(
       builder: (context, provider, child) {
         final bool isSaved = provider.isPropertySaved(property);
-
-        return Container(
-          width: finalWidth,
-          height: totalCardHeight,
-          margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.08),
-                blurRadius: 15,
-                spreadRadius: 2,
-                offset: Offset(0, 8),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: imageHeight,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PropertyScreen(
+                  property: PropertyModel(
+                    name: property['name'] ?? 'Unknown Property',
+                    price: (property['price'] is int
+                        ? property['price'].toDouble()
+                        : property['price']) ??
+                        0.0,
+                    size: property['size'] ?? 0,
+                    bedrooms: property['bedrooms'] ?? 0,
+                    bathrooms: property['bathrooms'] ?? 0,
+                    location: property['location'] ?? 'Unknown Location',
+                    image: property['image'] ??
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
+                    kitchens: property['kitchens'] ?? 1,
                   ),
                 ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            isSaved ? Icons.bookmark : Icons.bookmark_border,
-                            color: Color(0xFF4B5EFC),
-                            size: 16,
-                          ),
-                          onPressed: () {
-                            provider.toggleSaveProperty(property);
-                          },
-                        ),
-                      ),
+              ),
+            );
+          },
+          child: Container(
+            width: finalWidth,
+            height: totalCardHeight,
+            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.08),
+                  blurRadius: 15,
+                  spreadRadius: 2,
+                  offset: Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  height: imageHeight,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: detailsHeight,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: finalWidth * 0.05,
-                    vertical: 8,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
+                  child: Stack(
                     children: [
-                      Text(
-                        property['name'],
-                        style: TextStyle(
-                          fontSize: titleSize,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 2),
-                      Row(
-                        children: [
-                          Icon(Icons.location_on, size: locationSize, color: Colors.grey[600]),
-                          SizedBox(width: 2),
-                          Expanded(
-                            child: Text(
-                              'New York, USA',
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: locationSize,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
                           ),
-                        ],
+                          child: IconButton(
+                            icon: Icon(
+                              isSaved ? Icons.bookmark : Icons.bookmark_border,
+                              color: Color(0xFF4B5EFC),
+                              size: 16,
+                            ),
+                            onPressed: () {
+                              provider.toggleSaveProperty(property);
+                              print('HomeScreen (Hot): Toggled save for ${property['name']}, isSaved: $isSaved');
+                            },
+                          ),
+                        ),
                       ),
-                      Spacer(flex: 1),
-                      _buildCardBottomRow(property, finalWidth, priceSize),
                     ],
                   ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: detailsHeight,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: finalWidth * 0.05,
+                      vertical: 8,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          property['name'],
+                          style: TextStyle(
+                            fontSize: titleSize,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 2),
+                        Row(
+                          children: [
+                            Icon(Icons.location_on,
+                                size: locationSize, color: Colors.grey[600]),
+                            SizedBox(width: 2),
+                            Expanded(
+                              child: Text(
+                                property['location'] ?? 'New York, USA',
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: locationSize,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Spacer(flex: 1),
+                        _buildCardBottomRow(property, finalWidth, priceSize),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
     );
   }
-
-  Widget _buildCardBottomRow(Map<String, dynamic> property, double cardWidth, double priceSize) {
+  Widget _buildPropertyItem(Map<String, dynamic> property) {
+    return Consumer<SavedPropertiesProvider>(
+      builder: (context, provider, child) {
+        final bool isSaved = provider.isPropertySaved(property);
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PropertyScreen(
+                  property: PropertyModel(
+                    name: property['name'] ?? 'Unknown Property',
+                    price: (property['price'] is int
+                        ? property['price'].toDouble()
+                        : property['price']) ??
+                        0.0,
+                    size: property['size'] ?? 0,
+                    bedrooms: property['bedrooms'] ?? 0,
+                    bathrooms: property['bathrooms'] ?? 0,
+                    location: property['location'] ?? 'Unknown Location',
+                    image: property['image'] ??
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
+                    kitchens: property['kitchens'] ?? 1,
+                  ),
+                ),
+              ),
+            );
+          },
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 8,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              property['name'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              isSaved ? Icons.bookmark : Icons.bookmark_border,
+                              color: Color(0xFF4B5EFC),
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              provider.toggleSaveProperty(property);
+                              print('HomeScreen (List): Toggled save for ${property['name']}, isSaved: $isSaved');
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        property['location'] ?? '2BW Street, NY, New York',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '${property['price']}LE / share',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.square_foot, size: 20, color: Colors.grey[600]),
+                              const SizedBox(width: 4),
+                              Text(
+                                '${property['size']} sqft',
+                                style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.king_bed, size: 20, color: Colors.grey[600]),
+                              const SizedBox(width: 4),
+                              Text(
+                                '${property['bedrooms']}',
+                                style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                              ),
+                              const SizedBox(width: 8),
+                              Icon(Icons.bathtub, size: 20, color: Colors.grey[600]),
+                              const SizedBox(width: 4),
+                              Text(
+                                '${property['bathrooms']}',
+                                style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }  Widget _buildCardBottomRow(Map<String, dynamic> property, double cardWidth, double priceSize) {
     final bool isSmallCard = cardWidth < 250;
 
     if (isSmallCard) {
@@ -953,128 +1120,146 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildPropertyItem(Map<String, dynamic> property) {
-
-    return Consumer<SavedPropertiesProvider>(
-    builder: (context, provider, child) {
-      final bool isSaved = provider.isPropertySaved(property);
-      print("saved ukkuu properties: ${provider.savedProperties}");
-      return Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 8,
-              spreadRadius: 2,
-            ),
-          ],
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          property['name'],
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          isSaved ? Icons.bookmark : Icons.bookmark_border,
-                          color: Color(0xFF4B5EFC),
-                          size: 20,
-                        ),
-                        onPressed: () {
-                          provider.toggleSaveProperty(property);
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '2BW Street, NY, New York',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 14),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '${property['price']}LE / share',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.square_foot, size: 20,
-                              color: Colors.grey[600]),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${property['size']} sqft',
-                            style: TextStyle(
-                                color: Colors.grey[600], fontSize: 14),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.king_bed, size: 20,
-                              color: Colors.grey[600]),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${property['bedrooms']}',
-                            style: TextStyle(
-                                color: Colors.grey[600], fontSize: 14),
-                          ),
-                          const SizedBox(width: 8),
-                          Icon(
-                              Icons.bathtub, size: 20, color: Colors.grey[600]),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${property['bathrooms']}',
-                            style: TextStyle(
-                                color: Colors.grey[600], fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-    }  );
-  }
+  // Widget _buildPropertyItem(Map<String, dynamic> property) {
+  //   return Consumer<SavedPropertiesProvider>(
+  //     builder: (context, provider, child) {
+  //       final bool isSaved = provider.isPropertySaved(property);
+  //       return GestureDetector(
+  //         onTap: () {
+  //           Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //               builder: (context) => PropertyScreen(
+  //                 property: PropertyModel(
+  //                   name: property['name'] ?? 'Unknown Property',
+  //                   price: (property['price'] is int
+  //                       ? property['price'].toDouble()
+  //                       : property['price']) ??
+  //                       0.0,
+  //                   size: property['size'] ?? 0,
+  //                   bedrooms: property['bedrooms'] ?? 0,
+  //                   bathrooms: property['bathrooms'] ?? 0,
+  //                   location: property['location'] ?? 'Unknown Location',
+  //                   image: property['image'] ??
+  //                       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
+  //                   kitchens: 1, // Default value
+  //                 ),
+  //               ),
+  //             ),
+  //           );
+  //         },
+  //         child: Container(
+  //           margin: const EdgeInsets.only(bottom: 16),
+  //           padding: const EdgeInsets.all(12),
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(20),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black12,
+  //                 blurRadius: 8,
+  //                 spreadRadius: 2,
+  //               ),
+  //             ],
+  //           ),
+  //           child: Row(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Container(
+  //                 width: 100,
+  //                 height: 100,
+  //                 decoration: BoxDecoration(
+  //                   color: Colors.grey[300],
+  //                   borderRadius: BorderRadius.circular(15),
+  //                 ),
+  //               ),
+  //               const SizedBox(width: 12),
+  //               Expanded(
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   children: [
+  //                     Row(
+  //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                       children: [
+  //                         Expanded(
+  //                           child: Text(
+  //                             property['name'],
+  //                             style: const TextStyle(
+  //                               fontSize: 16,
+  //                               fontWeight: FontWeight.bold,
+  //                               color: Colors.black87,
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         IconButton(
+  //                           icon: Icon(
+  //                             isSaved ? Icons.bookmark : Icons.bookmark_border,
+  //                             color: Color(0xFF4B5EFC),
+  //                             size: 20,
+  //                           ),
+  //                           onPressed: () {
+  //                             provider.toggleSaveProperty(property);
+  //                           },
+  //                         ),
+  //                       ],
+  //                     ),
+  //                     const SizedBox(height: 4),
+  //                     Text(
+  //                       property['location'] ?? '2BW Street, NY, New York',
+  //                       style: TextStyle(color: Colors.grey[600], fontSize: 14),
+  //                     ),
+  //                     const SizedBox(height: 8),
+  //                     Text(
+  //                       '${property['price']}LE / share',
+  //                       style: const TextStyle(
+  //                         fontSize: 16,
+  //                         fontWeight: FontWeight.bold,
+  //                         color: Colors.red,
+  //                       ),
+  //                     ),
+  //                     const SizedBox(height: 8),
+  //                     Row(
+  //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                       children: [
+  //                         Row(
+  //                           children: [
+  //                             Icon(Icons.square_foot, size: 20, color: Colors.grey[600]),
+  //                             const SizedBox(width: 4),
+  //                             Text(
+  //                               '${property['size']} sqft',
+  //                               style: TextStyle(color: Colors.grey[600], fontSize: 14),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                         Row(
+  //                           children: [
+  //                             Icon(Icons.king_bed, size: 20, color: Colors.grey[600]),
+  //                             const SizedBox(width: 4),
+  //                             Text(
+  //                               '${property['bedrooms']}',
+  //                               style: TextStyle(color: Colors.grey[600], fontSize: 14),
+  //                             ),
+  //                             const SizedBox(width: 8),
+  //                             Icon(Icons.bathtub, size: 20, color: Colors.grey[600]),
+  //                             const SizedBox(width: 4),
+  //                             Text(
+  //                               '${property['bathrooms']}',
+  //                               style: TextStyle(color: Colors.grey[600], fontSize: 14),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   Widget _buildDeveloperProperties(BuildContext context, List<Map<String, dynamic>> developers) {
     if (developers.isEmpty) {
@@ -1145,8 +1330,6 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-
-
 }
 
 class FilterBottomSheet extends StatefulWidget {
@@ -1288,10 +1471,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(75, 94, 252, 0.1), // Equivalent to 0xFF4B5EFC with 10% opacity
+                  color: Color.fromRGBO(75, 94, 252, 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
-
                 child: Text(
                   '\$${_minPrice.round()}',
                   style: TextStyle(
@@ -1303,10 +1485,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(75, 94, 252, 0.1), // Equivalent to 0xFF4B5EFC with 10% opacity
+                  color: Color.fromRGBO(75, 94, 252, 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
-
                 child: Text(
                   '\$${_maxPrice.round()}',
                   style: TextStyle(
@@ -1369,4 +1550,3 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     );
   }
 }
-

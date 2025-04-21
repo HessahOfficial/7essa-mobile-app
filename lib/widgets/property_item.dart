@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hessa/constants/app_colors.dart';
 import 'package:hessa/screens/property_screen.dart';
-
 import '../constants/property_data.dart';
 
 class PropertyItem extends StatefulWidget {
@@ -17,7 +16,7 @@ class PropertyItem extends StatefulWidget {
     required this.screenWidth,
     required this.screenHeight,
     required this.property,
-    this.isMatched = true
+    this.isMatched = true,
   });
 
   @override
@@ -27,102 +26,145 @@ class PropertyItem extends StatefulWidget {
 class _PropertyItemState extends State<PropertyItem> {
   @override
   Widget build(BuildContext context) {
-
     PropertyModel property = widget.property;
 
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         if (widget.isMatched) {
-          Get.to(PropertyScreen(property: widget.property,));
+          Get.to(() => PropertyScreen(property: widget.property));
         }
       },
-      child: Expanded(child: Container(
+      child: Container(
         margin: EdgeInsets.symmetric(vertical: widget.screenHeight * 0.01),
-        // height: 340,
         decoration: BoxDecoration(
-            color: AppColors.white2,
-            borderRadius: BorderRadius.circular(45)
+          color: AppColors.white2,
+          borderRadius: BorderRadius.circular(45),
         ),
-        child: Padding(padding: EdgeInsets.all(20), child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(20)
-              ),
-              width: double.infinity,
-              child: SvgPicture.asset(property.image, height: 220, ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(property.name, style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20
-                  ),),
-                  Text("\$${property.price}", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: AppColors.accentColor
-                  ),),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.location_on, color: AppColors.gray),
-                  Expanded(
-                    child: Text("${property.location} (${property.area}sqft)",
-                      style: TextStyle(
-                        color: AppColors.gray,
-                        fontSize: 15
-                      ),
-                      softWrap: true,
-                      overflow: TextOverflow.visible,
-                    )
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Wrap(
-                children: [
-                  Row(
-                    children: [
-                      SvgPicture.asset("assets/images/bed.svg", width: 17, height: 17,),
-                      SizedBox(width: 5,),
-                      Text("${property.beds} Bed", style: TextStyle(
-                          color: AppColors.gray,
-                          fontSize: 15
-                      ),),
-                      SizedBox(width: 20,),
-                      SvgPicture.asset("assets/images/bath.svg", width: 17, height: 17,),
-                      SizedBox(width: 5,),
-                      Text("${property.baths} Bath", style: TextStyle(
-                          color: AppColors.gray,
-                          fontSize: 15
-                      ),),
-                      SizedBox(width: 20,),
-                      SvgPicture.asset("assets/images/kitchen.svg", width: 17, height: 17,),
-                      SizedBox(width: 5,),
-                      Text("${property.kitchens} Kitchen", style: TextStyle(
-                          color: AppColors.gray,
-                          fontSize: 15
-                      ),)
-                    ],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                width: double.infinity,
+                height: 220,
+                child: property.image != null && property.image!.endsWith('.svg')
+                    ? SvgPicture.asset(
+                  property.image!,
+                  fit: BoxFit.cover,
+                )
+                    : Image.network(
+                  property.image ??
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsD-IrOkZfrQw5_Fd_rE1xTmkY2lBrbo4CptJce8qBa530OL4u5f2KOrVWI644JZxxd_U&usqp=CAU',
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Image.asset(
+                    'assets/images/placeholder.png',
+                    fit: BoxFit.cover,
                   ),
-                ],
+                ),
               ),
-            )
-          ],
-        ),),
-      )),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      property.name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      "\$${property.price}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: AppColors.accentColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.location_on, color: AppColors.gray),
+                    Expanded(
+                      child: Text(
+                        "${property.location ?? 'Unknown Location'} (${property.size}sqft)",
+                        style: TextStyle(
+                          color: AppColors.gray,
+                          fontSize: 15,
+                        ),
+                        softWrap: true,
+                        overflow: TextOverflow.visible,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Wrap(
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          "assets/images/bed.svg",
+                          width: 17,
+                          height: 17,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          "${property.bedrooms} Bed",
+                          style: TextStyle(
+                            color: AppColors.gray,
+                            fontSize: 15,
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        SvgPicture.asset(
+                          "assets/images/bath.svg",
+                          width: 17,
+                          height: 17,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          "${property.bathrooms} Bath",
+                          style: TextStyle(
+                            color: AppColors.gray,
+                            fontSize: 15,
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        SvgPicture.asset(
+                          "assets/images/kitchen.svg",
+                          width: 17,
+                          height: 17,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          "${property.kitchens ?? 1} Kitchen",
+                          style: TextStyle(
+                            color: AppColors.gray,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

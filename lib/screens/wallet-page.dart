@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 // Data Models for easy backend integration
@@ -30,7 +29,8 @@ class Transaction {
   final String date;
   final String currency;
   final double amount;
-  final String category; // "Expense" or "Income"
+  final String category;
+  final String? propertyName; // For "Pay Shares"
 
   Transaction({
     required this.type,
@@ -38,6 +38,20 @@ class Transaction {
     required this.currency,
     required this.amount,
     required this.category,
+    this.propertyName,
+  });
+}
+
+class Investment {
+  final String propertyName;
+  final double amount; // In EGP
+  final Color color;
+
+
+  Investment({
+    required this.propertyName,
+    required this.amount,
+    required this.color,
   });
 }
 
@@ -50,8 +64,8 @@ class WalletProvider with ChangeNotifier {
   );
 
   Balance _balance = Balance(
-    currentBalance: 20560.50,
-    currency: "LE",
+    currentBalance: 260260260260260260260260260260260260260260260260260260260260.50,
+    currency: "EGP",
   );
 
   final List<Transaction> _transactions = [
@@ -59,22 +73,40 @@ class WalletProvider with ChangeNotifier {
       type: "Pay Shares",
       date: "04-Jan-2024",
       currency: "EGP",
-      amount: 250,
+      amount: 1250.50,
       category: "Expense",
+      propertyName: "Skyline Tower",
     ),
     Transaction(
-      type: "Fees",
+      type: "Pay Shares",
+      date: "04-Jan-2024",
+      currency: "EGP",
+      amount: 1250.50,
+      category: "Expense",
+      propertyName: "Skyline Tower",
+    ),Transaction(
+      type: "Pay Shares",
+      date: "04-Jan-2024",
+      currency: "EGP",
+      amount: 175740.50,
+      category: "Expense",
+      propertyName: "Tower",
+    ),
+    Transaction(
+      type: "Pay Shares",
       date: "08-May-2024",
       currency: "EGP",
-      amount: 50,
+      amount: 400,
       category: "Expense",
+      propertyName: "Riverfront Plaza",
     ),
     Transaction(
       type: "Pay Shares",
       date: "04-Aug-2023",
       currency: "EGP",
-      amount: 250,
+      amount: 200,
       category: "Expense",
+      propertyName: "Downtown Lofts",
     ),
     Transaction(
       type: "Rent",
@@ -92,9 +124,47 @@ class WalletProvider with ChangeNotifier {
     ),
   ];
 
+  // Colors for investments
+  final List<Color> _investmentColors = [
+    const Color(0xFF4A90E2), // Blue
+    const Color(0xFF50E3C2), // Teal
+    const Color(0xFFD81B60), // Pink
+    Colors.orange,
+    Colors.purple,
+  ];
+
   User get user => _user;
   Balance get balance => _balance;
   List<Transaction> get transactions => _transactions;
+
+  // Derive investments from transactions
+  List<Investment> get investments {
+    final Map<String, double> investmentMap = {};
+    for (var transaction in _transactions) {
+      if (transaction.type == "Pay Shares" && transaction.propertyName != null) {
+        investmentMap.update(
+          transaction.propertyName!,
+              (value) => value + transaction.amount,
+          ifAbsent: () => transaction.amount,
+        );
+      }
+    }
+
+    final List<Investment> investmentList = [];
+    int colorIndex = 0;
+    investmentMap.forEach((propertyName, amount) {
+      investmentList.add(Investment(
+        propertyName: propertyName,
+        amount: amount,
+        color: _investmentColors[colorIndex % _investmentColors.length],
+      ));
+      colorIndex++;
+    });
+
+    return investmentList;
+  }
+
+  double get totalInvestment => investments.fold(0, (sum, inv) => sum + inv.amount);
 
   // Filter transactions by category
   List<Transaction> getExpenses() {
@@ -103,6 +173,23 @@ class WalletProvider with ChangeNotifier {
 
   List<Transaction> getIncomes() {
     return _transactions.where((transaction) => transaction.category == "Income").toList();
+  }
+
+  // Update balance
+  void updateBalance(double newBalance) {
+    _balance = Balance(
+      currentBalance: newBalance.clamp(0, double.infinity), // Prevent negative balance
+      currency: _balance.currency,
+    );
+    notifyListeners();
+    print('Balance updated: ${_balance.currentBalance} EGP');
+  }
+
+  // Add transaction
+  void addTransaction(Transaction transaction) {
+    _transactions.add(transaction);
+    notifyListeners();
+    print('Transaction added: ${transaction.type}, ${transaction.amount} EGP');
   }
 
   // Methods for future API integration
@@ -120,9 +207,16 @@ class WalletProvider with ChangeNotifier {
     // Backend team can replace this with API call
     notifyListeners();
   }
+
+  Future<void> fetchInvestments() async {
+    // Backend team can fetch transactions and investments will be derived
+    notifyListeners();
+  }
 }
 
 class WalletPage extends StatefulWidget {
+  const WalletPage({super.key});
+
   @override
   _WalletPageState createState() => _WalletPageState();
 }
@@ -133,6 +227,8 @@ class _WalletPageState extends State<WalletPage> {
   String _enteredPassword = '';
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
   final List<TextEditingController> _controllers = List.generate(6, (_) => TextEditingController());
+  bool _isLoading = false;
+  String? _error;
 
   @override
   void dispose() {
@@ -145,31 +241,138 @@ class _WalletPageState extends State<WalletPage> {
     super.dispose();
   }
 
+  Future<void> _loadWalletData() async {
+    setState(() {
+      _isLoading = true;
+      _error = null;
+    });
+    try {
+      final walletProvider = Provider.of<WalletProvider>(context, listen: false);
+      await walletProvider.fetchUserData();
+      await walletProvider.fetchBalance();
+      await walletProvider.fetchTransactions();
+    } catch (e) {
+      setState(() {
+        _error = "Failed to load wallet data: $e";
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  Widget _buildActionButton(String label, IconData icon, {bool isTablet = false}) {
+    final buttonPadding = EdgeInsets.symmetric(
+      vertical: isTablet ? 6.0 : 4.0,
+      horizontal: isTablet ? 10.0 : 8.0,
+    );
+    final buttonFontSize = isTablet ? 20.0 : 18.0;
+    final iconSize = isTablet ? 28.0 : 24.0;
+
+    return Consumer<WalletProvider>(
+      builder: (context, walletProvider, child) {
+        return TextButton.icon(
+          onPressed: () {
+            if (label == 'DEPOSIT') {
+              walletProvider.updateBalance(walletProvider.balance.currentBalance + 1000);
+              walletProvider.addTransaction(Transaction(
+                type: "Deposit",
+                date: DateTime.now().toString().substring(0, 10),
+                currency: "EGP",
+                amount: 1000,
+                category: "Income",
+              ));
+            } else if (label == 'WITHDRAW') {
+              final newBalance = walletProvider.balance.currentBalance - 1000;
+              if (newBalance < 0) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Insufficient balance for withdrawal"),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                return;
+              }
+              walletProvider.updateBalance(newBalance);
+              walletProvider.addTransaction(Transaction(
+                type: "Withdrawal",
+                date: DateTime.now().toString().substring(0, 10),
+                currency: "EGP",
+                amount: 1000,
+                category: "Expense",
+              ));
+            }
+          },
+          icon: Icon(icon, size: iconSize, color: Colors.white),
+          label: Text(
+            label,
+            style: TextStyle(fontSize: buttonFontSize, color: Colors.white),
+          ),
+          style: TextButton.styleFrom(
+            padding: buttonPadding,
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final isTablet = screenWidth > 600;
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: isTablet ? screenWidth * 0.1 : 16.0,
-          vertical: 16.0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(context),
-            SizedBox(height: 20),
-            _buildBalanceCard(context, screenWidth),
-            SizedBox(height: 20),
-            _buildTabs(context),
-            SizedBox(height: 12),
-            _buildTransactionList(context),
-          ],
-        ),
-      ),
+    return Consumer<WalletProvider>(
+      builder: (context, provider, child) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
+            elevation: 0,
+
+            title: const Text(
+              "Wallet",
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            ),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.refresh, color: Colors.black),
+                onPressed: _loadWalletData,
+              ),
+            ],
+          ),
+          body: _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : _error != null
+              ? Center(child: Text(_error!))
+              : SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: isTablet ? screenWidth * 0.1 : 16.0,
+                vertical: 16.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeader(context),
+                  SizedBox(height: 20),
+                  _buildBalanceCard(context, screenWidth),
+                  SizedBox(height: 20),
+                  _buildTabs(context),
+                  SizedBox(height: 12),
+                  _buildTransactionList(context),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -321,30 +524,6 @@ class _WalletPageState extends State<WalletPage> {
     );
   }
 
-  Widget _buildActionButton(String label, IconData icon, {bool isTablet = false}) {
-    final buttonPadding = EdgeInsets.symmetric(
-      vertical: isTablet ? 6.0 : 4.0,
-      horizontal: isTablet ? 10.0 : 8.0,
-    );
-    final buttonFontSize = isTablet ? 20.0 : 18.0;
-    final iconSize = isTablet ? 28.0 : 24.0;
-
-    return TextButton.icon(
-      onPressed: () {},
-      icon: Icon(icon, size: iconSize, color: Colors.white),
-      label: Text(
-        label,
-        style: TextStyle(fontSize: buttonFontSize, color: Colors.white),
-      ),
-      style: TextButton.styleFrom(
-        padding: buttonPadding,
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.transparent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
-  }
-
   Widget _buildTabs(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -462,6 +641,14 @@ class _WalletPageState extends State<WalletPage> {
                       color: Colors.black87,
                     ),
                   ),
+                  if (transaction.propertyName != null)
+                    Text(
+                      transaction.propertyName!,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
                   SizedBox(height: 4),
                   Text(
                     transaction.date,
