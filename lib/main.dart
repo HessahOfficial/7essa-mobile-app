@@ -1,41 +1,78 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hessa/screens/splash_screen.dart';
-import 'package:get/get.dart';
-import 'package:hessa/screens/wallet-page.dart';
-import 'package:provider/provider.dart';
-import 'saved_properties_provider.dart';
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hessa/core/themes/dark_theme.dart';
+import 'package:hessa/features/home/presentation/managers/category_cubit.dart';
+import 'package:hessa/features/main/presentation/managers/screen_cubit.dart';
+import 'package:hessa/features/settings/presentation/managers/settings_cubit.dart';
+import 'package:hessa/features/wallet/presentation/managers/balance_cubit.dart';
+import 'package:hessa/features/wallet/presentation/managers/transaction_cubit.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+import 'package:hessa/generated/l10n.dart';
+import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/features/auth/data/models/user_model.dart';
+import 'package:hessa/core/themes/light_theme.dart';
+import 'package:hessa/core/utils/app_router.dart';
+import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/cubits/google/google_cubit.dart';
+import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
+import 'package:hessa/features/auth/data/repositories/auth_service.dart';
+import 'package:hessa/firebase_options.dart';
+
+void main() async {
+  setupServices();
+  await Hive.initFlutter();
+  Hive.registerAdapter(UserModelAdapter());
+  getIt.get<HiveHelper>().initializeBoxes();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
-    MultiProvider(
+    MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SavedPropertiesProvider()),
-        ChangeNotifierProvider(create: (_) => WalletProvider()),
-
+        BlocProvider<GoogleCubit>(create: (context) => GoogleCubit()),
+        BlocProvider<SettingsCubit>(create: (context) => SettingsCubit()),
+        BlocProvider<TransactionCubit>(create: (context) => TransactionCubit()),
+        BlocProvider<BalanceCubit>(create: (context) => BalanceCubit()),
+        BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
+        BlocProvider<ScreenCubit>(create: (context) => ScreenCubit()),
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(getIt.get<AuthService>()),
+        ),
       ],
+
       child: MyApp(),
     ),
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(fontFamily: "SF-Mono"),
-        debugShowCheckedModeBanner: false,
-        scaffoldMessengerKey: scaffoldMessengerKey,
-        home: SplashScreen());
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (bccontext, state) {
+        return MaterialApp.router(
+          locale: Locale(getIt.get<HiveHelper>().locale ?? "en"),
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          routerConfig: AppRouter.router,
+          title: 'Flutter Demo',
+          theme:
+              getIt.get<HiveHelper>().isDark ?? false
+                  ? getDarkThemeData()
+                  : getLightThemeData(),
+          debugShowCheckedModeBanner: false,
+        );
+      },
+    );
   }
 }
-
-

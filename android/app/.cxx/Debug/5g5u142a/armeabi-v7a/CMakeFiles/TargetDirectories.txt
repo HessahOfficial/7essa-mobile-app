@@ -1,2 +1,0 @@
-/home/meow/Desktop/WorkSpace/hessa/android/app/.cxx/Debug/5g5u142a/armeabi-v7a/CMakeFiles/edit_cache.dir
-/home/meow/Desktop/WorkSpace/hessa/android/app/.cxx/Debug/5g5u142a/armeabi-v7a/CMakeFiles/rebuild_cache.dir

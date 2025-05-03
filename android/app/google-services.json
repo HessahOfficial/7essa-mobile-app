@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "420569284844",
+    "project_id": "hessah-f080a",
+    "storage_bucket": "hessah-f080a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420569284844:android:cdab38b3d94781916365c9",
+        "android_client_info": {
+          "package_name": "com.example.hessa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420569284844-05f9egk741hk5rft2midibs4uak5pabu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hessa",
+            "certificate_hash": "0e6fd8d3d4337f191b2a6bcd1b617f4cc5f33b86"
+          }
+        },
+        {
+          "client_id": "420569284844-4dnp63t6icqt33pd8ec2oovnrtt6d0va.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA90GIfXuCRdJiquqf4ijYBW6UAuPKQcAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420569284844-4dnp63t6icqt33pd8ec2oovnrtt6d0va.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "420569284844-oeubde09oi44frtka1gbsujjvd7ds1l1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hessa"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420569284844:android:a776e578bb905b9b6365c9",
+        "android_client_info": {
+          "package_name": "com.hessa.hessa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420569284844-qprs1kfqq86t7srg9mj4csgfrb52v5ig.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hessa.hessa",
+            "certificate_hash": "0e6fd8d3d4337f191b2a6bcd1b617f4cc5f33b86"
+          }
+        },
+        {
+          "client_id": "420569284844-4dnp63t6icqt33pd8ec2oovnrtt6d0va.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA90GIfXuCRdJiquqf4ijYBW6UAuPKQcAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420569284844-4dnp63t6icqt33pd8ec2oovnrtt6d0va.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "420569284844-oeubde09oi44frtka1gbsujjvd7ds1l1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hessa"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
