@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Linux-6.1.0-32-amd64")
+set(CMAKE_HOST_SYSTEM "Linux-6.1.0-33-amd64")
 set(CMAKE_HOST_SYSTEM_NAME "Linux")
-set(CMAKE_HOST_SYSTEM_VERSION "6.1.0-32-amd64")
+set(CMAKE_HOST_SYSTEM_VERSION "6.1.0-33-amd64")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 include("/home/meow/Android/Sdk/ndk/26.3.11579264/build/cmake/android.toolchain.cmake")
