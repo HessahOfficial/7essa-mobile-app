@@ -1,2 +1,0 @@
-/home/meow/Desktop/WorkSpace/hessa/android/app/.cxx/Debug/2p46y3n6/x86_64/CMakeFiles/edit_cache.dir
-/home/meow/Desktop/WorkSpace/hessa/android/app/.cxx/Debug/2p46y3n6/x86_64/CMakeFiles/rebuild_cache.dir

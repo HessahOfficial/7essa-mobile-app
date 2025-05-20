@@ -1,2 +1,0 @@
-D:/Ana/Hessah/7essa-mobile-app/android/app/.cxx/Debug/3x1ld253/x86/CMakeFiles/edit_cache.dir
-D:/Ana/Hessah/7essa-mobile-app/android/app/.cxx/Debug/3x1ld253/x86/CMakeFiles/rebuild_cache.dir
