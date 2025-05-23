@@ -1,16 +1,28 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/features/auth/data/models/user_model.dart';
+import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.dart';
+import 'package:hessa/features/home/data/models/add_to_favourites_request.dart';
+import 'package:hessa/features/home/data/models/property_model.dart';
+import 'package:hessa/features/home/presentation/managers/property_bloc.dart';
 
 class CustomPropertyCard extends StatelessWidget {
-  const CustomPropertyCard({super.key});
+  final PropertyModel property;
+
+  const CustomPropertyCard({super.key, required this.property});
 
   @override
   Widget build(BuildContext context) {
     bool isDark = getIt.get<HiveHelper>().isDark ?? false;
+    UserModel currentUser = getIt.get<HiveHelper>().currentUser!;
+    bool isFavourite = context.read<FavouriteCubit>().isFavourite(
+      propertyId: property.id!,
+    );
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -30,6 +42,10 @@ class CustomPropertyCard extends StatelessWidget {
             width: 100,
             height: 100,
             decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(property.images![0]),
+                fit: BoxFit.cover,
+              ),
               color: AppColors.gray.withOpacity(0.4),
               borderRadius: BorderRadius.circular(15),
             ),
@@ -42,47 +58,65 @@ class CustomPropertyCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Apartment",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        property.title!,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Icon(
-                      Icons.bookmark_border_outlined,
-                      color:
-                          isDark
-                              ? Colors.white
-                              : Theme.of(context).colorScheme.primary,
-                    ),
+                    if (!isFavourite)
+                      InkWell(
+                        onTap: () {
+                          context.read<PropertyBloc>().add(
+                            AddToFavouritesEvent(
+                              request: AddToFavouritesRequest(
+                                propertyId: property.id!,
+                                userId: currentUser.id!,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.bookmark_border_outlined,
+                          color:
+                              isDark
+                                  ? Colors.white
+                                  : Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
                   ],
                 ),
                 Text(
-                  "Location",
+                  property.city!,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    overflow: TextOverflow.ellipsis,
                     color: AppColors.gray,
                   ),
                 ),
                 Text(
-                  "2550LE / Share",
+                  "${property.pricePerShare} LE/Share",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(children: [Icon(Icons.square_foot), Text("2200 sqft")]),
+                    Row(
+                      children: [
+                        Icon(Icons.square_foot),
+                        Text("${property.area} sqft"),
+                      ],
+                    ),
                     Row(
                       spacing: 1,
                       children: [
-                        Icon(Icons.bed, color: AppColors.gray),
-                        Text("5", style: TextStyle(color: AppColors.gray)),
-                        SizedBox(width: 5),
-                        Icon(Icons.bathtub, color: AppColors.gray),
-                        Text("2", style: TextStyle(color: AppColors.gray)),
+                        Text(
+                          "${property.numberOfRooms} rooms",
+                          style: TextStyle(color: AppColors.gray),
+                        ),
                       ],
                     ),
                   ],

@@ -46,3 +46,21 @@ class ForgotPasswordFailure extends AuthState {
 
   ForgotPasswordFailure({required this.message});
 }
+
+class VerifyEmailLoading extends AuthState {}
+
+class VerifyEmailSuccess extends AuthState {
+  final VerifyEmailResponse response;
+
+  VerifyEmailSuccess({required this.response});
+}
+
+class VerifyEmailFailure extends AuthState {
+  final String message;
+
+  VerifyEmailFailure({required this.message});
+}
+
+class LogoutLoading extends AuthState {}
+
+class LogoutSuccess extends AuthState {}

@@ -5,20 +5,26 @@ abstract class GoogleState {}
 
 class GoogleInitial extends GoogleState {}
 
-class GoogleLoading extends GoogleState {}
+class GoogleSignInLoading extends GoogleState {}
 
-class GoogleSuccess extends GoogleState {
+class GoogleSignInSuccess extends GoogleState {
   final User user;
 
-  GoogleSuccess({required this.user});
+  GoogleSignInSuccess({required this.user});
 }
 
-class AuthLoading extends GoogleState {}
-
-class AuthSuccess extends GoogleState {}
-
-class GoogleFailure extends GoogleState {
+class GoogleSignInFailure extends GoogleState {
   final String message;
 
-  GoogleFailure({required this.message});
+  GoogleSignInFailure({required this.message});
+}
+
+class GoogleSignOutLoading extends GoogleState {}
+
+class GoogleSignOutSuccess extends GoogleState {}
+
+class GoogleSignOutFailure extends GoogleState {
+  final String message;
+
+  GoogleSignOutFailure({required this.message});
 }

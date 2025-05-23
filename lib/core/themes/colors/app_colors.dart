@@ -28,6 +28,7 @@ class AppColors {
   static const Color skyBlue300 = Color(0xFF93C5FD);
   static const Color lightPurple = Color(0xFFDAD9F9);
   static const Color orange950 = Color(0xFFF7931B);
+  static const green = Color.fromARGB(0, 68, 207, 116);
   static const primaryLight = Color.fromARGB(255, 42, 35, 235);
   static const backgroundColorLight = Colors.white;
   static const secondaryLight = Color(0xFFDBDAFF);

@@ -22,18 +22,44 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "becomInvestorNote": MessageLookupByLibrary.simpleMessage(
+      "Once you save the information, you are agreed to the terms & conditions.",
+    ),
+    "becomeInvestor": MessageLookupByLibrary.simpleMessage("Become Investor"),
+    "becomeInvestorPopup": MessageLookupByLibrary.simpleMessage(
+      "Congratulations! You are now an investor. you can start investing now in our platform.",
+    ),
+    "becomeInvestorText": MessageLookupByLibrary.simpleMessage(
+      "You are already an investor, start your investing journey!",
+    ),
+    "becomeInvestorWithUs": MessageLookupByLibrary.simpleMessage(
+      "Become investor with us",
+    ),
     "bestForYou": MessageLookupByLibrary.simpleMessage("Best For You"),
     "bestInvest": MessageLookupByLibrary.simpleMessage("Best Invest"),
     "bonus": MessageLookupByLibrary.simpleMessage("Bonus"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "change": MessageLookupByLibrary.simpleMessage("Change"),
+    "changePin": MessageLookupByLibrary.simpleMessage("Change PIN"),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
+    "contactUsText": MessageLookupByLibrary.simpleMessage(
+      "Feel free to reach out via our official email, and we’ll respond as soon as possible (within 24 hours).",
+    ),
     "currentBalance": MessageLookupByLibrary.simpleMessage("CURRENT BALANCE"),
     "darkmode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "deleteDialogText": MessageLookupByLibrary.simpleMessage(
+      "You are about to delete the selected saved properties, are you sure about your decision?",
+    ),
     "deposit": MessageLookupByLibrary.simpleMessage("DEPOSIT"),
     "depositFee": MessageLookupByLibrary.simpleMessage("Deposit"),
     "developers": MessageLookupByLibrary.simpleMessage("Developers"),
+    "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+    "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
     "emailPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Enter your email to continue..",
+    ),
+    "emptyFavourites": MessageLookupByLibrary.simpleMessage(
+      "Add some favourite properties.",
     ),
     "expenses": MessageLookupByLibrary.simpleMessage("Expenses"),
     "fees": MessageLookupByLibrary.simpleMessage("Fees"),
@@ -65,8 +91,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
+    "messagePlaceholder": MessageLookupByLibrary.simpleMessage("Message"),
+    "myInvestments": MessageLookupByLibrary.simpleMessage("My Investments"),
     "newAdded": MessageLookupByLibrary.simpleMessage("New Added"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "no": MessageLookupByLibrary.simpleMessage("No"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "onboardingTitle": MessageLookupByLibrary.simpleMessage(
       "Invest in your favourite properties",
@@ -76,8 +105,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "passwordPlaceholder": MessageLookupByLibrary.simpleMessage("Password"),
     "payShares": MessageLookupByLibrary.simpleMessage("Pay Shares"),
+    "personalProfile": MessageLookupByLibrary.simpleMessage("Personal Profile"),
     "phonePlaceholder": MessageLookupByLibrary.simpleMessage("Phone No."),
-    "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+    "pinDialog": MessageLookupByLibrary.simpleMessage(
+      "The pin number changed successfully!",
+    ),
+    "pinError": MessageLookupByLibrary.simpleMessage(
+      "The new pin number is similar to the old one. try another one!",
+    ),
+    "pinMessage": MessageLookupByLibrary.simpleMessage(
+      "Enter new PIN number for your wallet",
+    ),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy & Policy"),
     "profileSettings": MessageLookupByLibrary.simpleMessage("Profile Settings"),
     "properties": MessageLookupByLibrary.simpleMessage(" Properties"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
@@ -86,6 +125,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "rent": MessageLookupByLibrary.simpleMessage("Rent"),
     "requiredEmail": MessageLookupByLibrary.simpleMessage(
       "Email field is required!",
+    ),
+    "requiredMessage": MessageLookupByLibrary.simpleMessage(
+      "Message field is required!",
     ),
     "requiredOtp": MessageLookupByLibrary.simpleMessage(
       "Otp field is required!",
@@ -102,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "restOfProperties": MessageLookupByLibrary.simpleMessage(
       "Rest Of Properties",
     ),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "savedProperties": MessageLookupByLibrary.simpleMessage("Saved Properties"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
     "sendButton": MessageLookupByLibrary.simpleMessage("Send"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
@@ -116,5 +160,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "wallet": MessageLookupByLibrary.simpleMessage("Wallet"),
     "withdraw": MessageLookupByLibrary.simpleMessage("WITHDRAW"),
     "withdrawal": MessageLookupByLibrary.simpleMessage("Withdrawal"),
+    "yes": MessageLookupByLibrary.simpleMessage("Yes"),
   };
 }

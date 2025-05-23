@@ -13,8 +13,8 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/home/meow/Desktop/GitRepos/hessa/android/app/src/debug/AndroidManifest.xml:6:5-66
-15-->/home/meow/Desktop/GitRepos/hessa/android/app/src/debug/AndroidManifest.xml:6:22-64
+15-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/debug/AndroidManifest.xml:6:5-66
+15-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/debug/AndroidManifest.xml:6:22-64
 16    <!--
 17     Required to query activities that can process text, see:
 18         https://developer.android.com/training/package-visibility and
@@ -23,16 +23,16 @@
 21         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
 22    -->
 23    <queries>
-23-->/home/meow/Desktop/GitRepos/hessa/android/app/src/main/AndroidManifest.xml:39:5-44:15
+23-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/main/AndroidManifest.xml:39:5-44:15
 24        <intent>
-24-->/home/meow/Desktop/GitRepos/hessa/android/app/src/main/AndroidManifest.xml:40:9-43:18
+24-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/main/AndroidManifest.xml:40:9-43:18
 25            <action android:name="android.intent.action.PROCESS_TEXT" />
-25-->/home/meow/Desktop/GitRepos/hessa/android/app/src/main/AndroidManifest.xml:41:13-72
-25-->/home/meow/Desktop/GitRepos/hessa/android/app/src/main/AndroidManifest.xml:41:21-70
+25-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/main/AndroidManifest.xml:41:13-72
+25-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/main/AndroidManifest.xml:41:21-70
 26
 27            <data android:mimeType="text/plain" />
-27-->/home/meow/Desktop/GitRepos/hessa/android/app/src/main/AndroidManifest.xml:42:13-50
-27-->/home/meow/Desktop/GitRepos/hessa/android/app/src/main/AndroidManifest.xml:42:19-48
+27-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/main/AndroidManifest.xml:42:13-50
+27-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/main/AndroidManifest.xml:42:19-48
 28        </intent>
 29        <!-- Needs to be explicitly declared on Android R+ -->
 30        <package android:name="com.google.android.apps.maps" />
@@ -109,25 +109,25 @@
 86            android:value="2" />
 87
 88        <service
-88-->[:firebase_auth] /home/meow/Desktop/GitRepos/hessa/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
+88-->[:firebase_auth] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
 89            android:name="com.google.firebase.components.ComponentDiscoveryService"
-89-->[:firebase_auth] /home/meow/Desktop/GitRepos/hessa/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:18-89
+89-->[:firebase_auth] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:18-89
 90            android:directBootAware="true"
 90-->[com.google.firebase:firebase-common:21.0.0] /home/meow/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:32:13-43
 91            android:exported="false" >
 91-->[com.google.firebase:firebase-auth:23.2.0] /home/meow/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:68:13-37
 92            <meta-data
-92-->[:firebase_auth] /home/meow/Desktop/GitRepos/hessa/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
+92-->[:firebase_auth] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
 93                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-93-->[:firebase_auth] /home/meow/Desktop/GitRepos/hessa/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
+93-->[:firebase_auth] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
 94                android:value="com.google.firebase.components.ComponentRegistrar" />
-94-->[:firebase_auth] /home/meow/Desktop/GitRepos/hessa/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
+94-->[:firebase_auth] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
 95            <meta-data
-95-->[:firebase_core] /home/meow/Desktop/GitRepos/hessa/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
+95-->[:firebase_core] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
 96                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-96-->[:firebase_core] /home/meow/Desktop/GitRepos/hessa/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
+96-->[:firebase_core] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
 97                android:value="com.google.firebase.components.ComponentRegistrar" />
-97-->[:firebase_core] /home/meow/Desktop/GitRepos/hessa/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
+97-->[:firebase_core] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
 98            <meta-data
 98-->[com.google.firebase:firebase-auth:23.2.0] /home/meow/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:69:13-71:85
 99                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
@@ -174,7 +174,7 @@
 119-->[com.google.firebase:firebase-auth:23.2.0] /home/meow/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:39:27-75
 120
 121                <data
-121-->/home/meow/Desktop/GitRepos/hessa/android/app/src/main/AndroidManifest.xml:42:13-50
+121-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/main/AndroidManifest.xml:42:13-50
 122                    android:host="firebase.auth"
 123                    android:path="/"
 124                    android:scheme="genericidp" />
@@ -206,7 +206,7 @@
 137-->[com.google.firebase:firebase-auth:23.2.0] /home/meow/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:39:27-75
 138
 139                <data
-139-->/home/meow/Desktop/GitRepos/hessa/android/app/src/main/AndroidManifest.xml:42:13-50
+139-->/home/meow/Desktop/GitRepos/7essa-mobile-app/android/app/src/main/AndroidManifest.xml:42:13-50
 140                    android:host="firebase.auth"
 141                    android:path="/"
 142                    android:scheme="recaptcha" />
@@ -214,43 +214,43 @@
 144        </activity>
 145
 146        <provider
-146-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:9-17:20
+146-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:9-17:20
 147            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-147-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:13-82
+147-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:13-82
 148            android:authorities="com.example.hessa.flutter.image_provider"
-148-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:13-74
+148-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:13-74
 149            android:exported="false"
-149-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:13-37
+149-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:13-37
 150            android:grantUriPermissions="true" >
-150-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:13:13-47
+150-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:13:13-47
 151            <meta-data
-151-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:14:13-16:75
+151-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:14:13-16:75
 152                android:name="android.support.FILE_PROVIDER_PATHS"
-152-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:15:17-67
+152-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:15:17-67
 153                android:resource="@xml/flutter_image_picker_file_paths" />
-153-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:16:17-72
+153-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:16:17-72
 154        </provider> <!-- Trigger Google Play services to install the backported photo picker module. -->
 155        <service
-155-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:19:9-31:19
+155-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:19:9-31:19
 156            android:name="com.google.android.gms.metadata.ModuleDependencies"
-156-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:20:13-78
+156-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:20:13-78
 157            android:enabled="false"
-157-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:21:13-36
+157-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:21:13-36
 158            android:exported="false" >
-158-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:22:13-37
+158-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:22:13-37
 159            <intent-filter>
-159-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:24:13-26:29
+159-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:24:13-26:29
 160                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
-160-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:25:17-94
-160-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:25:25-91
+160-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:25:17-94
+160-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:25:25-91
 161            </intent-filter>
 162
 163            <meta-data
-163-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:28:13-30:36
+163-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:28:13-30:36
 164                android:name="photopicker_activity:0:required"
-164-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:29:17-63
+164-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:29:17-63
 165                android:value="" />
-165-->[:image_picker_android] /home/meow/Desktop/GitRepos/hessa/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:30:17-33
+165-->[:image_picker_android] /home/meow/Desktop/GitRepos/7essa-mobile-app/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:30:17-33
 166        </service> <!-- Needs to be explicitly declared on P+ -->
 167        <uses-library
 167-->[com.google.android.gms:play-services-maps:18.2.0] /home/meow/.gradle/caches/8.10.2/transforms/b9c01572a1c0fb30052b74754d7f0455/transformed/jetified-play-services-maps-18.2.0/AndroidManifest.xml:39:9-41:40

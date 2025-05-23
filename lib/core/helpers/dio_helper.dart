@@ -2,11 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:hessa/core/utils/type_aliases.dart';
 
 class DioHelper {
-  final _baseUrl = "https://7essa-server.vercel.app/";
+  final _baseUrl = "http://192.168.1.9:8000";
   late Dio _dio;
-
-  static const success = "success";
-  static const failed = "failed";
 
   DioHelper() {
     _dio = Dio(
@@ -16,19 +13,59 @@ class DioHelper {
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
-        connectTimeout: Duration(seconds: 30),
-        receiveTimeout: Duration(seconds: 30),
-        sendTimeout: Duration(seconds: 30),
-        // receiveDataWhenStatusError: true,
-        // followRedirects: true,
       ),
     );
   }
 
-  Future<Json> post({required String endpoint, required Json body}) async {
-    print("==============before request==============");
-    final response = await _dio.post(endpoint, data: body);
-    print("==============After request==============");
+  Options getDioOptions({required String accessToken}) {
+    return Options(headers: {"Authorization": "Bearer $accessToken"});
+  }
+
+  Future<Json> post({
+    required String endpoint,
+    Json? body,
+    Json? params,
+    Options? options,
+  }) async {
+    print("Before");
+    final response = await _dio.post(
+      endpoint,
+      data: body,
+      queryParameters: params,
+      options: options,
+    );
+    print("response: $response");
+    return response.data;
+  }
+
+  Future<Json> get({
+    required String endpoint,
+    Json? body,
+    Json? params,
+    Options? options,
+  }) async {
+    final response = await _dio.get(
+      endpoint,
+      data: body,
+      queryParameters: params,
+      options: options,
+    );
+    print("response: $response");
+    return response.data;
+  }
+
+  Future<Json> delete({
+    required String endpoint,
+    Json? body,
+    Json? params,
+    Options? options,
+  }) async {
+    final response = await _dio.delete(
+      endpoint,
+      data: body,
+      queryParameters: params,
+      options: options,
+    );
     print("response: $response");
     return response.data;
   }

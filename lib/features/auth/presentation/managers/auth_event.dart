@@ -20,3 +20,11 @@ class ForgotPasswordEvent extends AuthEvent {
 
   ForgotPasswordEvent({required this.request});
 }
+
+class VerifyEmailEvent extends AuthEvent {
+  final VerifyEmailRequest request;
+
+  VerifyEmailEvent({required this.request});
+}
+
+class LogoutEvent extends AuthEvent {}

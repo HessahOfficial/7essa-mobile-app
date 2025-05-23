@@ -1,50 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
+import 'package:hessa/features/notification/data/models/notification_model.dart';
 
-import '../../constants/notification_data.dart';
+class NotificationItem extends StatelessWidget {
+  final NotificationModel notification;
 
-class NotificationItem extends StatefulWidget {
-  final NotificationModel item;
-
-  const NotificationItem({super.key, required this.item});
-
-  @override
-  State<NotificationItem> createState() => _NotificationItemState();
-}
-
-class _NotificationItemState extends State<NotificationItem> {
-  late Color background;
-
-  @override
-  void initState() {
-    background = AppColors.backgtoundLight;
-    super.initState();
-  }
+  const NotificationItem({super.key, required this.notification});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5),
-      child: GestureDetector(
-        onLongPressStart: (value) {
-          setState(() {
-            background = AppColors.accentColor;
-          });
-        },
-        onLongPressEnd: (value) {
-          setState(() {
-            background = AppColors.backgtoundLight;
-          });
-        },
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: () {},
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.backgtoundLight,
+            color: Colors.transparent,
             borderRadius: BorderRadius.circular(14),
           ),
           width: double.infinity,
           child: Padding(
             padding: EdgeInsets.all(10),
             child: Row(
+              spacing: 10,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
@@ -54,26 +33,31 @@ class _NotificationItemState extends State<NotificationItem> {
                     color: AppColors.accentColor,
                   ),
                 ),
-                SizedBox(width: 15),
                 Expanded(
                   child: Column(
+                    spacing: 10,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.item.type,
+                        notification.type,
                         style: TextStyle(
                           color: AppColors.gray,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 10),
                       Text(
-                        widget.item.title,
+                        notification.title,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
+                        overflow: TextOverflow.visible,
+                        softWrap: true,
+                      ),
+                      Text(
+                        notification.description,
+                        style: TextStyle(fontWeight: FontWeight.bold),
                         overflow: TextOverflow.visible,
                         softWrap: true,
                       ),

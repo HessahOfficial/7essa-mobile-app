@@ -1,26 +1,165 @@
-class NotificationModel {
-  late String type;
-  late String title;
+import 'package:hessa/features/notification/data/models/notification_model.dart';
 
-  NotificationModel({
-    required this.type,
-    required this.title
-  });
-}
-
-List<NotificationModel> data = [
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
-  NotificationModel(type: "Notification Type", title: "Notification Title"),
+List<NotificationModel> notifications = [
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
+  NotificationModel(
+    type: "Notification Type",
+    title: "Notification Title",
+    description:
+        "descriptionadfghjkkadghjalkdfgjhasdkljghfadfgjsdfkljsdnfvjknadsjfnvnsdflvvjnsdvbljsdfjlhkghsdjlfghjkahdgjkhajkghlkh",
+    date: DateTime.now().toString(),
+  ),
 ];

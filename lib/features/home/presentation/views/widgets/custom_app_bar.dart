@@ -1,5 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
+import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/features/auth/data/models/user_model.dart';
 import 'package:hessa/generated/l10n.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -8,6 +14,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    UserModel currentUser = getIt.get<HiveHelper>().currentUser!;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
@@ -27,12 +34,20 @@ class CustomAppBar extends StatelessWidget {
                 ),
               ),
               Text(
-                "User Name",
+                currentUser.username!,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          Icon(Icons.notifications_none, size: 28),
+          InkWell(
+            borderRadius: BorderRadius.circular(100),
+            splashColor: AppColors.gray.withOpacity(0.1),
+            onTap: () => context.push(AppRoutes.notificationsView),
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Icon(Icons.notifications_none, size: 28),
+            ),
+          ),
         ],
       ),
     );

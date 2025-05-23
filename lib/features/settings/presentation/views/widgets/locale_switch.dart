@@ -27,12 +27,15 @@ class _LocaleSwitchState extends State<LocaleSwitch> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: Row(
+        spacing: 10,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Icon(Icons.translate_rounded),
           Text(
             widget.title,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
+          Spacer(),
           Switch(
             inactiveTrackColor: Theme.of(context).scaffoldBackgroundColor,
             activeColor: Theme.of(context).colorScheme.primary,

@@ -7,8 +7,10 @@ class ScreenInitial extends ScreenState {}
 
 class HomeState extends ScreenState {}
 
-class FavouriteState extends ScreenState {}
+class SavesState extends ScreenState {}
 
 class WalletState extends ScreenState {}
 
 class SettingState extends ScreenState {}
+
+class InvestmentState extends ScreenState {}

@@ -22,17 +22,44 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "becomInvestorNote": MessageLookupByLibrary.simpleMessage(
+      "بمجرد حفظ المعلومات ، فإنك توافق على الشروط والاحكام.",
+    ),
+    "becomeInvestor": MessageLookupByLibrary.simpleMessage("كن مستثمرا"),
+    "becomeInvestorPopup": MessageLookupByLibrary.simpleMessage(
+      "تهانينا! انت الان مستثمر. يمكنك بدء الاستثمار في منصتنا.",
+    ),
+    "becomeInvestorText": MessageLookupByLibrary.simpleMessage(
+      "انت مستثمر بالفعل ، ابدء رحلتك الاستثمارية!",
+    ),
+    "becomeInvestorWithUs": MessageLookupByLibrary.simpleMessage(
+      "كن مستثمر معنا",
+    ),
     "bestForYou": MessageLookupByLibrary.simpleMessage("الأفضل لك"),
     "bestInvest": MessageLookupByLibrary.simpleMessage("أفضل استثمار"),
     "bonus": MessageLookupByLibrary.simpleMessage("مكافأة"),
     "cancel": MessageLookupByLibrary.simpleMessage("رجوع"),
+    "change": MessageLookupByLibrary.simpleMessage("تغيير"),
+    "changePin": MessageLookupByLibrary.simpleMessage("تغيير رقم البطاقة"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
+    "contactUsText": MessageLookupByLibrary.simpleMessage(
+      "تواصل معنا عبر البريد الالكتروني الرسمي وسوف نرد عليك في اسرع وقت ممكن. (في غضون 24 ساعة).",
+    ),
     "currentBalance": MessageLookupByLibrary.simpleMessage("الرصيد الحالي"),
     "darkmode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+    "deleteDialogText": MessageLookupByLibrary.simpleMessage(
+      "انت على وشك ان تقوم بحذف العقارات المختارة من القائمة, هل انت متأكد من قرارك؟",
+    ),
+    "deposit": MessageLookupByLibrary.simpleMessage("ايداع"),
     "depositFee": MessageLookupByLibrary.simpleMessage("ايداع"),
     "developers": MessageLookupByLibrary.simpleMessage("المطورين"),
+    "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "emailPlaceholder": MessageLookupByLibrary.simpleMessage(
       "البريد الالكتروني",
+    ),
+    "emptyFavourites": MessageLookupByLibrary.simpleMessage(
+      "قم باضافة بعض العقارات المفضلة.",
     ),
     "expenses": MessageLookupByLibrary.simpleMessage("مصروفات"),
     "fees": MessageLookupByLibrary.simpleMessage("رسوم"),
@@ -62,8 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+    "messagePlaceholder": MessageLookupByLibrary.simpleMessage("رسالة"),
+    "myInvestments": MessageLookupByLibrary.simpleMessage("استثماراتي"),
     "newAdded": MessageLookupByLibrary.simpleMessage("مضاف حديثا"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "no": MessageLookupByLibrary.simpleMessage("لا"),
     "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
     "onboardingTitle": MessageLookupByLibrary.simpleMessage(
       "استثمر في عقاراتك المفضلة",
@@ -73,8 +103,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "passwordPlaceholder": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "payShares": MessageLookupByLibrary.simpleMessage("اسهم مدفوعة"),
+    "personalProfile": MessageLookupByLibrary.simpleMessage("بيانات الشخصية"),
     "phonePlaceholder": MessageLookupByLibrary.simpleMessage("رقم التلفون"),
-    "privacyPolicy": MessageLookupByLibrary.simpleMessage("الخصوصية"),
+    "pinDialog": MessageLookupByLibrary.simpleMessage(
+      "تم تغيير رقم البطاقة بنجاح!",
+    ),
+    "pinError": MessageLookupByLibrary.simpleMessage(
+      "الرقم السري الجديد اللذي ادخلته مستخدم بالفعل. حاول مرة اخرى!",
+    ),
+    "pinMessage": MessageLookupByLibrary.simpleMessage(
+      "قم بادخال رقم سري جديد لمحفظتك",
+    ),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("الخصوصية و الأمان"),
     "profileSettings": MessageLookupByLibrary.simpleMessage("اعدادات المستخدم"),
     "properties": MessageLookupByLibrary.simpleMessage("عقارات "),
     "register": MessageLookupByLibrary.simpleMessage("حساب جديد"),
@@ -83,6 +123,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "rent": MessageLookupByLibrary.simpleMessage("ايجار"),
     "requiredEmail": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال البريد الالكتروني!",
+    ),
+    "requiredMessage": MessageLookupByLibrary.simpleMessage(
+      "يجب ادخال الرسالة!",
     ),
     "requiredOtp": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال رمز التحقق!",
@@ -97,6 +140,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "يجب ادخال اسم المستخدم!",
     ),
     "restOfProperties": MessageLookupByLibrary.simpleMessage("عقارات اخرى"),
+    "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+    "savedProperties": MessageLookupByLibrary.simpleMessage(
+      "العقارات المحفوظة",
+    ),
     "search": MessageLookupByLibrary.simpleMessage("بحث..."),
     "sendButton": MessageLookupByLibrary.simpleMessage("ارسال"),
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
@@ -111,5 +158,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "wallet": MessageLookupByLibrary.simpleMessage("المحفظة"),
     "withdraw": MessageLookupByLibrary.simpleMessage("سحب"),
     "withdrawal": MessageLookupByLibrary.simpleMessage("سحب"),
+    "yes": MessageLookupByLibrary.simpleMessage("نعم"),
   };
 }

@@ -5,6 +5,8 @@ import 'package:hessa/features/auth/data/models/login_request.dart';
 import 'package:hessa/features/auth/data/models/login_response.dart';
 import 'package:hessa/features/auth/data/models/register_request.dart';
 import 'package:hessa/features/auth/data/models/register_response.dart';
+import 'package:hessa/features/auth/data/models/verify_email_request.dart';
+import 'package:hessa/features/auth/data/models/verify_email_response.dart';
 import 'package:hessa/features/auth/data/repositories/auth_service.dart';
 import 'package:meta/meta.dart';
 
@@ -38,24 +40,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         },
         (data) {
           print(data);
+
           emit(LoginSuccess(response: data));
         },
       );
     });
 
-    on<ForgotPasswordEvent>((event, emit) async {
-      emit(ForgotPasswordLoading());
-      final response = await service.forgotPassword(request: event.request);
+    on<VerifyEmailEvent>((event, emit) async {
+      emit(VerifyEmailLoading());
+      final response = await service.verifyEmail(request: event.request);
       response.fold(
         (failure) {
           print(failure);
-          emit(ForgotPasswordFailure(message: failure.message));
+          emit(VerifyEmailFailure(message: failure.message));
         },
         (data) {
           print(data);
-          emit(ForgotPasswordSuccess(response: data));
+          emit(VerifyEmailSuccess(response: data));
         },
       );
+    });
+
+    on<LogoutEvent>((event, emit) async {
+      emit(LogoutLoading());
+      service.logout();
+      emit(LogoutSuccess());
     });
   }
 }

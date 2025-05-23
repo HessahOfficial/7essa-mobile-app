@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/features/auth/data/models/user_model.dart';
 import 'package:hessa/features/wallet/presentation/managers/balance_cubit.dart';
 import 'package:hessa/features/wallet/presentation/views/widgets/custom_wallet_button.dart';
 import 'package:hessa/generated/l10n.dart';
@@ -11,14 +14,13 @@ class CustomWalletCard extends StatelessWidget {
 
   final BuildContext screenContext;
 
-  final _balance = 2025.26;
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BalanceCubit, BalanceState>(
       listener: (context, state) {},
       builder: (context, state) {
         bool hide = context.read<BalanceCubit>().hide;
+        UserModel currentUser = getIt.get<HiveHelper>().currentUser!;
 
         return Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(25.24)),
@@ -58,7 +60,7 @@ class CustomWalletCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          hide ? "*******" : _balance.toString(),
+                          hide ? "*******" : currentUser.balance.toString(),
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

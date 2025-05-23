@@ -39,6 +39,17 @@ class Validator {
     return message;
   }
 
+  String? validateFullname({required String fullname}) {
+    String? message;
+    RegExp regex = RegExp(r'^.{3,}$');
+    if (fullname.isEmpty) {
+      message = "Fullname field is required!";
+    } else if (!regex.hasMatch(fullname)) {
+      message = "Fullname consists of at least 3 characters!";
+    }
+    return message;
+  }
+
   String? validatePhone({required String phone}) {
     String? message;
     RegExp regex = RegExp(r'^0\d{10}$');
@@ -53,7 +64,7 @@ class Validator {
   String? validateMessage({required String message}) {
     String? anotherMessage;
     if (message.isEmpty) {
-      anotherMessage = "Message field is required!";
+      anotherMessage = S.of(context).requiredMessage;
     }
     return anotherMessage;
   }
@@ -62,9 +73,10 @@ class Validator {
     String? message;
     RegExp regex = RegExp(r'^[1-9]\d{13}$');
     if (nationalId.isEmpty) {
-      message = "Phone field is required!";
+      message = "National Id field is required!";
     } else if (!regex.hasMatch(nationalId)) {
-      message = "Invalid National Id!";
+      message =
+          "National id consists of 14 digits and doesn't start with zero!";
     }
     return message;
   }

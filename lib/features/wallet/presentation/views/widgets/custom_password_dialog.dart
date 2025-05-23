@@ -35,6 +35,7 @@ class CustomPasswordDialog extends StatelessWidget {
             children: [
               Text(
                 S.of(context).passowrdDialog,
+                textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               OtpForm(

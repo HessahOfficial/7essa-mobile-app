@@ -6,7 +6,8 @@ import 'package:hessa/generated/l10n.dart';
 
 class RegisterForm extends StatelessWidget {
   final TextEditingController usernameController;
-  final TextEditingController phoneController;
+  final TextEditingController firstnameController;
+  final TextEditingController lastnameController;
   final TextEditingController emailAddressController;
   final TextEditingController passwordController;
   final double screenWidth;
@@ -15,19 +16,52 @@ class RegisterForm extends StatelessWidget {
   const RegisterForm({
     super.key,
     required this.usernameController,
-    required this.phoneController,
     required this.emailAddressController,
     required this.passwordController,
     required this.screenWidth,
     required this.formKey,
+    required this.firstnameController,
+    required this.lastnameController,
   });
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
+        spacing: 15,
         children: [
+          CustomTextField(
+            controller: firstnameController,
+            icon: Icons.person,
+            iconColor: AppColors.orange950,
+            inputColor: AppColors.white2,
+            iconBackgroundColor: AppColors.orange100,
+            placeholder: "Firstname",
+            screenWidth: screenWidth,
+            type: TextInputType.name,
+            validator: (value) {
+              return Validator(
+                context: context,
+              ).validateUsername(username: value!);
+            },
+          ),
+          CustomTextField(
+            controller: lastnameController,
+            icon: Icons.person,
+            iconColor: AppColors.orange950,
+            inputColor: AppColors.white2,
+            iconBackgroundColor: AppColors.orange100,
+            placeholder: "Lastname",
+            screenWidth: screenWidth,
+            type: TextInputType.name,
+            validator: (value) {
+              return Validator(
+                context: context,
+              ).validateUsername(username: value!);
+            },
+          ),
           CustomTextField(
             controller: usernameController,
             icon: Icons.person,
@@ -44,21 +78,6 @@ class RegisterForm extends StatelessWidget {
               ).validateUsername(username: value!);
             },
           ),
-          SizedBox(height: 15),
-          CustomTextField(
-            controller: phoneController,
-            icon: Icons.phone,
-            iconColor: AppColors.orange950,
-            inputColor: AppColors.white2,
-            iconBackgroundColor: AppColors.orange100,
-            placeholder: S.of(context).phonePlaceholder,
-            screenWidth: screenWidth,
-            type: TextInputType.phone,
-            validator: (value) {
-              return Validator(context: context).validatePhone(phone: value!);
-            },
-          ),
-          SizedBox(height: 15),
           CustomTextField(
             controller: emailAddressController,
             icon: Icons.email_rounded,
@@ -74,7 +93,6 @@ class RegisterForm extends StatelessWidget {
               ).validateEmailAddress(email: value!);
             },
           ),
-          SizedBox(height: 15),
           CustomTextField(
             controller: passwordController,
             icon: Icons.lock,

@@ -7,7 +7,12 @@ import 'package:hessa/features/auth/presentation/views/login_screen.dart';
 import 'package:hessa/features/auth/presentation/views/otp-screen.dart';
 import 'package:hessa/features/auth/presentation/views/register_screen.dart';
 import 'package:hessa/features/main/presentation/views/main_screen.dart';
-import 'package:hessa/onboarding_screen.dart';
+import 'package:hessa/features/notification/presentation/views/notifications_screen.dart';
+import 'package:hessa/features/settings/presentation/views/become_investor_screen.dart';
+import 'package:hessa/features/contact/presentation/views/contact_us_screen.dart';
+import 'package:hessa/features/settings/presentation/views/privacy_policy_screen.dart';
+import 'package:hessa/features/settings/presentation/views/profile_screen.dart';
+import 'package:hessa/features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:hessa/splash_screen.dart';
 
 abstract class AppRouter {
@@ -43,6 +48,26 @@ abstract class AppRouter {
       GoRoute(
         path: AppRoutes.mainView,
         builder: (context, state) => MainScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.profileView,
+        builder: (context, state) => ProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.becomeInvestorView,
+        builder: (context, state) => BecomeInvestorScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.contactUsView,
+        builder: (context, state) => ContactUsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.notificationsView,
+        builder: (context, state) => NotificationsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.policyPrivacyView,
+        builder: (context, state) => PrivacyPolicyScreen(),
       ),
     ],
   );

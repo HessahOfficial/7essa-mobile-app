@@ -17,6 +17,17 @@ class CustomSearchBar extends StatelessWidget {
     required this.screenContext,
   });
 
+  showFilterSheet() {
+    showModalBottomSheet(
+      context: screenContext,
+      builder:
+          (context) => FilterBottomSheet(
+            initialOptions: FilterOptions(),
+            onApply: (value) {},
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -79,7 +90,7 @@ class CustomSearchBar extends StatelessWidget {
             ),
             child: IconButton(
               icon: Icon(Icons.tune, color: Colors.white, size: 24),
-              onPressed: () {},
+              onPressed: showFilterSheet,
             ),
           ),
         ],

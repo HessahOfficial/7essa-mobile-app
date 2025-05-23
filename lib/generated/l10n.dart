@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `Privacy Policy`
+  /// `Privacy & Policy`
   String get privacyPolicy {
     return Intl.message(
-      'Privacy Policy',
+      'Privacy & Policy',
       name: 'privacyPolicy',
       desc: '',
       args: [],
@@ -493,6 +493,206 @@ class S {
   /// `HOT`
   String get hot {
     return Intl.message('HOT', name: 'hot', desc: '', args: []);
+  }
+
+  /// `Personal Profile`
+  String get personalProfile {
+    return Intl.message(
+      'Personal Profile',
+      name: 'personalProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The pin number changed successfully!`
+  String get pinDialog {
+    return Intl.message(
+      'The pin number changed successfully!',
+      name: 'pinDialog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change PIN`
+  String get changePin {
+    return Intl.message('Change PIN', name: 'changePin', desc: '', args: []);
+  }
+
+  /// `Change`
+  String get change {
+    return Intl.message('Change', name: 'change', desc: '', args: []);
+  }
+
+  /// `Edit Profile`
+  String get editProfile {
+    return Intl.message(
+      'Edit Profile',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message('Edit', name: 'edit', desc: '', args: []);
+  }
+
+  /// `Become investor with us`
+  String get becomeInvestorWithUs {
+    return Intl.message(
+      'Become investor with us',
+      name: 'becomeInvestorWithUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter new PIN number for your wallet`
+  String get pinMessage {
+    return Intl.message(
+      'Enter new PIN number for your wallet',
+      name: 'pinMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The new pin number is similar to the old one. try another one!`
+  String get pinError {
+    return Intl.message(
+      'The new pin number is similar to the old one. try another one!',
+      name: 'pinError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feel free to reach out via our official email, and we’ll respond as soon as possible (within 24 hours).`
+  String get contactUsText {
+    return Intl.message(
+      'Feel free to reach out via our official email, and we’ll respond as soon as possible (within 24 hours).',
+      name: 'contactUsText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message`
+  String get messagePlaceholder {
+    return Intl.message(
+      'Message',
+      name: 'messagePlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message field is required!`
+  String get requiredMessage {
+    return Intl.message(
+      'Message field is required!',
+      name: 'requiredMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Become Investor`
+  String get becomeInvestor {
+    return Intl.message(
+      'Become Investor',
+      name: 'becomeInvestor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are already an investor, start your investing journey!`
+  String get becomeInvestorText {
+    return Intl.message(
+      'You are already an investor, start your investing journey!',
+      name: 'becomeInvestorText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Once you save the information, you are agreed to the terms & conditions.`
+  String get becomInvestorNote {
+    return Intl.message(
+      'Once you save the information, you are agreed to the terms & conditions.',
+      name: 'becomInvestorNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Congratulations! You are now an investor. you can start investing now in our platform.`
+  String get becomeInvestorPopup {
+    return Intl.message(
+      'Congratulations! You are now an investor. you can start investing now in our platform.',
+      name: 'becomeInvestorPopup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Investments`
+  String get myInvestments {
+    return Intl.message(
+      'My Investments',
+      name: 'myInvestments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved Properties`
+  String get savedProperties {
+    return Intl.message(
+      'Saved Properties',
+      name: 'savedProperties',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are about to delete the selected saved properties, are you sure about your decision?`
+  String get deleteDialogText {
+    return Intl.message(
+      'You are about to delete the selected saved properties, are you sure about your decision?',
+      name: 'deleteDialogText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message('Yes', name: 'yes', desc: '', args: []);
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message('No', name: 'no', desc: '', args: []);
+  }
+
+  /// `Add some favourite properties.`
+  String get emptyFavourites {
+    return Intl.message(
+      'Add some favourite properties.',
+      name: 'emptyFavourites',
+      desc: '',
+      args: [],
+    );
   }
 }
 

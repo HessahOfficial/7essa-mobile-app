@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:hessa/core/themes/colors/app_colors.dart';
 
-class CustomIntentIcon extends StatefulWidget {
+class CustomIntentIcon extends StatelessWidget {
   final void Function()? onTap;
   final Color? iconColor;
-  final Color? splashColor;
   final String title;
   final TextStyle titleStyle;
   final double iconSize;
@@ -18,36 +17,28 @@ class CustomIntentIcon extends StatefulWidget {
     required this.iconSize,
     required this.titleStyle,
     this.iconColor,
-    this.splashColor,
     this.onTap,
   });
 
   @override
-  State<CustomIntentIcon> createState() => _CustomIntentIconState();
-}
-
-class _CustomIntentIconState extends State<CustomIntentIcon> {
-  @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(10),
-      splashColor: widget.splashColor ?? AppColors.lightPurple,
-      highlightColor: widget.splashColor ?? AppColors.lightPurple,
-      hoverDuration: Duration(milliseconds: 200),
-      onTap: widget.onTap ?? () {},
+      splashColor: Theme.of(context).colorScheme.secondary,
+      onTap: onTap ?? () {},
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        width: 80,
+        height: 80,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              widget.icon,
-              color: widget.iconColor ?? AppColors.accentColor,
-              size: widget.iconSize,
+              icon,
+              color: iconColor ?? AppColors.accentColor,
+              size: iconSize,
             ),
-            SizedBox(height: 5),
-            Text(widget.title, style: widget.titleStyle),
+            Text(title, style: titleStyle),
           ],
         ),
       ),

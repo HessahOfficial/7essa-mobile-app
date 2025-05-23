@@ -1,11 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hessa/core/themes/dark_theme.dart';
+import 'package:hessa/features/auth/data/models/token_model.dart';
+import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.dart';
+import 'package:hessa/features/home/data/repositories/property_service.dart';
 import 'package:hessa/features/home/presentation/managers/category_cubit.dart';
+import 'package:hessa/features/home/presentation/managers/property_bloc.dart';
 import 'package:hessa/features/main/presentation/managers/screen_cubit.dart';
+import 'package:hessa/features/onboarding/presentation/managers/launch_cubit.dart';
+import 'package:hessa/features/settings/presentation/managers/image_cubit.dart';
+import 'package:hessa/features/settings/presentation/managers/investor_cubit.dart';
+import 'package:hessa/features/settings/presentation/managers/pin_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/settings_cubit.dart';
+import 'package:hessa/features/settings/presentation/managers/update_cubit.dart';
 import 'package:hessa/features/wallet/presentation/managers/balance_cubit.dart';
 import 'package:hessa/features/wallet/presentation/managers/transaction_cubit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -25,8 +36,10 @@ void main() async {
   setupServices();
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
-  getIt.get<HiveHelper>().initializeBoxes();
+  Hive.registerAdapter(TokenModelAdapter());
+  await getIt.get<HiveHelper>().initializeBoxes(); // Initialize Hive Boxes
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     MultiBlocProvider(
@@ -37,8 +50,18 @@ void main() async {
         BlocProvider<BalanceCubit>(create: (context) => BalanceCubit()),
         BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
         BlocProvider<ScreenCubit>(create: (context) => ScreenCubit()),
+        BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
+        BlocProvider<PinCubit>(create: (context) => PinCubit()),
+        BlocProvider<UpdateCubit>(create: (context) => UpdateCubit()),
+        BlocProvider<InvestorCubit>(create: (context) => InvestorCubit()),
+        BlocProvider<LaunchCubit>(create: (context) => LaunchCubit()),
+        BlocProvider<FavouriteCubit>(create: (context) => FavouriteCubit()),
+
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(getIt.get<AuthService>()),
+        ),
+        BlocProvider<PropertyBloc>(
+          create: (context) => PropertyBloc(getIt.get<PropertyService>()),
         ),
       ],
 

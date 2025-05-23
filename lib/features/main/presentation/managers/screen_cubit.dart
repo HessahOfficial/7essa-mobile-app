@@ -15,13 +15,16 @@ class ScreenCubit extends Cubit<ScreenState> {
         emit(HomeState());
         break;
       case 1:
-        emit(FavouriteState());
+        emit(SavesState());
         break;
       case 2:
         emit(WalletState());
         break;
       case 3:
         emit(SettingState());
+        break;
+      case 4:
+        emit(InvestmentState());
         break;
     }
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
+import 'package:hessa/core/themes/light_theme.dart';
 import 'package:hessa/core/utils/lang.dart';
 
 class CustomTextField extends StatelessWidget {
   final IconData? icon;
+  final IconData? suffixIcon;
   final Color? iconColor;
   final Color inputColor;
   final Color? iconBackgroundColor;
@@ -13,17 +15,19 @@ class CustomTextField extends StatelessWidget {
   final double screenWidth;
   final TextEditingController controller;
   final void Function(String val)? onChanged;
+  final void Function()? suffixFunction;
   final String? Function(String?)? validator;
   final double? height;
   final double? borderRadius;
   final double? iconSize;
   final TextInputType? type;
   final bool? obscure;
+  final bool? enabled;
   final int? maxLines;
   final int? maxLength;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     this.icon,
     this.iconColor,
     required this.inputColor,
@@ -42,7 +46,10 @@ class CustomTextField extends StatelessWidget {
     this.obscure,
     this.maxLines,
     this.maxLength,
-  }) : super(key: key);
+    this.enabled,
+    this.suffixIcon,
+    this.suffixFunction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -75,54 +82,66 @@ class CustomTextField extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: TextFormField(
-                      validator: validator,
-                      onChanged: onChanged,
-                      obscureText: obscure ?? false,
-                      controller: controller,
-                      keyboardType: type ?? TextInputType.text,
-                      decoration:
-                          placeholder != null
-                              ? InputDecoration(
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                hintText: placeholder ?? "",
-                                hintStyle: const TextStyle(
-                                  color:
-                                      Colors
-                                          .grey, // Replace with your AppColors.gray
-                                ),
-                              )
-                              : InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: labelColor ?? Colors.transparent,
+                    child: Theme(
+                      data: getLightThemeData(),
+                      child: TextFormField(
+                        enabled: enabled ?? true,
+                        validator: validator,
+                        onChanged: onChanged,
+                        obscureText: obscure ?? false,
+                        controller: controller,
+                        keyboardType: type ?? TextInputType.text,
+                        decoration:
+                            placeholder != null
+                                ? InputDecoration(
+                                  suffixIcon:
+                                      suffixIcon != null
+                                          ? InkWell(
+                                            splashColor: Colors.transparent,
+                                            onTap: suffixFunction ?? () {},
+                                            child: Icon(suffixIcon),
+                                          )
+                                          : null,
+                                  border: const OutlineInputBorder(
+                                    borderSide: BorderSide.none,
                                   ),
-                                  borderRadius: BorderRadius.circular(
-                                    borderRadius ?? 20,
+                                  hintText: placeholder ?? "",
+                                  hintStyle: const TextStyle(
+                                    color:
+                                        Colors
+                                            .grey, // Replace with your AppColors.gray
+                                  ),
+                                )
+                                : InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: labelColor ?? Colors.transparent,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      borderRadius ?? 20,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  labelText: label ?? "",
+                                  labelStyle: TextStyle(
+                                    color:
+                                        labelColor ??
+                                        Colors
+                                            .grey, // Replace with your AppColors.gray
                                   ),
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                labelText: label ?? "",
-                                labelStyle: TextStyle(
-                                  color:
-                                      labelColor ??
-                                      Colors
-                                          .grey, // Replace with your AppColors.gray
-                                ),
-                              ),
-                      minLines: 1,
-                      maxLines: maxLines ?? 1,
-                      maxLength: maxLength,
-                      textInputAction: TextInputAction.next,
-                      onFieldSubmitted: (_) {
-                        FocusScope.of(
-                          context,
-                        ).nextFocus(); // Manually move to next field
-                      },
+                        minLines: 1,
+                        maxLines: maxLines ?? 1,
+                        maxLength: maxLength,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(
+                            context,
+                          ).nextFocus(); // Manually move to next field
+                        },
+                      ),
                     ),
                   ),
                 ],

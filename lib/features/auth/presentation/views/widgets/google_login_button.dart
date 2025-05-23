@@ -15,14 +15,14 @@ class GoogleLoginButton extends StatelessWidget {
 
     return BlocListener<GoogleCubit, GoogleState>(
       listener: (context, state) {
-        if (state is GoogleSuccess) {
+        if (state is GoogleSignInSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.user.email!),
               backgroundColor: Colors.green,
             ),
           );
-        } else if (state is GoogleFailure) {
+        } else if (state is GoogleSignInFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.message), backgroundColor: Colors.red),
           );

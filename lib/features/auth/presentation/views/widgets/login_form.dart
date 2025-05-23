@@ -4,7 +4,7 @@ import 'package:hessa/core/utils/validator.dart';
 import 'package:hessa/core/widgets/custom_text_field.dart';
 import 'package:hessa/generated/l10n.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   final TextEditingController emailAddressController;
   final TextEditingController passwordController;
   final double screenWidth;
@@ -19,20 +19,33 @@ class LoginForm extends StatelessWidget {
   });
 
   @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  late bool visible;
+
+  @override
+  void initState() {
+    visible = false;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      key: formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           CustomTextField(
-            controller: emailAddressController,
+            controller: widget.emailAddressController,
             icon: Icons.email_rounded,
             iconColor: AppColors.green800,
             inputColor: AppColors.white2,
             iconBackgroundColor: AppColors.green100,
             placeholder: S.of(context).emailPlaceholder,
-            screenWidth: screenWidth,
+            screenWidth: widget.screenWidth,
             type: TextInputType.emailAddress,
             validator: (value) {
               return Validator(
@@ -42,15 +55,20 @@ class LoginForm extends StatelessWidget {
           ),
           SizedBox(height: 15),
           CustomTextField(
-            controller: passwordController,
+            controller: widget.passwordController,
             icon: Icons.lock,
             iconColor: AppColors.purple950,
             inputColor: AppColors.white2,
             iconBackgroundColor: AppColors.purple100,
             placeholder: S.of(context).passwordPlaceholder,
-            screenWidth: screenWidth,
+            screenWidth: widget.screenWidth,
             type: TextInputType.text,
-            obscure: true,
+            obscure: !visible,
+            suffixIcon: visible ? Icons.visibility : Icons.visibility_off,
+            suffixFunction:
+                () => setState(() {
+                  visible = !visible;
+                }),
             validator: (value) {
               return Validator(
                 context: context,

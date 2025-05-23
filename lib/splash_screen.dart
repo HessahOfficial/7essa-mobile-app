@@ -27,19 +27,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Future.delayed(
-      Duration(seconds: 5),
-      // ignore: use_build_context_synchronously
-      () async {
-        final currentUser = await getIt.get<HiveHelper>().getCurrentUser();
-        if (currentUser != null) {
-          print("currentUser: $currentUser");
-          context.go(AppRoutes.mainView);
+    Future.delayed(Duration(seconds: 5), () {
+      final currentUser = getIt.get<HiveHelper>().currentUser;
+      print("current user: $currentUser");
+      if (currentUser != null) {
+        context.go(AppRoutes.mainView);
+      } else {
+        bool isFirstLaunch = getIt.get<HiveHelper>().isFirstLaunch ?? false;
+        if (!isFirstLaunch) {
+          context.go(AppRoutes.loginView);
         } else {
           context.go(AppRoutes.onBoardingView);
         }
-      },
-    );
+      }
+    });
     super.initState();
   }
 }

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
+import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/core/utils/show_snack_bar.dart';
 
 import 'package:hessa/core/widgets/custom_button.dart';
+import 'package:hessa/features/auth/data/models/login_request.dart';
 import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/auth/presentation/views/widgets/google_login_button.dart';
 import 'package:hessa/features/auth/presentation/views/widgets/login_form.dart';
@@ -25,15 +29,17 @@ class LoginScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     void loginUser() {
-      // BlocProvider.of<AuthBloc>(context).add(
-      //   LoginEvent(
-      //     request: LoginRequest(
-      //       email: emailAddressController.text,
-      //       password: passwordController.text,
-      //     ),
-      //   ),
-      // );
+      BlocProvider.of<AuthBloc>(context).add(
+        LoginEvent(
+          request: LoginRequest(
+            email: emailAddressController.text,
+            password: passwordController.text,
+          ),
+        ),
+      );
     }
+
+    bool isDark = getIt.get<HiveHelper>().isDark ?? false;
 
     return Theme(
       data: ThemeData(
@@ -45,7 +51,7 @@ class LoginScreen extends StatelessWidget {
             if (state is LoginSuccess) {
               context.go(AppRoutes.mainView);
             } else if (state is LoginFailure) {
-              print("Error: ${state.message}");
+              showSnackBar(context: context, message: state.message, type: 1);
             }
           },
           builder: (bccontext, state) {
@@ -86,6 +92,7 @@ class LoginScreen extends StatelessWidget {
                                 S.of(context).login,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
+                                  color: isDark ? Colors.white : Colors.black,
                                   fontSize: 23,
                                 ),
                               ),
@@ -107,8 +114,16 @@ class LoginScreen extends StatelessWidget {
                                     child: Text(
                                       S.of(context).forgotPassword,
                                       style: TextStyle(
-                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            isDark
+                                                ? Colors.white
+                                                : Colors.black,
+                                        fontWeight: FontWeight.w800,
                                         decoration: TextDecoration.underline,
+                                        decorationColor:
+                                            isDark
+                                                ? Colors.white
+                                                : Colors.black,
                                       ),
                                     ),
                                   ),
@@ -121,11 +136,17 @@ class LoginScreen extends StatelessWidget {
                                       S.of(context).registerUser,
                                       style: TextStyle(
                                         color:
-                                            Theme.of(
-                                              context,
-                                            ).colorScheme.primary,
-                                        fontWeight: FontWeight.w500,
+                                            isDark
+                                                ? Colors.white
+                                                : Theme.of(
+                                                  context,
+                                                ).colorScheme.primary,
+                                        fontWeight: FontWeight.w800,
                                         decoration: TextDecoration.underline,
+                                        decorationColor:
+                                            isDark
+                                                ? Colors.white
+                                                : Colors.black,
                                       ),
                                     ),
                                   ),

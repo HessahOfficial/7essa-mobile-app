@@ -8,11 +8,11 @@ class DeveloperProfilePage extends StatelessWidget {
   final String logo;
 
   const DeveloperProfilePage({
-    Key? key,
+    super.key,
     required this.name,
     required this.properties,
     required this.logo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

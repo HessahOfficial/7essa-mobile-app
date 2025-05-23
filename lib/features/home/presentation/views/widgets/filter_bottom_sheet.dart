@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/features/home/data/models/filter_option_model.dart';
 
 class FilterBottomSheet extends StatefulWidget {
@@ -31,11 +32,17 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+      ),
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: Container(
@@ -43,8 +50,8 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               height: 4,
               margin: const EdgeInsets.symmetric(vertical: 8),
               decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(2),
+                color: AppColors.gray,
+                borderRadius: BorderRadius.circular(25),
               ),
             ),
           ),
@@ -53,9 +60,12 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          Text(
-            'Property Size',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Property Size',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +81,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             min: 0,
             max: 5000,
             divisions: 50,
-            activeColor: const Color(0xFF4B5EFC),
+            activeColor: Theme.of(context).colorScheme.primary,
             inactiveColor: Colors.grey[300],
             onChanged: (value) {
               setState(() {
@@ -80,9 +90,12 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             },
           ),
           const SizedBox(height: 16),
-          Text(
-            'Property Price',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Property Price',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
           ),
           const SizedBox(height: 8),
           Row(
@@ -103,7 +116,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             min: 0,
             max: 50000,
             divisions: 50,
-            activeColor: const Color(0xFF4B5EFC),
+            activeColor: Theme.of(context).colorScheme.primary,
             inactiveColor: Colors.grey[300],
             labels: RangeLabels(
               '${(_minPrice.round() / 1000).toStringAsFixed(1)}K',
@@ -122,13 +135,13 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(75, 94, 252, 0.1),
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   '\$${_minPrice.round()}',
                   style: TextStyle(
-                    color: Color(0xFF4B5EFC),
+                    color: Colors.white,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -136,13 +149,13 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(75, 94, 252, 0.1),
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   '\$${_maxPrice.round()}',
                   style: TextStyle(
-                    color: Color(0xFF4B5EFC),
+                    color: Colors.white,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -178,7 +191,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF4B5EFC),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),

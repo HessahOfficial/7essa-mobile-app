@@ -63,7 +63,7 @@ class ServerFailure extends Failure {
         );
 
       default:
-        return ServerFailure(message: "$statusCode");
+        return ServerFailure(message: response["error"] ?? response["message"]);
     }
   }
 }

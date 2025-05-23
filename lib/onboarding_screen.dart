@@ -44,12 +44,12 @@ class OnboardingScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                customTextButton(
+                CustomTextButton(
                   text: S.of(context).skip,
                   color: AppColors.gray,
                   onTap: () => context.go(AppRoutes.loginView),
                 ),
-                customTextButton(
+                CustomTextButton(
                   text: S.of(context).next,
                   color: Theme.of(context).colorScheme.primary,
                   onTap: () => context.go(AppRoutes.loginView),

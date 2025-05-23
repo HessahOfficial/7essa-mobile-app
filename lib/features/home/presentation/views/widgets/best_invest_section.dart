@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hessa/features/home/data/models/property_model.dart';
 import 'package:hessa/features/home/presentation/views/widgets/custom_property_card.dart';
 
 class BestInvestSection extends StatelessWidget {
@@ -17,7 +18,7 @@ class BestInvestSection extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       itemCount: 10,
       itemBuilder: (context, index) {
-        return CustomPropertyCard();
+        return CustomPropertyCard(property: PropertyModel());
       },
     );
   }

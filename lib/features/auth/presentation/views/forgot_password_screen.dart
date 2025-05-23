@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
+import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/core/utils/show_snack_bar.dart';
 
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/features/auth/data/models/forgot_password_request.dart';
@@ -39,9 +42,13 @@ class ForgotPasswordScreen extends StatelessWidget {
         body: BlocConsumer<AuthBloc, AuthState>(
           listener: (bccontext, state) {
             if (state is ForgotPasswordFailure) {
-              print("Error: ${state.message}");
+              showSnackBar(context: context, message: state.message, type: 1);
             } else if (state is ForgotPasswordSuccess) {
-              print("Success: ${state.response.message}");
+              showSnackBar(
+                context: context,
+                message: state.response.message!,
+                type: 0,
+              );
               context.push(
                 AppRoutes.otpView,
                 extra: {"emailAddress": emailAddressController.text},
@@ -49,6 +56,8 @@ class ForgotPasswordScreen extends StatelessWidget {
             }
           },
           builder: (bccontext, state) {
+            bool isDark = getIt.get<HiveHelper>().isDark ?? false;
+
             return Column(
               children: [
                 Expanded(
@@ -87,6 +96,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 23,
+                                  color: isDark ? Colors.white : Colors.black,
                                 ),
                               ),
                               Text(
@@ -94,6 +104,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 15,
+                                  color: isDark ? Colors.white : Colors.black,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
