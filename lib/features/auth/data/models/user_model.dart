@@ -77,7 +77,7 @@ class UserModel {
   });
 
   UserModel.fromJson(Json json) {
-    id = json['_id'];
+    id = json['id'];
     firstName = json['firstName'];
     lastName = json['lastName'];
     username = json['username'];
@@ -91,7 +91,7 @@ class UserModel {
     isInvestor = json['isInvestor'];
     balance = json['balance'];
     lastLogin = json['lastLogin'];
-    favourites = json["favourites"];
+    favourites = json["favourites"] ?? [];
   }
 
   @override

@@ -1,143 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import 'package:hessa/constants/property_data.dart';
-import 'package:hessa/core/themes/colors/app_colors.dart';
-import 'package:hessa/core/widgets/custom_chart.dart';
-import 'package:hessa/core/widgets/property_item.dart';
+import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/features/home/data/models/property_model.dart';
+import 'package:hessa/features/property/presentation/managers/location_cubit.dart';
+import 'package:hessa/features/property/presentation/views/widgets/custom_image_slider.dart';
+import 'package:hessa/features/property/presentation/views/widgets/property_details.dart';
 
-class PropertyScreen extends StatefulWidget {
+class PropertyScreen extends StatelessWidget {
   final PropertyModel property;
 
   const PropertyScreen({super.key, required this.property});
 
   @override
-  State<PropertyScreen> createState() => _PropertyScreenState();
-}
-
-class _PropertyScreenState extends State<PropertyScreen> {
-  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    bool isDark = getIt.get<HiveHelper>().isDark ?? false;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.backgtoundLight,
-        actionsPadding: EdgeInsets.symmetric(horizontal: 10),
-        actions: [
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.activeAccent,
-              borderRadius: BorderRadius.circular(18),
-            ),
-            width: 48,
-            height: 48,
-            child: Container(),
-          ),
-        ],
-        leading: GestureDetector(
-          onTap: () {},
+        titleSpacing: 0,
+        title: Text(
+          property.title!,
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+        leading: InkWell(
+          borderRadius: BorderRadius.circular(50),
+          onTap: () => context.pop(),
           child: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: AppColors.accentColor,
+            color: isDark ? Colors.white : Colors.black,
           ),
-        ),
-        title: Text(
-          "Property Details",
-          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      backgroundColor: AppColors.backgtoundLight,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
-          child: Column(
-            children: [
-              PropertyItem(
-                screenWidth: screenWidth,
-                screenHeight: screenHeight,
-                property: widget.property,
-                isMatched: false,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Interior Details",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
-                    ),
-                    Icon(Icons.keyboard_arrow_down_rounded, size: 40),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Construction Details",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
-                    ),
-                    Icon(Icons.keyboard_arrow_down_rounded, size: 40),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: screenHeight * 0.02,
-                  horizontal: screenWidth * 0.03,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Statistics",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
-                    ),
-                    Icon(
-                      Icons.more_horiz_rounded,
-                      size: 40,
-                      color: AppColors.gray,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: screenHeight * 0.03,
-                  horizontal: screenWidth * 0.06,
-                ),
-                child: CustomChart(),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Location Map & Details",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomImageSlider(images: property.images!.cast<String>()),
+            PropertyDetails(property: property),
+          ],
         ),
       ),
     );

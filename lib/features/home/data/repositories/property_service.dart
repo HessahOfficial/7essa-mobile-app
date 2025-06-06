@@ -16,9 +16,9 @@ import 'package:hessa/features/home/data/models/get_all_properties_response.dart
 import 'package:hessa/features/home/data/repositories/property_repository.dart';
 
 class PropertyService implements PropertyRepository {
-  final DioHelper dioHelper;
+  final DioHelper helper;
 
-  PropertyService({required this.dioHelper});
+  PropertyService({required this.helper});
 
   @override
   Future<Either<Failure, GetAllPropertiesResponse>> getAllProperties({
@@ -29,7 +29,7 @@ class PropertyService implements PropertyRepository {
       final options = getIt.get<DioHelper>().getDioOptions(
         accessToken: tokens!.accessToken!,
       );
-      final data = await dioHelper.get(
+      final data = await helper.get(
         endpoint: Endpoints.getAllProperties,
         options: options,
       );
@@ -54,7 +54,7 @@ class PropertyService implements PropertyRepository {
       final options = getIt.get<DioHelper>().getDioOptions(
         accessToken: tokens!.accessToken!,
       );
-      final data = await dioHelper.post(
+      final data = await helper.post(
         endpoint: Endpoints.addToFavourites
             .replaceAll(':userId', request.userId)
             .replaceAll(':propertyId', request.propertyId),
@@ -85,7 +85,7 @@ class PropertyService implements PropertyRepository {
       final options = getIt.get<DioHelper>().getDioOptions(
         accessToken: tokens!.accessToken!,
       );
-      final data = await dioHelper.get(
+      final data = await helper.get(
         endpoint: Endpoints.getAllFavourites.replaceAll(
           ':userId',
           request.userId,
@@ -112,7 +112,7 @@ class PropertyService implements PropertyRepository {
         accessToken: tokens!.accessToken!,
       );
       final currentUser = getIt.get<HiveHelper>().currentUser;
-      final data = await dioHelper.delete(
+      final data = await helper.delete(
         endpoint: Endpoints.deleteFavourites.replaceAll(
           ':userId',
           currentUser!.id!,

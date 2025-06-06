@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/features/auth/presentation/views/widgets/otp_form.dart';
-import 'package:hessa/features/wallet/presentation/managers/balance_cubit.dart';
+import 'package:hessa/features/wallet/data/models/show_balance_request.dart';
+import 'package:hessa/features/wallet/presentation/managers/wallet_bloc.dart';
 import 'package:hessa/generated/l10n.dart';
 
 class CustomPasswordDialog extends StatelessWidget {
@@ -60,10 +62,14 @@ class CustomPasswordDialog extends StatelessWidget {
                     textColor: AppColors.backgroundColorLight,
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        context.read<BalanceCubit>().validatePassword(
-                          password: otpController.text,
-                          context: context,
+                        context.read<WalletBloc>().add(
+                          ShowBalanceEvent(
+                            request: ShowBalanceRequest(
+                              pin: int.parse(otpController.text),
+                            ),
+                          ),
                         );
+                        context.pop();
                       }
                     },
                   ),

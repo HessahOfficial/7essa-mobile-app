@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:hessa/core/utils/type_aliases.dart';
 
 class DioHelper {
-  final _baseUrl = "https://7essa-server-omega.vercel.app/";
+  final _baseUrl = "https://7essa-server-omega.vercel.app";
   late Dio _dio;
 
   DioHelper() {

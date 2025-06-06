@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hessa/core/helpers/hive_helper.dart';
-import 'package:hessa/core/utils/service_locator.dart';
-import 'package:hessa/features/auth/data/models/user_model.dart';
-import 'package:hessa/features/wallet/presentation/managers/balance_cubit.dart';
+
+import 'package:hessa/core/utils/show_snack_bar.dart';
+import 'package:hessa/features/wallet/presentation/managers/wallet_bloc.dart';
 import 'package:hessa/features/wallet/presentation/views/widgets/custom_wallet_button.dart';
 import 'package:hessa/generated/l10n.dart';
 
@@ -16,11 +15,14 @@ class CustomWalletCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BalanceCubit, BalanceState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        bool hide = context.read<BalanceCubit>().hide;
-        UserModel currentUser = getIt.get<HiveHelper>().currentUser!;
+    return BlocConsumer<WalletBloc, WalletState>(
+      listener: (bccontext, state) {
+        if (state is ShowBalanceFaliure) {
+          showSnackBar(context: screenContext, message: state.message, type: 1);
+        }
+      },
+      builder: (bccontext, state) {
+        bool hide = context.read<WalletBloc>().hidden;
 
         return Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(25.24)),
@@ -60,7 +62,11 @@ class CustomWalletCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          hide ? "*******" : currentUser.balance.toString(),
+                          hide
+                              ? "*******"
+                              : (state is ShowBalanceSuccess
+                                  ? "${state.response.balance}"
+                                  : "*******"),
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -69,14 +75,9 @@ class CustomWalletCard extends StatelessWidget {
                         ),
                         InkWell(
                           onTap:
-                              () =>
-                                  hide
-                                      ? context
-                                          .read<BalanceCubit>()
-                                          .showBalance(screenContext)
-                                      : context
-                                          .read<BalanceCubit>()
-                                          .balanceVisibility(),
+                              () => context.read<WalletBloc>().showBalance(
+                                screenContext,
+                              ),
                           splashColor: Colors.transparent,
                           child: Icon(
                             hide ? Icons.visibility_off : Icons.visibility,

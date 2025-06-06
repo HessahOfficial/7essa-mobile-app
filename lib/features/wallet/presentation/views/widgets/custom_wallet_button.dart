@@ -20,10 +20,13 @@ class CustomWalletButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(14),
-      splashColor: AppColors.gray.withOpacity(0.1),
+      splashColor: AppColors.gray.withOpacity(0.4),
       onTap: onTap ?? () {},
       child: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(14)),
+        decoration: BoxDecoration(
+          color: AppColors.gray.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(14),
+        ),
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Row(
           spacing: spacing ?? 5,

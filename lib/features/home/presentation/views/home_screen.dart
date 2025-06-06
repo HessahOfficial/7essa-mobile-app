@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 15,
               children: [
-                CustomAppBar(),
+                CustomAppBar(screenContext: context),
                 CustomSearchBar(
                   searchController: widget.searchController,
                   screenContext: widget.screenContext,
