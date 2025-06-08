@@ -6,13 +6,25 @@ import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/features/wallet/presentation/managers/transaction_cubit.dart';
+import 'package:hessa/features/wallet/presentation/managers/wallet_bloc.dart';
 import 'package:hessa/features/wallet/presentation/views/widgets/custom_transaction_list.dart';
 import 'package:hessa/features/wallet/presentation/views/widgets/custom_user_bar.dart';
 import 'package:hessa/features/wallet/presentation/views/widgets/custom_wallet_card.dart';
 import 'package:hessa/generated/l10n.dart';
 
-class WalletScreen extends StatelessWidget {
+class WalletScreen extends StatefulWidget {
   const WalletScreen({super.key});
+
+  @override
+  State<WalletScreen> createState() => _WalletScreenState();
+}
+
+class _WalletScreenState extends State<WalletScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<WalletBloc>().hidden = true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +37,27 @@ class WalletScreen extends StatelessWidget {
         appBar: AppBar(
           actionsPadding: EdgeInsets.symmetric(horizontal: 20),
           actions: [
-            InkWell(
-              child: Icon(
-                Icons.refresh,
-                size: 25,
-                color: isDark ? Colors.white : Colors.black,
+            Material(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(50),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(50),
+                onTap:
+                    () => setState(() {
+                      context.read<WalletBloc>().hidden = true;
+                    }),
+                splashColor: AppColors.gray.withOpacity(0.1),
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Icon(
+                    Icons.refresh,
+                    size: 25,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                ),
               ),
             ),
           ],

@@ -18,3 +18,31 @@ class UserInfoFailure extends UserState {
 
   UserInfoFailure({required this.message});
 }
+
+class ChangePinLoading extends UserState {}
+
+class ChangePinSuccess extends UserState {
+  final ChangePinResponse response;
+
+  ChangePinSuccess({required this.response});
+}
+
+class ChangePinFailure extends UserState {
+  final String message;
+
+  ChangePinFailure({required this.message});
+}
+
+class BecomeInvestorLoading extends UserState {}
+
+class BecomeInvestorSuccess extends UserState {
+  final BecomeInvestorResponse response;
+
+  BecomeInvestorSuccess({required this.response});
+}
+
+class BecomeInvestorFailure extends UserState {
+  final String message;
+
+  BecomeInvestorFailure({required this.message});
+}

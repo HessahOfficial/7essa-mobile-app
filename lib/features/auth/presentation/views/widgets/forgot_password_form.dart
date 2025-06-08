@@ -6,6 +6,8 @@ import 'package:hessa/generated/l10n.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   final TextEditingController emailAddressController;
+  final FocusNode emailAddressFocusNode;
+  final bool emailTouched;
   final double screenWidth;
   final GlobalKey<FormState> formKey;
 
@@ -14,23 +16,23 @@ class ForgotPasswordForm extends StatelessWidget {
     required this.emailAddressController,
     required this.screenWidth,
     required this.formKey,
+    required this.emailAddressFocusNode,
+    required this.emailTouched,
   });
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: formKey,
       child: Column(
         children: [
           CustomTextField(
+            fieldTocuhed: emailTouched,
+            focusNode: emailAddressFocusNode,
             controller: emailAddressController,
             icon: Icons.email_rounded,
-            iconColor: AppColors.green800,
             inputColor: AppColors.white2,
-            iconBackgroundColor: AppColors.green100,
             placeholder: S.of(context).emailPlaceholder,
-            screenWidth: screenWidth,
             type: TextInputType.emailAddress,
             validator: (value) {
               return Validator(

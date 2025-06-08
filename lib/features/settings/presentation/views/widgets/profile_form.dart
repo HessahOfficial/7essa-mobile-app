@@ -9,7 +9,23 @@ import 'package:hessa/generated/l10n.dart';
 class ProfileForm extends StatelessWidget {
   final TextEditingController usernameController;
   final TextEditingController phoneController;
+  final TextEditingController firstnameController;
+  final TextEditingController lastnameController;
   final TextEditingController emailAddressController;
+  final TextEditingController fullnameController;
+
+  final FocusNode usernameFocusNode;
+  final FocusNode phoneFocusNode;
+  final FocusNode firstnameFocusNode;
+  final FocusNode lastnameFocusNode;
+  final FocusNode fullnameFocusNode;
+
+  final bool usernameTouched;
+  final bool phoneTouched;
+  final bool firstnameTouched;
+  final bool lastnameTouched;
+  final bool fullnameTouched;
+
   final double screenWidth;
   final GlobalKey<FormState> formKey;
 
@@ -18,8 +34,21 @@ class ProfileForm extends StatelessWidget {
     required this.formKey,
     required this.usernameController,
     required this.phoneController,
-    required this.emailAddressController,
     required this.screenWidth,
+    required this.firstnameController,
+    required this.lastnameController,
+    required this.usernameFocusNode,
+    required this.phoneFocusNode,
+    required this.firstnameFocusNode,
+    required this.lastnameFocusNode,
+    required this.usernameTouched,
+    required this.phoneTouched,
+    required this.firstnameTouched,
+    required this.lastnameTouched,
+    required this.emailAddressController,
+    required this.fullnameController,
+    required this.fullnameFocusNode,
+    required this.fullnameTouched,
   });
 
   @override
@@ -30,20 +59,63 @@ class ProfileForm extends StatelessWidget {
         bool isUpdate = context.read<UpdateCubit>().isUpdate;
 
         return Form(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
-            spacing: 10,
+            spacing: 15,
             children: [
               CustomTextField(
+                focusNode: firstnameFocusNode,
+                fieldTocuhed: firstnameTouched,
+                enabled: isUpdate,
+                controller: firstnameController,
+                icon: Icons.person,
+                inputColor: AppColors.white2,
+                placeholder: S.of(context).firstNamePLaceholder,
+                type: TextInputType.name,
+                validator: (value) {
+                  return Validator(
+                    context: context,
+                  ).validateUsername(username: value!);
+                },
+              ),
+              CustomTextField(
+                enabled: isUpdate,
+                focusNode: lastnameFocusNode,
+                fieldTocuhed: lastnameTouched,
+                controller: lastnameController,
+                icon: Icons.person,
+                inputColor: AppColors.white2,
+                placeholder: S.of(context).lastNamePLaceholder,
+                type: TextInputType.name,
+                validator: (value) {
+                  return Validator(
+                    context: context,
+                  ).validateUsername(username: value!);
+                },
+              ),
+              CustomTextField(
+                enabled: isUpdate,
+                focusNode: fullnameFocusNode,
+                fieldTocuhed: fullnameTouched,
+                controller: fullnameController,
+                icon: Icons.person,
+                inputColor: AppColors.white2,
+                placeholder: S.of(context).fullNamePLaceholder,
+                type: TextInputType.name,
+                validator: (value) {
+                  return Validator(
+                    context: context,
+                  ).validateUsername(username: value!);
+                },
+              ),
+              CustomTextField(
+                fieldTocuhed: usernameTouched,
+                focusNode: usernameFocusNode,
                 enabled: isUpdate,
                 controller: usernameController,
                 icon: Icons.person,
                 iconSize: 20,
-                iconColor: AppColors.blue800,
                 inputColor: AppColors.white2,
-                iconBackgroundColor: AppColors.blue100,
                 placeholder: S.of(context).usernamePlaceholder,
-                screenWidth: screenWidth,
                 type: TextInputType.text,
                 validator: (value) {
                   return Validator(
@@ -52,14 +124,13 @@ class ProfileForm extends StatelessWidget {
                 },
               ),
               CustomTextField(
-                enabled: false,
+                enabled: isUpdate,
+                fieldTocuhed: phoneTouched,
+                focusNode: phoneFocusNode,
                 controller: phoneController,
                 icon: Icons.phone,
-                iconColor: AppColors.orange950,
                 inputColor: AppColors.white2,
-                iconBackgroundColor: AppColors.orange100,
                 placeholder: S.of(context).phonePlaceholder,
-                screenWidth: screenWidth,
                 type: TextInputType.phone,
                 validator: (value) {
                   return Validator(
@@ -71,11 +142,8 @@ class ProfileForm extends StatelessWidget {
                 enabled: false,
                 controller: emailAddressController,
                 icon: Icons.email_rounded,
-                iconColor: AppColors.green800,
                 inputColor: AppColors.white2,
-                iconBackgroundColor: AppColors.green100,
                 placeholder: S.of(context).emailPlaceholder,
-                screenWidth: screenWidth,
                 type: TextInputType.emailAddress,
                 validator: (value) {
                   return Validator(

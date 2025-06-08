@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hessa/core/widgets/custom_button.dart';
-import 'package:hessa/features/settings/presentation/managers/pin_cubit.dart';
+import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
 import 'package:hessa/generated/l10n.dart';
 
 class ChangePinItem extends StatelessWidget {
@@ -27,7 +27,7 @@ class ChangePinItem extends StatelessWidget {
           text: S.of(context).change,
           textColor: Colors.white,
           onPressed:
-              () => context.read<PinCubit>().showPinDialog(
+              () => context.read<UserBloc>().showPinDialog(
                 context: screenContext,
               ),
         ),

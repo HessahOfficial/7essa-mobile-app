@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addToFavouritesResponse": MessageLookupByLibrary.simpleMessage(
+      "One property saved successfully!",
+    ),
     "becomInvestorNote": MessageLookupByLibrary.simpleMessage(
       "Once you save the information, you are agreed to the terms & conditions.",
     ),
@@ -50,32 +53,47 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteDialogText": MessageLookupByLibrary.simpleMessage(
       "You are about to delete the selected saved properties, are you sure about your decision?",
     ),
+    "deleteOperationSuccess": MessageLookupByLibrary.simpleMessage(
+      "Delete operation is done successfully!",
+    ),
+    "deleteSinglePopupTextPart1": MessageLookupByLibrary.simpleMessage(
+      "You are about to delete the property ",
+    ),
+    "deleteSinglePopupTextPart2": MessageLookupByLibrary.simpleMessage(
+      " from the savings list, are you sure about your decision ?",
+    ),
     "deposit": MessageLookupByLibrary.simpleMessage("DEPOSIT"),
     "depositFee": MessageLookupByLibrary.simpleMessage("Deposit"),
     "developers": MessageLookupByLibrary.simpleMessage("Developers"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
-    "emailPlaceholder": MessageLookupByLibrary.simpleMessage(
-      "Enter your email to continue..",
-    ),
+    "emailPlaceholder": MessageLookupByLibrary.simpleMessage("Email Address"),
     "emptyFavourites": MessageLookupByLibrary.simpleMessage(
       "Add some favourite properties.",
     ),
     "expenses": MessageLookupByLibrary.simpleMessage("Expenses"),
     "fees": MessageLookupByLibrary.simpleMessage("Fees"),
+    "firstNamePLaceholder": MessageLookupByLibrary.simpleMessage("Firstname"),
     "forgot": MessageLookupByLibrary.simpleMessage("Forgot Password?"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage(
       "I forgot my password",
     ),
+    "forgotPasswordResponse": MessageLookupByLibrary.simpleMessage(
+      "Reset password email is sent successfully. check you inbox!",
+    ),
     "forgotPasswordText": MessageLookupByLibrary.simpleMessage(
       "Provide us with your email then check your inbox for the verification email.",
     ),
+    "fullNamePLaceholder": MessageLookupByLibrary.simpleMessage("Fullname"),
     "haveAccount": MessageLookupByLibrary.simpleMessage("I have an account?"),
     "hello": MessageLookupByLibrary.simpleMessage("Hello!"),
     "hot": MessageLookupByLibrary.simpleMessage("HOT"),
     "incomes": MessageLookupByLibrary.simpleMessage("Incomes"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Invalid email Address!",
+    ),
+    "invalidNationalId": MessageLookupByLibrary.simpleMessage(
+      "National id consists of 14 digits and doesn\'t start with zero!",
     ),
     "invalidOtp": MessageLookupByLibrary.simpleMessage("Invalid otp code!"),
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
@@ -87,12 +105,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidUsername": MessageLookupByLibrary.simpleMessage(
       "Requires at least 3 characters!",
     ),
+    "lastNamePLaceholder": MessageLookupByLibrary.simpleMessage("Lastname"),
     "locale": MessageLookupByLibrary.simpleMessage("Arabic"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
     "messagePlaceholder": MessageLookupByLibrary.simpleMessage("Message"),
     "myInvestments": MessageLookupByLibrary.simpleMessage("My Investments"),
+    "nationalIdPlaceholder": MessageLookupByLibrary.simpleMessage(
+      "National ID",
+    ),
     "newAdded": MessageLookupByLibrary.simpleMessage("New Added"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "no": MessageLookupByLibrary.simpleMessage("No"),
@@ -129,6 +151,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredMessage": MessageLookupByLibrary.simpleMessage(
       "Message field is required!",
     ),
+    "requiredNationalId": MessageLookupByLibrary.simpleMessage(
+      "National Id field is required!",
+    ),
     "requiredOtp": MessageLookupByLibrary.simpleMessage(
       "Otp field is required!",
     ),
@@ -153,8 +178,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "usernamePlaceholder": MessageLookupByLibrary.simpleMessage("Username"),
     "verification": MessageLookupByLibrary.simpleMessage("Verification"),
+    "verificationEmailSent": MessageLookupByLibrary.simpleMessage(
+      "Verification email is sent successfully! Please check your inbox.",
+    ),
     "verificationText": MessageLookupByLibrary.simpleMessage(
-      "Enter the 6-digit code you received in the inbox of ",
+      "Verify your email to complete your registration process via sending verification email.",
     ),
     "verifyButton": MessageLookupByLibrary.simpleMessage("Verify"),
     "wallet": MessageLookupByLibrary.simpleMessage("Wallet"),

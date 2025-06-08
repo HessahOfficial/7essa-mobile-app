@@ -16,13 +16,8 @@ class CustomMultiSelectList extends StatelessWidget {
         final favourites = context.read<FavouriteCubit>().favourites;
 
         return favourites.isNotEmpty
-            ? ListView.separated(
-              padding: EdgeInsets.only(
-                left: screenWidth * 0.06,
-                right: screenWidth * 0.06,
-                top: 10,
-              ),
-              separatorBuilder: (context, index) => SizedBox(height: 16),
+            ? ListView.builder(
+              padding: EdgeInsets.only(top: 10),
               physics: BouncingScrollPhysics(),
               itemCount: favourites.length,
               itemBuilder:

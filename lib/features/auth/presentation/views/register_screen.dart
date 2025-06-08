@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,15 +20,97 @@ import 'package:hessa/features/auth/presentation/views/widgets/register_form.dar
 import 'package:hessa/features/settings/presentation/views/widgets/custom_info_popup.dart';
 import 'package:hessa/generated/l10n.dart';
 
-class RegisterScreen extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController emailAddressController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController firstnameController = TextEditingController();
-  final TextEditingController lastnameController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey();
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
-  RegisterScreen({super.key});
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final usernameController = TextEditingController();
+  final emailAddressController = TextEditingController();
+  final passwordController = TextEditingController();
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
+
+  final usernameFocusNode = FocusNode();
+  final firstnameFocusNode = FocusNode();
+  final lastnameFocusNode = FocusNode();
+  final emailAddressFocusNode = FocusNode();
+  final passwordFocusNode = FocusNode();
+
+  bool usernameTouched = false;
+  bool firstnameTouched = false;
+  bool lastnameTouched = false;
+  bool emailTouched = false;
+  bool passwordTouched = false;
+
+  late GlobalKey<FormState> formKey;
+
+  @override
+  void initState() {
+    super.initState();
+
+    formKey = GlobalKey<FormState>();
+
+    usernameFocusNode.addListener(() {
+      if (usernameFocusNode.hasFocus) {
+        setState(() {
+          usernameTouched = true;
+        });
+      }
+    });
+
+    firstnameFocusNode.addListener(() {
+      if (firstnameFocusNode.hasFocus) {
+        setState(() {
+          firstnameTouched = true;
+        });
+      }
+    });
+
+    lastnameFocusNode.addListener(() {
+      if (lastnameFocusNode.hasFocus) {
+        setState(() {
+          lastnameTouched = true;
+        });
+      }
+    });
+
+    emailAddressFocusNode.addListener(() {
+      if (emailAddressFocusNode.hasFocus) {
+        setState(() {
+          emailTouched = true;
+        });
+      }
+    });
+
+    passwordFocusNode.addListener(() {
+      if (passwordFocusNode.hasFocus) {
+        setState(() {
+          passwordTouched = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    emailAddressController.dispose();
+    usernameController.dispose();
+    firstnameController.dispose();
+    lastnameController.dispose();
+    passwordController.dispose();
+
+    emailAddressFocusNode.dispose();
+    usernameFocusNode.dispose();
+    firstnameFocusNode.dispose();
+    lastnameFocusNode.dispose();
+    passwordFocusNode.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +153,7 @@ class RegisterScreen extends StatelessWidget {
             } else if (state is VerifyEmailSuccess) {
               showSnackBar(
                 context: context,
-                message:
-                    "Verification email is sent successfully! Please check your inbox.",
+                message: S.of(context).verificationEmailSent,
                 type: 0,
               );
             } else if (state is RegisterSuccess) {
@@ -92,8 +174,7 @@ class RegisterScreen extends StatelessWidget {
                       width: 220,
                       height: 170,
                       icon: Icons.info,
-                      message:
-                          "Verify your email to complete your registration process via sending verification email.",
+                      message: S.of(context).verificationText,
                     ),
               );
             }
@@ -135,6 +216,16 @@ class RegisterScreen extends StatelessWidget {
                         lastnameController: lastnameController,
                         emailAddressController: emailAddressController,
                         passwordController: passwordController,
+                        emailAddressFocusNode: emailAddressFocusNode,
+                        passwordFocusNode: passwordFocusNode,
+                        usernameFocusNode: usernameFocusNode,
+                        firstnameFocusNode: firstnameFocusNode,
+                        lastnameFocusNode: lastnameFocusNode,
+                        emailTouched: emailTouched,
+                        usernameTouched: usernameTouched,
+                        firstnameTouched: firstnameTouched,
+                        lastnameTouched: lastnameTouched,
+                        passwordTouched: passwordTouched,
                         screenWidth: screenWidth,
                         formKey: formKey,
                       ),

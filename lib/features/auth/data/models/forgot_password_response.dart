@@ -1,9 +1,9 @@
 import 'package:hessa/core/utils/type_aliases.dart';
 
 class ForgotPasswordResponse {
-  String? message;
+  String? status;
 
   ForgotPasswordResponse.fromJson(Json json) {
-    message = json["message"];
+    status = json["status"];
   }
 }

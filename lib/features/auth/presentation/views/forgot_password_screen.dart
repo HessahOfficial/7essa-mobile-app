@@ -10,16 +10,48 @@ import 'package:hessa/core/utils/show_snack_bar.dart';
 
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/features/auth/data/models/forgot_password_request.dart';
+import 'package:hessa/features/auth/data/models/verify_email_request.dart';
 import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/auth/presentation/views/widgets/forgot_password_form.dart';
 import 'package:hessa/generated/l10n.dart';
 
-// ignore: must_be_immutable
-class ForgotPasswordScreen extends StatelessWidget {
-  final TextEditingController emailAddressController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey();
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
 
-  ForgotPasswordScreen({super.key});
+  @override
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final emailAddressController = TextEditingController();
+
+  final emailAddressFocusNode = FocusNode();
+
+  final formKey = GlobalKey<FormState>();
+
+  bool emailTouched = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    emailAddressFocusNode.addListener(() {
+      if (emailAddressFocusNode.hasFocus) {
+        setState(() {
+          emailTouched = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    emailAddressController.dispose();
+
+    emailAddressFocusNode.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +78,8 @@ class ForgotPasswordScreen extends StatelessWidget {
             } else if (state is ForgotPasswordSuccess) {
               showSnackBar(
                 context: context,
-                message: state.response.message!,
+                message: S.of(context).forgotPasswordResponse,
                 type: 0,
-              );
-              context.push(
-                AppRoutes.otpView,
-                extra: {"emailAddress": emailAddressController.text},
               );
             }
           },
@@ -110,6 +138,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                               ),
                               ForgotPasswordForm(
                                 emailAddressController: emailAddressController,
+                                emailAddressFocusNode: emailAddressFocusNode,
+                                emailTouched: emailTouched,
                                 screenWidth: screenWidth,
                                 formKey: formKey,
                               ),

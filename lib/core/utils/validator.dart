@@ -73,10 +73,9 @@ class Validator {
     String? message;
     RegExp regex = RegExp(r'^[1-9]\d{13}$');
     if (nationalId.isEmpty) {
-      message = "National Id field is required!";
+      message = S.of(context).requiredNationalId;
     } else if (!regex.hasMatch(nationalId)) {
-      message =
-          "National id consists of 14 digits and doesn't start with zero!";
+      message = S.of(context).invalidNationalId;
     }
     return message;
   }

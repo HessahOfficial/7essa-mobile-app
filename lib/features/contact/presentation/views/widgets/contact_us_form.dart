@@ -27,7 +27,6 @@ class ContactUsForm extends StatelessWidget {
             controller: messageController,
             inputColor: AppColors.white2,
             placeholder: S.of(context).messagePlaceholder,
-            screenWidth: screenWidth,
             type: TextInputType.multiline,
             maxLines: 10,
             maxLength: 500,

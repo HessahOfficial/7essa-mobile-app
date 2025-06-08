@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/features/auth/presentation/views/widgets/otp_form.dart';
-import 'package:hessa/features/settings/presentation/managers/pin_cubit.dart';
+import 'package:hessa/features/settings/data/models/change_pin_request.dart';
+import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
 import 'package:hessa/generated/l10n.dart';
 
 class CustomPinDialog extends StatelessWidget {
-  final TextEditingController otpController = TextEditingController();
+  final otpController = TextEditingController();
+
+  final otpFocusNode = FocusNode();
+
   final GlobalKey<FormState> formKey = GlobalKey();
 
   CustomPinDialog({super.key});
@@ -60,10 +65,14 @@ class CustomPinDialog extends StatelessWidget {
                     textColor: AppColors.backgroundColorLight,
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        context.read<PinCubit>().changePin(
-                          context: context,
-                          pin: otpController.text,
+                        context.read<UserBloc>().add(
+                          ChangePinEvent(
+                            request: ChangePinRequest(
+                              pin: int.parse(otpController.text),
+                            ),
+                          ),
                         );
+                        context.pop();
                       }
                     },
                   ),

@@ -3,60 +3,48 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/validator.dart';
 import 'package:hessa/core/widgets/custom_text_field.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class InvestorForm extends StatelessWidget {
-  final TextEditingController fullnameController;
   final TextEditingController nationalIdController;
+  final FocusNode nationalIdFocusNode;
+  final bool nationalIdTouched;
   final double screenWidth;
   final GlobalKey<FormState> formKey;
 
   const InvestorForm({
     super.key,
-    required this.fullnameController,
     required this.nationalIdController,
     required this.screenWidth,
     required this.formKey,
+    required this.nationalIdFocusNode,
+    required this.nationalIdTouched,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Column(
-        children: [
-          CustomTextField(
-            controller: fullnameController,
-            icon: Icons.person,
-            iconSize: 20,
-            iconColor: AppColors.blue800,
-            inputColor: AppColors.white2,
-            iconBackgroundColor: AppColors.blue100,
-            placeholder: "Fullname",
-            screenWidth: screenWidth,
-            type: TextInputType.text,
-            validator: (value) {
-              return Validator(
-                context: context,
-              ).validateFullname(fullname: value!);
-            },
-          ),
-          SizedBox(height: 15),
-          CustomTextField(
-            controller: nationalIdController,
-            icon: FontAwesomeIcons.idCard,
-            iconColor: AppColors.orange950,
-            inputColor: AppColors.white2,
-            iconBackgroundColor: AppColors.orange100,
-            placeholder: "National ID",
-            screenWidth: screenWidth,
-            type: TextInputType.number,
-            validator: (value) {
-              return Validator(
-                context: context,
-              ).validateNationalId(nationalId: value!);
-            },
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            CustomTextField(
+              focusNode: nationalIdFocusNode,
+              fieldTocuhed: nationalIdTouched,
+              controller: nationalIdController,
+              icon: FontAwesomeIcons.idCard,
+              inputColor: AppColors.white2,
+              placeholder: S.of(context).nationalIdPlaceholder,
+              type: TextInputType.number,
+              validator: (value) {
+                return Validator(
+                  context: context,
+                ).validateNationalId(nationalId: value!);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

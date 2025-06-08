@@ -48,7 +48,7 @@ class _SaveedPropertiesScreenState extends State<SaveedPropertiesScreen> {
           context.read<FavouriteCubit>().deleteSelectedIndices();
           showSnackBar(
             context: context,
-            message: "Successfull Operation!",
+            message: S.of(context).deleteOperationSuccess,
             type: 0,
           );
         } else if (state is DeleteFavouritesFailure) {
