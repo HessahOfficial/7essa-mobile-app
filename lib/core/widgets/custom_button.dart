@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
-import 'package:hessa/core/utils/service_locator.dart';
 
 class CustomButton extends StatelessWidget {
   final double width;

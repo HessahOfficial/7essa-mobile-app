@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
-import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/utils/show_snack_bar.dart';
 
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/features/auth/data/models/forgot_password_request.dart';
-import 'package:hessa/features/auth/data/models/verify_email_request.dart';
 import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/auth/presentation/views/widgets/forgot_password_form.dart';
 import 'package:hessa/generated/l10n.dart';
