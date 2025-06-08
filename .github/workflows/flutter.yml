@@ -101,10 +101,6 @@ jobs:
           fi
           cat ios/Podfile
 
-      - name: Install Pods
-        run: |
-          cd ios
-          pod install --verbose
 
       - name: Build iOS IPA (no code signing)
         run: flutter build ios --release --no-codesign
