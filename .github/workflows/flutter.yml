@@ -54,8 +54,15 @@ jobs:
         run: flutter pub get
 
       - name: Install CocoaPods
+        run: sudo gem install cocoapods
+
+      - name: Update Podfile
         run: |
-          sudo gem install cocoapods
+          sed -i '' "s/# platform :ios, '.*'/platform :ios, '13.0'/" ios/Podfile
+          grep "platform :ios" ios/Podfile || echo "platform :ios, '13.0'" >> ios/Podfile
+
+      - name: Install Pods
+        run: |
           cd ios
           pod install
 
