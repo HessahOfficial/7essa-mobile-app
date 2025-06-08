@@ -44,7 +44,7 @@ jobs:
       - name: Checkout My Code
         uses: actions/checkout@v3
 
-      - name: Install Flutter Version 3.29.3
+      - name: Install Flutter 3.29.3
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.29.3'
@@ -53,18 +53,24 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Install CocoaPods
-        run: sudo gem install cocoapods
-
-      - name: Force Set iOS Deployment Target to 13.0
+      - name: Create/Modify Podfile with iOS 13.0 Support
         run: |
-          # Make sure platform version is updated
-          sed -i '' -e "s/platform :ios.*/platform :ios, '13.0'/" ios/Podfile || echo "platform :ios, '13.0'" >> ios/Podfile
+          cd ios
+          
+          # Create Podfile if it doesn't exist
+          flutter build ios --release --no-codesign || true
+          
+          # Force platform iOS 13.0
+          if grep -q "platform :ios" Podfile; then
+            sed -i '' "s/platform :ios.*/platform :ios, '13.0'/" Podfile
+          else
+            echo "platform :ios, '13.0'" | cat - Podfile > temp && mv temp Podfile
+          fi
+          
+          # Add post_install block if missing
+          if ! grep -q "post_install do" Podfile; then
+            cat << 'EOF' >> Podfile
 
-          # Ensure post_install block is present
-          if ! grep -q "post_install do" ios/Podfile; then
-            cat << 'EOF' >> ios/Podfile
-  
           post_install do |installer|
           installer.pods_project.targets.each do |target|
           flutter_additional_ios_build_settings(target)
@@ -77,7 +83,15 @@ jobs:
           fi
           
           echo "✅ Final Podfile:"
-          cat ios/Podfile
+          cat Podfile
+
+      - name: Install CocoaPods
+        run: sudo gem install cocoapods
+
+      - name: Install Pods
+        run: |
+          cd ios
+          pod install --verbose
 
       - name: Build iOS IPA
         run: flutter build ios --release --no-codesign
