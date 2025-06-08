@@ -15,13 +15,58 @@ import 'package:hessa/features/auth/presentation/views/widgets/google_login_butt
 import 'package:hessa/features/auth/presentation/views/widgets/login_form.dart';
 import 'package:hessa/generated/l10n.dart';
 
-// ignore: must_be_immutable
-class LoginScreen extends StatelessWidget {
-  final TextEditingController emailAddressController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey();
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-  LoginScreen({super.key});
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final emailAddressController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final emailAddressFocusNode = FocusNode();
+  final passwordFocusNode = FocusNode();
+
+  bool emailTouched = false;
+  bool passwordTouched = false;
+
+  late GlobalKey<FormState> formKey;
+
+  @override
+  void initState() {
+    super.initState();
+
+    formKey = GlobalKey<FormState>();
+
+    emailAddressFocusNode.addListener(() {
+      if (emailAddressFocusNode.hasFocus) {
+        setState(() {
+          emailTouched = true;
+        });
+      }
+    });
+
+    passwordFocusNode.addListener(() {
+      if (passwordFocusNode.hasFocus) {
+        setState(() {
+          passwordTouched = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    emailAddressController.dispose();
+    passwordController.dispose();
+
+    emailAddressFocusNode.dispose();
+    passwordFocusNode.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +144,10 @@ class LoginScreen extends StatelessWidget {
                               LoginForm(
                                 emailAddressController: emailAddressController,
                                 passwordController: passwordController,
+                                emailAddressFocusNode: emailAddressFocusNode,
+                                passwordFocusNode: passwordFocusNode,
+                                emailTouched: emailTouched,
+                                passwordTocuhed: passwordTouched,
                                 screenWidth: screenWidth,
                                 formKey: formKey,
                               ),

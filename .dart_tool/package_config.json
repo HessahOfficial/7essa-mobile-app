@@ -26,6 +26,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "another_flushbar",
+      "rootUri": "file:///home/meow/.pub-cache/hosted/pub.dev/another_flushbar-1.12.30",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "archive",
       "rootUri": "file:///home/meow/.pub-cache/hosted/pub.dev/archive-4.0.7",
       "packageUri": "lib/",
@@ -1076,7 +1082,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-06-06T16:25:37.593707Z",
+  "generated": "2025-06-07T14:30:49.150052Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///home/meow/development/flutter",

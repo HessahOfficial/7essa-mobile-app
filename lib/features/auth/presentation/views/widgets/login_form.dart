@@ -7,6 +7,10 @@ import 'package:hessa/generated/l10n.dart';
 class LoginForm extends StatefulWidget {
   final TextEditingController emailAddressController;
   final TextEditingController passwordController;
+  final FocusNode emailAddressFocusNode;
+  final FocusNode passwordFocusNode;
+  final bool emailTouched;
+  final bool passwordTocuhed;
   final double screenWidth;
   final GlobalKey<FormState> formKey;
 
@@ -16,6 +20,10 @@ class LoginForm extends StatefulWidget {
     required this.passwordController,
     required this.screenWidth,
     required this.formKey,
+    required this.emailAddressFocusNode,
+    required this.passwordFocusNode,
+    required this.emailTouched,
+    required this.passwordTocuhed,
   });
 
   @override
@@ -34,18 +42,17 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: widget.formKey,
       child: Column(
+        spacing: 15,
         children: [
           CustomTextField(
+            focusNode: widget.emailAddressFocusNode,
+            fieldTocuhed: widget.emailTouched,
             controller: widget.emailAddressController,
             icon: Icons.email_rounded,
-            iconColor: AppColors.green800,
             inputColor: AppColors.white2,
-            iconBackgroundColor: AppColors.green100,
             placeholder: S.of(context).emailPlaceholder,
-            screenWidth: widget.screenWidth,
             type: TextInputType.emailAddress,
             validator: (value) {
               return Validator(
@@ -53,15 +60,13 @@ class _LoginFormState extends State<LoginForm> {
               ).validateEmailAddress(email: value!);
             },
           ),
-          SizedBox(height: 15),
           CustomTextField(
+            focusNode: widget.passwordFocusNode,
+            fieldTocuhed: widget.passwordTocuhed,
             controller: widget.passwordController,
             icon: Icons.lock,
-            iconColor: AppColors.purple950,
             inputColor: AppColors.white2,
-            iconBackgroundColor: AppColors.purple100,
             placeholder: S.of(context).passwordPlaceholder,
-            screenWidth: widget.screenWidth,
             type: TextInputType.text,
             obscure: !visible,
             suffixIcon: visible ? Icons.visibility : Icons.visibility_off,

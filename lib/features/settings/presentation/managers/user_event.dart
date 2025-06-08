@@ -8,3 +8,15 @@ class GetInfoEvent extends UserEvent {
 
   GetInfoEvent({required this.request});
 }
+
+class ChangePinEvent extends UserEvent {
+  final ChangePinRequest request;
+
+  ChangePinEvent({required this.request});
+}
+
+class BecomeInvestorEvent extends UserEvent {
+  final BecomeInvestorRequest request;
+
+  BecomeInvestorEvent({required this.request});
+}

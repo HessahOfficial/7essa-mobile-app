@@ -61,6 +61,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     });
 
+    on<ForgotPasswordEvent>((event, emit) async {
+      emit(ForgotPasswordLoading());
+      final response = await service.forgotPassword(request: event.request);
+      response.fold(
+        (failure) {
+          print(failure);
+          emit(ForgotPasswordFailure(message: failure.message));
+        },
+        (data) {
+          print(data);
+          emit(ForgotPasswordSuccess(response: data));
+        },
+      );
+    });
+
     on<LogoutEvent>((event, emit) async {
       emit(LogoutLoading());
       service.logout();

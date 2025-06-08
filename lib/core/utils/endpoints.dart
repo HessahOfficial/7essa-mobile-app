@@ -10,4 +10,6 @@ abstract class Endpoints {
   static const deleteFavourites = "/users/:userId/favourites";
   static const showBalance = "/users/balance/:userId";
   static const getUserInfo = "/users/:userId";
+  static const changeUserPin = "/users/pin/:userId";
+  static const becomeInvestorUser = "/users/investor/:userId";
 }

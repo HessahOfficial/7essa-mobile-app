@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addToFavouritesResponse": MessageLookupByLibrary.simpleMessage(
+      "تم حفظ العقار بنجاح!",
+    ),
     "becomInvestorNote": MessageLookupByLibrary.simpleMessage(
       "بمجرد حفظ المعلومات ، فإنك توافق على الشروط والاحكام.",
     ),
@@ -40,7 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bonus": MessageLookupByLibrary.simpleMessage("مكافأة"),
     "cancel": MessageLookupByLibrary.simpleMessage("رجوع"),
     "change": MessageLookupByLibrary.simpleMessage("تغيير"),
-    "changePin": MessageLookupByLibrary.simpleMessage("تغيير رقم البطاقة"),
+    "changePin": MessageLookupByLibrary.simpleMessage("تغيير رقم المحفظة"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "contactUsText": MessageLookupByLibrary.simpleMessage(
       "تواصل معنا عبر البريد الالكتروني الرسمي وسوف نرد عليك في اسرع وقت ممكن. (في غضون 24 ساعة).",
@@ -49,6 +52,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "darkmode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
     "deleteDialogText": MessageLookupByLibrary.simpleMessage(
       "انت على وشك ان تقوم بحذف العقارات المختارة من القائمة, هل انت متأكد من قرارك؟",
+    ),
+    "deleteOperationSuccess": MessageLookupByLibrary.simpleMessage(
+      "تمت عملية الحذف بنجاح!",
+    ),
+    "deleteSinglePopupTextPart1": MessageLookupByLibrary.simpleMessage(
+      "انت على وشك ان تحذف العقارت  ",
+    ),
+    "deleteSinglePopupTextPart2": MessageLookupByLibrary.simpleMessage(
+      "  من قائمة المحفوظات , هل انت متأكد من قرارك ؟ ",
     ),
     "deposit": MessageLookupByLibrary.simpleMessage("ايداع"),
     "depositFee": MessageLookupByLibrary.simpleMessage("ايداع"),
@@ -63,17 +75,25 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "expenses": MessageLookupByLibrary.simpleMessage("مصروفات"),
     "fees": MessageLookupByLibrary.simpleMessage("رسوم"),
+    "firstNamePLaceholder": MessageLookupByLibrary.simpleMessage("الاسم الاول"),
     "forgot": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
+    "forgotPasswordResponse": MessageLookupByLibrary.simpleMessage(
+      "تم إرسال رسالة إعادة تعيين كلمة المرور، يرجى التحقق من صندوق الوارد!",
+    ),
     "forgotPasswordText": MessageLookupByLibrary.simpleMessage(
       ".ادخل بريدك الالكتروني لكي نرسل لك رسالة التحقق عبره",
     ),
+    "fullNamePLaceholder": MessageLookupByLibrary.simpleMessage("الاسم كامل"),
     "haveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
     "hello": MessageLookupByLibrary.simpleMessage("مرحبا!"),
     "hot": MessageLookupByLibrary.simpleMessage("رائجة"),
     "incomes": MessageLookupByLibrary.simpleMessage("العوائد"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "ليست صيغة بريد الكتروني!",
+    ),
+    "invalidNationalId": MessageLookupByLibrary.simpleMessage(
+      "الرقم القومي يتكون من 14 رقم ولا يبدأ ب 0!",
     ),
     "invalidOtp": MessageLookupByLibrary.simpleMessage("ليست صيغة رقم تحقق!"),
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
@@ -85,12 +105,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidUsername": MessageLookupByLibrary.simpleMessage(
       "اسم المستخدم يتكون من 3 احرف على الاقل!",
     ),
+    "lastNamePLaceholder": MessageLookupByLibrary.simpleMessage("الاسم الاخير"),
     "locale": MessageLookupByLibrary.simpleMessage("اللغة العربية"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
     "messagePlaceholder": MessageLookupByLibrary.simpleMessage("رسالة"),
     "myInvestments": MessageLookupByLibrary.simpleMessage("استثماراتي"),
+    "nationalIdPlaceholder": MessageLookupByLibrary.simpleMessage(
+      "الرقم القومي",
+    ),
     "newAdded": MessageLookupByLibrary.simpleMessage("مضاف حديثا"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "no": MessageLookupByLibrary.simpleMessage("لا"),
@@ -127,6 +151,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredMessage": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال الرسالة!",
     ),
+    "requiredNationalId": MessageLookupByLibrary.simpleMessage(
+      "يجب ادخال الرقم القومي!",
+    ),
     "requiredOtp": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال رمز التحقق!",
     ),
@@ -151,8 +178,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "submit": MessageLookupByLibrary.simpleMessage("ارسال"),
     "usernamePlaceholder": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
     "verification": MessageLookupByLibrary.simpleMessage("التحقق"),
+    "verificationEmailSent": MessageLookupByLibrary.simpleMessage(
+      "تم ارسال بريد التحقق.",
+    ),
     "verificationText": MessageLookupByLibrary.simpleMessage(
-      "قم بادخال الكود المكون من 6 ارقام المرسل على البريد الالكتروني",
+      "تحقق من بريدك الالكتروني لتكمل عملية تسجيل الحساب الجديد عبر ارسال رسالة التحقق.",
     ),
     "verifyButton": MessageLookupByLibrary.simpleMessage("تحقق"),
     "wallet": MessageLookupByLibrary.simpleMessage("المحفظة"),

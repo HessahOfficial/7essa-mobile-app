@@ -17,7 +17,6 @@ import 'package:hessa/features/property/presentation/managers/slider_cubit.dart'
 import 'package:hessa/features/settings/data/repositories/user_service.dart';
 import 'package:hessa/features/settings/presentation/managers/image_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/investor_cubit.dart';
-import 'package:hessa/features/settings/presentation/managers/pin_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/settings_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/update_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
@@ -54,7 +53,6 @@ void main() async {
         BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
         BlocProvider<ScreenCubit>(create: (context) => ScreenCubit()),
         BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
-        BlocProvider<PinCubit>(create: (context) => PinCubit()),
         BlocProvider<UpdateCubit>(create: (context) => UpdateCubit()),
         BlocProvider<InvestorCubit>(create: (context) => InvestorCubit()),
         BlocProvider<LaunchCubit>(create: (context) => LaunchCubit()),
@@ -90,7 +88,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (bccontext, state) {
         return MaterialApp.router(
-          locale: Locale(getIt.get<HiveHelper>().locale ?? "en"),
+          locale: Locale(getIt.get<HiveHelper>().locale ?? "ar"),
           localizationsDelegates: [
             S.delegate,
             GlobalMaterialLocalizations.delegate,

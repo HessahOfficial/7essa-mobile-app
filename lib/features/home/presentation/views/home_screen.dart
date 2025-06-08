@@ -11,6 +11,7 @@ import 'package:hessa/features/home/presentation/views/widgets/custom_app_bar.da
 import 'package:hessa/features/home/presentation/views/widgets/custom_category_list.dart';
 import 'package:hessa/features/home/presentation/views/widgets/custom_search_bar.dart';
 import 'package:hessa/features/home/presentation/views/widgets/category_tabs_list.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class HomeScreen extends StatefulWidget {
   final TextEditingController searchController = TextEditingController();
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           } else if (state is AddToFavouritesSuccess) {
             showSnackBar(
               context: widget.screenContext,
-              message: state.response.message!,
+              message: S.of(context).addToFavouritesResponse,
               type: 0,
             );
           } else if (state is AddToFavouritesFailure) {

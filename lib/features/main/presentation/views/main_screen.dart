@@ -10,8 +10,20 @@ import 'package:hessa/features/main/presentation/views/widgets/custom_nav_item.d
 import 'package:hessa/features/settings/presentation/views/settings_screen.dart';
 import 'package:hessa/features/wallet/presentation/views/wallet_screen.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<ScreenCubit>().currentIndex = 0;
+  }
 
   @override
   Widget build(BuildContext context) {

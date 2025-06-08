@@ -260,11 +260,21 @@ class S {
     );
   }
 
-  /// `Enter the 6-digit code you received in the inbox of `
+  /// `Verify your email to complete your registration process via sending verification email.`
   String get verificationText {
     return Intl.message(
-      'Enter the 6-digit code you received in the inbox of ',
+      'Verify your email to complete your registration process via sending verification email.',
       name: 'verificationText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification email is sent successfully! Please check your inbox.`
+  String get verificationEmailSent {
+    return Intl.message(
+      'Verification email is sent successfully! Please check your inbox.',
+      name: 'verificationEmailSent',
       desc: '',
       args: [],
     );
@@ -305,10 +315,10 @@ class S {
     return Intl.message('Verify', name: 'verifyButton', desc: '', args: []);
   }
 
-  /// `Enter your email to continue..`
+  /// `Email Address`
   String get emailPlaceholder {
     return Intl.message(
-      'Enter your email to continue..',
+      'Email Address',
       name: 'emailPlaceholder',
       desc: '',
       args: [],
@@ -340,6 +350,46 @@ class S {
     return Intl.message(
       'Phone No.',
       name: 'phonePlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Firstname`
+  String get firstNamePLaceholder {
+    return Intl.message(
+      'Firstname',
+      name: 'firstNamePLaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lastname`
+  String get lastNamePLaceholder {
+    return Intl.message(
+      'Lastname',
+      name: 'lastNamePLaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fullname`
+  String get fullNamePLaceholder {
+    return Intl.message(
+      'Fullname',
+      name: 'fullNamePLaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID`
+  String get nationalIdPlaceholder {
+    return Intl.message(
+      'National ID',
+      name: 'nationalIdPlaceholder',
       desc: '',
       args: [],
     );
@@ -440,6 +490,26 @@ class S {
     return Intl.message(
       'Invalid otp code!',
       name: 'invalidOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National Id field is required!`
+  String get requiredNationalId {
+    return Intl.message(
+      'National Id field is required!',
+      name: 'requiredNationalId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National id consists of 14 digits and doesn't start with zero!`
+  String get invalidNationalId {
+    return Intl.message(
+      'National id consists of 14 digits and doesn\'t start with zero!',
+      name: 'invalidNationalId',
       desc: '',
       args: [],
     );
@@ -690,6 +760,56 @@ class S {
     return Intl.message(
       'Add some favourite properties.',
       name: 'emptyFavourites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset password email is sent successfully. check you inbox!`
+  String get forgotPasswordResponse {
+    return Intl.message(
+      'Reset password email is sent successfully. check you inbox!',
+      name: 'forgotPasswordResponse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One property saved successfully!`
+  String get addToFavouritesResponse {
+    return Intl.message(
+      'One property saved successfully!',
+      name: 'addToFavouritesResponse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are about to delete the property `
+  String get deleteSinglePopupTextPart1 {
+    return Intl.message(
+      'You are about to delete the property ',
+      name: 'deleteSinglePopupTextPart1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` from the savings list, are you sure about your decision ?`
+  String get deleteSinglePopupTextPart2 {
+    return Intl.message(
+      ' from the savings list, are you sure about your decision ?',
+      name: 'deleteSinglePopupTextPart2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete operation is done successfully!`
+  String get deleteOperationSuccess {
+    return Intl.message(
+      'Delete operation is done successfully!',
+      name: 'deleteOperationSuccess',
       desc: '',
       args: [],
     );

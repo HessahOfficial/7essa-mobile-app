@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
+import 'package:hessa/core/themes/dark_theme.dart';
 import 'package:hessa/core/themes/light_theme.dart';
-import 'package:hessa/core/utils/lang.dart';
+
+import 'package:hessa/core/utils/service_locator.dart';
 
 class CustomTextField extends StatelessWidget {
   final IconData? icon;
   final IconData? suffixIcon;
-  final Color? iconColor;
+  final FocusNode? focusNode;
+  final Color? borderColor;
   final Color inputColor;
-  final Color? iconBackgroundColor;
   final String? placeholder;
   final String? label;
   final Color? labelColor;
-  final double screenWidth;
   final TextEditingController controller;
   final void Function(String val)? onChanged;
   final void Function()? suffixFunction;
@@ -25,17 +27,16 @@ class CustomTextField extends StatelessWidget {
   final bool? enabled;
   final int? maxLines;
   final int? maxLength;
+  final TextInputAction? inputAction;
+  final bool fieldTocuhed;
 
   const CustomTextField({
     super.key,
     this.icon,
-    this.iconColor,
     required this.inputColor,
-    this.iconBackgroundColor,
     this.placeholder,
     this.label,
     this.labelColor,
-    required this.screenWidth,
     required this.controller,
     this.onChanged,
     this.validator,
@@ -49,106 +50,79 @@ class CustomTextField extends StatelessWidget {
     this.enabled,
     this.suffixIcon,
     this.suffixFunction,
+    this.borderColor,
+    this.inputAction,
+    this.focusNode,
+    this.fieldTocuhed = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 1,
-      borderRadius: BorderRadius.circular(borderRadius ?? 20),
-      shadowColor: AppColors.gray,
-      child: Container(
-        width: screenWidth,
-        decoration: BoxDecoration(
-          color: inputColor,
-          borderRadius: BorderRadius.circular(borderRadius ?? 20),
-        ),
-        child: Row(
-          children: [
-            icon != null
-                ? Padding(
-                  padding: EdgeInsets.only(
-                    left: isArabic() ? 0 : 10,
-                    right: isArabic() ? 10 : 0,
-                  ),
-                  child: CircleAvatar(
-                    backgroundColor: iconBackgroundColor,
-                    radius: borderRadius ?? 20,
-                    child: Icon(icon, size: iconSize ?? 17, color: iconColor),
-                  ),
-                )
-                : Container(),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Theme(
-                      data: getLightThemeData(),
-                      child: TextFormField(
-                        enabled: enabled ?? true,
-                        validator: validator,
-                        onChanged: onChanged,
-                        obscureText: obscure ?? false,
-                        controller: controller,
-                        keyboardType: type ?? TextInputType.text,
-                        decoration:
-                            placeholder != null
-                                ? InputDecoration(
-                                  suffixIcon:
-                                      suffixIcon != null
-                                          ? InkWell(
-                                            splashColor: Colors.transparent,
-                                            onTap: suffixFunction ?? () {},
-                                            child: Icon(suffixIcon),
-                                          )
-                                          : null,
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: placeholder ?? "",
-                                  hintStyle: const TextStyle(
-                                    color:
-                                        Colors
-                                            .grey, // Replace with your AppColors.gray
-                                  ),
-                                )
-                                : InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: labelColor ?? Colors.transparent,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      borderRadius ?? 20,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  labelText: label ?? "",
-                                  labelStyle: TextStyle(
-                                    color:
-                                        labelColor ??
-                                        Colors
-                                            .grey, // Replace with your AppColors.gray
-                                  ),
-                                ),
-                        minLines: 1,
-                        maxLines: maxLines ?? 1,
-                        maxLength: maxLength,
-                        textInputAction: TextInputAction.next,
-                        onFieldSubmitted: (_) {
-                          FocusScope.of(
-                            context,
-                          ).nextFocus(); // Manually move to next field
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+    bool isDark = getIt.get<HiveHelper>().isDark ?? false;
+
+    return Theme(
+      data: isDark ? getDarkThemeData() : getLightThemeData(),
+      child: TextFormField(
+        focusNode: focusNode,
+        autovalidateMode:
+            fieldTocuhed
+                ? AutovalidateMode.onUserInteraction
+                : AutovalidateMode.disabled,
+        decoration: InputDecoration(
+          errorMaxLines: 10,
+          errorStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: isDark ? Colors.white : Colors.black,
+              width: 2.5,
             ),
-          ],
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: isDark ? Colors.white : AppColors.accentColor,
+              width: 2.5,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2.5),
+          ),
+          suffixIcon:
+              suffixIcon != null
+                  ? InkWell(
+                    onTap: suffixFunction,
+                    child: Icon(
+                      suffixIcon,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                  )
+                  : null,
+          prefixIcon:
+              icon != null
+                  ? Icon(
+                    icon,
+                    size: iconSize ?? 20,
+                    color: isDark ? Colors.white : Colors.black,
+                  )
+                  : null,
+          labelText: placeholder,
+          floatingLabelStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: isDark ? Colors.white : null,
+          ),
         ),
+        enabled: enabled ?? true,
+        validator: validator,
+        onChanged: onChanged,
+        obscureText: obscure ?? false,
+        controller: controller,
+        keyboardType: type,
+        minLines: 1,
+        maxLines: maxLines ?? 1,
+        maxLength: maxLength,
+        textInputAction: inputAction,
       ),
     );
   }
