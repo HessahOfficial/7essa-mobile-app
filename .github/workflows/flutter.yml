@@ -26,16 +26,8 @@ jobs:
         with:
           flutter-version: '3.29.3'
 
-      - name: Cache Flutter Dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.pub-cache
-          key: ${{ runner.os }}-pub-cache
-
-      - name: Get and Upgrade Dependencies
-        run: |
-          flutter pub get
-          flutter pub upgrade
+      - name: Install Dependencies
+        run: flutter pub get
 
       - name: Build APK
         run: flutter build apk --release
@@ -58,37 +50,21 @@ jobs:
           flutter-version: '3.29.3'
           architecture: x64
 
-      - name: Cache Flutter Dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.pub-cache
-          key: ${{ runner.os }}-pub-cache
-
-      - name: Get and Upgrade Dependencies
-        run: |
-          flutter pub get
-          flutter pub upgrade
+      - name: Install Dependencies
+        run: flutter pub get
 
       - name: Install CocoaPods
         run: sudo gem install cocoapods
 
-      - name: Cache CocoaPods
-        uses: actions/cache@v3
-        with:
-          path: ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
-
-      - name: Update Podfile
+      - name: Force Set iOS Deployment Target to 13.0
         run: |
-          if grep -q "platform :ios" ios/Podfile; then
-            sed -i '' "s/platform :ios.*/platform :ios, '13.0'/" ios/Podfile
-          else
-            echo "platform :ios, '13.0'" >> ios/Podfile
-          fi
-          if ! grep -q "post_install" ios/Podfile; then
+          # Make sure platform version is updated
+          sed -i '' -e "s/platform :ios.*/platform :ios, '13.0'/" ios/Podfile || echo "platform :ios, '13.0'" >> ios/Podfile
+
+          # Ensure post_install block is present
+          if ! grep -q "post_install do" ios/Podfile; then
             cat << 'EOF' >> ios/Podfile
+  
           post_install do |installer|
           installer.pods_project.targets.each do |target|
           flutter_additional_ios_build_settings(target)
@@ -99,10 +75,11 @@ jobs:
           end
           EOF
           fi
+          
+          echo "✅ Final Podfile:"
           cat ios/Podfile
 
-
-      - name: Build iOS IPA (no code signing)
+      - name: Build iOS IPA
         run: flutter build ios --release --no-codesign
 
       - name: Package IPA
@@ -111,9 +88,6 @@ jobs:
           mkdir Payload
           mv Runner.app Payload/
           zip -r app.ipa Payload
-
-      - name: List IPA Directory Contents
-        run: ls -la build/ios/iphoneos
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
