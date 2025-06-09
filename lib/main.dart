@@ -16,7 +16,6 @@ import 'package:hessa/features/property/presentation/managers/location_cubit.dar
 import 'package:hessa/features/property/presentation/managers/slider_cubit.dart';
 import 'package:hessa/features/settings/data/repositories/user_service.dart';
 import 'package:hessa/features/settings/presentation/managers/image_cubit.dart';
-import 'package:hessa/features/settings/presentation/managers/investor_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/settings_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/update_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
@@ -54,7 +53,6 @@ void main() async {
         BlocProvider<ScreenCubit>(create: (context) => ScreenCubit()),
         BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
         BlocProvider<UpdateCubit>(create: (context) => UpdateCubit()),
-        BlocProvider<InvestorCubit>(create: (context) => InvestorCubit()),
         BlocProvider<LaunchCubit>(create: (context) => LaunchCubit()),
         BlocProvider<FavouriteCubit>(create: (context) => FavouriteCubit()),
         BlocProvider<SliderCubit>(create: (context) => SliderCubit()),

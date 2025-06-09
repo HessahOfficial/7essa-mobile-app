@@ -35,9 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "becomeInvestorText": MessageLookupByLibrary.simpleMessage(
       "انت مستثمر بالفعل ، ابدء رحلتك الاستثمارية!",
     ),
-    "becomeInvestorWithUs": MessageLookupByLibrary.simpleMessage(
-      "كن مستثمر معنا",
-    ),
+    "becomeInvestorWithUs": MessageLookupByLibrary.simpleMessage("كن مستثمرا"),
     "bestForYou": MessageLookupByLibrary.simpleMessage("الأفضل لك"),
     "bestInvest": MessageLookupByLibrary.simpleMessage("أفضل استثمار"),
     "bonus": MessageLookupByLibrary.simpleMessage("مكافأة"),
@@ -175,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendButton": MessageLookupByLibrary.simpleMessage("ارسال"),
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
+    "startInvestment": MessageLookupByLibrary.simpleMessage("ابدأ الاستثمار!"),
     "submit": MessageLookupByLibrary.simpleMessage("ارسال"),
     "usernamePlaceholder": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
     "verification": MessageLookupByLibrary.simpleMessage("التحقق"),

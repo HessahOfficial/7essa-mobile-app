@@ -75,7 +75,7 @@
   "editProfile": "تعديل الملف الشخصي",
   "save": "حفظ",
   "edit": "تعديل",
-  "becomeInvestorWithUs": "كن مستثمر معنا",
+  "becomeInvestorWithUs": "كن مستثمرا",
   "pinMessage": "قم بادخال رقم سري جديد لمحفظتك",
   "pinError": "الرقم السري الجديد اللذي ادخلته مستخدم بالفعل. حاول مرة اخرى!",
   "contactUsText": "تواصل معنا عبر البريد الالكتروني الرسمي وسوف نرد عليك في اسرع وقت ممكن. (في غضون 24 ساعة).",
@@ -95,5 +95,6 @@
   "addToFavouritesResponse": "تم حفظ العقار بنجاح!",
   "deleteSinglePopupTextPart1": "انت على وشك ان تحذف العقارت  ",
   "deleteSinglePopupTextPart2" : "  من قائمة المحفوظات , هل انت متأكد من قرارك ؟ " ,
-  "deleteOperationSuccess" : "تمت عملية الحذف بنجاح!"
+  "deleteOperationSuccess" : "تمت عملية الحذف بنجاح!",
+  "startInvestment": "ابدأ الاستثمار!"
 }
