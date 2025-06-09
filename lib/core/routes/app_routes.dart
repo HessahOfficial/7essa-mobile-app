@@ -14,4 +14,5 @@ abstract class AppRoutes {
   static const policyPrivacyView = "/policyPrivacyView";
   static const propertyView = "/propertyView";
   static const galleryView = "/galleryView";
+  static const ctaBecomInvestorView = "/ctaBecomInvestorView";
 }
