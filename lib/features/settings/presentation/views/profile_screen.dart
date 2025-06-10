@@ -222,20 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     ChangePinItem(screenContext: context),
                     EditProfileItem(),
-                    BecomeInvestorButton(),
-                    isInvestor
-                        ? Container()
-                        : GestureDetector(
-                          onTap:
-                              () => context.push(AppRoutes.becomeInvestorView),
-                          child: Text(
-                            S.of(context).becomeInvestorWithUs,
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                    if (!isInvestor) BecomeInvestorButton(),
                   ],
                 ),
               );
@@ -243,6 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           );
         },
       ),
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         shape: CircleBorder(),

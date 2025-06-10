@@ -59,6 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
               message: state.message,
               type: 1,
             );
+          } else if (state is DeleteFavouritesFailure) {
+            showSnackBar(context: context, message: state.message, type: 1);
           }
         },
         builder: (bccontext, state) {
@@ -76,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 CategoryTabsList(),
                 state is AddToFavouritesSuccess ||
-                        state is GetAllPropertiesSuccess
+                        state is GetAllPropertiesSuccess ||
+                        state is DeleteFavouritesSuccess
                     ? Expanded(child: CustomCategoryList())
                     : Align(
                       alignment: Alignment.topCenter,
