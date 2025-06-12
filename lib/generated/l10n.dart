@@ -615,10 +615,10 @@ class S {
     return Intl.message('Edit', name: 'edit', desc: '', args: []);
   }
 
-  /// `Become investor with us`
+  /// `BECOME INVESTOR`
   String get becomeInvestorWithUs {
     return Intl.message(
-      'Become investor with us',
+      'BECOME INVESTOR',
       name: 'becomeInvestorWithUs',
       desc: '',
       args: [],
@@ -810,6 +810,16 @@ class S {
     return Intl.message(
       'Delete operation is done successfully!',
       name: 'deleteOperationSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Investment!`
+  String get startInvestment {
+    return Intl.message(
+      'Start Investment!',
+      name: 'startInvestment',
       desc: '',
       args: [],
     );

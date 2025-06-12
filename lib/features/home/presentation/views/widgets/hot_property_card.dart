@@ -7,6 +7,7 @@ import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/lang.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/features/auth/data/models/user_model.dart';
+import 'package:hessa/features/favourite/data/models/delete_favourites_request.dart';
 import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.dart';
 import 'package:hessa/features/home/data/models/add_to_favourites_request.dart';
 import 'package:hessa/features/home/data/models/property_model.dart';
@@ -72,22 +73,30 @@ class HotPropertyCard extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: [
-                    if (!isFavourite)
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.08),
-                              blurRadius: 15,
-                              spreadRadius: 2,
-                              offset: Offset(0, 8),
-                            ),
-                          ],
-                        ),
-                        child: InkWell(
-                          onTap: () {
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.08),
+                            blurRadius: 15,
+                            spreadRadius: 2,
+                            offset: Offset(0, 8),
+                          ),
+                        ],
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          if (isFavourite) {
+                            context.read<PropertyBloc>().add(
+                              DeleteFavouritesEvent(
+                                request: DeleteFavouritesRequest(
+                                  properties: [property.id!],
+                                ),
+                              ),
+                            );
+                          } else {
                             context.read<PropertyBloc>().add(
                               AddToFavouritesEvent(
                                 request: AddToFavouritesRequest(
@@ -96,19 +105,22 @@ class HotPropertyCard extends StatelessWidget {
                                 ),
                               ),
                             );
-                          },
-                          borderRadius: BorderRadius.circular(10),
-                          splashColor: AppColors.gray.withOpacity(0.1),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.bookmark_border_rounded,
-                              size: 24,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                          }
+                        },
+                        borderRadius: BorderRadius.circular(10),
+                        splashColor: AppColors.gray.withOpacity(0.1),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            isFavourite
+                                ? Icons.bookmark_outlined
+                                : Icons.bookmark_border_rounded,
+                            size: 24,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ),
+                    ),
                   ],
                 ),
               ),

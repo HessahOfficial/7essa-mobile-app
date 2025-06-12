@@ -40,6 +40,7 @@ class _MainScreenState extends State<MainScreen> {
         int index = context.read<ScreenCubit>().currentIndex;
 
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(

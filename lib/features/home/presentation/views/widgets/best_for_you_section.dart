@@ -1,3 +1,5 @@
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hessa/core/utils/lang.dart';
@@ -34,22 +36,22 @@ class BestForYouSection extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
                 child: SizedBox(
                   height: screenHeight * 0.32,
-                  child: ListView.separated(
-                    padding: EdgeInsets.only(
-                      left: arabic ? 0 : screenHeight * 0.08,
-                      right: arabic ? screenHeight * 0.08 : 0,
-                    ),
-                    separatorBuilder: (context, index) => SizedBox(width: 40),
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
+                  child: CarouselSlider.builder(
                     itemCount: hotProperties.length,
-                    itemBuilder: (context, index) {
-                      return HotPropertyCard(
-                        property: hotProperties[index],
-                        screenHeight: screenHeight,
-                        screenWidth: screenWidth,
-                      );
-                    },
+                    itemBuilder:
+                        (context, index, realIndex) => HotPropertyCard(
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                          property: hotProperties[index],
+                        ),
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: true,
+                      reverse: arabic ? true : false,
+                      viewportFraction: 0.75,
+                      autoPlayInterval: Duration(seconds: 2),
+                    ),
                   ),
                 ),
               ),
@@ -68,10 +70,8 @@ class BestForYouSection extends StatelessWidget {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) => Padding(
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
-                  child: CustomPropertyCard(property: restOfProperties[index]),
-                ),
+                (context, index) =>
+                    CustomPropertyCard(property: restOfProperties[index]),
                 childCount: restOfProperties.length,
               ),
             ),
