@@ -9,7 +9,6 @@ import "package:hessa/core/utils/service_locator.dart";
 import "package:hessa/core/utils/show_snack_bar.dart";
 import "package:hessa/core/widgets/custom_button.dart";
 import "package:hessa/features/settings/data/models/become_investor_request.dart";
-import "package:hessa/features/settings/presentation/managers/investor_cubit.dart";
 import "package:hessa/features/settings/presentation/managers/user_bloc.dart";
 import "package:hessa/features/settings/presentation/views/widgets/investor_form.dart";
 import "package:hessa/generated/l10n.dart";
@@ -71,12 +70,7 @@ class _BecomeInvestorScreenState extends State<BecomeInvestorScreen> {
           if (state is BecomeInvestorFailure) {
             showSnackBar(context: context, message: state.message, type: 1);
           } else if (state is BecomeInvestorSuccess) {
-            showSnackBar(
-              context: context,
-              message: S.of(context).becomeInvestorPopup,
-              type: 0,
-            );
-            context.go(AppRoutes.profileView);
+            context.go(AppRoutes.ctaBecomInvestorView);
           }
         },
         builder: (bccontext, state) {
@@ -105,23 +99,27 @@ class _BecomeInvestorScreenState extends State<BecomeInvestorScreen> {
                     ),
                   ],
                 ),
-                CustomButton(
-                  width: 100,
-                  height: 50,
-                  text: S.of(context).save,
-                  textColor: Colors.white,
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      context.read<UserBloc>().add(
-                        BecomeInvestorEvent(
-                          request: BecomeInvestorRequest(
-                            nationalId: nationalIdController.text,
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                ),
+                state is BecomeInvestorLoading
+                    ? CircularProgressIndicator(
+                      color: isDark ? Colors.white : Colors.black,
+                    )
+                    : CustomButton(
+                      width: 100,
+                      height: 50,
+                      text: S.of(context).save,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          context.read<UserBloc>().add(
+                            BecomeInvestorEvent(
+                              request: BecomeInvestorRequest(
+                                nationalId: nationalIdController.text,
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
               ],
             ),
           );

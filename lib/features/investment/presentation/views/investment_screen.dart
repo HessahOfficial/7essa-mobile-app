@@ -16,13 +16,6 @@ class InvestmentScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
-
-        onPressed: () {},
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: Icon(FontAwesomeIcons.search, color: Colors.white, size: 20),
-      ),
       appBar: AppBar(
         actionsPadding: EdgeInsets.symmetric(horizontal: 20),
         actions: [

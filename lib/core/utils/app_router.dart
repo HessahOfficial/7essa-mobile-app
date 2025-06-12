@@ -9,6 +9,7 @@ import 'package:hessa/features/main/presentation/views/main_screen.dart';
 import 'package:hessa/features/notification/presentation/views/notifications_screen.dart';
 import 'package:hessa/features/property/presentation/views/gallery_screen.dart';
 import 'package:hessa/features/property/presentation/views/property_screen.dart';
+import 'package:hessa/features/settings/presentation/views/become_investor_cta_screen.dart';
 import 'package:hessa/features/settings/presentation/views/become_investor_screen.dart';
 import 'package:hessa/features/contact/presentation/views/contact_us_screen.dart';
 import 'package:hessa/features/settings/presentation/views/privacy_policy_screen.dart';
@@ -50,6 +51,10 @@ abstract class AppRouter {
       GoRoute(
         path: AppRoutes.becomeInvestorView,
         builder: (context, state) => BecomeInvestorScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.ctaBecomInvestorView,
+        builder: (context, state) => BecomeInvestorCtaScreen(),
       ),
       GoRoute(
         path: AppRoutes.contactUsView,

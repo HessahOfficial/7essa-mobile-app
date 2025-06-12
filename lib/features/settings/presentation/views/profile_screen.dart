@@ -14,6 +14,7 @@ import 'package:hessa/features/auth/data/models/user_model.dart';
 import 'package:hessa/features/settings/data/models/get_info_request.dart';
 import 'package:hessa/features/settings/presentation/managers/image_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
+import 'package:hessa/features/settings/presentation/views/widgets/become_investor_button.dart';
 import 'package:hessa/features/settings/presentation/views/widgets/change_pin_item.dart';
 import 'package:hessa/features/settings/presentation/views/widgets/custom_avatar.dart';
 import 'package:hessa/features/settings/presentation/views/widgets/edit_profile_item.dart';
@@ -170,26 +171,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 30,
                   children: [
-                    Stack(
-                      alignment: Alignment.bottomRight,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CustomAvatar(image: image),
-                        InkWell(
-                          borderRadius: BorderRadius.circular(20),
-                          splashColor: AppColors.gray.withOpacity(0.1),
-                          onTap:
-                              () => context
-                                  .read<ImageCubit>()
-                                  .showAvatarBottomSheet(context: context),
-                          child: CircleAvatar(
-                            child: Icon(
-                              Icons.camera_alt_rounded,
-                              color: Colors.white,
-                              size: 20,
+                        Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            CustomAvatar(image: image),
+                            InkWell(
+                              borderRadius: BorderRadius.circular(20),
+                              splashColor: AppColors.gray.withOpacity(0.1),
+                              onTap:
+                                  () => context
+                                      .read<ImageCubit>()
+                                      .showAvatarBottomSheet(context: context),
+                              child: CircleAvatar(
+                                child: Icon(
+                                  Icons.camera_alt_rounded,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),
@@ -215,19 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     ChangePinItem(screenContext: context),
                     EditProfileItem(),
-                    isInvestor
-                        ? Container()
-                        : GestureDetector(
-                          onTap:
-                              () => context.push(AppRoutes.becomeInvestorView),
-                          child: Text(
-                            S.of(context).becomeInvestorWithUs,
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                    if (!isInvestor) BecomeInvestorButton(),
                   ],
                 ),
               );
@@ -235,6 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           );
         },
       ),
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         shape: CircleBorder(),

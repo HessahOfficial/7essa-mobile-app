@@ -75,7 +75,7 @@
   "editProfile": "Edit Profile",
   "save": "Save",
   "edit": "Edit",
-  "becomeInvestorWithUs": "Become investor with us",
+  "becomeInvestorWithUs": "BECOME INVESTOR",
   "pinMessage": "Enter new PIN number for your wallet",
   "pinError": "The new pin number is similar to the old one. try another one!",
   "contactUsText": "Feel free to reach out via our official email, and we’ll respond as soon as possible (within 24 hours).",
@@ -95,5 +95,6 @@
   "addToFavouritesResponse": "One property saved successfully!",
   "deleteSinglePopupTextPart1": "You are about to delete the property ",
   "deleteSinglePopupTextPart2" : " from the savings list, are you sure about your decision ?", 
-  "deleteOperationSuccess" : "Delete operation is done successfully!"
+  "deleteOperationSuccess" : "Delete operation is done successfully!",
+  "startInvestment": "Start Investment!"
 }
