@@ -36,10 +36,6 @@ jobs:
           rm -rf Podfile.lock Pods
         working-directory: ios
 
-      - name: Install Pods
-        run: pod install
-        working-directory: ios
-
       - name: Build iOS
         run: flutter build ios --release --no-codesign
 
