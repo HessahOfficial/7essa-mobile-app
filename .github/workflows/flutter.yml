@@ -2,11 +2,9 @@ name: 7essa CI/CD
 
 on:
   push:
-    branches:
-      - develop
+    branches: [develop]
   pull_request:
-    branches:
-      - develop
+    branches: [develop]
 
 jobs:
   build-android:
@@ -31,7 +29,6 @@ jobs:
         id: versioning
         run: |
           current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
-
           if [[ "$current_version" == *"+"* ]]; then
             base_version="${current_version%%+*}"
             build_number="${current_version##*+}"
@@ -39,23 +36,33 @@ jobs:
             base_version="$current_version"
             build_number=0
           fi
-
           new_build_number=$((build_number + 1))
           new_version="${base_version}+${new_build_number}"
-
           sed -i "s/^version:.*/version: $new_version/" pubspec.yaml
-
           echo "New version: $new_version"
           echo "version=$new_version" >> $GITHUB_OUTPUT
 
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build APK
+      - name: Decode Keystore from Secret
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
+
+      - name: Create key.properties
+        run: |
+          cat > android/key.properties <<EOF
+          storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword=${{ secrets.KEY_PASSWORD }}
+          keyAlias=${{ secrets.KEY_ALIAS }}
+          storeFile=upload-keystore.jks
+          EOF
+
+      - name: Build Signed APK
         run: flutter build apk --release
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Hessah
+          name: Hessah-${{ steps.versioning.outputs.version }}
           path: build/app/outputs/flutter-apk/app-release.apk
