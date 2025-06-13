@@ -62,6 +62,10 @@ dependencies:
   photo_view: ^0.15.0
   url_launcher: ^6.3.1
   another_flushbar: ^1.12.30
+  dialog_flowtter:
+  intl: ^0.19.0
+  speech_to_text:
+  permission_handler:
 
 dev_dependencies:
   flutter_test:
@@ -94,6 +98,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/chat/dialog_flow_auth.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

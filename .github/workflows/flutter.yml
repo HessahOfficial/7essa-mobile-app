@@ -4,29 +4,60 @@ on:
   push:
     branches:
       - develop
-
   pull_request:
     branches:
       - develop
 
 jobs:
-  build:
+  build-android:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout My Code
+      - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Setup Git Credentials
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
       - name: Setup Java 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin' # Use the Eclipse Temurin distribution
+          distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Flutter Version 3.29.3
+      - name: Install Flutter 3.29.3
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.3' # Use the required Flutter version
+          flutter-version: '3.29.3'
+
+      - name: Auto-increment version in pubspec.yaml
+        id: versioning
+        run: |
+          current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          if [[ "$current_version" == *"+"* ]]; then
+            base_version="${current_version%%+*}"
+            build_number="${current_version##*+}"
+          else
+            base_version="$current_version"
+            build_number=0
+          fi
+
+          new_build_number=$((build_number + 1))
+          new_version="${base_version}+${new_build_number}"
+          sed -i "s/^version:.*/version: $new_version/" pubspec.yaml
+
+          echo "version=$new_version" >> $GITHUB_OUTPUT
+          echo "New version: $new_version"
+
+      - name: Commit version bump
+        run: |
+          git fetch origin develop
+          git add pubspec.yaml
+          git commit -m "ci: bump version to ${{ steps.versioning.outputs.version }}" || echo "No changes to commit"
+          git push origin HEAD:develop --force
+      
 
       - name: Install Dependencies
         run: flutter pub get
@@ -34,9 +65,8 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
-
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: 7essa-apk
+          name: Hessah-${{ steps.versioning.outputs.version }}
           path: build/app/outputs/flutter-apk/app-release.apk
