@@ -2,17 +2,24 @@ name: 7essa CI/CD
 
 on:
   push:
-    branches: [develop]
+    branches:
+      - develop
   pull_request:
-    branches: [develop]
+    branches:
+      - develop
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout My Code
+      - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Setup Git Credentials
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
       - name: Setup Java 17
         uses: actions/setup-java@v3
@@ -36,29 +43,24 @@ jobs:
             base_version="$current_version"
             build_number=0
           fi
+
           new_build_number=$((build_number + 1))
           new_version="${base_version}+${new_build_number}"
           sed -i "s/^version:.*/version: $new_version/" pubspec.yaml
-          echo "New version: $new_version"
+
           echo "version=$new_version" >> $GITHUB_OUTPUT
+          echo "New version: $new_version"
+
+      - name: Commit version bump
+        run: |
+          git add pubspec.yaml
+          git commit -m "ci: bump version to ${{ steps.versioning.outputs.version }}" || echo "No changes to commit"
+          git push origin HEAD:develop
 
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Decode Keystore from Secret
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
-
-      - name: Create key.properties
-        run: |
-          cat > android/key.properties <<EOF
-          storePassword=${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword=${{ secrets.KEY_PASSWORD }}
-          keyAlias=${{ secrets.KEY_ALIAS }}
-          storeFile=upload-keystore.jks
-          EOF
-
-      - name: Build Signed APK
+      - name: Build APK
         run: flutter build apk --release
 
       - name: Upload APK Artifact

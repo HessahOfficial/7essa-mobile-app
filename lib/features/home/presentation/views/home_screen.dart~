@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
@@ -14,78 +13,36 @@ import 'package:hessa/features/home/presentation/views/widgets/category_tabs_lis
 import 'package:hessa/generated/l10n.dart';
 import 'package:hessa/chat-bot/chatbot.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
+import 'dart:async';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatefulWidget {
   final TextEditingController searchController = TextEditingController();
   final BuildContext screenContext;
   HomeScreen({super.key, required this.screenContext});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   OverlayEntry? _overlayEntry;
-  final GlobalKey _fabKey = GlobalKey();
+  final GlobalKey _fabKey = GlobalKey(); // Key to track FAB position
   late stt.SpeechToText _speech;
   bool _isListening = false;
+  String _listeningStatus = "Tap to start listening";
 
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
-    // Request microphone permission and start listening after widget is built
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _requestMicrophonePermission();
-      _scheduleWelcomeMessage();
-    });
+    _initializeSpeech();
     context.read<PropertyBloc>().add(
       GetAllPropertiesEvent(request: GetAllPropertiesRequest()),
     );
-  }
-
-  // Request microphone permission and show popup
-  Future<void> _requestMicrophonePermission() async {
-    PermissionStatus status = await Permission.microphone.status;
-    if (!status.isGranted) {
-      // Show dialog to request permission
-      if (mounted) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Microphone Permission'),
-            content: Text(
-              'For better communication with the Hessah chatbot, please allow microphone access to enable voice commands like "Hi Hessah".',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _stopListening(); // Don't listen if permission is denied
-                },
-                child: Text('Deny'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-                  PermissionStatus newStatus = await Permission.microphone.request();
-                  if (newStatus.isGranted) {
-                    _initializeSpeech();
-                  } else {
-                    print('Microphone permission denied');
-                  }
-                },
-                child: Text('Allow'),
-              ),
-            ],
-          ),
-        );
-      }
-    } else {
-      _initializeSpeech();
-    }
+    // Ensure widget tree is built before scheduling message
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scheduleWelcomeMessage();
+    });
   }
 
   // Initialize speech recognition
@@ -93,26 +50,23 @@ class _HomeScreenState extends State<HomeScreen> {
     bool available = await _speech.initialize(
       onStatus: (status) {
         setState(() {
-          _isListening = status == 'listening';
+          _listeningStatus = status;
         });
       },
       onError: (error) {
         print('Speech error: $error');
         setState(() {
           _isListening = false;
+          _listeningStatus = "Error: $error";
         });
-        // Restart listening on error to ensure continuous listening
-        if (mounted) {
-          _startListening();
-        }
       },
     );
-    if (available && mounted) {
+    if (available) {
       _startListening();
     }
   }
 
-  // Start listening for "Hi Hessah"
+  // Start listening for "hi hessah"
   void _startListening() {
     if (!_isListening) {
       _speech.listen(
@@ -128,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       setState(() {
         _isListening = true;
+        _listeningStatus = "Listening...";
       });
     }
   }
@@ -138,49 +93,57 @@ class _HomeScreenState extends State<HomeScreen> {
       _speech.stop();
       setState(() {
         _isListening = false;
+        _listeningStatus = "Tap to start listening";
       });
     }
   }
 
-  // Schedule the welcome message
+  // Schedule the welcome message to appear after 1 second and disappear after 2 seconds
   void _scheduleWelcomeMessage() async {
     final hiveHelper = getIt.get<HiveHelper>();
-    final user = await hiveHelper.getCurrentUser();
-    final username = user?.username ?? 'User';
+    final user = await hiveHelper.getCurrentUser(); // Returns Future<UserModel?>
+    final username = user?.username ?? 'User'; // Adjust 'username' to match UserModel field
 
-    print('Scheduling message for username: $username');
+    print('Scheduling message for username: $username'); // Debug print
+
+    // Delay 1 second before showing the message
     Timer(Duration(seconds: 1), () {
       if (mounted) {
-        print('Attempting to show message overlay');
+        print('Attempting to show message overlay'); // Debug print
         _showMessageOverlay(username);
       }
     });
+
+    // Remove message after 2 more seconds (total 3 seconds from init)
     Timer(Duration(seconds: 3), () {
-      print('Removing message overlay');
+      print('Removing message overlay'); // Debug print
       _overlayEntry?.remove();
       _overlayEntry = null;
     });
   }
 
-  // Show overlay message
+  // Show overlay message to the left of the FAB with improved styling
   void _showMessageOverlay(String username) {
     _overlayEntry?.remove();
     final overlay = Overlay.of(context);
     final renderBox = _fabKey.currentContext?.findRenderObject() as RenderBox?;
+    print('RenderBox attached: ${renderBox?.attached}'); // Debug print
 
     if (renderBox == null || !renderBox.attached) {
-      print('RenderBox is null or not attached, skipping overlay');
+      print('RenderBox is null or not attached, skipping overlay'); // Debug print
       return;
     }
 
     final offset = renderBox.localToGlobal(Offset.zero);
-    final fabSize = 56.0;
+    final fabSize = 56.0; // Default FAB size
     final message = "Hey $username, ask me anything";
+
+    print('Inserting overlay at offset: $offset'); // Debug print
 
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        left: offset.dx - 220 > 0 ? offset.dx - 220 : 0,
-        top: offset.dy - (fabSize / 2),
+        left: offset.dx - 220 > 0 ? offset.dx - 220 : 0, // Left of FAB with margin, clamp to 0
+        top: offset.dy - (fabSize / 2), // Align top with FAB center
         child: CustomPaint(
           painter: BubbleTailPainter(),
           child: AnimatedOpacity(
@@ -216,10 +179,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     overlay.insert(_overlayEntry!);
-    print('Overlay inserted successfully');
+    print('Overlay inserted successfully'); // Debug print
   }
 
-  // Navigate to chatbot
+  // Async function to handle navigation with username
   Future<void> _openChatbot() async {
     final hiveHelper = getIt.get<HiveHelper>();
     final user = await hiveHelper.getCurrentUser();
@@ -228,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Home(username: username), // Ensure Home accepts username
+          builder: (context) => Home(username: username),
         ),
       );
     }
@@ -240,7 +203,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _overlayEntry = null;
     _stopListening();
     _speech.cancel();
-    widget.searchController.dispose();
     super.dispose();
   }
 
@@ -248,15 +210,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        key: _fabKey,
-        heroTag: 'homeScreenFAB',
+        key: _fabKey, // Assign the key to the FAB
+        heroTag: 'homeScreenFAB', // Unique hero tag
         onPressed: _openChatbot,
         backgroundColor: AppColors.primaryLight,
         child: Stack(
           alignment: Alignment.center,
           children: [
             Image.asset(
-              'assets/images/icon.png',
+              'assets/images/icon.png', // Replace with your logo asset
               width: 40,
               height: 40,
               fit: BoxFit.contain,
@@ -320,7 +282,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         : Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                // Removed _listeningStatus text
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    _listeningStatus,
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ),
               ],
             ),
           );
@@ -330,15 +298,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// Custom painter for the bubble tail
+// Custom painter for the bubble tail pointing to the FAB
 class BubbleTailPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..color = Colors.white;
     final path = Path();
-    path.moveTo(0, size.height / 2);
-    path.lineTo(10, size.height / 2 - 5);
-    path.lineTo(20, size.height / 2);
+    path.moveTo(0, size.height / 2); // Start at center left
+    path.lineTo(10, size.height / 2 - 5); // Top of tail
+    path.lineTo(20, size.height / 2); // Bottom of tail
     path.close();
     canvas.drawPath(path, paint);
   }
