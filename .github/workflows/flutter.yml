@@ -22,35 +22,40 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Flutter Version 3.29.3
+      - name: Install Flutter 3.29.3
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.29.3'
 
-      - name: Install yq to edit YAML
-        run: sudo apt-get install -y yq
-
       - name: Auto-increment version in pubspec.yaml
         id: versioning
         run: |
-          # Get current version
-          current_version=$(yq '.version' pubspec.yaml)
-          base_version=$(echo $current_version | cut -d+ -f1)
-          build_number=$(echo $current_version | cut -d+ -f2)
+          current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+
+          if [[ "$current_version" == *"+"* ]]; then
+            base_version="${current_version%%+*}"
+            build_number="${current_version##*+}"
+          else
+            base_version="$current_version"
+            build_number=0
+          fi
+
           new_build_number=$((build_number + 1))
-          new_version="$base_version+$new_build_number"
-          yq e -i ".version = \"$new_version\"" pubspec.yaml
+          new_version="${base_version}+${new_build_number}"
+
+          sed -i "s/^version:.*/version: $new_version/" pubspec.yaml
+
           echo "New version: $new_version"
           echo "version=$new_version" >> $GITHUB_OUTPUT
 
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build APK with updated version
+      - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: 7essa-apk-${{ steps.versioning.outputs.version }}
+          name: 7essa-apk
           path: build/app/outputs/flutter-apk/app-release.apk
