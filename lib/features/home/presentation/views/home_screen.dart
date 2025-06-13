@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!_isListening) {
       _speech.listen(
         onResult: (result) {
-          if (result.recognizedWords.toLowerCase().contains('hi hessah')) {
+          if (result.recognizedWords.toLowerCase().contains('hi chat')) {
             _stopListening();
             _openChatbot();
           }
