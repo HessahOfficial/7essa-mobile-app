@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/utils/show_snack_bar.dart';
+import 'package:hessa/features/auth/data/models/refresh_token_request.dart';
+import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/favourite/data/models/get_all_favourites_request.dart';
 import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.dart';
 import 'package:hessa/features/favourite/presentation/views/widgets/custom_delete_popup.dart';
@@ -24,12 +26,20 @@ class _SaveedPropertiesScreenState extends State<SaveedPropertiesScreen> {
 
   @override
   void initState() {
+    super.initState();
+
+    final tokens = getIt.get<HiveHelper>().token;
+    context.read<AuthBloc>().add(
+      RefreshRokenEvent(
+        request: RefreshTokenRequest(refreshToken: tokens!.refreshToken!),
+      ),
+    );
+
     context.read<PropertyBloc>().add(
       GetAllFavouritesEvent(
         request: GetAllFavouritesRequest(userId: currentUser!.id!),
       ),
     );
-    super.initState();
   }
 
   @override
@@ -65,8 +75,6 @@ class _SaveedPropertiesScreenState extends State<SaveedPropertiesScreen> {
             builder: (bccontext, state) {
               bool deleteMode =
                   context.read<FavouriteCubit>().selectedIndices.isNotEmpty;
-              print(context.read<FavouriteCubit>().selectedIndices);
-              print(deleteMode);
               if (deleteMode) {
                 return FloatingActionButton(
                   backgroundColor: Colors.red,
@@ -96,7 +104,6 @@ class _SaveedPropertiesScreenState extends State<SaveedPropertiesScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-
           body:
               state is GetAllFavouritesSuccess ||
                       state is DeleteFavouritesSuccess

@@ -62,7 +62,7 @@
   "hello": "مرحبا!",
   "search": "بحث...",
   "bestForYou": "الأفضل لك",
-  "developers": "المطورين",
+  "partners": "الشركاء",
   "newAdded": "مضاف حديثا",
   "bestInvest": "أفضل استثمار",
   "restOfProperties": "عقارات اخرى",
@@ -93,8 +93,11 @@
   "emptyFavourites": "قم باضافة بعض العقارات المفضلة.",
   "forgotPasswordResponse": "تم إرسال رسالة إعادة تعيين كلمة المرور، يرجى التحقق من صندوق الوارد!",
   "addToFavouritesResponse": "تم حفظ العقار بنجاح!",
-  "deleteSinglePopupTextPart1": "انت على وشك ان تحذف العقارت  ",
+  "deleteSinglePopupTextPart1": "انت على وشك ان تحذف العقار  ",
   "deleteSinglePopupTextPart2" : "  من قائمة المحفوظات , هل انت متأكد من قرارك ؟ " ,
   "deleteOperationSuccess" : "تمت عملية الحذف بنجاح!",
-  "startInvestment": "ابدأ الاستثمار!"
+  "startInvestment": "ابدأ الاستثمار!",
+  "more": "المزيد",
+  "searchResults": "نتائج البحث:",
+  "userAvatarSuccessMessage": "تم تحديث الصورة الشخصية بنجاح!"
 }

@@ -68,5 +68,5 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Hessah-${{ steps.versioning.outputs.version }}
+          name: Hessah|حصة
           path: build/app/outputs/flutter-apk/app-release.apk

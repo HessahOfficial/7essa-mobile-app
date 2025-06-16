@@ -10,6 +10,8 @@ import 'package:hessa/features/home/data/models/add_to_favourites_response.dart'
 import 'package:hessa/features/home/data/models/get_all_properties_request.dart';
 import 'package:hessa/features/home/data/models/get_all_properties_response.dart';
 import 'package:hessa/features/home/data/repositories/property_service.dart';
+import 'package:hessa/features/property/data/models/get_property_request.dart';
+import 'package:hessa/features/property/data/models/get_property_response.dart';
 import 'package:meta/meta.dart';
 
 part 'property_event.dart';
@@ -67,6 +69,19 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         },
         (data) {
           emit(DeleteFavouritesSuccess(response: data));
+        },
+      );
+    });
+
+    on<GetPropertyEvent>((event, emit) async {
+      emit(GetPropertyLoading());
+      final response = await service.getProperty(request: event.request);
+      response.fold(
+        (failure) {
+          emit(GetPropertyFailure(message: failure.message));
+        },
+        (data) {
+          emit(GetPropertySuccess(response: data));
         },
       );
     });

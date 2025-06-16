@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/validator.dart';
 import 'package:hessa/core/widgets/custom_text_field.dart';
-import 'package:hessa/features/settings/presentation/managers/update_cubit.dart';
+import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
 import 'package:hessa/generated/l10n.dart';
 
 class ProfileForm extends StatelessWidget {
@@ -53,10 +54,10 @@ class ProfileForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UpdateCubit, UpdateState>(
+    return BlocConsumer<UserBloc, UserState>(
       listener: (context, state) {},
       builder: (context, state) {
-        bool isUpdate = context.read<UpdateCubit>().isUpdate;
+        bool isUpdate = context.read<UserBloc>().isUpdate;
 
         return Form(
           child: Column(

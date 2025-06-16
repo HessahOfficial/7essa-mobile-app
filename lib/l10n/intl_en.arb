@@ -62,7 +62,7 @@
   "hello": "Hello!", 
   "search": "Search...",
   "bestForYou": "Best For You",
-  "developers": "Developers",
+  "partners": "Partners",
   "newAdded": "New Added",
   "bestInvest": "Best Invest",
   "restOfProperties": "Rest Of Properties",
@@ -96,5 +96,8 @@
   "deleteSinglePopupTextPart1": "You are about to delete the property ",
   "deleteSinglePopupTextPart2" : " from the savings list, are you sure about your decision ?", 
   "deleteOperationSuccess" : "Delete operation is done successfully!",
-  "startInvestment": "Start Investment!"
+  "startInvestment": "Start Investment!",
+  "more": "More",
+  "searchResults": "Search Results:",
+  "userAvatarSuccessMessage": "User avatar updated successfully!"
 }

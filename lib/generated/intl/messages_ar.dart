@@ -55,14 +55,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "تمت عملية الحذف بنجاح!",
     ),
     "deleteSinglePopupTextPart1": MessageLookupByLibrary.simpleMessage(
-      "انت على وشك ان تحذف العقارت  ",
+      "انت على وشك ان تحذف العقار  ",
     ),
     "deleteSinglePopupTextPart2": MessageLookupByLibrary.simpleMessage(
       "  من قائمة المحفوظات , هل انت متأكد من قرارك ؟ ",
     ),
     "deposit": MessageLookupByLibrary.simpleMessage("ايداع"),
     "depositFee": MessageLookupByLibrary.simpleMessage("ايداع"),
-    "developers": MessageLookupByLibrary.simpleMessage("المطورين"),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
     "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "emailPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -109,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
     "messagePlaceholder": MessageLookupByLibrary.simpleMessage("رسالة"),
+    "more": MessageLookupByLibrary.simpleMessage("المزيد"),
     "myInvestments": MessageLookupByLibrary.simpleMessage("استثماراتي"),
     "nationalIdPlaceholder": MessageLookupByLibrary.simpleMessage(
       "الرقم القومي",
@@ -120,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingTitle": MessageLookupByLibrary.simpleMessage(
       "استثمر في عقاراتك المفضلة",
     ),
+    "partners": MessageLookupByLibrary.simpleMessage("الشركاء"),
     "passowrdDialog": MessageLookupByLibrary.simpleMessage(
       "قم بادخال الكود المكون من 6 ارقام",
     ),
@@ -170,11 +171,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "العقارات المحفوظة",
     ),
     "search": MessageLookupByLibrary.simpleMessage("بحث..."),
+    "searchResults": MessageLookupByLibrary.simpleMessage("نتائج البحث:"),
     "sendButton": MessageLookupByLibrary.simpleMessage("ارسال"),
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
     "startInvestment": MessageLookupByLibrary.simpleMessage("ابدأ الاستثمار!"),
     "submit": MessageLookupByLibrary.simpleMessage("ارسال"),
+    "userAvatarSuccessMessage": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث الصورة الشخصية بنجاح!",
+    ),
     "usernamePlaceholder": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
     "verification": MessageLookupByLibrary.simpleMessage("التحقق"),
     "verificationEmailSent": MessageLookupByLibrary.simpleMessage(

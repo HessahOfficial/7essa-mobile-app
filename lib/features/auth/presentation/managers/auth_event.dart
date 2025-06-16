@@ -28,3 +28,9 @@ class VerifyEmailEvent extends AuthEvent {
 }
 
 class LogoutEvent extends AuthEvent {}
+
+class RefreshRokenEvent extends AuthEvent {
+  final RefreshTokenRequest request;
+
+  RefreshRokenEvent({required this.request});
+}
