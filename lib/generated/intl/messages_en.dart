@@ -64,7 +64,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "deposit": MessageLookupByLibrary.simpleMessage("DEPOSIT"),
     "depositFee": MessageLookupByLibrary.simpleMessage("Deposit"),
-    "developers": MessageLookupByLibrary.simpleMessage("Developers"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
     "emailPlaceholder": MessageLookupByLibrary.simpleMessage("Email Address"),
@@ -111,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
     "messagePlaceholder": MessageLookupByLibrary.simpleMessage("Message"),
+    "more": MessageLookupByLibrary.simpleMessage("More"),
     "myInvestments": MessageLookupByLibrary.simpleMessage("My Investments"),
     "nationalIdPlaceholder": MessageLookupByLibrary.simpleMessage(
       "National ID",
@@ -122,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingTitle": MessageLookupByLibrary.simpleMessage(
       "Invest in your favourite properties",
     ),
+    "partners": MessageLookupByLibrary.simpleMessage("Partners"),
     "passowrdDialog": MessageLookupByLibrary.simpleMessage(
       "Enter 6-Digit Password",
     ),
@@ -172,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "savedProperties": MessageLookupByLibrary.simpleMessage("Saved Properties"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
+    "searchResults": MessageLookupByLibrary.simpleMessage("Search Results:"),
     "sendButton": MessageLookupByLibrary.simpleMessage("Send"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
@@ -179,6 +181,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Start Investment!",
     ),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "userAvatarSuccessMessage": MessageLookupByLibrary.simpleMessage(
+      "User avatar updated successfully!",
+    ),
     "usernamePlaceholder": MessageLookupByLibrary.simpleMessage("Username"),
     "verification": MessageLookupByLibrary.simpleMessage("Verification"),
     "verificationEmailSent": MessageLookupByLibrary.simpleMessage(

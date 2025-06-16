@@ -5,6 +5,7 @@ import 'package:hessa/core/utils/type_aliases.dart';
 import 'package:hessa/features/auth/presentation/views/forgot_password_screen.dart';
 import 'package:hessa/features/auth/presentation/views/login_screen.dart';
 import 'package:hessa/features/auth/presentation/views/register_screen.dart';
+import 'package:hessa/features/home/presentation/views/matched_property_screen.dart';
 import 'package:hessa/features/main/presentation/views/main_screen.dart';
 import 'package:hessa/features/notification/presentation/views/notifications_screen.dart';
 import 'package:hessa/features/property/presentation/views/gallery_screen.dart';
@@ -69,10 +70,14 @@ abstract class AppRouter {
         builder: (context, state) => PrivacyPolicyScreen(),
       ),
       GoRoute(
+        path: AppRoutes.matchedPropertyView,
+        builder: (context, state) => MatchedPropertyScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.propertyView,
         builder: (context, state) {
           final params = state.extra as Json;
-          return PropertyScreen(property: params["property"]);
+          return PropertyScreen(propertyId: params["propertyId"]);
         },
       ),
       GoRoute(

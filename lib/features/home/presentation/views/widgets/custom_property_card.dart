@@ -34,7 +34,7 @@ class CustomPropertyCard extends StatelessWidget {
         onTap:
             () => context.push(
               AppRoutes.propertyView,
-              extra: {"property": property},
+              extra: {"propertyId": property.id},
             ),
         child: Container(
           padding: const EdgeInsets.all(12),

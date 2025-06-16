@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hessa/features/settings/presentation/managers/cloudinary_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/widgets/custom_intent_icon.dart';
-import 'package:hessa/features/settings/presentation/managers/image_cubit.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AvatarBottomSheet extends StatelessWidget {
   const AvatarBottomSheet({super.key});
@@ -40,7 +41,9 @@ class AvatarBottomSheet extends StatelessWidget {
                   iconSize: iconSize,
                   titleStyle: style,
                   onTap: () {
-                    context.read<ImageCubit>().pickImage(ImageSource.camera);
+                    context.read<CloudinaryBloc>().pickImage(
+                      ImageSource.camera,
+                    );
                     context.pop();
                   },
                   icon: Icons.photo_camera,
@@ -50,7 +53,9 @@ class AvatarBottomSheet extends StatelessWidget {
                   iconSize: iconSize,
                   titleStyle: style,
                   onTap: () {
-                    context.read<ImageCubit>().pickImage(ImageSource.gallery);
+                    context.read<CloudinaryBloc>().pickImage(
+                      ImageSource.gallery,
+                    );
                     context.pop();
                   },
                   icon: Icons.photo,

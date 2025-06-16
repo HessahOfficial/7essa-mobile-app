@@ -52,7 +52,7 @@ class HotPropertiesTitle extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               child: CustomButton(
                 onPressed: () => context.push(AppRoutes.becomeInvestorView),
-                width: 100,
+                width: arabic ? 100 : 160,
                 height: 30,
                 text: S.of(context).becomeInvestor,
                 textColor: Colors.white,

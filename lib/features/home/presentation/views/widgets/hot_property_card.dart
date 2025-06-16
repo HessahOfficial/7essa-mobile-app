@@ -38,7 +38,7 @@ class HotPropertyCard extends StatelessWidget {
       onTap:
           () => context.push(
             AppRoutes.propertyView,
-            extra: {"property": property},
+            extra: {"propertyId": property.id},
           ),
       child: Container(
         width: screenWidth * 0.67,
