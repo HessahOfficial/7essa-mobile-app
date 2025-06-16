@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hessa/generated/l10n.dart';
 
 import 'package:hessa/core/themes/dark_theme.dart';
 import 'package:hessa/features/auth/data/models/token_model.dart';
@@ -14,16 +16,14 @@ import 'package:hessa/features/main/presentation/managers/screen_cubit.dart';
 import 'package:hessa/features/onboarding/presentation/managers/launch_cubit.dart';
 import 'package:hessa/features/property/presentation/managers/location_cubit.dart';
 import 'package:hessa/features/property/presentation/managers/slider_cubit.dart';
+import 'package:hessa/features/settings/data/repositories/cloudinary_service.dart';
 import 'package:hessa/features/settings/data/repositories/user_service.dart';
-import 'package:hessa/features/settings/presentation/managers/image_cubit.dart';
+import 'package:hessa/features/settings/presentation/managers/cloudinary_bloc.dart';
 import 'package:hessa/features/settings/presentation/managers/settings_cubit.dart';
-import 'package:hessa/features/settings/presentation/managers/update_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
 import 'package:hessa/features/wallet/data/repositories/wallet_service.dart';
 import 'package:hessa/features/wallet/presentation/managers/transaction_cubit.dart';
 import 'package:hessa/features/wallet/presentation/managers/wallet_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hessa/generated/l10n.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/features/auth/data/models/user_model.dart';
 import 'package:hessa/core/themes/light_theme.dart';
@@ -39,7 +39,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(TokenModelAdapter());
-  await getIt.get<HiveHelper>().initializeBoxes(); // Initialize Hive Boxes
+  await getIt.get<HiveHelper>().initializeBoxes();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -51,8 +51,6 @@ void main() async {
         BlocProvider<TransactionCubit>(create: (context) => TransactionCubit()),
         BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
         BlocProvider<ScreenCubit>(create: (context) => ScreenCubit()),
-        BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
-        BlocProvider<UpdateCubit>(create: (context) => UpdateCubit()),
         BlocProvider<LaunchCubit>(create: (context) => LaunchCubit()),
         BlocProvider<FavouriteCubit>(create: (context) => FavouriteCubit()),
         BlocProvider<SliderCubit>(create: (context) => SliderCubit()),
@@ -69,6 +67,11 @@ void main() async {
         ),
         BlocProvider<UserBloc>(
           create: (context) => UserBloc(service: getIt.get<UserService>()),
+        ),
+        BlocProvider<CloudinaryBloc>(
+          create:
+              (context) =>
+                  CloudinaryBloc(service: getIt.get<CloudinaryService>()),
         ),
       ],
 

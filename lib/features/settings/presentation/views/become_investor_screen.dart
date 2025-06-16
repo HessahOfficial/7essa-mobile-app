@@ -8,6 +8,8 @@ import "package:hessa/core/themes/colors/app_colors.dart";
 import "package:hessa/core/utils/service_locator.dart";
 import "package:hessa/core/utils/show_snack_bar.dart";
 import "package:hessa/core/widgets/custom_button.dart";
+import "package:hessa/features/auth/data/models/refresh_token_request.dart";
+import "package:hessa/features/auth/presentation/managers/auth_bloc.dart";
 import "package:hessa/features/settings/data/models/become_investor_request.dart";
 import "package:hessa/features/settings/presentation/managers/user_bloc.dart";
 import "package:hessa/features/settings/presentation/views/widgets/investor_form.dart";
@@ -32,6 +34,13 @@ class _BecomeInvestorScreenState extends State<BecomeInvestorScreen> {
   @override
   void initState() {
     super.initState();
+
+    final tokens = getIt.get<HiveHelper>().token;
+    context.read<AuthBloc>().add(
+      RefreshRokenEvent(
+        request: RefreshTokenRequest(refreshToken: tokens!.refreshToken!),
+      ),
+    );
 
     formKey = GlobalKey<FormState>();
 

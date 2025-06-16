@@ -10,9 +10,10 @@ import 'package:hessa/features/settings/data/models/become_investor_request.dart
 import 'package:hessa/features/settings/data/models/become_investor_response.dart';
 import 'package:hessa/features/settings/data/models/change_pin_request.dart';
 import 'package:hessa/features/settings/data/models/change_pin_response.dart';
-import 'package:hessa/features/settings/data/models/get_info_request.dart';
-import 'package:hessa/features/settings/data/models/get_info_response.dart';
+import 'package:hessa/features/settings/data/models/update_user_request.dart';
+import 'package:hessa/features/settings/data/models/update_user_response.dart';
 import 'package:hessa/features/settings/data/repositories/user_repository.dart';
+import 'package:path/path.dart';
 
 class UserService implements UserRepository {
   final DioHelper helper;
@@ -20,45 +21,12 @@ class UserService implements UserRepository {
   UserService({required this.helper});
 
   @override
-  Future<Either<Failure, GetInfoResponse>> getUserInfo({
-    required GetInfoRequest request,
-  }) async {
-    try {
-      final tokens = getIt.get<HiveHelper>().token;
-      final options = getIt.get<DioHelper>().getDioOptions(
-        accessToken: tokens!.accessToken!,
-      );
-      final data = await helper.get(
-        endpoint: Endpoints.getUserInfo.replaceAll(":userId", request.userId),
-        options: options,
-      );
-      final response = GetInfoResponse.fromJson(data["data"]["user"]);
-      final currentUser = getIt.get<HiveHelper>().currentUser;
-      currentUser!.email = response.email;
-      currentUser.username = response.username;
-      currentUser.avatar = response.avatar;
-      await getIt.get<HiveHelper>().storeCurrentUser(
-        tokens: tokens,
-        user: currentUser,
-      );
-      return right(response);
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioException(exception: e));
-      }
-      return left(ServerFailure(message: e.toString()));
-    }
-  }
-
-  @override
   Future<Either<Failure, ChangePinResponse>> changeUserPin({
     required ChangePinRequest request,
   }) async {
     try {
       final tokens = getIt.get<HiveHelper>().token;
-      final options = getIt.get<DioHelper>().getDioOptions(
-        accessToken: tokens!.accessToken!,
-      );
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
       final currentUser = getIt.get<HiveHelper>().currentUser;
       final data = await helper.post(
         endpoint: Endpoints.changeUserPin.replaceAll(
@@ -84,9 +52,7 @@ class UserService implements UserRepository {
   }) async {
     try {
       final tokens = getIt.get<HiveHelper>().token;
-      final options = getIt.get<DioHelper>().getDioOptions(
-        accessToken: tokens!.accessToken!,
-      );
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
       final currentUser = getIt.get<HiveHelper>().currentUser;
       final data = await helper.post(
         endpoint: Endpoints.becomeInvestorUser.replaceAll(
@@ -103,6 +69,39 @@ class UserService implements UserRepository {
       currentUser.nationalId = response.nationalId;
       currentUser.avatar = response.avatar;
       currentUser.phoneNumber = response.phoneNumber;
+      await getIt.get<HiveHelper>().storeCurrentUser(
+        tokens: tokens,
+        user: currentUser,
+      );
+      return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(exception: e));
+      }
+      return left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UpdateUserResponse>> updateUser({
+    required UpdateUserRequest request,
+  }) async {
+    try {
+      final tokens = getIt.get<HiveHelper>().token;
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
+      final currentUser = getIt.get<HiveHelper>().currentUser;
+      final data = await helper.patch(
+        endpoint: Endpoints.userInfo.replaceAll(":userId", currentUser!.id!),
+        options: options,
+        body: request.toJson(),
+      );
+      final response = UpdateUserResponse.fromJson(data["user"]);
+      currentUser.username = response.username ?? currentUser.username;
+      currentUser.firstName = response.firstname ?? currentUser.firstName;
+      currentUser.lastName = response.lastname ?? currentUser.lastName;
+      currentUser.fullName = response.fullname ?? currentUser.fullName;
+      currentUser.phoneNumber = response.phoneNumber ?? currentUser.phoneNumber;
+      currentUser.avatar = response.avatar ?? currentUser.avatar;
       await getIt.get<HiveHelper>().storeCurrentUser(
         tokens: tokens,
         user: currentUser,

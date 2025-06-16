@@ -20,7 +20,7 @@ class WalletService implements WalletRepository {
   }) async {
     try {
       final tokens = getIt.get<HiveHelper>().token;
-      final options = helper.getDioOptions(accessToken: tokens!.accessToken!);
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
       final currentUser = getIt.get<HiveHelper>().currentUser;
       final data = await helper.post(
         endpoint: Endpoints.showBalance.replaceAll(":userId", currentUser!.id!),

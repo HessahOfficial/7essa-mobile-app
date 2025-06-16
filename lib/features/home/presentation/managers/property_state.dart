@@ -60,3 +60,17 @@ class DeleteFavouritesFailure extends PropertyState {
 
   DeleteFavouritesFailure({required this.message});
 }
+
+class GetPropertyLoading extends PropertyState {}
+
+class GetPropertySuccess extends PropertyState {
+  final GetPropertyResponse response;
+
+  GetPropertySuccess({required this.response});
+}
+
+class GetPropertyFailure extends PropertyState {
+  final String message;
+
+  GetPropertyFailure({required this.message});
+}

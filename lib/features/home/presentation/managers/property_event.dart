@@ -26,3 +26,9 @@ class DeleteFavouritesEvent extends PropertyEvent {
 
   DeleteFavouritesEvent({required this.request});
 }
+
+class GetPropertyEvent extends PropertyEvent {
+  final GetPropertyRequest request;
+
+  GetPropertyEvent({required this.request});
+}

@@ -14,6 +14,8 @@ import 'package:hessa/features/home/data/models/add_to_favourites_response.dart'
 import 'package:hessa/features/home/data/models/get_all_properties_request.dart';
 import 'package:hessa/features/home/data/models/get_all_properties_response.dart';
 import 'package:hessa/features/home/data/repositories/property_repository.dart';
+import 'package:hessa/features/property/data/models/get_property_request.dart';
+import 'package:hessa/features/property/data/models/get_property_response.dart';
 
 class PropertyService implements PropertyRepository {
   final DioHelper helper;
@@ -26,9 +28,7 @@ class PropertyService implements PropertyRepository {
   }) async {
     try {
       final tokens = getIt.get<HiveHelper>().token;
-      final options = getIt.get<DioHelper>().getDioOptions(
-        accessToken: tokens!.accessToken!,
-      );
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
       final data = await helper.get(
         endpoint: Endpoints.getAllProperties,
         options: options,
@@ -51,9 +51,7 @@ class PropertyService implements PropertyRepository {
   }) async {
     try {
       final tokens = getIt.get<HiveHelper>().token;
-      final options = getIt.get<DioHelper>().getDioOptions(
-        accessToken: tokens!.accessToken!,
-      );
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
       final data = await helper.post(
         endpoint: Endpoints.addToFavourites
             .replaceAll(':userId', request.userId)
@@ -82,9 +80,7 @@ class PropertyService implements PropertyRepository {
   }) async {
     try {
       final tokens = getIt.get<HiveHelper>().token;
-      final options = getIt.get<DioHelper>().getDioOptions(
-        accessToken: tokens!.accessToken!,
-      );
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
       final data = await helper.get(
         endpoint: Endpoints.getAllFavourites.replaceAll(
           ':userId',
@@ -109,7 +105,7 @@ class PropertyService implements PropertyRepository {
     try {
       final tokens = getIt.get<HiveHelper>().token;
       final options = getIt.get<DioHelper>().getDioOptions(
-        accessToken: tokens!.accessToken!,
+        token: tokens!.accessToken!,
       );
       final currentUser = getIt.get<HiveHelper>().currentUser;
       final data = await helper.delete(
@@ -128,6 +124,30 @@ class PropertyService implements PropertyRepository {
         tokens: tokens,
       );
       final response = DeleteFavouritesResponse.fromJson(data['data']);
+      return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(exception: e));
+      }
+      return left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GetPropertyResponse>> getProperty({
+    required GetPropertyRequest request,
+  }) async {
+    try {
+      final tokens = getIt.get<HiveHelper>().token;
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
+      final data = await helper.get(
+        endpoint: Endpoints.getPropertyById.replaceAll(
+          ":id",
+          request.propertyId,
+        ),
+        options: options,
+      );
+      final response = GetPropertyResponse.fromJson(data["data"]);
       return right(response);
     } catch (e) {
       if (e is DioException) {

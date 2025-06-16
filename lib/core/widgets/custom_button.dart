@@ -13,14 +13,12 @@ class CustomButton extends StatelessWidget {
   final Color? textColor;
   final double? borderRadius;
   final FontWeight? fontWeight;
-  final bool preventKeyboardDismissal;
 
   const CustomButton({
     super.key,
     required this.width,
     required this.height,
     required this.text,
-    this.preventKeyboardDismissal = true,
     void Function()? this.onPressed,
     Color? this.backgroundColor,
     Color? this.textColor,

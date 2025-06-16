@@ -64,3 +64,17 @@ class VerifyEmailFailure extends AuthState {
 class LogoutLoading extends AuthState {}
 
 class LogoutSuccess extends AuthState {}
+
+class RefreshTokenLoading extends AuthState {}
+
+class RefreshTokenSuccess extends AuthState {
+  final RefreshTokenResponse response;
+
+  RefreshTokenSuccess({required this.response});
+}
+
+class RefreshTokenFailure extends AuthState {
+  final String message;
+
+  RefreshTokenFailure({required this.message});
+}

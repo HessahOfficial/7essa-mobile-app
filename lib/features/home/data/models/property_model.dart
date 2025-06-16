@@ -4,7 +4,6 @@ class PropertyModel {
   String? description;
   String? city;
   String? locationLink;
-  String? name;
   String? managementCompany;
   String? status;
   String? investmentDocs;
@@ -35,7 +34,6 @@ class PropertyModel {
     this.description,
     this.city,
     this.locationLink,
-    this.name,
     this.managementCompany,
     this.status,
     this.investmentDocs,

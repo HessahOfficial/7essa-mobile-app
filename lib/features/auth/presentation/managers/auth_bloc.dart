@@ -3,6 +3,8 @@ import 'package:hessa/features/auth/data/models/forgot_password_request.dart';
 import 'package:hessa/features/auth/data/models/forgot_password_response.dart';
 import 'package:hessa/features/auth/data/models/login_request.dart';
 import 'package:hessa/features/auth/data/models/login_response.dart';
+import 'package:hessa/features/auth/data/models/refresh_token_request.dart';
+import 'package:hessa/features/auth/data/models/refresh_token_response.dart';
 import 'package:hessa/features/auth/data/models/register_request.dart';
 import 'package:hessa/features/auth/data/models/register_response.dart';
 import 'package:hessa/features/auth/data/models/verify_email_request.dart';
@@ -35,12 +37,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final response = await service.login(request: event.request);
       response.fold(
         (failure) {
-          print(failure);
           emit(LoginFailure(message: failure.message));
         },
         (data) {
-          print(data);
-
           emit(LoginSuccess(response: data));
         },
       );
@@ -51,11 +50,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final response = await service.verifyEmail(request: event.request);
       response.fold(
         (failure) {
-          print(failure);
           emit(VerifyEmailFailure(message: failure.message));
         },
         (data) {
-          print(data);
           emit(VerifyEmailSuccess(response: data));
         },
       );
@@ -66,12 +63,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final response = await service.forgotPassword(request: event.request);
       response.fold(
         (failure) {
-          print(failure);
           emit(ForgotPasswordFailure(message: failure.message));
         },
         (data) {
-          print(data);
           emit(ForgotPasswordSuccess(response: data));
+        },
+      );
+    });
+
+    on<RefreshRokenEvent>((event, emit) async {
+      emit(RefreshTokenLoading());
+      final response = await service.refreshUserToken(request: event.request);
+      response.fold(
+        (failure) {
+          emit(RefreshTokenFailure(message: failure.message));
+        },
+        (data) {
+          emit(RefreshTokenSuccess(response: data));
         },
       );
     });
