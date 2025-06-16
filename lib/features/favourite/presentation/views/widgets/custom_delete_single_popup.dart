@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/features/favourite/data/models/delete_favourites_request.dart';
 import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.dart';
@@ -15,6 +17,8 @@ class CustomDeleteSinglePopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = getIt.get<HiveHelper>().isDark ?? false;
+
     return Dialog(
       child: Container(
         decoration: BoxDecoration(
@@ -39,6 +43,7 @@ class CustomDeleteSinglePopup extends StatelessWidget {
                     TextSpan(text: S.of(context).deleteSinglePopupTextPart2),
                   ],
                   style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
                     height: 1.5,
