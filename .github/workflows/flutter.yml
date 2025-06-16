@@ -57,7 +57,7 @@ jobs:
           git add pubspec.yaml
           git commit -m "ci: bump version to ${{ steps.versioning.outputs.version }}" || echo "No changes to commit"
           git push origin HEAD:develop --force
-      
+
 
       - name: Install Dependencies
         run: flutter pub get

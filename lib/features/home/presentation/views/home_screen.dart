@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context) => AlertDialog(
             title: Text('Microphone Permission'),
             content: Text(
-              'For better communication with the Hessah chatbot, please allow microphone access to enable voice commands like "Hi Hessah".',
+              'For better communication with the Hessah chatbot, please allow microphone access to enable voice commands like "Hi chat".',
             ),
             actions: [
               TextButton(
