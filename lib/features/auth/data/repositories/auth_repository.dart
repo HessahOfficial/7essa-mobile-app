@@ -4,6 +4,8 @@ import 'package:hessa/features/auth/data/models/forgot_password_request.dart';
 import 'package:hessa/features/auth/data/models/forgot_password_response.dart';
 import 'package:hessa/features/auth/data/models/login_request.dart';
 import 'package:hessa/features/auth/data/models/login_response.dart';
+import 'package:hessa/features/auth/data/models/refresh_token_request.dart';
+import 'package:hessa/features/auth/data/models/refresh_token_response.dart';
 import 'package:hessa/features/auth/data/models/register_request.dart';
 import 'package:hessa/features/auth/data/models/register_response.dart';
 import 'package:hessa/features/auth/data/models/verify_email_request.dart';
@@ -22,6 +24,10 @@ abstract class AuthRepository {
 
   Future<Either<Failure, ForgotPasswordResponse>> forgotPassword({
     required ForgotPasswordRequest request,
+  });
+
+  Future<Either<Failure, RefreshTokenResponse>> refreshUserToken({
+    required RefreshTokenRequest request,
   });
 
   void logout();

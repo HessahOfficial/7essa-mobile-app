@@ -5,6 +5,8 @@ import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/widgets/custom_button.dart';
+import 'package:hessa/features/auth/data/models/refresh_token_request.dart';
+import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/wallet/presentation/managers/transaction_cubit.dart';
 import 'package:hessa/features/wallet/presentation/managers/wallet_bloc.dart';
 import 'package:hessa/features/wallet/presentation/views/widgets/custom_transaction_list.dart';
@@ -24,6 +26,12 @@ class _WalletScreenState extends State<WalletScreen> {
   void initState() {
     super.initState();
     context.read<WalletBloc>().hidden = true;
+    final tokens = getIt.get<HiveHelper>().token;
+    context.read<AuthBloc>().add(
+      RefreshRokenEvent(
+        request: RefreshTokenRequest(refreshToken: tokens!.refreshToken!),
+      ),
+    );
   }
 
   @override

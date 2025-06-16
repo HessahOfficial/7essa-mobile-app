@@ -14,7 +14,6 @@ class TokenModel {
   TokenModel({this.accessToken, this.refreshToken});
 
   TokenModel.fromJson(Json json) {
-    print(json);
     accessToken = json['accessToken'];
     refreshToken = json['refreshToken'];
   }

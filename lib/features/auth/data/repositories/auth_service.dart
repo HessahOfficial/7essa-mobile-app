@@ -10,6 +10,8 @@ import 'package:hessa/features/auth/data/models/forgot_password_request.dart';
 import 'package:hessa/features/auth/data/models/forgot_password_response.dart';
 import 'package:hessa/features/auth/data/models/login_request.dart';
 import 'package:hessa/features/auth/data/models/login_response.dart';
+import 'package:hessa/features/auth/data/models/refresh_token_request.dart';
+import 'package:hessa/features/auth/data/models/refresh_token_response.dart';
 import 'package:hessa/features/auth/data/models/register_request.dart';
 import 'package:hessa/features/auth/data/models/register_response.dart';
 import 'package:hessa/features/auth/data/models/token_model.dart';
@@ -27,7 +29,6 @@ class AuthService extends AuthRepository {
     required RegisterRequest request,
   }) async {
     try {
-      print("request body: ${request.toJson()}");
       final data = await helper.post(
         endpoint: Endpoints.signUp,
         body: request.toJson(),
@@ -77,7 +78,6 @@ class AuthService extends AuthRepository {
       );
       return right(response);
     } catch (e) {
-      print(e);
       if (e is DioException) {
         return left(ServerFailure.fromDioException(exception: e));
       }
@@ -101,6 +101,39 @@ class AuthService extends AuthRepository {
         body: request.toJson(),
       );
       final response = ForgotPasswordResponse.fromJson(data);
+      return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(exception: e));
+      }
+      return left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, RefreshTokenResponse>> refreshUserToken({
+    required RefreshTokenRequest request,
+  }) async {
+    try {
+      final options = helper.getDioOptions(token: request.refreshToken);
+      final data = await helper.get(
+        endpoint: Endpoints.refreshUserToken,
+        options: options,
+      );
+      final response = RefreshTokenResponse.fromJson(data["data"]);
+      final currentUser = getIt.get<HiveHelper>().currentUser;
+      currentUser!.username = response.user!.username;
+      currentUser!.firstName = response.user!.firstName;
+      currentUser!.lastName = response.user!.lastName;
+      currentUser!.fullName = response.user!.fullName;
+      currentUser!.phoneNumber = response.user!.phoneNumber;
+      currentUser!.email = response.user!.email;
+      currentUser!.isInvestor = response.user!.isInvestor;
+      currentUser!.id = response.user!.id;
+      await getIt.get<HiveHelper>().storeCurrentUser(
+        user: currentUser,
+        tokens: response.tokens,
+      );
       return right(response);
     } catch (e) {
       if (e is DioException) {

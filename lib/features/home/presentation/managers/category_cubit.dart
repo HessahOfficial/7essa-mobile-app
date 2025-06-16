@@ -21,11 +21,8 @@ class CategoryCubit extends Cubit<CategoryState> {
 
   void setProperties({required List<PropertyModel> allProperties}) {
     this.allProperties = allProperties;
-    print("all properties length: ${allProperties.length}");
     hotProperties = [allProperties[0], allProperties[1], allProperties[2]];
-    print("hot properties length: ${hotProperties.length}");
     restOfProperties = allProperties.sublist(3);
-    print("rest of properties length: ${hotProperties.length}");
     emit(CategoryFetch());
   }
 }

@@ -5,13 +5,16 @@ import 'package:hessa/features/home/presentation/views/widgets/best_for_you_sect
 import 'package:hessa/features/home/presentation/views/widgets/best_invest_section.dart';
 import 'package:hessa/features/home/presentation/views/widgets/developers_section.dart';
 import 'package:hessa/features/home/presentation/views/widgets/new_added_section.dart';
+import 'package:path/path.dart';
 
 class CustomCategoryList extends StatelessWidget {
-  const CustomCategoryList({super.key});
+  final BuildContext screenContext;
+
+  const CustomCategoryList({super.key, required this.screenContext});
 
   Widget getSelectedCategoryList({required int index}) {
     List<Widget> categorySections = [
-      BestForYouSection(),
+      BestForYouSection(screenContext: screenContext),
       DevelopersSection(),
       NewAddedSection(),
       BestInvestSection(),

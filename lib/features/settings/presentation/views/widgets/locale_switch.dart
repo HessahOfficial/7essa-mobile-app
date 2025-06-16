@@ -18,7 +18,7 @@ class _LocaleSwitchState extends State<LocaleSwitch> {
 
   @override
   void initState() {
-    _toggled = getIt.get<HiveHelper>().locale == "ar";
+    _toggled = getIt.get<HiveHelper>().locale != "en";
     super.initState();
   }
 

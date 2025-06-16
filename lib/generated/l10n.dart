@@ -530,9 +530,9 @@ class S {
     return Intl.message('Best For You', name: 'bestForYou', desc: '', args: []);
   }
 
-  /// `Developers`
-  String get developers {
-    return Intl.message('Developers', name: 'developers', desc: '', args: []);
+  /// `Partners`
+  String get partners {
+    return Intl.message('Partners', name: 'partners', desc: '', args: []);
   }
 
   /// `New Added`
@@ -820,6 +820,31 @@ class S {
     return Intl.message(
       'Start Investment!',
       name: 'startInvestment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message('More', name: 'more', desc: '', args: []);
+  }
+
+  /// `Search Results:`
+  String get searchResults {
+    return Intl.message(
+      'Search Results:',
+      name: 'searchResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User avatar updated successfully!`
+  String get userAvatarSuccessMessage {
+    return Intl.message(
+      'User avatar updated successfully!',
+      name: 'userAvatarSuccessMessage',
       desc: '',
       args: [],
     );

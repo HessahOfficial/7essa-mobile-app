@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/core/utils/verify_token.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,11 +28,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    super.initState();
+
     Future.delayed(Duration(seconds: 5), () {
       final currentUser = getIt.get<HiveHelper>().currentUser;
+      final tokens = getIt.get<HiveHelper>().token;
       print("current user: $currentUser");
       if (currentUser != null) {
-        context.go(AppRoutes.mainView);
+        bool isExpired = verifyToken(accessToken: tokens!.accessToken!);
+        if (isExpired) {
+          context.go(AppRoutes.loginView);
+        } else {
+          context.go(AppRoutes.mainView);
+        }
       } else {
         bool isFirstLaunch = getIt.get<HiveHelper>().isFirstLaunch ?? false;
         if (!isFirstLaunch) {
@@ -41,6 +50,5 @@ class _SplashScreenState extends State<SplashScreen> {
         }
       }
     });
-    super.initState();
   }
 }

@@ -28,7 +28,7 @@ class CategoryTabsList extends StatelessWidget {
           CustomCategoryTab(
             index: 1,
             selectedIndex: selectedIndex,
-            text: S.of(context).developers,
+            text: S.of(context).partners,
             color: AppColors.developersColor,
             onTap:
                 () => context.read<CategoryCubit>().setSelectedIndex(index: 1),

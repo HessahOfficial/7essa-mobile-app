@@ -1,15 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/features/auth/data/models/user_model.dart';
 
 class CustomAvatar extends StatelessWidget {
-  final File? image;
-
-  const CustomAvatar({super.key, required this.image});
+  const CustomAvatar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +21,7 @@ class CustomAvatar extends StatelessWidget {
         // color: AppColors.accentColor,
         borderRadius: BorderRadius.circular(16),
       ),
-      child:
-          image == null
-              ? Image(
-                image: NetworkImage(currentUser.avatar!),
-                fit: BoxFit.cover,
-              )
-              : Image.file(image!, fit: BoxFit.cover),
+      child: Image(image: NetworkImage(currentUser.avatar!), fit: BoxFit.cover),
     );
   }
 }

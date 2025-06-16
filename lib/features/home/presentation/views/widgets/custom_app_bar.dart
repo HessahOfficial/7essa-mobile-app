@@ -9,6 +9,7 @@ import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/utils/show_snack_bar.dart';
 import 'package:hessa/features/auth/data/models/user_model.dart';
+import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
 import 'package:hessa/generated/l10n.dart';
 
@@ -24,9 +25,9 @@ class CustomAppBar extends StatefulWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserBloc, UserState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (bccontext, state) {
-        if (state is UserInfoFailure) {
+        if (state is RefreshTokenFailure) {
           showSnackBar(
             context: widget.screenContext,
             message: state.message,
