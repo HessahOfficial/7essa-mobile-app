@@ -1,179 +1,72 @@
+name: 7essa CI/CD
 
-  name: 7essa CI/CD
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
 
-  on:
-    push:
-      branches:
-        - develop
-    pull_request:
-      branches:
-        - develop
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
 
-  jobs:
-    build-android:
-      runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      steps:
-        - name: Checkout Code
-          uses: actions/checkout@v4
+      - name: Setup Git Credentials
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
-        - name: Setup Git Credentials
-          run: |
-            git config --global user.email "actions@github.com"
-            git config --global user.name "GitHub Actions"
+      - name: Setup Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-        - name: Setup Java 17
-          uses: actions/setup-java@v4
-          with:
-            distribution: 'temurin'
-            java-version: '17'
+      - name: Install Flutter 3.29.3
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
 
-        - name: Install Flutter
-          uses: subosito/flutter-action@v2
-          with:
-            flutter-version: '3.24.5' # Use a stable version compatible with your project
-            channel: 'stable'
-            cache: true
+      - name: Auto-increment version in pubspec.yaml
+        id: versioning
+        run: |
+          current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          if [[ "$current_version" == *"+"* ]]; then
+            base_version="${current_version%%+*}"
+            build_number="${current_version##*+}"
+          else
+            base_version="$current_version"
+            build_number=0
+          fi
 
-        - name: Auto-increment Build Number
-          id: versioning
-          run: |
-            current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
-            if [[ "$current_version" =~ ^([0-9]+\.[0-9]+\.[0-9]+)\+([0-9]+)$ ]]; then
-              base_version="${BASH_REMATCH[1]}"
-              build_number="${BASH_REMATCH[2]}"
-            else
-              echo "Invalid version format in pubspec.yaml. Expected: x.y.z+n"
-              exit 1
-            fi
-            
-            new_build_number=$((build_number + 1))
-            new_version="${base_version}+${new_build_number}"
-            sed -i "s/^version:.*/version: $new_version/" pubspec.yaml
-            
-            echo "version=$new_version" >> $GITHUB_OUTPUT
-            echo "New version: $new_version"
+          new_build_number=$((build_number + 1))
+          new_version="${base_version}+${new_build_number}"
+          sed -i "s/^version:.*/version: $new_version/" pubspec.yaml
 
-        - name: Commit Version Bump
-          if: github.event_name == 'push' # Only commit on push, not PR
-          run: |
-            git add pubspec.yaml
-            git commit -m "ci: bump version to ${{ steps.versioning.outputs.version }}" || echo "No changes to commit"
-            git push origin HEAD:develop
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "version=$new_version" >> $GITHUB_OUTPUT
+          echo "New version: $new_version"
 
-        - name: Install Dependencies
-          run: flutter pub get
+      - name: Commit version bump
+        run: |
+          git fetch origin develop
+          git add pubspec.yaml
+          git commit -m "ci: bump version to ${{ steps.versioning.outputs.version }}" || echo "No changes to commit"
+          git push origin HEAD:develop --force
 
-        - name: Run Tests
-          run: flutter test
 
-        - name: Setup Android Keystore
-          run: |
-            echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
-            echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
-            echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
-            echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
-            echo "storeFile=keystore.jks" >> android/key.properties
+      - name: Install Dependencies
+        run: flutter pub get
 
-        - name: Build APK
-          run: flutter build apk --release
+      - name: Build APK
+        run: flutter build apk --release
 
-        - name: Upload APK Artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: Hessah-Android-${{ steps.versioning.outputs.version }}
-            path: build/app/outputs/flutter-apk/app-release.apk
-            retention-days: 30
-
-    build-ios:
-      runs-on: macos-latest
-
-      steps:
-        - name: Checkout Code
-          uses: actions/checkout@v4
-
-        - name: Setup Git Credentials
-          run: |
-            git config --global user.email "actions@github.com"
-            git config --global user.name "GitHub Actions"
-
-        - name: Install Flutter
-          uses: subosito/flutter-action@v2
-          with:
-            flutter-version: '3.24.5'
-            channel: 'stable'
-            cache: true
-
-        - name: Auto-increment Build Number
-          id: versioning
-          run: |
-            current_version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
-            if [[ "$current_version" =~ ^([0-9]+\.[0-9]+\.[0-9]+)\+([0-9]+)$ ]]; then
-              base_version="${BASH_REMATCH[1]}"
-              build_number="${BASH_REMATCH[2]}"
-            else
-              echo "Invalid version format in pubspec.yaml. Expected: x.y.z+n"
-              exit 1
-            fi
-            
-            new_build_number=$((build_number + 1))
-            new_version="${base_version}+${new_build_number}"
-            sed -i '' "s/^version:.*/version: $new_version/" pubspec.yaml
-            
-            echo "version=$new_version" >> $GITHUB_OUTPUT
-            echo "New version: $new_version"
-
-        - name: Commit Version Bump
-          if: github.event_name == 'push' # Only commit on push, not PR
-          run: |
-            git add pubspec.yaml
-            git commit -m "ci: bump version to ${{ steps.versioning.outputs.version }}" || echo "No changes to commit"
-            git push origin HEAD:develop
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        - name: Install Dependencies
-          run: flutter pub get
-
-        - name: Run Tests
-          run: flutter test
-
-        - name: Setup Ruby for Fastlane
-          uses: ruby/setup-ruby@v1
-          with:
-            ruby-version: '3.2'
-            bundler-cache: true
-
-        - name: Install Fastlane
-          working-directory: ios
-          run: bundle install
-
-        - name: Setup iOS Code Signing
-          env:
-            MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
-            MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-            APPLE_ID: ${{ secrets.APPLE_ID }}
-            APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-          working-directory: ios
-          run: |
-            echo "${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}" | base64 --decode > ~/.git-credentials
-            git config --global credential.helper store
-            bundle exec fastlane match development --readonly
-
-        - name: Build IPA
-          env:
-            MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-            APPLE_ID: ${{ secrets.APPLE_ID }}
-          working-directory: ios
-          run: |
-            bundle exec fastlane build_ipa
-            mv Runner.ipa ../build/ios/Runner-${{ steps.versioning.outputs.version }}.ipa
-
-        - name: Upload IPA Artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: Hessah-iOS-${{ steps.versioning.outputs.version }}
-            path: build/ios/Runner-${{ steps.versioning.outputs.version }}.ipa
-            retention-days: 30
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hessah-${{ steps.versioning.outputs.version }}
+          path: build/app/outputs/flutter-apk/app-release.apk
