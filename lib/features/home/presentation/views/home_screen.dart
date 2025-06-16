@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,11 +19,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  OverlayEntry? _overlayEntry;
-  final GlobalKey _fabKey = GlobalKey();
-  late stt.SpeechToText _speech;
-  bool _isListening = false;
-
   @override
   void initState() {
     super.initState();
@@ -55,21 +49,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-// Custom painter for the bubble tail
-class BubbleTailPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = Colors.white;
-    final path = Path();
-    path.moveTo(0, size.height / 2);
-    path.lineTo(10, size.height / 2 - 5);
-    path.lineTo(20, size.height / 2);
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
