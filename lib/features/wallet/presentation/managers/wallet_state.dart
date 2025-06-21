@@ -7,6 +7,8 @@ class WalletInitial extends WalletState {}
 
 class InvisibleBalance extends WalletState {}
 
+class SelectPaymentOption extends WalletState {}
+
 class ShowBalanceLoading extends WalletState {}
 
 class ShowBalanceSuccess extends WalletState {

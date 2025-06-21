@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hessa/features/home/presentation/managers/search_bloc.dart';
+import 'package:hessa/features/investment/data/repositories/investment_service.dart';
+import 'package:hessa/features/investment/presentation/managers/investment_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hessa/generated/l10n.dart';
 
@@ -72,6 +75,15 @@ void main() async {
           create:
               (context) =>
                   CloudinaryBloc(service: getIt.get<CloudinaryService>()),
+        ),
+        BlocProvider<InvestmentBloc>(
+          create:
+              (context) =>
+                  InvestmentBloc(service: getIt.get<InvestmentService>()),
+        ),
+        BlocProvider<SearchBloc>(
+          create:
+              (context) => SearchBloc(service: getIt.get<PropertyService>()),
         ),
       ],
 

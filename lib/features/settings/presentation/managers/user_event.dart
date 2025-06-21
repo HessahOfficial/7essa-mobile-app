@@ -26,3 +26,9 @@ class UpdateAvatarEvent extends UserEvent {
 
   UpdateAvatarEvent({required this.request});
 }
+
+class GetAllPartnersEvent extends UserEvent {
+  final GetAllPartnersRequest request;
+
+  GetAllPartnersEvent({required this.request});
+}

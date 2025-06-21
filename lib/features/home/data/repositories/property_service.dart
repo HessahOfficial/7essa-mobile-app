@@ -32,6 +32,7 @@ class PropertyService implements PropertyRepository {
       final data = await helper.get(
         endpoint: Endpoints.getAllProperties,
         options: options,
+        params: request.toJson(),
       );
       final response = GetAllPropertiesResponse.fromJson(
         data["data"]["properties"],

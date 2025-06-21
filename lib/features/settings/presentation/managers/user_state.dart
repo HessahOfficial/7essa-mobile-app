@@ -62,3 +62,17 @@ class UpdateAvatarFailure extends UserState {
 
   UpdateAvatarFailure({required this.message});
 }
+
+class GetAllPartnersLoading extends UserState {}
+
+class GetAllPartnersSuccess extends UserState {
+  final GetAllPartnersResponse response;
+
+  GetAllPartnersSuccess({required this.response});
+}
+
+class GetAllPartnersFailure extends UserState {
+  final String message;
+
+  GetAllPartnersFailure({required this.message});
+}

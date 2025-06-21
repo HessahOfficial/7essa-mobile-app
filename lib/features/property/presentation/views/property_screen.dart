@@ -80,6 +80,7 @@ class _PropertyScreenState extends State<PropertyScreen> {
                     ),
                   ),
                   body: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -87,7 +88,10 @@ class _PropertyScreenState extends State<PropertyScreen> {
                           images:
                               state.response.property!.images!.cast<String>(),
                         ),
-                        PropertyDetails(property: state.response.property!),
+                        PropertyDetails(
+                          property: state.response.property!,
+                          screenContext: context,
+                        ),
                       ],
                     ),
                   ),

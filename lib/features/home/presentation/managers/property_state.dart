@@ -74,3 +74,31 @@ class GetPropertyFailure extends PropertyState {
 
   GetPropertyFailure({required this.message});
 }
+
+class GetNewAddedPropertiesLoading extends PropertyState {}
+
+class GetNewAddedPropertiesSuccess extends PropertyState {
+  final GetAllPropertiesResponse response;
+
+  GetNewAddedPropertiesSuccess({required this.response});
+}
+
+class GetNewAddedPropertiesFailure extends PropertyState {
+  final String message;
+
+  GetNewAddedPropertiesFailure({required this.message});
+}
+
+class GetBestInvestPropertiesLoading extends PropertyState {}
+
+class GetBestInvestPropertiesSuccess extends PropertyState {
+  final GetAllPropertiesResponse response;
+
+  GetBestInvestPropertiesSuccess({required this.response});
+}
+
+class GetBestInvestPropertiesFailure extends PropertyState {
+  final String message;
+
+  GetBestInvestPropertiesFailure({required this.message});
+}

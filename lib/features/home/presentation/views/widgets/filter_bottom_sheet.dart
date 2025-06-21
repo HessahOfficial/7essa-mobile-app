@@ -1,211 +1,280 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
-import 'package:hessa/features/home/data/models/filter_option_model.dart';
+import 'package:hessa/core/widgets/custom_button.dart';
+import 'package:hessa/features/home/data/models/get_all_properties_request.dart';
+import 'package:hessa/features/home/data/models/property_query_model.dart';
+import 'package:hessa/features/home/presentation/managers/search_bloc.dart';
+import 'package:hessa/features/home/presentation/views/widgets/custom_range_slider.dart';
+import 'package:hessa/features/home/presentation/views/widgets/custom_slider_list.dart';
+import 'package:hessa/features/home/presentation/views/widgets/custom_status_list.dart';
+import 'package:hessa/features/home/presentation/views/widgets/rooms_filter_form.dart';
 
 class FilterBottomSheet extends StatefulWidget {
-  final FilterOptions initialOptions;
-  final Function(FilterOptions) onApply;
+  final String? title;
 
-  const FilterBottomSheet({
-    super.key,
-    required this.initialOptions,
-    required this.onApply,
-  });
+  const FilterBottomSheet({super.key, this.title});
 
   @override
-  _FilterBottomSheetState createState() => _FilterBottomSheetState();
+  State<FilterBottomSheet> createState() => _FilterBottomSheetState();
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
-  late double _maxSize;
-  late double _minPrice;
-  late double _maxPrice;
+  double minAvailableShares = 1;
+  double maxAvailableShares = 400;
+  RangeValues availableSharesValues = RangeValues(1, 400);
+
+  double minPrice = 200000;
+  double maxPrice = 18000000;
+  RangeValues priceValues = RangeValues(200000, 18000000);
+
+  double minPricePerShare = 1000;
+  double maxPricePerShare = 500000;
+  RangeValues pricePerShareValues = RangeValues(1000, 500000);
+
+  double minRentalIncome = 2000;
+  double maxRentalIncome = 200000;
+  RangeValues rentalIncomeValues = RangeValues(2000, 200000);
+
+  double minArea = 50;
+  double maxArea = 1000;
+  RangeValues areaValues = RangeValues(50, 1000);
+
+  double minYearlyPayment = 24000;
+  double maxYearlyPayment = 1200000;
+  RangeValues yearlyPaymentValues = RangeValues(24000, 1200000);
+
+  bool? isRented = false;
+
+  final roomsController = TextEditingController();
+  final bedsController = TextEditingController();
+  final kitchensController = TextEditingController();
+  final bathsController = TextEditingController();
+
+  final roomsFocusNode = FocusNode();
+  final bathsFocusNode = FocusNode();
+  final bedsFocusNode = FocusNode();
+  final kitchensFocusNode = FocusNode();
+
+  bool roomsTouched = false;
+  bool bedsTouched = false;
+  bool kitchensTouched = false;
+  bool bathsTouched = false;
+
+  late GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    _maxSize = widget.initialOptions.maxSize;
-    _minPrice = widget.initialOptions.minPrice;
-    _maxPrice = widget.initialOptions.maxPrice;
+
+    roomsFocusNode.addListener(() {
+      if (roomsFocusNode.hasFocus) {
+        setState(() {
+          roomsTouched = true;
+        });
+      }
+    });
+
+    kitchensFocusNode.addListener(() {
+      if (kitchensFocusNode.hasFocus) {
+        setState(() {
+          kitchensTouched = true;
+        });
+      }
+    });
+
+    bathsFocusNode.addListener(() {
+      if (bathsFocusNode.hasFocus) {
+        setState(() {
+          bathsTouched = true;
+        });
+      }
+    });
+
+    bedsFocusNode.addListener(() {
+      if (bedsFocusNode.hasFocus) {
+        setState(() {
+          bedsTouched = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    roomsFocusNode.dispose();
+    bedsFocusNode.dispose();
+    kitchensFocusNode.dispose();
+    bathsFocusNode.dispose();
+
+    roomsController.dispose();
+    bedsController.dispose();
+    kitchensController.dispose();
+    bathsController.dispose();
+
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(25),
-          topRight: Radius.circular(25),
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    PropertyQueryModel query = context.read<SearchBloc>().initialQuery;
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          vertical: 40,
+          horizontal: screenWidth * 0.06,
         ),
-      ),
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Container(
-              width: 40,
-              height: 4,
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                color: AppColors.gray,
-                borderRadius: BorderRadius.circular(25),
-              ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 20,
+          children: [
+            CustomStatusList(),
+
+            RoomsFilterForm(
+              roomsController: roomsController,
+              bedsController: bedsController,
+              kitchensController: kitchensController,
+              bathsController: bathsController,
+              roomsFocusNode: roomsFocusNode,
+              bedsFocusNode: bedsFocusNode,
+              kitchensFocusNode: kitchensFocusNode,
+              bathsFocusNode: bathsFocusNode,
+              roomsTouched: roomsTouched,
+              kitchensTouched: kitchensTouched,
+              bathsTouched: bathsTouched,
+              bedsTouched: bedsTouched,
+              formKey: formKey,
             ),
-          ),
-          Text(
-            'Filter',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Property Size',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+
+            CustomSliderList(
+              minAvailableShares: minAvailableShares,
+              maxAvailableShares: maxAvailableShares,
+              minPrice: minPrice,
+              maxPrice: maxPrice,
+              minPricePerShare: minPricePerShare,
+              maxPricePerShare: maxPricePerShare,
+              minRentalIncome: minRentalIncome,
+              maxRentalIncome: maxRentalIncome,
+              minArea: minArea,
+              maxArea: maxArea,
+              minYearlyPayment: minYearlyPayment,
+              maxYearlyPayment: maxYearlyPayment,
+              availableSharesValues: availableSharesValues,
+              pricePerShareValues: pricePerShareValues,
+              rentalIncomeValues: rentalIncomeValues,
+              areaValues: areaValues,
+              yearlyPaymentValues: yearlyPaymentValues,
+              availableSharesOnchanged: (value) {
+                setState(() {
+                  availableSharesValues = value;
+                });
+              },
+              priceOnchanged: (value) {
+                setState(() {
+                  priceValues = value;
+                });
+              },
+              pricePerShareOnchanged: (value) {
+                setState(() {
+                  pricePerShareValues = value;
+                });
+              },
+              rentalIncomeOnchanged: (value) {
+                setState(() {
+                  rentalIncomeValues = value;
+                });
+              },
+              areaOnchanged: (value) {
+                setState(() {
+                  areaValues = value;
+                });
+              },
+              yealyPaymentOnchanged: (value) {
+                setState(() {
+                  yearlyPaymentValues = value;
+                });
+              },
+              priceValues: priceValues,
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Up to ${(_maxSize.round() / 1000).toStringAsFixed(1)}K sqft',
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-              ),
-            ],
-          ),
-          Slider(
-            value: _maxSize,
-            min: 0,
-            max: 5000,
-            divisions: 50,
-            activeColor: Theme.of(context).colorScheme.primary,
-            inactiveColor: Colors.grey[300],
-            onChanged: (value) {
-              setState(() {
-                _maxSize = value;
-              });
-            },
-          ),
-          const SizedBox(height: 16),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Property Price',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'LOW',
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-              ),
-              Text(
-                'HIGH',
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-              ),
-            ],
-          ),
-          RangeSlider(
-            values: RangeValues(_minPrice, _maxPrice),
-            min: 0,
-            max: 50000,
-            divisions: 50,
-            activeColor: Theme.of(context).colorScheme.primary,
-            inactiveColor: Colors.grey[300],
-            labels: RangeLabels(
-              '${(_minPrice.round() / 1000).toStringAsFixed(1)}K',
-              '${(_maxPrice.round() / 1000).toStringAsFixed(1)}K',
-            ),
-            onChanged: (RangeValues values) {
-              setState(() {
-                _minPrice = values.start;
-                _maxPrice = values.end;
-              });
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  '\$${_minPrice.round()}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  '\$${_maxPrice.round()}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    _maxSize = 5000;
-                    _minPrice = 0;
-                    _maxPrice = 50000;
-                  });
-                },
-                child: Text(
-                  'Reset',
-                  style: TextStyle(color: Colors.grey[600], fontSize: 16),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  widget.onApply(
-                    FilterOptions(
-                      maxSize: _maxSize,
-                      minPrice: _minPrice,
-                      maxPrice: _maxPrice,
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Checkbox(
+                      value: isRented,
+                      onChanged:
+                          (value) => setState(() {
+                            isRented = value;
+                          }),
                     ),
-                  );
-                  Navigator.of(context).pop();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    Text(
+                      "Rented",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-                child: Text(
-                  'Apply',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                CustomButton(
+                  onPressed: () {
+                    String? status = context.read<SearchBloc>().statusText;
+                    context.read<SearchBloc>().setStatus(index: -1);
+                    context.read<SearchBloc>().setQuery(
+                      query: PropertyQueryModel(
+                        minAvailableShares: availableSharesValues.start.toInt(),
+                        maxAvailableShares: availableSharesValues.end.toInt(),
+                        minPrice: priceValues.start,
+                        maxPrice: priceValues.end,
+                        minPricePerShare: pricePerShareValues.start,
+                        maxPricePerShare: pricePerShareValues.end,
+                        minRentalIncome: rentalIncomeValues.start,
+                        maxRentalIncome: rentalIncomeValues.end,
+                        minArea: areaValues.start,
+                        maxArea: areaValues.end,
+                        minYearlyPayment: yearlyPaymentValues.start,
+                        maxYearlyPayment: yearlyPaymentValues.end,
+                        numberOfRooms:
+                            roomsController.text.isEmpty
+                                ? null
+                                : int.parse(roomsController.text),
+                        numberOfBathrooms:
+                            bathsController.text.isEmpty
+                                ? null
+                                : int.parse(bathsController.text),
+                        numberOfbeds:
+                            bedsController.text.isEmpty
+                                ? null
+                                : int.parse(bedsController.text),
+                        numberOfKitchens:
+                            kitchensController.text.isEmpty
+                                ? null
+                                : int.parse(kitchensController.text),
+                        isRented: isRented,
+                        status: status,
+                        title: widget.title,
+                      ),
+                    );
+                    context.read<SearchBloc>().add(
+                      GetFilteredPropertiesEvent(
+                        request: GetAllPropertiesRequest(query: query),
+                      ),
+                    );
+                    context.pop();
+                  },
+                  width: 100,
+                  height: 30,
+                  text: "Apply",
+                  textColor: Colors.white,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

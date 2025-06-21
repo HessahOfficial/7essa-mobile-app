@@ -90,6 +90,10 @@ class CustomWalletCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         CustomWalletButton(
+                          onTap:
+                              () => context
+                                  .read<WalletBloc>()
+                                  .showDepositDialog(screenContext),
                           title: S.of(context).deposit,
                           icon: Icons.add_box,
                         ),

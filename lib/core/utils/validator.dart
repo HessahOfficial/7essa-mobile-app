@@ -61,6 +61,16 @@ class Validator {
     return message;
   }
 
+  String? validateAmount({required String amount}) {
+    String? message;
+    if (amount.isEmpty) {
+      message = "Amount field is required!";
+    } else if (int.parse(amount) <= 0) {
+      message = "The amount should be positive value!";
+    }
+    return message;
+  }
+
   String? validateMessage({required String message}) {
     String? anotherMessage;
     if (message.isEmpty) {

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/routes/app_routes.dart';
-import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/lang.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/utils/show_snack_bar.dart';
@@ -147,8 +146,6 @@ class _BestForYouSectionState extends State<BestForYouSection> {
                                     fontSize: 20,
                                     fontStyle: FontStyle.italic,
                                     fontWeight: FontWeight.bold,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ),
