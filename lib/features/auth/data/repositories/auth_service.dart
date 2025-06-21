@@ -123,13 +123,13 @@ class AuthService extends AuthRepository {
       final response = RefreshTokenResponse.fromJson(data["data"]);
       final currentUser = getIt.get<HiveHelper>().currentUser;
       currentUser!.username = response.user!.username;
-      currentUser!.firstName = response.user!.firstName;
-      currentUser!.lastName = response.user!.lastName;
-      currentUser!.fullName = response.user!.fullName;
-      currentUser!.phoneNumber = response.user!.phoneNumber;
-      currentUser!.email = response.user!.email;
-      currentUser!.isInvestor = response.user!.isInvestor;
-      currentUser!.id = response.user!.id;
+      currentUser.firstName = response.user!.firstName;
+      currentUser.lastName = response.user!.lastName;
+      currentUser.fullName = response.user!.fullName;
+      currentUser.phoneNumber = response.user!.phoneNumber;
+      currentUser.email = response.user!.email;
+      currentUser.isInvestor = response.user!.isInvestor;
+      currentUser.id = response.user!.id;
       await getIt.get<HiveHelper>().storeCurrentUser(
         user: currentUser,
         tokens: response.tokens,

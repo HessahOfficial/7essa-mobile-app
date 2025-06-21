@@ -32,3 +32,15 @@ class GetPropertyEvent extends PropertyEvent {
 
   GetPropertyEvent({required this.request});
 }
+
+class GetNewAddedPropertiesEvent extends PropertyEvent {
+  final GetAllPropertiesRequest request;
+
+  GetNewAddedPropertiesEvent({required this.request});
+}
+
+class GetBestInvestPropertiesEvent extends PropertyEvent {
+  final GetAllPropertiesRequest request;
+
+  GetBestInvestPropertiesEvent({required this.request});
+}

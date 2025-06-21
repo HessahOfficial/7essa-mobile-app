@@ -14,4 +14,6 @@ abstract class Endpoints {
   static const userInfo = "/users/:userId";
   static const changeUserPin = "/users/pin/:userId";
   static const becomeInvestorUser = "/users/investor/:userId";
+  static const getAllPartners = "/users/partners";
+  static const getAllUserInvestments = "/investments";
 }

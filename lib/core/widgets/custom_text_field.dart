@@ -29,6 +29,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final TextInputAction? inputAction;
   final bool fieldTocuhed;
+  final EdgeInsets? contentPadding;
 
   const CustomTextField({
     super.key,
@@ -54,6 +55,7 @@ class CustomTextField extends StatelessWidget {
     this.inputAction,
     this.focusNode,
     this.fieldTocuhed = false,
+    this.contentPadding,
   });
 
   @override
@@ -69,6 +71,7 @@ class CustomTextField extends StatelessWidget {
                 ? AutovalidateMode.onUserInteraction
                 : AutovalidateMode.disabled,
         decoration: InputDecoration(
+          contentPadding: contentPadding,
           errorMaxLines: 10,
           errorStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           border: OutlineInputBorder(

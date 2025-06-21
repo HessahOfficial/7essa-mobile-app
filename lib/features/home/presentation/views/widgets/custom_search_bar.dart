@@ -3,31 +3,26 @@ import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/themes/light_theme.dart';
 import 'package:hessa/core/utils/service_locator.dart';
-import 'package:hessa/features/home/data/models/filter_option_model.dart';
 import 'package:hessa/features/home/presentation/views/widgets/filter_bottom_sheet.dart';
 import 'package:hessa/generated/l10n.dart';
 
-class CustomSearchBar extends StatelessWidget {
+class CustomSearchBar extends StatefulWidget {
   final TextEditingController searchController;
   final BuildContext screenContext;
+  final void Function(String) onChanged;
 
   const CustomSearchBar({
     super.key,
     required this.searchController,
     required this.screenContext,
+    required this.onChanged,
   });
 
-  showFilterSheet() {
-    showModalBottomSheet(
-      context: screenContext,
-      builder:
-          (context) => FilterBottomSheet(
-            initialOptions: FilterOptions(),
-            onApply: (value) {},
-          ),
-    );
-  }
+  @override
+  State<CustomSearchBar> createState() => _CustomSearchBarState();
+}
 
+class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
     bool isDark = getIt.get<HiveHelper>().isDark ?? false;
@@ -49,8 +44,9 @@ class CustomSearchBar extends StatelessWidget {
                   ),
                 ],
               ),
-              child: TextField(
-                controller: searchController,
+              child: TextFormField(
+                onChanged: widget.onChanged,
+                controller: widget.searchController,
                 decoration: InputDecoration(
                   hintText: S.of(context).search,
                   hintStyle: TextStyle(color: AppColors.gray),
@@ -70,24 +66,7 @@ class CustomSearchBar extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 10),
-        Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(color: Colors.black12, blurRadius: 6, spreadRadius: 1),
-            ],
-          ),
-          child: IconButton(
-            icon: Icon(Icons.tune, color: Colors.white, size: 24),
-            onPressed: showFilterSheet,
-          ),
-        ),
       ],
     );
-    ;
   }
 }

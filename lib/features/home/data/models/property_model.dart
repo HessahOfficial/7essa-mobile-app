@@ -1,3 +1,5 @@
+import 'package:hessa/core/utils/type_aliases.dart';
+
 class PropertyModel {
   String? id;
   String? title;
@@ -59,7 +61,7 @@ class PropertyModel {
     this.area,
   });
 
-  PropertyModel.fromJson(Map<String, dynamic> json) {
+  PropertyModel.fromJson(Json json) {
     id = json['_id'];
     title = json['title'];
     description = json['description'];
@@ -73,8 +75,14 @@ class PropertyModel {
     totalShares = json['totalShares'];
     availableShares = json['availableShares'];
     yearlyPayment = json['yearlyPayment'];
-    price = json['price'][0];
-    pricePerShare = json['pricePerShare'][0];
+    price =
+        (json['price'] is List && json['price'].isNotEmpty)
+            ? json['price'][0]
+            : null;
+    pricePerShare =
+        (json['pricePerShare'] is List && json['pricePerShare'].isNotEmpty)
+            ? json['pricePerShare'][0]
+            : null;
     benefits = json['benefits'];
     priceSold = json['priceSold'];
     isRented = json['isRented'];

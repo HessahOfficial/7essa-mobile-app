@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hessa/features/auth/data/models/user_model.dart';
+import 'package:hessa/features/home/data/models/get_all_partners_request.dart';
+import 'package:hessa/features/home/data/models/get_all_partners_response.dart';
 import 'package:hessa/features/settings/data/models/become_investor_request.dart';
 import 'package:hessa/features/settings/data/models/become_investor_response.dart';
 import 'package:hessa/features/settings/data/models/change_pin_request.dart';
@@ -18,6 +21,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final UserService service;
 
   bool isUpdate = false;
+
+  List<UserModel> partnres = [];
 
   void updateDetails({required bool isUpdate}) {
     this.isUpdate = isUpdate;
@@ -91,6 +96,22 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           print(data);
           isUpdate = false;
           emit(UpdateAvatarSuccess(response: data));
+        },
+      );
+    });
+
+    on<GetAllPartnersEvent>((event, emit) async {
+      emit(GetAllPartnersLoading());
+      final response = await service.getPartners(request: event.request);
+      response.fold(
+        (failure) {
+          print(failure);
+          emit(GetAllPartnersFailure(message: failure.message));
+        },
+        (data) {
+          print(data);
+          partnres = data.partners;
+          emit(GetAllPartnersSuccess(response: data));
         },
       );
     });

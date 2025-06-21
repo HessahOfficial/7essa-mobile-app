@@ -4,6 +4,7 @@ import 'package:hessa/core/helpers/dio_helper.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/features/auth/data/repositories/auth_service.dart';
 import 'package:hessa/features/home/data/repositories/property_service.dart';
+import 'package:hessa/features/investment/data/repositories/investment_service.dart';
 import 'package:hessa/features/settings/data/repositories/cloudinary_service.dart';
 import 'package:hessa/features/settings/data/repositories/user_service.dart';
 import 'package:hessa/features/wallet/data/repositories/wallet_service.dart';
@@ -35,4 +36,8 @@ void setupServices() {
   );
 
   getIt.registerSingleton(CloudinaryService(helper: getIt.get<DioHelper>()));
+
+  getIt.registerSingleton<InvestmentService>(
+    InvestmentService(helper: getIt.get<DioHelper>()),
+  );
 }

@@ -1,8 +1,6 @@
 import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/material.dart';
 import 'package:hessa/chat-bot/Messages.dart';
-import 'package:hessa/core/helpers/hive_helper.dart';
-import 'package:hessa/core/utils/service_locator.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,9 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Hessah Chatbot',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-      ),
+      theme: ThemeData(brightness: Brightness.dark),
       home: Home(username: 'User'),
     );
   }
@@ -44,7 +40,11 @@ class _HomeState extends State<Home> {
     // Add initial greeting message
     setState(() {
       addMessage(
-        Message(text: DialogText(text: ['Hi ${widget.username}, How can I help you?'])),
+        Message(
+          text: DialogText(
+            text: ['Hi ${widget.username}, How can I help you?'],
+          ),
+        ),
         false,
       );
     });
@@ -53,9 +53,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Hessah Chatbot'),
-      ),
+      appBar: AppBar(title: Text('Hessah Chatbot')),
       body: Container(
         child: Column(
           children: [
@@ -93,7 +91,11 @@ class _HomeState extends State<Home> {
     } else {
       setState(() {
         addMessage(Message(text: DialogText(text: [text])), true);
-        messages.add({'isTyping': true, 'isUserMessage': false, 'timestamp': DateTime.now()});
+        messages.add({
+          'isTyping': true,
+          'isUserMessage': false,
+          'timestamp': DateTime.now(),
+        });
       });
 
       DetectIntentResponse response = await dialogFlowtter.detectIntent(

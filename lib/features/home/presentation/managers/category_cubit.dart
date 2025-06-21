@@ -13,6 +13,8 @@ class CategoryCubit extends Cubit<CategoryState> {
   List<PropertyModel> allProperties = [];
   List<PropertyModel> hotProperties = [];
   List<PropertyModel> restOfProperties = [];
+  List<PropertyModel> newAddedProperties = [];
+  List<PropertyModel> bestInvestProperties = [];
 
   void setSelectedIndex({required int index}) {
     selectedIndex = index;
@@ -21,6 +23,10 @@ class CategoryCubit extends Cubit<CategoryState> {
 
   void setProperties({required List<PropertyModel> allProperties}) {
     this.allProperties = allProperties;
+    newAddedProperties = allProperties.reversed.toList();
+    List<PropertyModel> sortedList = allProperties;
+    sortedList.sort((a, b) => a.pricePerShare!.compareTo(b.pricePerShare!));
+    bestInvestProperties = sortedList.sublist(0, 3);
     hotProperties = [allProperties[0], allProperties[1], allProperties[2]];
     restOfProperties = allProperties.sublist(3);
     emit(CategoryFetch());

@@ -34,6 +34,32 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
       );
     });
 
+    on<GetNewAddedPropertiesEvent>((event, emit) async {
+      emit(GetNewAddedPropertiesLoading());
+      final response = await service.getAllProperties(request: event.request);
+      response.fold(
+        (failure) {
+          emit(GetNewAddedPropertiesFailure(message: failure.message));
+        },
+        (data) {
+          emit(GetNewAddedPropertiesSuccess(response: data));
+        },
+      );
+    });
+
+    on<GetBestInvestPropertiesEvent>((event, emit) async {
+      emit(GetBestInvestPropertiesLoading());
+      final response = await service.getAllProperties(request: event.request);
+      response.fold(
+        (failure) {
+          emit(GetBestInvestPropertiesFailure(message: failure.message));
+        },
+        (data) {
+          emit(GetBestInvestPropertiesSuccess(response: data));
+        },
+      );
+    });
+
     on<AddToFavouritesEvent>((event, emit) async {
       emit(AddToFavouritesLoading());
       final response = await service.addToFavourites(request: event.request);

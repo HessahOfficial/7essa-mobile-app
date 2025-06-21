@@ -7,6 +7,7 @@ class CustomInfoPopup extends StatelessWidget {
   final void Function()? onPressed;
   final double? width;
   final double? height;
+  final String? textButton;
 
   const CustomInfoPopup({
     super.key,
@@ -15,6 +16,7 @@ class CustomInfoPopup extends StatelessWidget {
     this.onPressed,
     this.width,
     this.height,
+    this.textButton,
   });
 
   @override
@@ -34,13 +36,17 @@ class CustomInfoPopup extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.info),
-            Text(message, textAlign: TextAlign.center),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
             onPressed != null
                 ? CustomButton(
                   width: 100,
                   height: 40,
                   onPressed: onPressed,
-                  text: "Send",
+                  text: textButton ?? "Send",
                   textColor: Colors.white,
                 )
                 : Container(),

@@ -6,6 +6,8 @@ import 'package:hessa/core/helpers/dio_helper.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/utils/endpoints.dart';
 import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hessa/features/home/data/models/get_all_partners_request.dart';
+import 'package:hessa/features/home/data/models/get_all_partners_response.dart';
 import 'package:hessa/features/settings/data/models/become_investor_request.dart';
 import 'package:hessa/features/settings/data/models/become_investor_response.dart';
 import 'package:hessa/features/settings/data/models/change_pin_request.dart';
@@ -95,7 +97,7 @@ class UserService implements UserRepository {
         options: options,
         body: request.toJson(),
       );
-      final response = UpdateUserResponse.fromJson(data["user"]);
+      final response = UpdateUserResponse.fromJson(data["data"]["user"]);
       currentUser.username = response.username ?? currentUser.username;
       currentUser.firstName = response.firstname ?? currentUser.firstName;
       currentUser.lastName = response.lastname ?? currentUser.lastName;
@@ -105,6 +107,29 @@ class UserService implements UserRepository {
       await getIt.get<HiveHelper>().storeCurrentUser(
         tokens: tokens,
         user: currentUser,
+      );
+      return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(exception: e));
+      }
+      return left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GetAllPartnersResponse>> getPartners({
+    required GetAllPartnersRequest request,
+  }) async {
+    try {
+      final tokens = getIt.get<HiveHelper>().token;
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
+      final data = await helper.get(
+        endpoint: Endpoints.getAllPartners,
+        options: options,
+      );
+      final response = GetAllPartnersResponse.fromJson(
+        data["data"]["partners"],
       );
       return right(response);
     } catch (e) {
