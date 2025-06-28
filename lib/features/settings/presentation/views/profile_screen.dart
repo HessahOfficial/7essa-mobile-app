@@ -51,12 +51,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   late GlobalKey<FormState> formKey;
 
-  UserModel currentUser = UserModel();
-
   @override
   void initState() {
     super.initState();
-    currentUser = getIt.get<HiveHelper>().currentUser!;
+    final currentUser = getIt.get<HiveHelper>().currentUser!;
+    firstnameController.text = currentUser.firstName ?? "";
+    lastnameController.text = currentUser.lastName ?? "";
+    fullnameController.text = currentUser.fullName ?? "";
+    usernameController.text = currentUser.username ?? "";
+    emailAddressController.text = currentUser.email ?? "";
+    phoneController.text = currentUser.phoneNumber ?? "";
     final tokens = getIt.get<HiveHelper>().token;
     context.read<AuthBloc>().add(
       RefreshRokenEvent(
@@ -65,13 +69,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
 
     formKey = GlobalKey<FormState>();
-
-    firstnameController.text = currentUser.firstName ?? "";
-    lastnameController.text = currentUser.lastName ?? "";
-    fullnameController.text = currentUser.fullName ?? "";
-    usernameController.text = currentUser.username ?? "";
-    emailAddressController.text = currentUser.email ?? "";
-    phoneController.text = currentUser.phoneNumber ?? "";
 
     firstnameFocusNode.addListener(() {
       if (firstnameFocusNode.hasFocus) {
@@ -153,130 +150,153 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: BlocConsumer<CloudinaryBloc, CloudinaryState>(
-        listener: (bccontext, state) {
-          if (state is ChangeImage) {
-            context.read<CloudinaryBloc>().add(
-              UplodImageEvent(
-                request: UploadImageRequest(
-                  imageFile: context.read<CloudinaryBloc>().image!,
-                ),
-              ),
-            );
-          } else if (state is UploadImageFailure) {
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is RefreshTokenFailure) {
             showSnackBar(context: context, message: state.message, type: 1);
-          } else if (state is UploadImageSuccess) {
-            context.read<UserBloc>().add(
-              UpdateAvatarEvent(
-                request: UpdateUserRequest(avatar: state.response.image_url),
-              ),
-            );
           }
         },
-        builder: (bccontext, state) {
-          bool isInvestor =
-              getIt.get<HiveHelper>().currentUser!.isInvestor ?? false;
-
-          return BlocConsumer<UserBloc, UserState>(
+        builder: (context, state) {
+          return BlocConsumer<CloudinaryBloc, CloudinaryState>(
             listener: (bccontext, state) {
-              if (state is ChangePinFailure) {
-                showSnackBar(context: context, message: state.message, type: 1);
-              } else if (state is ChangePinSuccess) {
-                showSnackBar(
-                  context: context,
-                  message: S.of(context).pinDialog,
-                  type: 0,
+              if (state is ChangeImage) {
+                context.read<CloudinaryBloc>().add(
+                  UploadImageEvent(
+                    request: UploadImageRequest(
+                      imageFile: context.read<CloudinaryBloc>().image!,
+                    ),
+                  ),
                 );
-              } else if (state is UpdateAvatarFailure) {
+              } else if (state is UploadImageFailure) {
                 showSnackBar(context: context, message: state.message, type: 1);
-              } else if (state is UpdateAvatarSuccess) {
-                showSnackBar(
-                  context: context,
-                  message: S.of(context).userAvatarSuccessMessage,
-                  type: 0,
+              } else if (state is UploadImageSuccess) {
+                context.read<UserBloc>().add(
+                  UpdateAvatarEvent(
+                    request: UpdateUserRequest(
+                      avatar: state.response.image_url,
+                    ),
+                  ),
                 );
               }
             },
             builder: (bccontext, state) {
-              bool isUpdate = context.read<UserBloc>().isUpdate;
+              bool isInvestor =
+                  getIt.get<HiveHelper>().currentUser!.isInvestor ?? false;
 
-              return SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 30,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              return BlocConsumer<UserBloc, UserState>(
+                listener: (bccontext, state) {
+                  if (state is ChangePinFailure) {
+                    showSnackBar(
+                      context: context,
+                      message: state.message,
+                      type: 1,
+                    );
+                  } else if (state is ChangePinSuccess) {
+                    showSnackBar(
+                      context: context,
+                      message: S.of(context).pinDialog,
+                      type: 0,
+                    );
+                  } else if (state is UpdateAvatarFailure) {
+                    showSnackBar(
+                      context: context,
+                      message: state.message,
+                      type: 1,
+                    );
+                  } else if (state is UpdateAvatarSuccess) {
+                    showSnackBar(
+                      context: context,
+                      message: S.of(context).userAvatarSuccessMessage,
+                      type: 0,
+                    );
+                  }
+                },
+                builder: (bccontext, state) {
+                  bool isUpdate = context.read<UserBloc>().isUpdate;
+
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.06,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 30,
                       children: [
-                        Stack(
-                          alignment: Alignment.bottomRight,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CustomAvatar(),
-                            InkWell(
-                              borderRadius: BorderRadius.circular(20),
-                              splashColor: AppColors.gray.withOpacity(0.1),
-                              onTap:
-                                  () => context
-                                      .read<CloudinaryBloc>()
-                                      .showAvatarBottomSheet(context: context),
-                              child: CircleAvatar(
-                                child: Icon(
-                                  Icons.camera_alt_rounded,
-                                  color: Colors.white,
-                                  size: 20,
+                            Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                CustomAvatar(),
+                                InkWell(
+                                  borderRadius: BorderRadius.circular(20),
+                                  splashColor: AppColors.gray.withOpacity(0.1),
+                                  onTap:
+                                      () => context
+                                          .read<CloudinaryBloc>()
+                                          .showAvatarBottomSheet(
+                                            context: context,
+                                          ),
+                                  child: CircleAvatar(
+                                    child: Icon(
+                                      Icons.camera_alt_rounded,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ],
                         ),
+                        ProfileForm(
+                          formKey: formKey,
+                          usernameController: usernameController,
+                          phoneController: phoneController,
+                          emailAddressController: emailAddressController,
+                          firstnameController: firstnameController,
+                          lastnameController: lastnameController,
+                          fullnameController: fullnameController,
+                          usernameFocusNode: usernameFocusNode,
+                          phoneFocusNode: phoneFocusNode,
+                          firstnameFocusNode: firstnameFocusNode,
+                          lastnameFocusNode: lastnameFocusNode,
+                          fullnameFocusNode: fullnameFocusNode,
+                          phoneTouched: phoneTouched,
+                          usernameTouched: usernameTouched,
+                          firstnameTouched: firstnameTouched,
+                          lastnameTouched: lastnameTouched,
+                          fullnameTouched: fullnameTouched,
+                          screenWidth: screenWidth,
+                        ),
+                        ChangePinItem(screenContext: context),
+                        EditProfileItem(
+                          onSwitch: () {
+                            if (isUpdate) {
+                              context.read<UserBloc>().add(
+                                UpdateUserEvent(
+                                  request: UpdateUserRequest(
+                                    firstname: firstnameController.text,
+                                    lastname: lastnameController.text,
+                                    fullname: fullnameController.text,
+                                    username: usernameController.text,
+                                    phoneNumber: phoneController.text,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              context.read<UserBloc>().updateDetails(
+                                isUpdate: true,
+                              );
+                            }
+                          },
+                        ),
+                        if (!isInvestor) BecomeInvestorButton(),
                       ],
                     ),
-                    ProfileForm(
-                      formKey: formKey,
-                      usernameController: usernameController,
-                      phoneController: phoneController,
-                      emailAddressController: emailAddressController,
-                      firstnameController: firstnameController,
-                      lastnameController: lastnameController,
-                      fullnameController: fullnameController,
-                      usernameFocusNode: usernameFocusNode,
-                      phoneFocusNode: phoneFocusNode,
-                      firstnameFocusNode: firstnameFocusNode,
-                      lastnameFocusNode: lastnameFocusNode,
-                      fullnameFocusNode: fullnameFocusNode,
-                      phoneTouched: phoneTouched,
-                      usernameTouched: usernameTouched,
-                      firstnameTouched: firstnameTouched,
-                      lastnameTouched: lastnameTouched,
-                      fullnameTouched: fullnameTouched,
-                      screenWidth: screenWidth,
-                    ),
-                    ChangePinItem(screenContext: context),
-                    EditProfileItem(
-                      onSwitch: () {
-                        if (isUpdate) {
-                          context.read<UserBloc>().add(
-                            UpdateUserEvent(
-                              request: UpdateUserRequest(
-                                firstname: firstnameController.text,
-                                lastname: lastnameController.text,
-                                fullname: fullnameController.text,
-                                username: usernameController.text,
-                                phoneNumber: phoneController.text,
-                              ),
-                            ),
-                          );
-                        } else {
-                          context.read<UserBloc>().updateDetails(
-                            isUpdate: true,
-                          );
-                        }
-                      },
-                    ),
-                    if (!isInvestor) BecomeInvestorButton(),
-                  ],
-                ),
+                  );
+                },
               );
             },
           );

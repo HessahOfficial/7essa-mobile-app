@@ -1,32 +1,33 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/utils/validator.dart';
+import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/core/widgets/custom_text_field.dart';
+import 'package:hessa/features/settings/presentation/managers/cloudinary_bloc.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class PaymentGatewayForm extends StatefulWidget {
   final TextEditingController amountController;
-  final TextEditingController screenshotController;
-
   final FocusNode amountFocusNode;
-  final FocusNode screenshotFocusNode;
+  final File? image;
 
   final bool amountTouched;
-  final bool screenshotTouched;
 
   final GlobalKey<FormState> formKey;
 
   const PaymentGatewayForm({
     super.key,
     required this.amountController,
-    required this.screenshotController,
     required this.amountFocusNode,
-    required this.screenshotFocusNode,
     required this.amountTouched,
-    required this.screenshotTouched,
     required this.formKey,
+    this.image,
   });
 
   @override
@@ -43,28 +44,13 @@ class _PaymentGatewayFormState extends State<PaymentGatewayForm> {
       child: Column(
         spacing: 15,
         children: [
-          RichText(
-            text: TextSpan(
-              text: "For payment gateways like (",
-              children: [
-                TextSpan(
-                  text: "InstaPay",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextSpan(text: ", "),
-                TextSpan(
-                  text: "Vodafone",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextSpan(
-                  text:
-                      ") transfer the money for the following number: 01016868492",
-                ),
-              ],
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: isDark ? Colors.white : Colors.black,
-              ),
+          Text(
+            S.of(context).paymentFormTextPart1,
+
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              height: 1.2,
+              color: isDark ? Colors.white : Colors.black,
             ),
             textAlign: TextAlign.center,
           ),
@@ -74,26 +60,61 @@ class _PaymentGatewayFormState extends State<PaymentGatewayForm> {
             controller: widget.amountController,
             icon: FontAwesomeIcons.moneyBillTransfer,
             inputColor: AppColors.white2,
-            placeholder: "Amount",
+            placeholder: S.of(context).amountPlaceholder,
             type: TextInputType.number,
             validator: (value) {
               return Validator(context: context).validateAmount(amount: value!);
             },
           ),
-          CustomTextField(
-            focusNode: widget.screenshotFocusNode,
-            fieldTocuhed: widget.screenshotTouched,
-            controller: widget.screenshotController,
-            icon: Icons.image,
-            inputColor: AppColors.white2,
-            placeholder: "Screenshot",
-            type: TextInputType.url,
-            suffixIcon: Icons.upload,
-            suffixFunction: () {},
-            validator: (value) {
-              return Validator(
-                context: context,
-              ).validateUsername(username: value!);
+          BlocBuilder<CloudinaryBloc, CloudinaryState>(
+            builder: (context, state) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image:
+                          widget.image != null
+                              ? DecorationImage(
+                                image: FileImage(widget.image!),
+                                fit: BoxFit.cover,
+                              )
+                              : null,
+                      border: Border.all(
+                        width: 1,
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    child:
+                        state is UploadImageLoading
+                            ? SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: isDark ? Colors.white : Colors.black,
+                                ),
+                              ),
+                            )
+                            : (widget.image == null
+                                ? Center(child: Icon(Icons.image))
+                                : null),
+                  ),
+                  CustomButton(
+                    onPressed:
+                        () => context
+                            .read<CloudinaryBloc>()
+                            .showAvatarBottomSheet(context: context),
+                    width: 100,
+                    height: 50,
+                    text: S.of(context).uploadBill,
+                    textColor: Colors.white,
+                  ),
+                ],
+              );
             },
           ),
         ],

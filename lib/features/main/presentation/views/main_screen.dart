@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
 
-    context.read<ScreenCubit>().currentIndex = 0;
+    context.read<ScreenCubit>().currentIndex = 4;
   }
 
   @override

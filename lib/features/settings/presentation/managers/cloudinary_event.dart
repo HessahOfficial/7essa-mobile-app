@@ -3,8 +3,8 @@ part of 'cloudinary_bloc.dart';
 @immutable
 abstract class CloudinaryEvent {}
 
-class UplodImageEvent extends CloudinaryEvent {
+class UploadImageEvent extends CloudinaryEvent {
   final UploadImageRequest request;
 
-  UplodImageEvent({required this.request});
+  UploadImageEvent({required this.request});
 }

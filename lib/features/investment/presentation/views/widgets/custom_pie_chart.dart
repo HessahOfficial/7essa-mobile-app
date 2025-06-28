@@ -1,20 +1,19 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/utils/service_locator.dart';
-import 'package:hessa/features/investment/presentation/views/widgets/custom_badge.dart';
+import 'package:hessa/features/investment/data/models/investment_model.dart';
+import 'package:hessa/features/investment/presentation/managers/investment_bloc.dart';
 
 class CustomPieChart extends StatelessWidget {
-  const CustomPieChart({super.key});
+  final InvestmentModel currentInvestment;
+
+  const CustomPieChart({super.key, required this.currentInvestment});
 
   @override
   Widget build(BuildContext context) {
     bool isDark = getIt.get<HiveHelper>().isDark ?? false;
-
-    final TextStyle titleStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
-    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
@@ -24,29 +23,46 @@ class CustomPieChart extends StatelessWidget {
           SizedBox(
             width: 200,
             height: 200,
-            child: PieChart(
-              PieChartData(
-                sections: [
-                  PieChartSectionData(
-                    color: Colors.green,
-                    value: 40,
-                    showTitle: true,
-                    titleStyle: titleStyle,
-                    badgeWidget: CustomBadge(),
-                    titlePositionPercentageOffset: 0.5,
-                    badgePositionPercentageOffset: 1.3,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                PieChart(
+                  swapAnimationDuration: Duration(milliseconds: 500),
+                  PieChartData(
+                    sectionsSpace: 5,
+                    centerSpaceRadius: 100,
+                    sections:
+                        context.read<InvestmentBloc>().getPieChartSections(),
                   ),
-                  PieChartSectionData(
-                    color: Colors.red,
-                    value: 60,
-                    showTitle: true,
-                    titleStyle: titleStyle,
-                    badgeWidget: CustomBadge(),
-                    titlePositionPercentageOffset: 0.5,
-                    badgePositionPercentageOffset: 1.3,
-                  ),
-                ],
-              ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 5,
+                  children: [
+                    Text(
+                      "Total Investments",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      "${currentInvestment.investmentAmount} EGP",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      "65% Shares",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

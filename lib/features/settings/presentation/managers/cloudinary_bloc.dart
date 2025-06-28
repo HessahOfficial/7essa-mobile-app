@@ -44,7 +44,7 @@ class CloudinaryBloc extends Bloc<CloudinaryEvent, CloudinaryState> {
   }
 
   CloudinaryBloc({required this.service}) : super(CloudinaryInitial()) {
-    on<UplodImageEvent>((event, emit) async {
+    on<UploadImageEvent>((event, emit) async {
       emit(UploadImageLoading());
       final response = await service.uploadImage(request: event.request);
       response.fold(

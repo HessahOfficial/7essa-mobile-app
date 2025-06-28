@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/lang.dart';
 import 'package:hessa/core/utils/service_locator.dart';
@@ -91,7 +93,7 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (bccontext, state) {
           if (state is RefreshTokenFailure) {
-            showSnackBar(context: context, message: state.message, type: 1);
+            context.go(AppRoutes.loginView);
           }
         },
         builder: (bccontext, state) {
@@ -103,7 +105,6 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
             },
             builder: (bccontext, state) {
               bool isDark = getIt.get<HiveHelper>().isDark ?? false;
-              bool arabic = isArabic();
               int selectedIndex = context.read<InvestmentBloc>().selectedIndex;
               List<InvestmentModel> investments =
                   context.read<InvestmentBloc>().investments;
@@ -115,15 +116,11 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                     child: Column(
                       spacing: 25,
                       children: [
-                        CustomPieChart(),
+                        CustomPieChart(
+                          currentInvestment: investments[selectedIndex],
+                        ),
                         Text(
-                          arabic
-                              ? investments[selectedIndex]
-                                  .displayingSharePrice!
-                                  .ar!
-                              : investments[selectedIndex]
-                                  .displayingSharePrice!
-                                  .en!,
+                          investments[selectedIndex].propertyId!.title!,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -135,11 +132,14 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                   )
                   : Align(
                     alignment: Alignment.topCenter,
-                    child: CircularProgressIndicator(
-                      color:
-                          isDark
-                              ? Colors.white
-                              : Theme.of(context).colorScheme.primary,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: CircularProgressIndicator(
+                        color:
+                            isDark
+                                ? Colors.white
+                                : Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   );
             },

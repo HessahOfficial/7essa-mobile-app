@@ -6,7 +6,7 @@ part 'screen_state.dart';
 class ScreenCubit extends Cubit<ScreenState> {
   ScreenCubit() : super(ScreenInitial());
 
-  int currentIndex = 0;
+  int currentIndex = 4;
 
   void setCurrentIndex({required int index}) {
     currentIndex = index;

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hessa/features/contact/data/repositories/contact_service.dart';
+import 'package:hessa/features/contact/presentation/managers/contact_bloc.dart';
 import 'package:hessa/features/home/presentation/managers/search_bloc.dart';
 import 'package:hessa/features/investment/data/repositories/investment_service.dart';
 import 'package:hessa/features/investment/presentation/managers/investment_bloc.dart';
@@ -25,7 +27,6 @@ import 'package:hessa/features/settings/presentation/managers/cloudinary_bloc.da
 import 'package:hessa/features/settings/presentation/managers/settings_cubit.dart';
 import 'package:hessa/features/settings/presentation/managers/user_bloc.dart';
 import 'package:hessa/features/wallet/data/repositories/wallet_service.dart';
-import 'package:hessa/features/wallet/presentation/managers/transaction_cubit.dart';
 import 'package:hessa/features/wallet/presentation/managers/wallet_bloc.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/features/auth/data/models/user_model.dart';
@@ -36,6 +37,7 @@ import 'package:hessa/cubits/google/google_cubit.dart';
 import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/auth/data/repositories/auth_service.dart';
 import 'package:hessa/firebase_options.dart';
+import 'package:clarity_flutter/clarity_flutter.dart';
 
 void main() async {
   setupServices();
@@ -45,49 +47,63 @@ void main() async {
   await getIt.get<HiveHelper>().initializeBoxes();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  final config = ClarityConfig(
+    projectId:
+        "s2e1nq1i6d", // You can find it on the Settings page of Clarity dashboard.
+    logLevel:
+        LogLevel
+            .None, // Note: Use "LogLevel.Verbose" value while testing to debug initialization issues.
+  );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider<GoogleCubit>(create: (context) => GoogleCubit()),
-        BlocProvider<SettingsCubit>(create: (context) => SettingsCubit()),
-        BlocProvider<TransactionCubit>(create: (context) => TransactionCubit()),
-        BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
-        BlocProvider<ScreenCubit>(create: (context) => ScreenCubit()),
-        BlocProvider<LaunchCubit>(create: (context) => LaunchCubit()),
-        BlocProvider<FavouriteCubit>(create: (context) => FavouriteCubit()),
-        BlocProvider<SliderCubit>(create: (context) => SliderCubit()),
-        BlocProvider<LocationCubit>(create: (context) => LocationCubit()),
+    ClarityWidget(
+      clarityConfig: config,
+      app: MultiBlocProvider(
+        providers: [
+          BlocProvider<GoogleCubit>(create: (context) => GoogleCubit()),
+          BlocProvider<SettingsCubit>(create: (context) => SettingsCubit()),,
+          BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
+          BlocProvider<ScreenCubit>(create: (context) => ScreenCubit()),
+          BlocProvider<LaunchCubit>(create: (context) => LaunchCubit()),
+          BlocProvider<FavouriteCubit>(create: (context) => FavouriteCubit()),
+          BlocProvider<SliderCubit>(create: (context) => SliderCubit()),
+          BlocProvider<LocationCubit>(create: (context) => LocationCubit()),
 
-        BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc(getIt.get<AuthService>()),
-        ),
-        BlocProvider<PropertyBloc>(
-          create: (context) => PropertyBloc(getIt.get<PropertyService>()),
-        ),
-        BlocProvider<WalletBloc>(
-          create: (context) => WalletBloc(service: getIt.get<WalletService>()),
-        ),
-        BlocProvider<UserBloc>(
-          create: (context) => UserBloc(service: getIt.get<UserService>()),
-        ),
-        BlocProvider<CloudinaryBloc>(
-          create:
-              (context) =>
-                  CloudinaryBloc(service: getIt.get<CloudinaryService>()),
-        ),
-        BlocProvider<InvestmentBloc>(
-          create:
-              (context) =>
-                  InvestmentBloc(service: getIt.get<InvestmentService>()),
-        ),
-        BlocProvider<SearchBloc>(
-          create:
-              (context) => SearchBloc(service: getIt.get<PropertyService>()),
-        ),
-      ],
+          BlocProvider<AuthBloc>(
+            create: (context) => AuthBloc(getIt.get<AuthService>()),
+          ),
+          BlocProvider<PropertyBloc>(
+            create: (context) => PropertyBloc(getIt.get<PropertyService>()),
+          ),
+          BlocProvider<WalletBloc>(
+            create:
+                (context) => WalletBloc(service: getIt.get<WalletService>()),
+          ),
+          BlocProvider<UserBloc>(
+            create: (context) => UserBloc(service: getIt.get<UserService>()),
+          ),
+          BlocProvider<CloudinaryBloc>(
+            create:
+                (context) =>
+                    CloudinaryBloc(service: getIt.get<CloudinaryService>()),
+          ),
+          BlocProvider<InvestmentBloc>(
+            create:
+                (context) =>
+                    InvestmentBloc(service: getIt.get<InvestmentService>()),
+          ),
+          BlocProvider<SearchBloc>(
+            create:
+                (context) => SearchBloc(service: getIt.get<PropertyService>()),
+          ),
+          BlocProvider<ContactBloc>(
+            create:
+                (context) => ContactBloc(service: getIt.get<ContactService>()),
+          ),
+        ],
 
-      child: MyApp(),
+        child: MyApp(),
+      ),
     ),
   );
 }

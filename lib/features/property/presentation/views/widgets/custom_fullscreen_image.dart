@@ -24,7 +24,6 @@ class CustomFullscreenImage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(fit: BoxFit.cover, image: NetworkImage(image)),
           borderRadius: BorderRadius.circular(15),
-          color: AppColors.gray,
         ),
       ),
     );

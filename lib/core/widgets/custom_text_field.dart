@@ -5,6 +5,7 @@ import 'package:hessa/core/themes/dark_theme.dart';
 import 'package:hessa/core/themes/light_theme.dart';
 
 import 'package:hessa/core/utils/service_locator.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class CustomTextField extends StatelessWidget {
   final IconData? icon;
@@ -74,6 +75,13 @@ class CustomTextField extends StatelessWidget {
           contentPadding: contentPadding,
           errorMaxLines: 10,
           errorStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: isDark ? Colors.white : Colors.black,
+              width: 1,
+            ),
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
@@ -95,10 +103,17 @@ class CustomTextField extends StatelessWidget {
           suffixIcon:
               suffixIcon != null
                   ? InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    splashColor: AppColors.gray.withOpacity(0.1),
                     onTap: suffixFunction,
-                    child: Icon(
-                      suffixIcon,
-                      color: isDark ? Colors.white : Colors.black,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Icon(
+                        suffixIcon,
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                     ),
                   )
                   : null,

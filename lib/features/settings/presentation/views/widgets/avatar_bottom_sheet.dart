@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hessa/features/settings/presentation/managers/cloudinary_bloc.dart';
+import 'package:hessa/generated/l10n.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:hessa/core/themes/colors/app_colors.dart';
@@ -37,7 +38,7 @@ class AvatarBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CustomIntentIcon(
-                  title: "Camera",
+                  title: S.of(context).camera,
                   iconSize: iconSize,
                   titleStyle: style,
                   onTap: () {
@@ -49,7 +50,7 @@ class AvatarBottomSheet extends StatelessWidget {
                   icon: Icons.photo_camera,
                 ),
                 CustomIntentIcon(
-                  title: "Gallery",
+                  title: S.of(context).gallery,
                   iconSize: iconSize,
                   titleStyle: style,
                   onTap: () {

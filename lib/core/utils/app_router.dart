@@ -2,8 +2,10 @@ import 'package:go_router/go_router.dart';
 
 import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/utils/type_aliases.dart';
+import 'package:hessa/features/auth/presentation/views/forgot_password_cta_screen.dart';
 import 'package:hessa/features/auth/presentation/views/forgot_password_screen.dart';
 import 'package:hessa/features/auth/presentation/views/login_screen.dart';
+import 'package:hessa/features/auth/presentation/views/register_cta_screen.dart';
 import 'package:hessa/features/auth/presentation/views/register_screen.dart';
 import 'package:hessa/features/home/presentation/views/matched_property_screen.dart';
 import 'package:hessa/features/main/presentation/views/main_screen.dart';
@@ -58,6 +60,10 @@ abstract class AppRouter {
         builder: (context, state) => BecomeInvestorCtaScreen(),
       ),
       GoRoute(
+        path: AppRoutes.ctaForgotPasswordView,
+        builder: (context, state) => ForgotPasswordCtaScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.contactUsView,
         builder: (context, state) => ContactUsScreen(),
       ),
@@ -78,6 +84,13 @@ abstract class AppRouter {
         builder: (context, state) {
           final params = state.extra as Json;
           return PropertyScreen(propertyId: params["propertyId"]);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.ctaRegisterView,
+        builder: (context, state) {
+          final params = state.extra as Json;
+          return RegisterCtaScreen(email: params["email"]);
         },
       ),
       GoRoute(

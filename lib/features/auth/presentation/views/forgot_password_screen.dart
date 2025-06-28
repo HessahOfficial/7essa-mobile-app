@@ -76,11 +76,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             if (state is ForgotPasswordFailure) {
               showSnackBar(context: context, message: state.message, type: 1);
             } else if (state is ForgotPasswordSuccess) {
-              showSnackBar(
-                context: context,
-                message: S.of(context).forgotPasswordResponse,
-                type: 0,
-              );
+              context.go(AppRoutes.ctaForgotPasswordView);
             }
           },
           builder: (bccontext, state) {

@@ -69,6 +69,7 @@ dependencies:
   intl: ^0.19.0
   speech_to_text:
   permission_handler:
+  clarity_flutter: ^1.0.0
 
 dev_dependencies:
   flutter_test:

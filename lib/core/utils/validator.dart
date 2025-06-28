@@ -9,7 +9,7 @@ class Validator {
   String? validateEmailAddress({required String email}) {
     String? message;
     RegExp regex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-    if (email.isEmpty) {
+    if (email.trim().isEmpty) {
       message = S.of(context).requiredEmail;
     } else if (!regex.hasMatch(email)) {
       message = S.of(context).invalidEmail;
@@ -20,7 +20,7 @@ class Validator {
   String? validatePassword({required String password}) {
     String? message;
     RegExp regex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$');
-    if (password.isEmpty) {
+    if (password.trim().isEmpty) {
       message = S.of(context).requiredPassword;
     } else if (!regex.hasMatch(password)) {
       message = S.of(context).invalidPassword;
@@ -31,7 +31,7 @@ class Validator {
   String? validateUsername({required String username}) {
     String? message;
     RegExp regex = RegExp(r'^.{3,}$');
-    if (username.isEmpty) {
+    if (username.trim().isEmpty) {
       message = S.of(context).requiredUsername;
     } else if (!regex.hasMatch(username)) {
       message = S.of(context).invalidUsername;
@@ -42,7 +42,7 @@ class Validator {
   String? validateFullname({required String fullname}) {
     String? message;
     RegExp regex = RegExp(r'^.{3,}$');
-    if (fullname.isEmpty) {
+    if (fullname.trim().isEmpty) {
       message = "Fullname field is required!";
     } else if (!regex.hasMatch(fullname)) {
       message = "Fullname consists of at least 3 characters!";
@@ -53,7 +53,7 @@ class Validator {
   String? validatePhone({required String phone}) {
     String? message;
     RegExp regex = RegExp(r'^0\d{10}$');
-    if (phone.isEmpty) {
+    if (phone.trim().isEmpty) {
       message = S.of(context).requiredPhone;
     } else if (!regex.hasMatch(phone)) {
       message = S.of(context).invalidPhone;
@@ -63,17 +63,17 @@ class Validator {
 
   String? validateAmount({required String amount}) {
     String? message;
-    if (amount.isEmpty) {
-      message = "Amount field is required!";
-    } else if (int.parse(amount) <= 0) {
-      message = "The amount should be positive value!";
+    if (amount.trim().isEmpty) {
+      message = S.of(context).requiredAmount;
+    } else if (int.parse(amount) < 1000) {
+      message = S.of(context).invalidAmount;
     }
     return message;
   }
 
   String? validateMessage({required String message}) {
     String? anotherMessage;
-    if (message.isEmpty) {
+    if (message.trim().isEmpty) {
       anotherMessage = S.of(context).requiredMessage;
     }
     return anotherMessage;
@@ -82,7 +82,7 @@ class Validator {
   String? validateNationalId({required String nationalId}) {
     String? message;
     RegExp regex = RegExp(r'^[1-9]\d{13}$');
-    if (nationalId.isEmpty) {
+    if (nationalId.trim().isEmpty) {
       message = S.of(context).requiredNationalId;
     } else if (!regex.hasMatch(nationalId)) {
       message = S.of(context).invalidNationalId;
@@ -90,14 +90,23 @@ class Validator {
     return message;
   }
 
-  String? validateOtp({required String? otp}) {
+  String? validatePin({required String? otp}) {
     String? message;
     RegExp regex = RegExp(r'^[1-9]\d{5}$');
-    if (otp!.isEmpty) {
-      message = "Otp field is required!";
+    if (otp!.trim().isEmpty) {
+      message = S.of(context).requiredPin;
     } else if (!regex.hasMatch(otp)) {
-      message = "Invalid otp code!";
+      message = S.of(context).invalidPin;
     }
+    return message;
+  }
+
+  String? validateSubject({required String? subject}) {
+    String? message;
+    if (subject!.trim().isEmpty) {
+      message = S.of(context).requiredSubject;
+    }
+
     return message;
   }
 }

@@ -8,3 +8,9 @@ class GetAllInvestmentsEvent extends InvestmentEvent {
 
   GetAllInvestmentsEvent({required this.request});
 }
+
+class MakeInvestmentEvent extends InvestmentEvent {
+  final MakeInvestmentRequest request;
+
+  MakeInvestmentEvent({required this.request});
+}
