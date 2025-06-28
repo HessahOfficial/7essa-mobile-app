@@ -20,7 +20,10 @@ class CreatePaymentRequest {
     String fileName = basename(screenshot.path);
 
     FormData formData = FormData.fromMap({
-      'file': await MultipartFile.fromFile(screenshot.path, filename: fileName),
+      'screenshot': await MultipartFile.fromFile(
+        screenshot.path,
+        filename: fileName,
+      ),
       "amount": amount.toInt(),
       "paymentMethod": paymentMethod,
       "paymentType": paymentType,

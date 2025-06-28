@@ -108,7 +108,7 @@ class _PaymentGatewayFormState extends State<PaymentGatewayForm> {
                         () => context
                             .read<CloudinaryBloc>()
                             .showAvatarBottomSheet(context: context),
-                    width: 100,
+                    width: 120,
                     height: 50,
                     text: S.of(context).uploadBill,
                     textColor: Colors.white,
