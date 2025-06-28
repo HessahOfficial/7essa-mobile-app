@@ -61,7 +61,7 @@ void main() async {
       app: MultiBlocProvider(
         providers: [
           BlocProvider<GoogleCubit>(create: (context) => GoogleCubit()),
-          BlocProvider<SettingsCubit>(create: (context) => SettingsCubit()),,
+          BlocProvider<SettingsCubit>(create: (context) => SettingsCubit()),
           BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
           BlocProvider<ScreenCubit>(create: (context) => ScreenCubit()),
           BlocProvider<LaunchCubit>(create: (context) => LaunchCubit()),
