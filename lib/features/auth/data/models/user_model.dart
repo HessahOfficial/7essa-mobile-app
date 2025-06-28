@@ -92,6 +92,7 @@ class UserModel {
     balance = json['balance'];
     lastLogin = json['lastLogin'];
     favourites = json["favourites"] ?? [];
+    phoneNumber = json["phoneNumber"];
   }
 
   @override
@@ -113,6 +114,7 @@ class UserModel {
       balance: $balance,
       lastLogin: $lastLogin
       favourites: $favourites
+      phoneNumber: $phoneNumber
     )
     """;
   }

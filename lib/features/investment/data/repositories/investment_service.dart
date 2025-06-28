@@ -7,6 +7,8 @@ import 'package:hessa/core/utils/endpoints.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/features/investment/data/models/get_all_investments_request.dart';
 import 'package:hessa/features/investment/data/models/get_all_investments_response.dart';
+import 'package:hessa/features/investment/data/models/make_investment_request.dart';
+import 'package:hessa/features/investment/data/models/make_investment_response.dart';
 import 'package:hessa/features/investment/data/repositories/investment_repository.dart';
 
 class InvestmentService extends InvestmentRepository {
@@ -30,6 +32,30 @@ class InvestmentService extends InvestmentRepository {
         data["data"]["investments"],
       );
       return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(exception: e));
+      }
+      return left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, MakeInvestmentResponse>> makeInvestment({
+    required MakeInvestmentRequest request,
+  }) async {
+    try {
+      final tokens = getIt.get<HiveHelper>().token;
+      final options = helper.getDioOptions(token: tokens!.accessToken!);
+      await helper.post(
+        endpoint: Endpoints.makeUserInvestment.replaceAll(
+          ":propertyId",
+          request.propertyId,
+        ),
+        options: options,
+        body: request.toJson(),
+      );
+      return right(MakeInvestmentResponse());
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(exception: e));

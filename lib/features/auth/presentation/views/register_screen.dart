@@ -148,34 +148,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           listener: (bccontext, state) {
             if (state is RegisterFailure) {
               showSnackBar(context: context, message: state.message, type: 1);
-            } else if (state is VerifyEmailFailure) {
-              showSnackBar(context: context, message: state.message, type: 1);
-            } else if (state is VerifyEmailSuccess) {
-              showSnackBar(
-                context: context,
-                message: S.of(context).verificationEmailSent,
-                type: 0,
-              );
             } else if (state is RegisterSuccess) {
-              showDialog(
-                context: context,
-                builder:
-                    (context) => CustomInfoPopup(
-                      onPressed: () {
-                        context.read<AuthBloc>().add(
-                          VerifyEmailEvent(
-                            request: VerifyEmailRequest(
-                              email: emailAddressController.text,
-                            ),
-                          ),
-                        );
-                        context.pop();
-                      },
-                      width: 220,
-                      height: 170,
-                      icon: Icons.info,
-                      message: S.of(context).verificationText,
-                    ),
+              context.go(
+                AppRoutes.ctaRegisterView,
+                extra: {"email": emailAddressController.text},
               );
             }
           },

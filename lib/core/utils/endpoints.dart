@@ -16,4 +16,10 @@ abstract class Endpoints {
   static const becomeInvestorUser = "/users/investor/:userId";
   static const getAllPartners = "/users/partners";
   static const getAllUserInvestments = "/investments";
+  static const makeUserInvestment = "/investments/:propertyId";
+  static const createPayment = "/payments/create";
+  static const getPaymentHistory = "/payments/history";
+  static const getDepositHistory = "/payments/getDepositHistory";
+  static const getWithdrawHistory = "/payments/getWithdrawHistory";
+  static const contact = "/emails";
 }

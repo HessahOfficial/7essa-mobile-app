@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/utils/show_snack_bar.dart';
 import 'package:hessa/features/auth/data/models/refresh_token_request.dart';
@@ -63,7 +65,7 @@ class _MatchedPropertyScreenState extends State<MatchedPropertyScreen> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (BuildContext context, AuthState state) {
         if (state is RefreshTokenFailure) {
-          showSnackBar(context: context, message: state.message, type: 1);
+          context.go(AppRoutes.loginView);
         }
       },
       builder:

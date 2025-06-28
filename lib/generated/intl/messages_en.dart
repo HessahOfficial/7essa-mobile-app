@@ -25,6 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "addToFavouritesResponse": MessageLookupByLibrary.simpleMessage(
       "One property saved successfully!",
     ),
+    "all": MessageLookupByLibrary.simpleMessage("ALL"),
+    "amountPlaceholder": MessageLookupByLibrary.simpleMessage("Amount"),
+    "bankTransfer": MessageLookupByLibrary.simpleMessage("BANK"),
     "becomInvestorNote": MessageLookupByLibrary.simpleMessage(
       "Once you save the information, you are agreed to the terms & conditions.",
     ),
@@ -41,15 +44,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "bestForYou": MessageLookupByLibrary.simpleMessage("Best For You"),
     "bestInvest": MessageLookupByLibrary.simpleMessage("Best Invest"),
     "bonus": MessageLookupByLibrary.simpleMessage("Bonus"),
+    "camera": MessageLookupByLibrary.simpleMessage("Camera"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "change": MessageLookupByLibrary.simpleMessage("Change"),
     "changePin": MessageLookupByLibrary.simpleMessage("Change PIN"),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
+    "contactUsSuccess": MessageLookupByLibrary.simpleMessage(
+      "Email sent successfully! Please follow you inbox.",
+    ),
     "contactUsText": MessageLookupByLibrary.simpleMessage(
       "Feel free to reach out via our official email, and we’ll respond as soon as possible (within 24 hours).",
     ),
     "currentBalance": MessageLookupByLibrary.simpleMessage("CURRENT BALANCE"),
     "darkmode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "declined": MessageLookupByLibrary.simpleMessage("DECLINED"),
     "deleteDialogText": MessageLookupByLibrary.simpleMessage(
       "You are about to delete the selected saved properties, are you sure about your decision?",
     ),
@@ -84,27 +92,37 @@ class MessageLookup extends MessageLookupByLibrary {
       "Provide us with your email then check your inbox for the verification email.",
     ),
     "fullNamePLaceholder": MessageLookupByLibrary.simpleMessage("Fullname"),
+    "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
     "haveAccount": MessageLookupByLibrary.simpleMessage("I have an account?"),
     "hello": MessageLookupByLibrary.simpleMessage("Hello!"),
     "hot": MessageLookupByLibrary.simpleMessage("HOT"),
     "incomes": MessageLookupByLibrary.simpleMessage("Incomes"),
+    "instaPay": MessageLookupByLibrary.simpleMessage("INSTAPAY"),
+    "invalidAmount": MessageLookupByLibrary.simpleMessage(
+      "The amount should be at least 1000!",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Invalid email Address!",
     ),
     "invalidNationalId": MessageLookupByLibrary.simpleMessage(
       "National id consists of 14 digits and doesn\'t start with zero!",
     ),
-    "invalidOtp": MessageLookupByLibrary.simpleMessage("Invalid otp code!"),
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
       "Requires at least 8 characters, including uppercase, lowercase, digits, and special characters.",
     ),
     "invalidPhone": MessageLookupByLibrary.simpleMessage(
       "Invalid Phone Number!",
     ),
+    "invalidPin": MessageLookupByLibrary.simpleMessage(
+      "PIN code consists of 6 digits doesn\'t start with 0!",
+    ),
     "invalidUsername": MessageLookupByLibrary.simpleMessage(
       "Requires at least 3 characters!",
     ),
     "lastNamePLaceholder": MessageLookupByLibrary.simpleMessage("Lastname"),
+    "lastTransactions": MessageLookupByLibrary.simpleMessage(
+      "Last Transactions :",
+    ),
     "locale": MessageLookupByLibrary.simpleMessage("Arabic"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
@@ -118,16 +136,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "newAdded": MessageLookupByLibrary.simpleMessage("New Added"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "no": MessageLookupByLibrary.simpleMessage("No"),
+    "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
+      "There is no transactions yet!",
+    ),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "onboardingTitle": MessageLookupByLibrary.simpleMessage(
       "Invest in your favourite properties",
     ),
+    "paid": MessageLookupByLibrary.simpleMessage("PAID"),
     "partners": MessageLookupByLibrary.simpleMessage("Partners"),
     "passowrdDialog": MessageLookupByLibrary.simpleMessage(
       "Enter 6-Digit Password",
     ),
     "passwordPlaceholder": MessageLookupByLibrary.simpleMessage("Password"),
     "payShares": MessageLookupByLibrary.simpleMessage("Pay Shares"),
+    "paymentFormTextPart1": MessageLookupByLibrary.simpleMessage(
+      "Transfer the money for the following number: 01016868492",
+    ),
+    "pending": MessageLookupByLibrary.simpleMessage("PENDING"),
     "personalProfile": MessageLookupByLibrary.simpleMessage("Personal Profile"),
     "phonePlaceholder": MessageLookupByLibrary.simpleMessage("Phone No."),
     "pinDialog": MessageLookupByLibrary.simpleMessage(
@@ -146,6 +172,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
     "registerUser": MessageLookupByLibrary.simpleMessage("register"),
     "rent": MessageLookupByLibrary.simpleMessage("Rent"),
+    "requiredAmount": MessageLookupByLibrary.simpleMessage(
+      "Amount field is required!",
+    ),
     "requiredEmail": MessageLookupByLibrary.simpleMessage(
       "Email field is required!",
     ),
@@ -155,14 +184,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredNationalId": MessageLookupByLibrary.simpleMessage(
       "National Id field is required!",
     ),
-    "requiredOtp": MessageLookupByLibrary.simpleMessage(
-      "Otp field is required!",
-    ),
     "requiredPassword": MessageLookupByLibrary.simpleMessage(
       "Password Field is required!",
     ),
     "requiredPhone": MessageLookupByLibrary.simpleMessage(
       "Phone field is required!",
+    ),
+    "requiredPin": MessageLookupByLibrary.simpleMessage(
+      "Pin field is required!",
+    ),
+    "requiredSubject": MessageLookupByLibrary.simpleMessage(
+      "Subject field is required!",
     ),
     "requiredUsername": MessageLookupByLibrary.simpleMessage(
       "Username field is required!",
@@ -172,6 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "savedProperties": MessageLookupByLibrary.simpleMessage("Saved Properties"),
+    "screenshotPlaceholder": MessageLookupByLibrary.simpleMessage("Screenshot"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
     "searchResults": MessageLookupByLibrary.simpleMessage("Search Results:"),
     "sendButton": MessageLookupByLibrary.simpleMessage("Send"),
@@ -180,7 +213,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "startInvestment": MessageLookupByLibrary.simpleMessage(
       "Start Investment!",
     ),
+    "subjectPlaceholder": MessageLookupByLibrary.simpleMessage("Subject"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "successfullPayment": MessageLookupByLibrary.simpleMessage(
+      "Payment operation done successfully!",
+    ),
+    "uploadBill": MessageLookupByLibrary.simpleMessage("Upload Bill"),
+    "uploadBillMessage": MessageLookupByLibrary.simpleMessage(
+      "You must upload a screenshot for the bill!",
+    ),
     "userAvatarSuccessMessage": MessageLookupByLibrary.simpleMessage(
       "User avatar updated successfully!",
     ),
@@ -193,6 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Verify your email to complete your registration process via sending verification email.",
     ),
     "verifyButton": MessageLookupByLibrary.simpleMessage("Verify"),
+    "vodafoneCash": MessageLookupByLibrary.simpleMessage("VODAFONE CASH"),
     "wallet": MessageLookupByLibrary.simpleMessage("Wallet"),
     "withdraw": MessageLookupByLibrary.simpleMessage("WITHDRAW"),
     "withdrawal": MessageLookupByLibrary.simpleMessage("Withdrawal"),

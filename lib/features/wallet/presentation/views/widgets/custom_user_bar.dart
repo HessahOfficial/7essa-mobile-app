@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/service_locator.dart';
-import 'package:hessa/core/utils/show_snack_bar.dart';
 import 'package:hessa/features/auth/data/models/user_model.dart';
 import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 
@@ -20,17 +21,21 @@ class CustomUserBar extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (bccontext, state) {
         if (state is RefreshTokenFailure) {
-          showSnackBar(context: context, message: state.message, type: 1);
+          context.go(AppRoutes.loginView);
         }
       },
       builder: (bccontext, state) {
         return Row(
           spacing: 10,
           children: [
-            CircleAvatar(
-              backgroundColor: Colors.transparent,
-              radius: 25,
-              child: Image.network(currentUser.avatar!, fit: BoxFit.cover),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image(
+                image: NetworkImage(currentUser.avatar!),
+                width: 70,
+                height: 70,
+                fit: BoxFit.cover,
+              ),
             ),
             Expanded(
               child: Column(

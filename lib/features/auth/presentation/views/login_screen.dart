@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       child: Scaffold(
         body: BlocConsumer<AuthBloc, AuthState>(
-          listener: (context, state) {
+          listener: (bccontext, state) {
             if (state is LoginSuccess) {
               context.go(AppRoutes.mainView);
             } else if (state is LoginFailure) {

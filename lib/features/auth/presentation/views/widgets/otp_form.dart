@@ -38,7 +38,7 @@ class OtpForm extends StatelessWidget {
           hintCharacter: "0",
 
           validator: (value) {
-            return Validator(context: context).validateOtp(otp: value);
+            return Validator(context: context).validatePin(otp: value);
           },
         ),
       ),

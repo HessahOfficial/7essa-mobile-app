@@ -65,7 +65,7 @@ class CustomWalletCard extends StatelessWidget {
                           hide
                               ? "*******"
                               : (state is ShowBalanceSuccess
-                                  ? "${state.response.balance}"
+                                  ? "${state.response.balance} EGP"
                                   : "*******"),
                           style: TextStyle(
                             color: Colors.white,
@@ -80,7 +80,11 @@ class CustomWalletCard extends StatelessWidget {
                               ),
                           splashColor: Colors.transparent,
                           child: Icon(
-                            hide ? Icons.visibility_off : Icons.visibility,
+                            hide
+                                ? Icons.visibility_off
+                                : (state is ShowBalanceSuccess
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
                             color: Colors.white,
                           ),
                         ),

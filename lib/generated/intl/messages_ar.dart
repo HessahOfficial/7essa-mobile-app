@@ -25,6 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "addToFavouritesResponse": MessageLookupByLibrary.simpleMessage(
       "تم حفظ العقار بنجاح!",
     ),
+    "all": MessageLookupByLibrary.simpleMessage("الكل"),
+    "amountPlaceholder": MessageLookupByLibrary.simpleMessage("المبلغ"),
+    "bankTransfer": MessageLookupByLibrary.simpleMessage("BANK"),
     "becomInvestorNote": MessageLookupByLibrary.simpleMessage(
       "بمجرد حفظ المعلومات ، فإنك توافق على الشروط والاحكام.",
     ),
@@ -39,15 +42,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "bestForYou": MessageLookupByLibrary.simpleMessage("الأفضل لك"),
     "bestInvest": MessageLookupByLibrary.simpleMessage("أفضل استثمار"),
     "bonus": MessageLookupByLibrary.simpleMessage("مكافأة"),
+    "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
     "cancel": MessageLookupByLibrary.simpleMessage("رجوع"),
     "change": MessageLookupByLibrary.simpleMessage("تغيير"),
     "changePin": MessageLookupByLibrary.simpleMessage("تغيير رقم المحفظة"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
+    "contactUsSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم الارسال! برجاء متابعة صندوق الوارد.",
+    ),
     "contactUsText": MessageLookupByLibrary.simpleMessage(
       "تواصل معنا عبر البريد الالكتروني الرسمي وسوف نرد عليك في اسرع وقت ممكن. (في غضون 24 ساعة).",
     ),
     "currentBalance": MessageLookupByLibrary.simpleMessage("الرصيد الحالي"),
     "darkmode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+    "declined": MessageLookupByLibrary.simpleMessage("ملغي"),
     "deleteDialogText": MessageLookupByLibrary.simpleMessage(
       "انت على وشك ان تقوم بحذف العقارات المختارة من القائمة, هل انت متأكد من قرارك؟",
     ),
@@ -82,27 +90,37 @@ class MessageLookup extends MessageLookupByLibrary {
       ".ادخل بريدك الالكتروني لكي نرسل لك رسالة التحقق عبره",
     ),
     "fullNamePLaceholder": MessageLookupByLibrary.simpleMessage("الاسم كامل"),
+    "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
     "haveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
     "hello": MessageLookupByLibrary.simpleMessage("مرحبا!"),
     "hot": MessageLookupByLibrary.simpleMessage("رائجة"),
     "incomes": MessageLookupByLibrary.simpleMessage("العوائد"),
+    "instaPay": MessageLookupByLibrary.simpleMessage("INSTAPAY"),
+    "invalidAmount": MessageLookupByLibrary.simpleMessage(
+      "يجب ان تكون قيمة المبلغ على الاقل 1000",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "ليست صيغة بريد الكتروني!",
     ),
     "invalidNationalId": MessageLookupByLibrary.simpleMessage(
       "الرقم القومي يتكون من 14 رقم ولا يبدأ ب 0!",
     ),
-    "invalidOtp": MessageLookupByLibrary.simpleMessage("ليست صيغة رقم تحقق!"),
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور تتكون من 8 رموز على الاقل و تشمل حروف كبيرة و صغيرة و ارقام و رموز مميزة!",
     ),
     "invalidPhone": MessageLookupByLibrary.simpleMessage(
       "ليست صيغة رقم تلفون!",
     ),
+    "invalidPin": MessageLookupByLibrary.simpleMessage(
+      "رقم ال PIN يتكون من 6 ارقام لا تبدأ ب 0!",
+    ),
     "invalidUsername": MessageLookupByLibrary.simpleMessage(
       "اسم المستخدم يتكون من 3 احرف على الاقل!",
     ),
     "lastNamePLaceholder": MessageLookupByLibrary.simpleMessage("الاسم الاخير"),
+    "lastTransactions": MessageLookupByLibrary.simpleMessage(
+      "المعاملات الأخيرة :",
+    ),
     "locale": MessageLookupByLibrary.simpleMessage("اللغة العربية"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل"),
@@ -116,16 +134,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "newAdded": MessageLookupByLibrary.simpleMessage("مضاف حديثا"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "no": MessageLookupByLibrary.simpleMessage("لا"),
+    "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
+      "!لا توجد معاملات بعد",
+    ),
     "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
     "onboardingTitle": MessageLookupByLibrary.simpleMessage(
       "استثمر في عقاراتك المفضلة",
     ),
+    "paid": MessageLookupByLibrary.simpleMessage("مدفوع"),
     "partners": MessageLookupByLibrary.simpleMessage("الشركاء"),
     "passowrdDialog": MessageLookupByLibrary.simpleMessage(
       "قم بادخال الكود المكون من 6 ارقام",
     ),
     "passwordPlaceholder": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "payShares": MessageLookupByLibrary.simpleMessage("اسهم مدفوعة"),
+    "paymentFormTextPart1": MessageLookupByLibrary.simpleMessage(
+      " يرجى تحويل المبلغ على الرقم الآتي: 01016868492",
+    ),
+    "pending": MessageLookupByLibrary.simpleMessage("معلق"),
     "personalProfile": MessageLookupByLibrary.simpleMessage("بيانات الشخصية"),
     "phonePlaceholder": MessageLookupByLibrary.simpleMessage("رقم التلفون"),
     "pinDialog": MessageLookupByLibrary.simpleMessage(
@@ -144,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "registerButton": MessageLookupByLibrary.simpleMessage("انشاء"),
     "registerUser": MessageLookupByLibrary.simpleMessage("حساب جديد"),
     "rent": MessageLookupByLibrary.simpleMessage("ايجار"),
+    "requiredAmount": MessageLookupByLibrary.simpleMessage("يجب ادخال المبلغ!"),
     "requiredEmail": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال البريد الالكتروني!",
     ),
@@ -153,14 +180,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredNationalId": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال الرقم القومي!",
     ),
-    "requiredOtp": MessageLookupByLibrary.simpleMessage(
-      "يجب ادخال رمز التحقق!",
-    ),
     "requiredPassword": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال كلمة المرور!",
     ),
     "requiredPhone": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال رقم التلفون!",
+    ),
+    "requiredPin": MessageLookupByLibrary.simpleMessage(
+      "يجب ادخال رقم ال PIN!",
+    ),
+    "requiredSubject": MessageLookupByLibrary.simpleMessage(
+      "يجب ادخال عنوان الرسالة!",
     ),
     "requiredUsername": MessageLookupByLibrary.simpleMessage(
       "يجب ادخال اسم المستخدم!",
@@ -170,13 +200,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "savedProperties": MessageLookupByLibrary.simpleMessage(
       "العقارات المحفوظة",
     ),
+    "screenshotPlaceholder": MessageLookupByLibrary.simpleMessage("صورة"),
     "search": MessageLookupByLibrary.simpleMessage("بحث..."),
     "searchResults": MessageLookupByLibrary.simpleMessage("نتائج البحث:"),
     "sendButton": MessageLookupByLibrary.simpleMessage("ارسال"),
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
     "startInvestment": MessageLookupByLibrary.simpleMessage("ابدأ الاستثمار!"),
+    "subjectPlaceholder": MessageLookupByLibrary.simpleMessage("العنوان"),
     "submit": MessageLookupByLibrary.simpleMessage("ارسال"),
+    "successfullPayment": MessageLookupByLibrary.simpleMessage(
+      "تمت المعاملة المالية بنجاح!",
+    ),
+    "uploadBill": MessageLookupByLibrary.simpleMessage("رفع الفاتورة"),
+    "uploadBillMessage": MessageLookupByLibrary.simpleMessage(
+      "يجب رفع صورة الفاتورة!",
+    ),
     "userAvatarSuccessMessage": MessageLookupByLibrary.simpleMessage(
       "تم تحديث الصورة الشخصية بنجاح!",
     ),
@@ -189,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تحقق من بريدك الالكتروني لتكمل عملية تسجيل الحساب الجديد عبر ارسال رسالة التحقق.",
     ),
     "verifyButton": MessageLookupByLibrary.simpleMessage("تحقق"),
+    "vodafoneCash": MessageLookupByLibrary.simpleMessage("VODAFONE CASH"),
     "wallet": MessageLookupByLibrary.simpleMessage("المحفظة"),
     "withdraw": MessageLookupByLibrary.simpleMessage("سحب"),
     "withdrawal": MessageLookupByLibrary.simpleMessage("سحب"),

@@ -2,6 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hessa/features/wallet/data/models/create_payment_request.dart';
+import 'package:hessa/features/wallet/data/models/create_payment_response.dart';
+import 'package:hessa/features/wallet/data/models/get_payment_history_request.dart';
+import 'package:hessa/features/wallet/data/models/get_payment_history_response.dart';
+import 'package:hessa/features/wallet/data/models/payment_model.dart';
 import 'package:hessa/features/wallet/data/models/show_balance_request.dart';
 import 'package:hessa/features/wallet/data/models/show_balance_response.dart';
 import 'package:hessa/features/wallet/data/repositories/wallet_service.dart';
@@ -18,6 +23,8 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
 
   int selectedPaymentOption = 0;
   String selectedPaymentMethod = "instaPay";
+
+  List<PaymentModel> payments = [];
 
   void setSelectedPaymentOption(int selectedOptionIndex) {
     selectedPaymentOption = selectedOptionIndex;
@@ -69,6 +76,65 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
         (data) {
           hidden = false;
           emit(ShowBalanceSuccess(response: data));
+        },
+      );
+    });
+
+    on<CreatePaymentEvent>((event, emit) async {
+      emit(CreatePaymnetLoading());
+      final response = await service.createPayment(request: event.request);
+      response.fold(
+        (failure) {
+          emit(CreatePaymentFailure(message: failure.message));
+        },
+        (data) {
+          hidden = false;
+          emit(CreatePaymentSuccess(response: data));
+        },
+      );
+    });
+
+    on<GetPaymentHistoryEvent>((event, emit) async {
+      emit(GetPaymentHistoryLoading());
+      final response = await service.getPaymentHistory(request: event.request);
+      response.fold(
+        (failure) {
+          emit(GetPaymentHistoryFailure(message: failure.message));
+        },
+        (data) {
+          hidden = false;
+          payments = data.payments;
+          emit(GetPaymentHistorySuccess(response: data));
+        },
+      );
+    });
+
+    on<GetDepositHistoryEvent>((event, emit) async {
+      emit(GetDepositHistoryLoading());
+      final response = await service.getDepositHistory(request: event.request);
+      response.fold(
+        (failure) {
+          emit(GetDepositHistoryFailure(message: failure.message));
+        },
+        (data) {
+          hidden = false;
+          payments = data.payments;
+          emit(GetDepositHistorySuccess(response: data));
+        },
+      );
+    });
+
+    on<GetWithdrawHistoryEvent>((event, emit) async {
+      emit(GetWithdrawHistoryLoading());
+      final response = await service.getWithdrawHistory(request: event.request);
+      response.fold(
+        (failure) {
+          emit(GetWithdrawHistoryFailure(message: failure.message));
+        },
+        (data) {
+          hidden = false;
+          payments = data.payments;
+          emit(GetWithdrawHistorySuccess(response: data));
         },
       );
     });

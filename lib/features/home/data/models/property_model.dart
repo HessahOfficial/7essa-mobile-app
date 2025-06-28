@@ -1,4 +1,5 @@
 import 'package:hessa/core/utils/type_aliases.dart';
+import 'package:hessa/features/auth/data/models/user_model.dart';
 
 class PropertyModel {
   String? id;
@@ -13,6 +14,9 @@ class PropertyModel {
   String? rentalStartDate;
   String? rentalEndDate;
   String? estimatedExitDate;
+  String? ownerAvatar;
+  String? ownerName;
+  UserModel? owner;
   int? size;
   int? numberOfRooms;
   int? numberOfbeds;
@@ -29,6 +33,8 @@ class PropertyModel {
   bool? isRented;
   List<dynamic>? benefits;
   List<dynamic>? images;
+  List<dynamic>? priceHistory;
+  List<dynamic>? pricePerShareHistory;
 
   PropertyModel({
     this.id,
@@ -59,10 +65,15 @@ class PropertyModel {
     this.numberOfKitchens,
     this.numberOfBathrooms,
     this.area,
+    this.owner,
+    this.ownerAvatar,
+    this.ownerName,
+    this.priceHistory,
+    this.pricePerShareHistory,
   });
 
   PropertyModel.fromJson(Json json) {
-    id = json['_id'];
+    id = json['id'] ?? json["_id"];
     title = json['title'];
     description = json['description'];
     city = json['city'];
@@ -75,14 +86,8 @@ class PropertyModel {
     totalShares = json['totalShares'];
     availableShares = json['availableShares'];
     yearlyPayment = json['yearlyPayment'];
-    price =
-        (json['price'] is List && json['price'].isNotEmpty)
-            ? json['price'][0]
-            : null;
-    pricePerShare =
-        (json['pricePerShare'] is List && json['pricePerShare'].isNotEmpty)
-            ? json['pricePerShare'][0]
-            : null;
+    price = json['price'];
+    pricePerShare = json['pricePerShare'];
     benefits = json['benefits'];
     priceSold = json['priceSold'];
     isRented = json['isRented'];
@@ -96,6 +101,11 @@ class PropertyModel {
     numberOfKitchens = json['numOfKitchens'];
     numberOfBathrooms = json['numOfBathrooms'];
     area = json['area'];
+    owner = json["owner"] != null ? UserModel.fromJson(json["owner"]) : null;
+    ownerAvatar = json["ownerAvatar"];
+    ownerName = json["ownerName"];
+    priceHistory = json["priceHistory"];
+    pricePerShareHistory = json["pricePerShareHistory"];
   }
 
   @override

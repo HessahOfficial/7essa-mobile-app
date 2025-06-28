@@ -28,11 +28,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (bccontext, state) {
         if (state is RefreshTokenFailure) {
-          showSnackBar(
-            context: widget.screenContext,
-            message: state.message,
-            type: 1,
-          );
+          context.go(AppRoutes.loginView);
         }
       },
       builder: (bccontext, state) {

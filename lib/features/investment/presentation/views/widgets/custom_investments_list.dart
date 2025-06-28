@@ -13,9 +13,12 @@ class CustomInvestmentsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int selectedIndex = context.read<InvestmentBloc>().selectedIndex;
+    double screenWidth = MediaQuery.of(context).size.width;
 
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => SizedBox(height: 20),
       shrinkWrap: true,
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
       itemCount: investments.length,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder:

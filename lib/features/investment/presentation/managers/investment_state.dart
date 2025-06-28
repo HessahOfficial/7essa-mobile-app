@@ -22,3 +22,17 @@ class GetAllInvestmentsFailure extends InvestmentState {
 
   GetAllInvestmentsFailure({required this.message});
 }
+
+class MakeInvestmentLoading extends InvestmentState {}
+
+class MakeInvestmentSuccess extends InvestmentState {
+  final MakeInvestmentResponse response;
+
+  MakeInvestmentSuccess({required this.response});
+}
+
+class MakeInvestmentFailure extends InvestmentState {
+  final String message;
+
+  MakeInvestmentFailure({required this.message});
+}

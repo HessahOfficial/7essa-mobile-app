@@ -475,26 +475,6 @@ class S {
     );
   }
 
-  /// `Otp field is required!`
-  String get requiredOtp {
-    return Intl.message(
-      'Otp field is required!',
-      name: 'requiredOtp',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Invalid otp code!`
-  String get invalidOtp {
-    return Intl.message(
-      'Invalid otp code!',
-      name: 'invalidOtp',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `National Id field is required!`
   String get requiredNationalId {
     return Intl.message(
@@ -845,6 +825,201 @@ class S {
     return Intl.message(
       'User avatar updated successfully!',
       name: 'userAvatarSuccessMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Transactions :`
+  String get lastTransactions {
+    return Intl.message(
+      'Last Transactions :',
+      name: 'lastTransactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ALL`
+  String get all {
+    return Intl.message('ALL', name: 'all', desc: '', args: []);
+  }
+
+  /// `There is no transactions yet!`
+  String get noTransactionsYet {
+    return Intl.message(
+      'There is no transactions yet!',
+      name: 'noTransactionsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PENDING`
+  String get pending {
+    return Intl.message('PENDING', name: 'pending', desc: '', args: []);
+  }
+
+  /// `PAID`
+  String get paid {
+    return Intl.message('PAID', name: 'paid', desc: '', args: []);
+  }
+
+  /// `DECLINED`
+  String get declined {
+    return Intl.message('DECLINED', name: 'declined', desc: '', args: []);
+  }
+
+  /// `INSTAPAY`
+  String get instaPay {
+    return Intl.message('INSTAPAY', name: 'instaPay', desc: '', args: []);
+  }
+
+  /// `VODAFONE CASH`
+  String get vodafoneCash {
+    return Intl.message(
+      'VODAFONE CASH',
+      name: 'vodafoneCash',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BANK`
+  String get bankTransfer {
+    return Intl.message('BANK', name: 'bankTransfer', desc: '', args: []);
+  }
+
+  /// `Transfer the money for the following number: 01016868492`
+  String get paymentFormTextPart1 {
+    return Intl.message(
+      'Transfer the money for the following number: 01016868492',
+      name: 'paymentFormTextPart1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount`
+  String get amountPlaceholder {
+    return Intl.message(
+      'Amount',
+      name: 'amountPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Screenshot`
+  String get screenshotPlaceholder {
+    return Intl.message(
+      'Screenshot',
+      name: 'screenshotPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount field is required!`
+  String get requiredAmount {
+    return Intl.message(
+      'Amount field is required!',
+      name: 'requiredAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The amount should be at least 1000!`
+  String get invalidAmount {
+    return Intl.message(
+      'The amount should be at least 1000!',
+      name: 'invalidAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment operation done successfully!`
+  String get successfullPayment {
+    return Intl.message(
+      'Payment operation done successfully!',
+      name: 'successfullPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Bill`
+  String get uploadBill {
+    return Intl.message('Upload Bill', name: 'uploadBill', desc: '', args: []);
+  }
+
+  /// `You must upload a screenshot for the bill!`
+  String get uploadBillMessage {
+    return Intl.message(
+      'You must upload a screenshot for the bill!',
+      name: 'uploadBillMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message('Camera', name: 'camera', desc: '', args: []);
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message('Gallery', name: 'gallery', desc: '', args: []);
+  }
+
+  /// `Email sent successfully! Please follow you inbox.`
+  String get contactUsSuccess {
+    return Intl.message(
+      'Email sent successfully! Please follow you inbox.',
+      name: 'contactUsSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subject field is required!`
+  String get requiredSubject {
+    return Intl.message(
+      'Subject field is required!',
+      name: 'requiredSubject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subject`
+  String get subjectPlaceholder {
+    return Intl.message(
+      'Subject',
+      name: 'subjectPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pin field is required!`
+  String get requiredPin {
+    return Intl.message(
+      'Pin field is required!',
+      name: 'requiredPin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN code consists of 6 digits doesn't start with 0!`
+  String get invalidPin {
+    return Intl.message(
+      'PIN code consists of 6 digits doesn\'t start with 0!',
+      name: 'invalidPin',
       desc: '',
       args: [],
     );

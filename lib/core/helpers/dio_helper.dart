@@ -3,7 +3,6 @@ import 'package:hessa/core/utils/type_aliases.dart';
 
 class DioHelper {
   final _baseUrl = "https://7essa-server-omega.vercel.app";
-  // final _baseUrl = "http://92.168.1.9:8000";
   late Dio _dio;
 
   DioHelper() {
@@ -46,7 +45,11 @@ class DioHelper {
     Options? options,
   }) async {
     print("Before");
-    final response = await Dio().post(
+    final dio =
+        endpoint != "https://api.cloudinary.com/v1_1/dw7f2lwio/image/upload"
+            ? _dio
+            : Dio();
+    final response = await dio.post(
       endpoint,
       data: body,
       queryParameters: params,
