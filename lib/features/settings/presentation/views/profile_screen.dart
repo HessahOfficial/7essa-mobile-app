@@ -9,7 +9,6 @@ import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/utils/show_snack_bar.dart';
 import 'package:hessa/features/auth/data/models/refresh_token_request.dart';
-import 'package:hessa/features/auth/data/models/user_model.dart';
 import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/settings/data/models/update_user_request.dart';
 import 'package:hessa/features/settings/data/models/upload_image_request.dart';

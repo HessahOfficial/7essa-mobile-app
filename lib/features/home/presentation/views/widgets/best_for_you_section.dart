@@ -54,12 +54,6 @@ class _BestForYouSectionState extends State<BestForYouSection> {
           context.read<CategoryCubit>().setProperties(
             allProperties: state.response.properties,
           );
-        } else if (state is AddToFavouritesSuccess) {
-          showSnackBar(
-            context: widget.screenContext,
-            message: S.of(context).addToFavouritesResponse,
-            type: 0,
-          );
         } else if (state is AddToFavouritesFailure) {
           showSnackBar(
             context: widget.screenContext,
@@ -79,9 +73,6 @@ class _BestForYouSectionState extends State<BestForYouSection> {
                 context.read<CategoryCubit>().hotProperties;
             List<PropertyModel> restOfProperties =
                 context.read<CategoryCubit>().restOfProperties;
-
-            print("STATE: $state");
-            print("HOT: $hotProperties");
 
             return state is CategoryFetch
                 ? CustomScrollView(

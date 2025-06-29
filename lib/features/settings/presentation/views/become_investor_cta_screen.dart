@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
-import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/generated/l10n.dart';
 
@@ -12,7 +10,6 @@ class BecomeInvestorCtaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = getIt.get<HiveHelper>().isDark ?? false;
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(

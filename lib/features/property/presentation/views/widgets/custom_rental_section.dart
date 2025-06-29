@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hessa/features/home/data/models/property_model.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomRentalSection extends StatelessWidget {
   final PropertyModel property;
@@ -22,7 +23,7 @@ class CustomRentalSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Rental Incomes: ",
+          S.of(context).rentalSeciton,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         Container(
@@ -37,19 +38,19 @@ class CustomRentalSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Rental Name: ${property.rentalName}",
+                "${S.of(context).rentalName}: ${property.rentalName}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "Income: ${property.rentalIncome} EGP",
+                "${S.of(context).income}: ${property.rentalIncome} ${S.of(context).egp}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "From: $formatStartDay/$formatStartMonth/${start.year} ",
+                "${S.of(context).from}: $formatStartDay/$formatStartMonth/${start.year} ",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "To: $formatEndDay/$formatEndMonth/${start.year} ",
+                "${S.of(context).to}: $formatEndDay/$formatEndMonth/${start.year} ",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],

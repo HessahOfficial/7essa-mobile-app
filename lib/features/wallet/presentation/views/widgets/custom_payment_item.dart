@@ -1,4 +1,3 @@
-import 'package:cloudinary_url_gen/transformation/region.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
@@ -24,7 +23,7 @@ class CustomPaymentItem extends StatelessWidget {
     Map<String, Color> paymentMethodColors = {
       "instaPay": Color(0xFF7c569f),
       "VodafoneCash": Color(0xFFe60101),
-      "bankTransfer": Color(0xFFFFFFFF),
+      "bankTransfer": Theme.of(context).colorScheme.primary,
     };
 
     Map<String, String> paymentStatusStrings = {
@@ -117,7 +116,7 @@ class CustomPaymentItem extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "${payment.amount} EGP",
+                    "${payment.amount} ${S.of(context).egp}",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Align(

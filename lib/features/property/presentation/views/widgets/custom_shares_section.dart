@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hessa/core/widgets/custom_button.dart';
+
 import 'package:hessa/features/home/data/models/property_model.dart';
 import 'package:hessa/features/property/presentation/views/widgets/custom_line_chart.dart';
 import 'package:hessa/features/property/presentation/views/widgets/custom_switch_buttons.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomSharesSection extends StatefulWidget {
   final PropertyModel property;
@@ -28,7 +29,7 @@ class _CustomSharesSectionState extends State<CustomSharesSection> {
       spacing: 30,
       children: [
         Text(
-          "Shares :",
+          S.of(context).sharesSeciton,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         CustomLineChart(
@@ -43,27 +44,27 @@ class _CustomSharesSectionState extends State<CustomSharesSection> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Price: ${widget.property.price} EGP",
+                "${S.of(context).price}: ${widget.property.price} ${S.of(context).egp}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "Payment per year: ${widget.property.yearlyPayment} EGP/year",
+                "${S.of(context).paymentPerYear}: ${widget.property.yearlyPayment} ${S.of(context).egpPerYear}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "Price per share: ${widget.property.pricePerShare} EGP/Share",
+                "${S.of(context).pricePerShare}: ${widget.property.pricePerShare} ${S.of(context).egpPerShare}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "Available Shares: ${widget.property.availableShares} Shares",
+                "${S.of(context).availableShares}: ${widget.property.availableShares} ${S.of(context).egp}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "Price Sold: ${widget.property.priceSold} EGP",
+                "${S.of(context).priceSold}: ${widget.property.priceSold} ${S.of(context).egp}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "Estimated to exit on: $formatExitDay/$formatExitMonth/${exit.year}",
+                "${S.of(context).estimatedExitdate}: $formatExitDay/$formatExitMonth/${exit.year}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],

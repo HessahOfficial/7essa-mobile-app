@@ -31,7 +31,6 @@ class _NewAddedSectionState extends State<NewAddedSection> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     bool isDark = getIt.get<HiveHelper>().isDark ?? false;
 
     return BlocConsumer<PropertyBloc, PropertyState>(

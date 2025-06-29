@@ -1,7 +1,6 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:hessa/generated/l10n.dart';
 import 'package:intl/intl.dart';
 
 class CustomLineChart extends StatelessWidget {
@@ -49,7 +48,7 @@ class CustomLineChart extends StatelessWidget {
                 bottomTitles: AxisTitles(
                   axisNameSize: 40,
                   axisNameWidget: Text(
-                    "Month / Day",
+                    S.of(context).monthDay,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   sideTitles: SideTitles(
@@ -81,7 +80,7 @@ class CustomLineChart extends StatelessWidget {
                 leftTitles: AxisTitles(
                   axisNameSize: 30,
                   axisNameWidget: Text(
-                    "Price",
+                    S.of(context).price,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   sideTitles: SideTitles(
@@ -109,7 +108,7 @@ class CustomLineChart extends StatelessWidget {
                 bottomTitles: AxisTitles(
                   axisNameSize: 40,
                   axisNameWidget: Text(
-                    "Month / Day",
+                    S.of(context).monthDay,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   sideTitles: SideTitles(
@@ -141,7 +140,7 @@ class CustomLineChart extends StatelessWidget {
                 leftTitles: AxisTitles(
                   axisNameSize: 30,
                   axisNameWidget: Text(
-                    "Price / Share",
+                    S.of(context).priceShare,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   sideTitles: SideTitles(

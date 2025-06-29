@@ -7,20 +7,30 @@ class CreatePaymentRequest {
   final double amount;
   final String paymentMethod;
   final String paymentType;
-  final File screenshot;
+  final File? screenshot;
 
   CreatePaymentRequest({
-    required this.screenshot,
+    this.screenshot,
     required this.amount,
     required this.paymentMethod,
     required this.paymentType,
   });
 
   Future<FormData> toJson() async {
-    String fileName = basename(screenshot.path);
+    String? fileName;
+
+    if (paymentType == "deposit") {
+      fileName = basename(screenshot!.path);
+    }
 
     FormData formData = FormData.fromMap({
-      'file': await MultipartFile.fromFile(screenshot.path, filename: fileName),
+      'screenshot':
+          paymentType == "deposit"
+              ? await MultipartFile.fromFile(
+                screenshot!.path,
+                filename: fileName!,
+              )
+              : null,
       "amount": amount.toInt(),
       "paymentMethod": paymentMethod,
       "paymentType": paymentType,

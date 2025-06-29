@@ -55,7 +55,6 @@ class _BecomeInvestorScreenState extends State<BecomeInvestorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     bool isDark = getIt.get<HiveHelper>().isDark ?? false;
 
     return Scaffold(

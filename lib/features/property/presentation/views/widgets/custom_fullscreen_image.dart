@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hessa/core/themes/colors/app_colors.dart';
 
 class CustomFullscreenImage extends StatelessWidget {
   final double screenWidth;

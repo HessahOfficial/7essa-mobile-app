@@ -16,7 +16,7 @@ class PropertyModel {
   String? estimatedExitDate;
   String? ownerAvatar;
   String? ownerName;
-  UserModel? owner;
+  Object? owner;
   int? size;
   int? numberOfRooms;
   int? numberOfbeds;
@@ -72,7 +72,7 @@ class PropertyModel {
     this.pricePerShareHistory,
   });
 
-  PropertyModel.fromJson(Json json) {
+  PropertyModel.fromJson(Json json, {bool isFavourite = false}) {
     id = json['id'] ?? json["_id"];
     title = json['title'];
     description = json['description'];
@@ -101,7 +101,11 @@ class PropertyModel {
     numberOfKitchens = json['numOfKitchens'];
     numberOfBathrooms = json['numOfBathrooms'];
     area = json['area'];
-    owner = json["owner"] != null ? UserModel.fromJson(json["owner"]) : null;
+    if (isFavourite) {
+      owner = json["owner"];
+    } else {
+      owner = json["owner"] != null ? UserModel.fromJson(json["owner"]) : null;
+    }
     ownerAvatar = json["ownerAvatar"];
     ownerName = json["ownerName"];
     priceHistory = json["priceHistory"];

@@ -27,14 +27,12 @@ class DioHelper {
     Json? params,
     Options? options,
   }) async {
-    print("Before");
     final response = await _dio.post(
       endpoint,
       data: body,
       queryParameters: params,
       options: options,
     );
-    print("response: $response");
     return response.data;
   }
 
@@ -44,7 +42,6 @@ class DioHelper {
     Json? params,
     Options? options,
   }) async {
-    print("Before");
     final dio =
         endpoint != "https://api.cloudinary.com/v1_1/dw7f2lwio/image/upload"
             ? _dio
@@ -55,7 +52,6 @@ class DioHelper {
       queryParameters: params,
       options: options,
     );
-    print("response: $response");
     return response.data;
   }
 
@@ -71,7 +67,6 @@ class DioHelper {
       queryParameters: params,
       options: options,
     );
-    print("response: $response");
     return response.data;
   }
 
@@ -87,7 +82,6 @@ class DioHelper {
       queryParameters: params,
       options: options,
     );
-    print("response: $response");
     return response.data;
   }
 
@@ -103,7 +97,6 @@ class DioHelper {
       queryParameters: params,
       options: options,
     );
-    print("response: $response");
     return response.data;
   }
 }

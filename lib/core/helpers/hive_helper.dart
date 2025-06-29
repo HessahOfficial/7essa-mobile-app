@@ -31,7 +31,6 @@ class HiveHelper {
       locale = settingsBox.get(_localeKey);
       isFirstLaunch = settingsBox.get(_isFirstLaunchKey);
       isGoogleAuth = settingsBox.get(_isGoogleAuthKey);
-      print(" Google Auth: $isGoogleAuth");
     } catch (e) {
       print("hive init error: $e");
     }
@@ -40,7 +39,6 @@ class HiveHelper {
   Future<void> deleteBoxes() async {
     await Hive.deleteBoxFromDisk(_userBox);
     await Hive.deleteBoxFromDisk(_settingsBox);
-    print("deleted!");
   }
 
   Future<void> changeTheme({required bool isDark}) async {

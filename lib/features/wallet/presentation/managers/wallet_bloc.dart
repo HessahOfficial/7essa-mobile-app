@@ -30,7 +30,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     selectedPaymentOption = selectedOptionIndex;
     switch (selectedOptionIndex) {
       case 0:
-        selectedPaymentMethod = "instapay";
+        selectedPaymentMethod = "instaPay";
         break;
       case 1:
         selectedPaymentMethod = "VodafoneCash";
@@ -47,7 +47,23 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     showModalBottomSheet(
       context: screenContext,
       backgroundColor: Theme.of(screenContext).scaffoldBackgroundColor,
-      builder: (context) => CustomPaymentDialog(screenContext: screenContext),
+      builder:
+          (context) => CustomPaymentDialog(
+            screenContext: screenContext,
+            isDeposit: true,
+          ),
+    );
+  }
+
+  void showWithdrawDialog(BuildContext screenContext) {
+    showModalBottomSheet(
+      context: screenContext,
+      backgroundColor: Theme.of(screenContext).scaffoldBackgroundColor,
+      builder:
+          (context) => CustomPaymentDialog(
+            screenContext: screenContext,
+            isDeposit: false,
+          ),
     );
   }
 

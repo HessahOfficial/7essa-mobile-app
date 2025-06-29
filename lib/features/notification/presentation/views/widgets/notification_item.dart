@@ -52,7 +52,7 @@ class _NotificationItemState extends State<NotificationItem> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.notification.type,
+                        widget.notification.type!,
                         style: TextStyle(
                           color: AppColors.gray,
                           fontSize: 15,
@@ -60,7 +60,7 @@ class _NotificationItemState extends State<NotificationItem> {
                         ),
                       ),
                       Text(
-                        widget.notification.title,
+                        widget.notification.title!,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -71,7 +71,7 @@ class _NotificationItemState extends State<NotificationItem> {
                       hide
                           ? Container()
                           : Text(
-                            widget.notification.description,
+                            widget.notification.message!,
                             style: TextStyle(fontWeight: FontWeight.w600),
                             overflow: TextOverflow.visible,
                             softWrap: true,

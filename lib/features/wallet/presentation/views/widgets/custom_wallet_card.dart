@@ -65,7 +65,7 @@ class CustomWalletCard extends StatelessWidget {
                           hide
                               ? "*******"
                               : (state is ShowBalanceSuccess
-                                  ? "${state.response.balance} EGP"
+                                  ? "${state.response.balance} ${S.of(context).egp}"
                                   : "*******"),
                           style: TextStyle(
                             color: Colors.white,
@@ -102,6 +102,10 @@ class CustomWalletCard extends StatelessWidget {
                           icon: Icons.add_box,
                         ),
                         CustomWalletButton(
+                          onTap:
+                              () => context
+                                  .read<WalletBloc>()
+                                  .showWithdrawDialog(screenContext),
                           title: S.of(context).withdraw,
                           icon: FontAwesomeIcons.moneyBill,
                           spacing: 10,

@@ -12,7 +12,7 @@ import 'package:hessa/core/widgets/custom_text_field.dart';
 import 'package:hessa/features/settings/presentation/managers/cloudinary_bloc.dart';
 import 'package:hessa/generated/l10n.dart';
 
-class PaymentGatewayForm extends StatefulWidget {
+class PaymentDepositForm extends StatefulWidget {
   final TextEditingController amountController;
   final FocusNode amountFocusNode;
   final File? image;
@@ -21,7 +21,7 @@ class PaymentGatewayForm extends StatefulWidget {
 
   final GlobalKey<FormState> formKey;
 
-  const PaymentGatewayForm({
+  const PaymentDepositForm({
     super.key,
     required this.amountController,
     required this.amountFocusNode,
@@ -31,10 +31,10 @@ class PaymentGatewayForm extends StatefulWidget {
   });
 
   @override
-  State<PaymentGatewayForm> createState() => _PaymentGatewayFormState();
+  State<PaymentDepositForm> createState() => _PaymentDepositFormState();
 }
 
-class _PaymentGatewayFormState extends State<PaymentGatewayForm> {
+class _PaymentDepositFormState extends State<PaymentDepositForm> {
   @override
   Widget build(BuildContext context) {
     bool isDark = getIt.get<HiveHelper>().isDark ?? false;
@@ -63,7 +63,9 @@ class _PaymentGatewayFormState extends State<PaymentGatewayForm> {
             placeholder: S.of(context).amountPlaceholder,
             type: TextInputType.number,
             validator: (value) {
-              return Validator(context: context).validateAmount(amount: value!);
+              return Validator(
+                context: context,
+              ).validateAmount(amount: value!, paymentType: "deposit");
             },
           ),
           BlocBuilder<CloudinaryBloc, CloudinaryState>(
@@ -108,7 +110,7 @@ class _PaymentGatewayFormState extends State<PaymentGatewayForm> {
                         () => context
                             .read<CloudinaryBloc>()
                             .showAvatarBottomSheet(context: context),
-                    width: 100,
+                    width: 120,
                     height: 50,
                     text: S.of(context).uploadBill,
                     textColor: Colors.white,

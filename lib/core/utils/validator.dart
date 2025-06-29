@@ -43,9 +43,9 @@ class Validator {
     String? message;
     RegExp regex = RegExp(r'^.{3,}$');
     if (fullname.trim().isEmpty) {
-      message = "Fullname field is required!";
+      message = S.of(context).requiredFullname;
     } else if (!regex.hasMatch(fullname)) {
-      message = "Fullname consists of at least 3 characters!";
+      message = S.of(context).invalidFullname;
     }
     return message;
   }
@@ -61,12 +61,49 @@ class Validator {
     return message;
   }
 
-  String? validateAmount({required String amount}) {
+  String? validateVodafoneNumber({required String phone}) {
+    String? message;
+    RegExp regex = RegExp(r'^010\d{8}$');
+    if (phone.trim().isEmpty) {
+      message = S.of(context).requiredPhone;
+    } else if (!regex.hasMatch(phone)) {
+      message = S.of(context).invalidVodafone;
+    }
+    return message;
+  }
+
+  String? validateInstapay({required String instapay}) {
+    String? message;
+    if (instapay.trim().isEmpty) {
+      message = S.of(context).requiredInstapay;
+    } else if (!instapay.endsWith("@instapay")) {
+      message = S.of(context).invalidInstapay;
+    }
+    return message;
+  }
+
+  String? validateCreditCard({required String credit}) {
+    String? message;
+    RegExp regex = RegExp(r'^\d{14}$');
+    if (credit.trim().isEmpty) {
+      message = S.of(context).requiredCredit;
+    } else if (!regex.hasMatch(credit)) {
+      message = S.of(context).invalidCredit;
+    }
+    return message;
+  }
+
+  String? validateAmount({
+    required String amount,
+    required String paymentType,
+  }) {
     String? message;
     if (amount.trim().isEmpty) {
       message = S.of(context).requiredAmount;
-    } else if (int.parse(amount) < 1000) {
+    } else if (paymentType == "deposit" && int.parse(amount) < 1000) {
       message = S.of(context).invalidAmount;
+    } else if (paymentType == "withdraw" && int.parse(amount) == 0) {
+      message = S.of(context).invalidAmount2;
     }
     return message;
   }

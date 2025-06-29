@@ -33,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 5), () {
       final currentUser = getIt.get<HiveHelper>().currentUser;
       final tokens = getIt.get<HiveHelper>().token;
-      print("current user: $currentUser");
       if (currentUser != null) {
         bool isExpired = verifyToken(accessToken: tokens!.accessToken!);
         if (isExpired) {

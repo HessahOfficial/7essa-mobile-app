@@ -6,6 +6,7 @@ import 'package:hessa/features/auth/data/repositories/auth_service.dart';
 import 'package:hessa/features/contact/data/repositories/contact_service.dart';
 import 'package:hessa/features/home/data/repositories/property_service.dart';
 import 'package:hessa/features/investment/data/repositories/investment_service.dart';
+import 'package:hessa/features/notification/data/repositories/notification_service.dart';
 import 'package:hessa/features/settings/data/repositories/cloudinary_service.dart';
 import 'package:hessa/features/settings/data/repositories/user_service.dart';
 import 'package:hessa/features/wallet/data/repositories/wallet_service.dart';
@@ -44,5 +45,9 @@ void setupServices() {
 
   getIt.registerSingleton<ContactService>(
     ContactService(helper: getIt.get<DioHelper>()),
+  );
+
+  getIt.registerSingleton<NotificationService>(
+    NotificationService(helper: getIt.get<DioHelper>()),
   );
 }

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hessa/core/helpers/hive_helper.dart';
+import 'package:hessa/core/routes/app_routes.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/utils/lang.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/features/investment/data/models/investment_model.dart';
 import 'package:hessa/features/investment/presentation/managers/investment_bloc.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomInvestmentItem extends StatelessWidget {
   final InvestmentModel investment;
@@ -23,6 +26,7 @@ class CustomInvestmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDark = getIt.get<HiveHelper>().isDark ?? false;
+    bool arabic = isArabic();
 
     return Opacity(
       opacity: index == selectedIndex ? 1 : 0.5,
@@ -78,7 +82,7 @@ class CustomInvestmentItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${investment.sharePrice} EGP/Share",
+                            "${investment.sharePrice} ${S.of(context).egpPerShare}",
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color:
@@ -89,7 +93,13 @@ class CustomInvestmentItem extends StatelessWidget {
                           ),
                           if (index == selectedIndex)
                             InkWell(
-                              onTap: () {},
+                              onTap:
+                                  () => context.push(
+                                    AppRoutes.propertyView,
+                                    extra: {
+                                      "propertyId": investment.propertyId!.id!,
+                                    },
+                                  ),
                               borderRadius: BorderRadius.circular(10),
                               splashColor: AppColors.gray.withOpacity(0.1),
                               child: Container(
@@ -99,7 +109,10 @@ class CustomInvestmentItem extends StatelessWidget {
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                                 child: Icon(
-                                  Icons.double_arrow,
+                                  arabic
+                                      ? Icons.keyboard_double_arrow_left_rounded
+                                      : Icons
+                                          .keyboard_double_arrow_right_rounded,
                                   color: Colors.white,
                                 ),
                               ),

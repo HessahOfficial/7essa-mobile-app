@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hessa/core/themes/colors/app_colors.dart';
+
 import 'package:hessa/core/widgets/custom_button.dart';
 import 'package:hessa/features/home/data/models/get_all_properties_request.dart';
 import 'package:hessa/features/home/data/models/property_query_model.dart';
 import 'package:hessa/features/home/presentation/managers/search_bloc.dart';
-import 'package:hessa/features/home/presentation/views/widgets/custom_range_slider.dart';
 import 'package:hessa/features/home/presentation/views/widgets/custom_slider_list.dart';
 import 'package:hessa/features/home/presentation/views/widgets/custom_status_list.dart';
 import 'package:hessa/features/home/presentation/views/widgets/rooms_filter_form.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   final String? title;
@@ -215,7 +215,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                           }),
                     ),
                     Text(
-                      "Rented",
+                      S.of(context).rented,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -268,7 +268,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   },
                   width: 100,
                   height: 30,
-                  text: "Apply",
+                  text: S.of(context).apply,
                   textColor: Colors.white,
                 ),
               ],

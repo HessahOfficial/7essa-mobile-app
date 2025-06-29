@@ -13,6 +13,7 @@ import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.d
 import 'package:hessa/features/home/data/models/add_to_favourites_request.dart';
 import 'package:hessa/features/home/data/models/property_model.dart';
 import 'package:hessa/features/home/presentation/managers/property_bloc.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomPropertyCard extends StatelessWidget {
   final PropertyModel property;
@@ -113,7 +114,7 @@ class CustomPropertyCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "${property.pricePerShare} LE/Share",
+                      "${property.pricePerShare} ${S.of(context).egpPerShare}",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Row(
@@ -122,14 +123,16 @@ class CustomPropertyCard extends StatelessWidget {
                         Row(
                           children: [
                             Icon(Icons.square_foot),
-                            Text("${property.area} sqft"),
+                            Text(
+                              "${property.area} ${S.of(context).squaredMeters}",
+                            ),
                           ],
                         ),
                         Row(
                           spacing: 1,
                           children: [
                             Text(
-                              "${property.numberOfRooms} rooms",
+                              "${property.numberOfRooms} ${S.of(context).rooms}",
                               style: TextStyle(color: AppColors.gray),
                             ),
                           ],

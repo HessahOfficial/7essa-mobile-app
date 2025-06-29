@@ -70,6 +70,8 @@ dependencies:
   speech_to_text:
   permission_handler:
   clarity_flutter: ^1.0.0
+  path_provider: ^2.1.1
+  open_file: ^3.5.10
 
 dev_dependencies:
   flutter_test:
@@ -103,6 +105,7 @@ flutter:
   assets:
     - assets/images/
     - assets/chat/dialog_flow_auth.json
+    - assets/Hessah_Terms_and_Conditions.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

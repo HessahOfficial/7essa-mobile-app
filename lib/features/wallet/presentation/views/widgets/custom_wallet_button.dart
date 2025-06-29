@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
-import 'package:hive/hive.dart';
 
 class CustomWalletButton extends StatelessWidget {
   final String title;
