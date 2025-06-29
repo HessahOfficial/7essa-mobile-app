@@ -12,6 +12,7 @@ import 'package:hessa/cubits/google/google_cubit.dart';
 import 'package:hessa/features/auth/presentation/managers/auth_bloc.dart';
 import 'package:hessa/features/settings/presentation/views/widgets/locale_switch.dart';
 import 'package:hessa/features/settings/presentation/views/widgets/setting_item.dart';
+import 'package:hessa/features/settings/presentation/views/widgets/terms_and_conditions.dart';
 import 'package:hessa/features/settings/presentation/views/widgets/theme_switch.dart';
 import 'package:hessa/generated/l10n.dart';
 
@@ -62,17 +63,6 @@ class SettingsScreen extends StatelessWidget {
                           onTap: () => context.push(AppRoutes.profileView),
                         ),
                         SettingItem(
-                          title: S.of(context).privacyPolicy,
-                          backgroundColor: AppColors.orange100,
-                          iconWidget: Icon(
-                            FontAwesomeIcons.checkCircle,
-                            color: AppColors.orange,
-                            size: 20,
-                          ),
-                          onTap:
-                              () => context.push(AppRoutes.policyPrivacyView),
-                        ),
-                        SettingItem(
                           title: S.of(context).contactUs,
                           backgroundColor: AppColors.purple,
                           icon: Icons.alternate_email_rounded,
@@ -99,6 +89,7 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         ThemeSwitch(title: S.of(context).darkmode),
                         LocaleSwitch(title: S.of(context).locale),
+                        TermsAndConditions(),
                       ],
                     ),
                   ],

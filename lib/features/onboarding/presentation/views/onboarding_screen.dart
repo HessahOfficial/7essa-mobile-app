@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/routes/app_routes.dart';
-import 'package:hessa/core/themes/colors/app_colors.dart';
-import 'package:hessa/core/utils/service_locator.dart';
 
 import 'package:hessa/core/widgets/custom_text_button.dart';
 import 'package:hessa/features/onboarding/presentation/managers/launch_cubit.dart';
@@ -55,19 +52,11 @@ class OnboardingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomTextButton(
-                    text: S.of(context).skip,
-                    color: AppColors.gray,
-                    onTap:
-                        () => context.read<LaunchCubit>().launch(
-                          context: context,
-                        ),
-                  ),
-                  CustomTextButton(
                     text: S.of(context).next,
-                    onTap:
-                        () => context.read<LaunchCubit>().launch(
-                          context: context,
-                        ),
+                    onTap: () {
+                      context.read<LaunchCubit>().launch(context: context);
+                      context.go(AppRoutes.loginView);
+                    },
                   ),
                 ],
               ),

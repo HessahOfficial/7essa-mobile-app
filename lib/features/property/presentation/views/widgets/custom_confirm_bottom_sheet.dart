@@ -90,41 +90,44 @@ class _CustomConfirmBottomSheetState extends State<CustomConfirmBottomSheet> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Price per share: ${widget.property.pricePerShare} EGP/Share",
+                            "${S.of(context).pricePerShare}: ${widget.property.pricePerShare} ${S.of(context).egpPerShare}",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Available Shares: ${widget.property.availableShares} Shares",
+                            "${S.of(context).availableShares}: ${widget.property.availableShares} ${S.of(context).shares}",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Number of shares: $numberOfShares Shares",
+                            "${S.of(context).numberOfShares}: $numberOfShares ${S.of(context).shares}",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Total: ${numberOfShares * widget.property.pricePerShare!} EGP",
+                            "${S.of(context).total}: ${numberOfShares * widget.property.pricePerShare!} ${S.of(context).egp}",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              CustomCounterButton(
-                                value: numberOfShares,
-                                decrement: () {
-                                  if (numberOfShares > 1) {
-                                    setState(() {
-                                      numberOfShares--;
-                                    });
-                                  }
-                                },
-                                increment: () {
-                                  if (numberOfShares <
-                                      widget.property.availableShares!) {
-                                    setState(() {
-                                      numberOfShares++;
-                                    });
-                                  }
-                                },
+                              Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: CustomCounterButton(
+                                  value: numberOfShares,
+                                  decrement: () {
+                                    if (numberOfShares > 1) {
+                                      setState(() {
+                                        numberOfShares--;
+                                      });
+                                    }
+                                  },
+                                  increment: () {
+                                    if (numberOfShares <
+                                        widget.property.availableShares!) {
+                                      setState(() {
+                                        numberOfShares++;
+                                      });
+                                    }
+                                  },
+                                ),
                               ),
                             ],
                           ),
@@ -146,7 +149,7 @@ class _CustomConfirmBottomSheetState extends State<CustomConfirmBottomSheet> {
                         },
                         width: 100,
                         height: 30,
-                        text: "Confirm",
+                        text: S.of(context).confirm,
                         textColor: Colors.white,
                       ),
                     ),

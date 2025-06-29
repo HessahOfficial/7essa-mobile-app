@@ -3,6 +3,7 @@ import 'package:hessa/core/utils/type_aliases.dart';
 class PropertyQueryModel {
   String? title;
   String? status;
+  String? ownerId;
   int? numberOfRooms;
   int? numberOfbeds;
   int? numberOfKitchens;
@@ -41,12 +42,14 @@ class PropertyQueryModel {
     this.numberOfbeds,
     this.status,
     this.title,
+    this.ownerId,
   });
 
   Json toJson() {
     return {
       "title": title,
       "status": status,
+      "ownerId": ownerId,
       "numOfKitchens": numberOfKitchens,
       "numOfBathrooms": numberOfBathrooms,
       "numOfBeds": numberOfbeds,

@@ -15,7 +15,9 @@ abstract class Endpoints {
   static const changeUserPin = "/users/pin/:userId";
   static const becomeInvestorUser = "/users/investor/:userId";
   static const getAllPartners = "/users/partners";
+  static const getAllNotifications = "/users/notifications/my";
   static const getAllUserInvestments = "/investments";
+  static const getInvestment = "/investments/:investmentId";
   static const makeUserInvestment = "/investments/:propertyId";
   static const createPayment = "/payments/create";
   static const getPaymentHistory = "/payments/history";

@@ -190,7 +190,7 @@ class _MatchedPropertyScreenState extends State<MatchedPropertyScreen> {
                                 filteredProperties.isEmpty
                             ? SliverToBoxAdapter(
                               child: Text(
-                                "No results exist!",
+                                S.of(context).noResults,
                                 style: TextStyle(fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                               ),

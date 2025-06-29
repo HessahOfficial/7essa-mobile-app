@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart' as property;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -25,9 +24,8 @@ import 'package:hessa/generated/l10n.dart';
 
 class PropertyScreen extends StatefulWidget {
   final String propertyId;
-  final InvestmentModel? investment;
 
-  const PropertyScreen({super.key, required this.propertyId, this.investment});
+  const PropertyScreen({super.key, required this.propertyId});
 
   @override
   State<PropertyScreen> createState() => _PropertyScreenState();
@@ -72,7 +70,7 @@ class _PropertyScreenState extends State<PropertyScreen> {
             } else if (state is MakeInvestmentSuccess) {
               showSnackBar(
                 context: context,
-                message: "Investment operation is done successfully!",
+                message: S.of(context).investmentSuccess,
                 type: 0,
               );
             }

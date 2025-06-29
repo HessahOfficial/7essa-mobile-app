@@ -100,11 +100,11 @@ class S {
     );
   }
 
-  /// `Privacy & Policy`
-  String get privacyPolicy {
+  /// `Terms & Conditions`
+  String get termsAndConditions {
     return Intl.message(
-      'Privacy & Policy',
-      name: 'privacyPolicy',
+      'Terms & Conditions',
+      name: 'termsAndConditions',
       desc: '',
       args: [],
     );
@@ -1020,6 +1020,456 @@ class S {
     return Intl.message(
       'PIN code consists of 6 digits doesn\'t start with 0!',
       name: 'invalidPin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Credit card number`
+  String get creditPlaceholder {
+    return Intl.message(
+      'Credit card number',
+      name: 'creditPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Instapay account`
+  String get instapayPlaceholder {
+    return Intl.message(
+      'Instapay account',
+      name: 'instapayPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount must be greater than 0`
+  String get invalidAmount2 {
+    return Intl.message(
+      'Amount must be greater than 0',
+      name: 'invalidAmount2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Credit card number is required!`
+  String get requiredCredit {
+    return Intl.message(
+      'Credit card number is required!',
+      name: 'requiredCredit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid credit/debit card number!`
+  String get invalidCredit {
+    return Intl.message(
+      'Invalid credit/debit card number!',
+      name: 'invalidCredit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Instapay account is required!`
+  String get requiredInstapay {
+    return Intl.message(
+      'Instapay account is required!',
+      name: 'requiredInstapay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account must end with @instapay`
+  String get invalidInstapay {
+    return Intl.message(
+      'Your account must end with @instapay',
+      name: 'invalidInstapay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vodafone numbers start with 010 and consists of 11 digits!`
+  String get invalidVodafone {
+    return Intl.message(
+      'Vodafone numbers start with 010 and consists of 11 digits!',
+      name: 'invalidVodafone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fullname field is required!`
+  String get requiredFullname {
+    return Intl.message(
+      'Fullname field is required!',
+      name: 'requiredFullname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fullname consists of at least 3 characters!`
+  String get invalidFullname {
+    return Intl.message(
+      'Fullname consists of at least 3 characters!',
+      name: 'invalidFullname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `EGP`
+  String get egp {
+    return Intl.message('EGP', name: 'egp', desc: '', args: []);
+  }
+
+  /// `EGP/Share`
+  String get egpPerShare {
+    return Intl.message('EGP/Share', name: 'egpPerShare', desc: '', args: []);
+  }
+
+  /// `EGP/Year`
+  String get egpPerYear {
+    return Intl.message('EGP/Year', name: 'egpPerYear', desc: '', args: []);
+  }
+
+  /// `Investment operation is done successfully!`
+  String get investmentSuccess {
+    return Intl.message(
+      'Investment operation is done successfully!',
+      name: 'investmentSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get available {
+    return Intl.message('Available', name: 'available', desc: '', args: []);
+  }
+
+  /// `Funded`
+  String get funded {
+    return Intl.message('Funded', name: 'funded', desc: '', args: []);
+  }
+
+  /// `Exited`
+  String get exited {
+    return Intl.message('Exited', name: 'exited', desc: '', args: []);
+  }
+
+  /// `Rented`
+  String get rented {
+    return Intl.message('Rented', name: 'rented', desc: '', args: []);
+  }
+
+  /// `Squared Meters`
+  String get squaredMeters {
+    return Intl.message(
+      'Squared Meters',
+      name: 'squaredMeters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Visit`
+  String get visit {
+    return Intl.message('Visit', name: 'visit', desc: '', args: []);
+  }
+
+  /// `Shares:`
+  String get sharesSeciton {
+    return Intl.message('Shares:', name: 'sharesSeciton', desc: '', args: []);
+  }
+
+  /// `Rooms:`
+  String get roomsSeciton {
+    return Intl.message('Rooms:', name: 'roomsSeciton', desc: '', args: []);
+  }
+
+  /// `Rental Incomes:`
+  String get rentalSeciton {
+    return Intl.message(
+      'Rental Incomes:',
+      name: 'rentalSeciton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Benefits:`
+  String get benefitsSeciton {
+    return Intl.message(
+      'Benefits:',
+      name: 'benefitsSeciton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invest NOW!`
+  String get investNow {
+    return Intl.message('Invest NOW!', name: 'investNow', desc: '', args: []);
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message('Price', name: 'price', desc: '', args: []);
+  }
+
+  /// `Price/Share`
+  String get priceShare {
+    return Intl.message('Price/Share', name: 'priceShare', desc: '', args: []);
+  }
+
+  /// `Price per share`
+  String get pricePerShare {
+    return Intl.message(
+      'Price per share',
+      name: 'pricePerShare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment per year`
+  String get paymentPerYear {
+    return Intl.message(
+      'Payment per year',
+      name: 'paymentPerYear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available Shares`
+  String get availableShares {
+    return Intl.message(
+      'Available Shares',
+      name: 'availableShares',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price Sold`
+  String get priceSold {
+    return Intl.message('Price Sold', name: 'priceSold', desc: '', args: []);
+  }
+
+  /// `Shares`
+  String get shares {
+    return Intl.message('Shares', name: 'shares', desc: '', args: []);
+  }
+
+  /// `Estimated to exit on`
+  String get estimatedExitdate {
+    return Intl.message(
+      'Estimated to exit on',
+      name: 'estimatedExitdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rooms`
+  String get rooms {
+    return Intl.message('Rooms', name: 'rooms', desc: '', args: []);
+  }
+
+  /// `Bathrooms`
+  String get bathrooms {
+    return Intl.message('Bathrooms', name: 'bathrooms', desc: '', args: []);
+  }
+
+  /// `Beds`
+  String get beds {
+    return Intl.message('Beds', name: 'beds', desc: '', args: []);
+  }
+
+  /// `Kitchens`
+  String get kitchens {
+    return Intl.message('Kitchens', name: 'kitchens', desc: '', args: []);
+  }
+
+  /// `Rental Name`
+  String get rentalName {
+    return Intl.message('Rental Name', name: 'rentalName', desc: '', args: []);
+  }
+
+  /// `Income`
+  String get income {
+    return Intl.message('Income', name: 'income', desc: '', args: []);
+  }
+
+  /// `From`
+  String get from {
+    return Intl.message('From', name: 'from', desc: '', args: []);
+  }
+
+  /// `To`
+  String get to {
+    return Intl.message('To', name: 'to', desc: '', args: []);
+  }
+
+  /// `Partner doesn't have properties!`
+  String get emptyPartnerProperties {
+    return Intl.message(
+      'Partner doesn\'t have properties!',
+      name: 'emptyPartnerProperties',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Month/Day`
+  String get monthDay {
+    return Intl.message('Month/Day', name: 'monthDay', desc: '', args: []);
+  }
+
+  /// `Number of shares`
+  String get numberOfShares {
+    return Intl.message(
+      'Number of shares',
+      name: 'numberOfShares',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total`
+  String get total {
+    return Intl.message('Total', name: 'total', desc: '', args: []);
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message('Confirm', name: 'confirm', desc: '', args: []);
+  }
+
+  /// `Total Investments`
+  String get totalInvestments {
+    return Intl.message(
+      'Total Investments',
+      name: 'totalInvestments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no investments yet, start investing in some property!`
+  String get emptyInvetsments {
+    return Intl.message(
+      'There are no investments yet, start investing in some property!',
+      name: 'emptyInvetsments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are not Investor yet! you need to become investor first.`
+  String get notInvestorYet {
+    return Intl.message(
+      'You are not Investor yet! you need to become investor first.',
+      name: 'notInvestorYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get ok {
+    return Intl.message('Ok', name: 'ok', desc: '', args: []);
+  }
+
+  /// `Partner's Properties:`
+  String get propertiesOfPartners {
+    return Intl.message(
+      'Partner\'s Properties:',
+      name: 'propertiesOfPartners',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results exist!`
+  String get noResults {
+    return Intl.message(
+      'No results exist!',
+      name: 'noResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hey`
+  String get overlayTextPart1 {
+    return Intl.message('Hey', name: 'overlayTextPart1', desc: '', args: []);
+  }
+
+  /// `, ask me anything`
+  String get overlayTextPart2 {
+    return Intl.message(
+      ', ask me anything',
+      name: 'overlayTextPart2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bedrooms`
+  String get bedrooms {
+    return Intl.message('Bedrooms', name: 'bedrooms', desc: '', args: []);
+  }
+
+  /// `Apply`
+  String get apply {
+    return Intl.message('Apply', name: 'apply', desc: '', args: []);
+  }
+
+  /// `UNIT`
+  String get unit {
+    return Intl.message('UNIT', name: 'unit', desc: '', args: []);
+  }
+
+  /// `Rental Income`
+  String get rentalIncome {
+    return Intl.message(
+      'Rental Income',
+      name: 'rentalIncome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Area`
+  String get area {
+    return Intl.message('Area', name: 'area', desc: '', args: []);
+  }
+
+  /// `Phone number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no notifications yet!`
+  String get noNotificationsYet {
+    return Intl.message(
+      'There are no notifications yet!',
+      name: 'noNotificationsYet',
       desc: '',
       args: [],
     );

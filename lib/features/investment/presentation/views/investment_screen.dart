@@ -51,7 +51,6 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
   @override
   Widget build(BuildContext context) {
     bool isDark = getIt.get<HiveHelper>().isDark ?? false;
-    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -109,28 +108,8 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
               List<InvestmentModel> investments =
                   context.read<InvestmentBloc>().investments;
 
-              return state is GetAllInvestmentsSuccess ||
-                      state is DisplayInvestment
-                  ? SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      spacing: 25,
-                      children: [
-                        CustomPieChart(
-                          currentInvestment: investments[selectedIndex],
-                        ),
-                        Text(
-                          investments[selectedIndex].propertyId!.title!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                        CustomInvestmentsList(investments: investments),
-                      ],
-                    ),
-                  )
-                  : Align(
+              return state is GetAllInvestmentsLoading
+                  ? Align(
                     alignment: Alignment.topCenter,
                     child: Padding(
                       padding: const EdgeInsets.all(10),
@@ -141,6 +120,38 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
                                 : Theme.of(context).colorScheme.primary,
                       ),
                     ),
+                  )
+                  : SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child:
+                        investments.isEmpty
+                            ? Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  S.of(context).emptyInvetsments,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            )
+                            : Column(
+                              spacing: 25,
+                              children: [
+                                CustomPieChart(
+                                  currentInvestment: investments[selectedIndex],
+                                ),
+                                Text(
+                                  investments[selectedIndex].propertyId!.title!,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                CustomInvestmentsList(investments: investments),
+                              ],
+                            ),
                   );
             },
           );

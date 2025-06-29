@@ -6,7 +6,9 @@ class GetAllFavouritesResponse {
 
   GetAllFavouritesResponse.fromJson(Json json) {
     json["favourites"].forEach(
-      (property) => {favourites.add(PropertyModel.fromJson(property))},
+      (property) => {
+        favourites.add(PropertyModel.fromJson(property, isFavourite: true)),
+      },
     );
   }
 }

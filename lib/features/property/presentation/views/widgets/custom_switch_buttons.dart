@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomSwitchButtons extends StatelessWidget {
   final bool isPrice;
@@ -30,7 +31,7 @@ class CustomSwitchButtons extends StatelessWidget {
               color: isPrice ? Colors.teal.withOpacity(0.5) : null,
             ),
             child: Text(
-              "Price",
+              S.of(context).price,
               style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
             ),
           ),
@@ -47,7 +48,7 @@ class CustomSwitchButtons extends StatelessWidget {
               color: !isPrice ? Colors.amber.withOpacity(0.5) : null,
             ),
             child: Text(
-              "Price/Share",
+              S.of(context).priceShare,
               style: TextStyle(
                 color: Colors.amber,
                 fontWeight: FontWeight.bold,

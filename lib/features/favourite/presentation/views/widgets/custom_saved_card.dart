@@ -7,6 +7,7 @@ import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.dart';
 import 'package:hessa/features/favourite/presentation/views/widgets/custom_delete_single_popup.dart';
 import 'package:hessa/features/home/data/models/property_model.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomSavedCard extends StatefulWidget {
   final PropertyModel property;
@@ -100,12 +101,16 @@ class _CustomSavedCardState extends State<CustomSavedCard> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Text("${widget.property.pricePerShare} LE/Share"),
+                    Text(
+                      "${widget.property.pricePerShare} ${S.of(context).egpPerShare}",
+                    ),
                     Row(
                       spacing: 5,
                       children: [
                         Icon(Icons.square_foot, size: 20),
-                        Text('${widget.property.area} sqft'),
+                        Text(
+                          '${widget.property.area} ${S.of(context).squaredMeters}',
+                        ),
                         Icon(Icons.king_bed, size: 20),
                         Text("${widget.property.numberOfbeds ?? 0}"),
                         Icon(Icons.bathtub, size: 20),

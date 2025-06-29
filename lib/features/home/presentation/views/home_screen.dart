@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hessa/features/home/data/models/property_query_model.dart';
 import 'package:hessa/features/home/presentation/managers/search_bloc.dart';
+import 'package:hessa/generated/l10n.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'package:permission_handler/permission_handler.dart';
 import 'package:hessa/chat-bot/chatbot.dart';
 
 import 'package:hessa/core/helpers/hive_helper.dart';
@@ -50,118 +50,18 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<SearchBloc>().setQuery(query: PropertyQueryModel());
   }
 
-  // Future<void> _requestMicrophonePermission() async {
-  //   PermissionStatus status = await Permission.microphone.status;
-  //   if (!status.isGranted) {
-  //     // Show dialog to request permission
-  //     if (mounted) {
-  //       showDialog(
-  //         context: context,
-  //         builder:
-  //             (context) => AlertDialog(
-  //               title: Text('Microphone Permission'),
-  //               content: Text(
-  //                 'For better communication with the Hessah chatbot, please allow microphone access to enable voice commands like "Hi chat".',
-  //               ),
-  //               actions: [
-  //                 TextButton(
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                     _stopListening(); // Don't listen if permission is denied
-  //                   },
-  //                   child: Text('Deny'),
-  //                 ),
-  //                 TextButton(
-  //                   onPressed: () async {
-  //                     Navigator.pop(context);
-  //                     PermissionStatus newStatus =
-  //                         await Permission.microphone.request();
-  //                     if (newStatus.isGranted) {
-  //                       _initializeSpeech();
-  //                     } else {
-  //                       print('Microphone permission denied');
-  //                     }
-  //                   },
-  //                   child: Text('Allow'),
-  //                 ),
-  //               ],
-  //             ),
-  //       );
-  //     }
-  //   } else {
-  //     _initializeSpeech();
-  //   }
-  // }
-
-  // Initialize speech recognition
-  // Future<void> _initializeSpeech() async {
-  //   bool available = await _speech.initialize(
-  //     onStatus: (status) {
-  //       setState(() {
-  //         _isListening = status == 'listening';
-  //       });
-  //     },
-  //     onError: (error) {
-  //       print('Speech error: $error');
-  //       setState(() {
-  //         _isListening = false;
-  //       });
-  //       // Restart listening on error to ensure continuous listening
-  //       if (mounted) {
-  //         _startListening();
-  //       }
-  //     },
-  //   );
-  //   if (available && mounted) {
-  //     _startListening();
-  //   }
-  // }
-
-  // Start listening for "Hi Hessah"
-  // void _startListening() {
-  //   if (!_isListening) {
-  //     _speech.listen(
-  //       onResult: (result) {
-  //         if (result.recognizedWords.toLowerCase().contains('hi chat')) {
-  //           _stopListening();
-  //           _openChatbot();
-  //         }
-  //       },
-  //       localeId: 'en_US', // Adjust locale as needed
-  //       listenMode: stt.ListenMode.confirmation,
-  //       cancelOnError: true,
-  //     );
-  //     setState(() {
-  //       _isListening = true;
-  //     });
-  //   }
-  // }
-
-  // Stop listening
-  // void _stopListening() {
-  //   if (_isListening) {
-  //     _speech.stop();
-  //     setState(() {
-  //       _isListening = false;
-  //     });
-  //   }
-  // }
-
   // Schedule the welcome message
   void _scheduleWelcomeMessage() async {
     final hiveHelper = getIt.get<HiveHelper>();
     final user = await hiveHelper.getCurrentUser();
     final username = user?.username ?? 'User';
 
-    print('Scheduling message for username: $username');
     Timer(Duration(seconds: 1), () {
       if (mounted) {
-        print('Attempting to show message overlay');
         _showMessageOverlay(username);
       }
     });
     Timer(Duration(seconds: 3), () {
-      print('Removing message overlay');
       _overlayEntry?.remove();
       _overlayEntry = null;
     });
@@ -174,13 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
     final renderBox = _fabKey.currentContext?.findRenderObject() as RenderBox?;
 
     if (renderBox == null || !renderBox.attached) {
-      print('RenderBox is null or not attached, skipping overlay');
       return;
     }
 
     final offset = renderBox.localToGlobal(Offset.zero);
     final fabSize = 56.0;
-    final message = "Hey $username, ask me anything";
+    final message =
+        "${S.of(context).overlayTextPart1} $username${S.of(context).overlayTextPart2}";
 
     _overlayEntry = OverlayEntry(
       builder:
@@ -226,7 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     overlay.insert(_overlayEntry!);
-    print('Overlay inserted successfully');
   }
 
   // Navigate to chatbot
@@ -244,16 +143,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     }
-  }
-
-  @override
-  void dispose() {
-    // _overlayEntry?.remove();
-    // _overlayEntry = null;
-    // // _stopListening();
-    // _speech.cancel();
-    // widget.searchController.dispose();
-    super.dispose();
   }
 
   @override

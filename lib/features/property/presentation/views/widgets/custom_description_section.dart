@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hessa/features/home/data/models/property_model.dart';
 import 'package:hessa/features/property/presentation/managers/location_cubit.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomDescriptionSection extends StatelessWidget {
   final PropertyModel property;
@@ -24,7 +25,7 @@ class CustomDescriptionSection extends StatelessWidget {
             InkWell(
               onTap: () {
                 context.read<LocationCubit>().openLocationLink(
-                  "https://maps.app.goo.gl/n3E7Ngk6EL2DrJpv9",
+                  property.locationLink!,
                 );
               },
               borderRadius: BorderRadius.circular(10),
@@ -43,7 +44,7 @@ class CustomDescriptionSection extends StatelessWidget {
           ],
         ),
         Text(
-          "${property.description!} (${property.area} squared meter)",
+          "${property.description!} (${property.area} ${S.of(context).squaredMeters})",
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
       ],

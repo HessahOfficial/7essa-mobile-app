@@ -3,7 +3,6 @@ import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/themes/light_theme.dart';
 import 'package:hessa/core/utils/service_locator.dart';
-import 'package:hessa/features/home/presentation/views/widgets/filter_bottom_sheet.dart';
 import 'package:hessa/generated/l10n.dart';
 
 class CustomSearchBar extends StatefulWidget {

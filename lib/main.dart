@@ -8,6 +8,8 @@ import 'package:hessa/features/contact/presentation/managers/contact_bloc.dart';
 import 'package:hessa/features/home/presentation/managers/search_bloc.dart';
 import 'package:hessa/features/investment/data/repositories/investment_service.dart';
 import 'package:hessa/features/investment/presentation/managers/investment_bloc.dart';
+import 'package:hessa/features/notification/data/repositories/notification_service.dart';
+import 'package:hessa/features/notification/presentation/managers/bloc/notification_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hessa/generated/l10n.dart';
 
@@ -100,6 +102,11 @@ void main() async {
             create:
                 (context) => ContactBloc(service: getIt.get<ContactService>()),
           ),
+          BlocProvider<NotificationBloc>(
+            create:
+                (context) =>
+                    NotificationBloc(service: getIt.get<NotificationService>()),
+          ),
         ],
 
         child: MyApp(),
@@ -117,7 +124,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (bccontext, state) {
         return MaterialApp.router(
-          locale: Locale(getIt.get<HiveHelper>().locale ?? "ar"),
+          locale: Locale(getIt.get<HiveHelper>().locale ?? "en"),
           localizationsDelegates: [
             S.delegate,
             GlobalMaterialLocalizations.delegate,

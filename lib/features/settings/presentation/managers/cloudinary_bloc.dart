@@ -9,7 +9,6 @@ import 'package:hessa/features/settings/data/models/upload_image_response.dart';
 import 'package:hessa/features/settings/data/repositories/cloudinary_service.dart';
 import 'package:hessa/features/settings/presentation/views/widgets/avatar_bottom_sheet.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
 
 part 'cloudinary_event.dart';
 part 'cloudinary_state.dart';

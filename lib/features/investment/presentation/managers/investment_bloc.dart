@@ -14,7 +14,7 @@ import 'package:hessa/features/investment/data/models/make_investment_response.d
 import 'package:hessa/features/investment/data/repositories/investment_service.dart';
 import 'package:hessa/features/property/presentation/views/widgets/custom_confirm_bottom_sheet.dart';
 import 'package:hessa/features/settings/presentation/views/widgets/custom_info_popup.dart';
-import 'package:path/path.dart';
+import 'package:hessa/generated/l10n.dart';
 
 part 'investment_event.dart';
 part 'investment_state.dart';
@@ -71,9 +71,8 @@ class InvestmentBloc extends Bloc<InvestmentEvent, InvestmentState> {
             (context) => CustomInfoPopup(
               icon: Icons.cancel_rounded,
               height: 170,
-              message:
-                  "You are not Investor yet! you need to become investor first.",
-              textButton: "Ok",
+              message: S.of(context).notInvestorYet,
+              textButton: S.of(context).ok,
               onPressed: () => screenContext.pop(),
             ),
       );

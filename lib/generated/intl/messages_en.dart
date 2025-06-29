@@ -27,7 +27,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "all": MessageLookupByLibrary.simpleMessage("ALL"),
     "amountPlaceholder": MessageLookupByLibrary.simpleMessage("Amount"),
+    "apply": MessageLookupByLibrary.simpleMessage("Apply"),
+    "area": MessageLookupByLibrary.simpleMessage("Area"),
+    "available": MessageLookupByLibrary.simpleMessage("Available"),
+    "availableShares": MessageLookupByLibrary.simpleMessage("Available Shares"),
     "bankTransfer": MessageLookupByLibrary.simpleMessage("BANK"),
+    "bathrooms": MessageLookupByLibrary.simpleMessage("Bathrooms"),
     "becomInvestorNote": MessageLookupByLibrary.simpleMessage(
       "Once you save the information, you are agreed to the terms & conditions.",
     ),
@@ -41,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "becomeInvestorWithUs": MessageLookupByLibrary.simpleMessage(
       "BECOME INVESTOR",
     ),
+    "bedrooms": MessageLookupByLibrary.simpleMessage("Bedrooms"),
+    "beds": MessageLookupByLibrary.simpleMessage("Beds"),
+    "benefitsSeciton": MessageLookupByLibrary.simpleMessage("Benefits:"),
     "bestForYou": MessageLookupByLibrary.simpleMessage("Best For You"),
     "bestInvest": MessageLookupByLibrary.simpleMessage("Best Invest"),
     "bonus": MessageLookupByLibrary.simpleMessage("Bonus"),
@@ -48,12 +56,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "change": MessageLookupByLibrary.simpleMessage("Change"),
     "changePin": MessageLookupByLibrary.simpleMessage("Change PIN"),
+    "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
     "contactUsSuccess": MessageLookupByLibrary.simpleMessage(
       "Email sent successfully! Please follow you inbox.",
     ),
     "contactUsText": MessageLookupByLibrary.simpleMessage(
       "Feel free to reach out via our official email, and we’ll respond as soon as possible (within 24 hours).",
+    ),
+    "creditPlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Credit card number",
     ),
     "currentBalance": MessageLookupByLibrary.simpleMessage("CURRENT BALANCE"),
     "darkmode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
@@ -74,10 +86,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "depositFee": MessageLookupByLibrary.simpleMessage("Deposit"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
+    "egp": MessageLookupByLibrary.simpleMessage("EGP"),
+    "egpPerShare": MessageLookupByLibrary.simpleMessage("EGP/Share"),
+    "egpPerYear": MessageLookupByLibrary.simpleMessage("EGP/Year"),
     "emailPlaceholder": MessageLookupByLibrary.simpleMessage("Email Address"),
     "emptyFavourites": MessageLookupByLibrary.simpleMessage(
       "Add some favourite properties.",
     ),
+    "emptyInvetsments": MessageLookupByLibrary.simpleMessage(
+      "There are no investments yet, start investing in some property!",
+    ),
+    "emptyPartnerProperties": MessageLookupByLibrary.simpleMessage(
+      "Partner doesn\'t have properties!",
+    ),
+    "estimatedExitdate": MessageLookupByLibrary.simpleMessage(
+      "Estimated to exit on",
+    ),
+    "exited": MessageLookupByLibrary.simpleMessage("Exited"),
     "expenses": MessageLookupByLibrary.simpleMessage("Expenses"),
     "fees": MessageLookupByLibrary.simpleMessage("Fees"),
     "firstNamePLaceholder": MessageLookupByLibrary.simpleMessage("Firstname"),
@@ -91,18 +116,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordText": MessageLookupByLibrary.simpleMessage(
       "Provide us with your email then check your inbox for the verification email.",
     ),
+    "from": MessageLookupByLibrary.simpleMessage("From"),
     "fullNamePLaceholder": MessageLookupByLibrary.simpleMessage("Fullname"),
+    "funded": MessageLookupByLibrary.simpleMessage("Funded"),
     "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
     "haveAccount": MessageLookupByLibrary.simpleMessage("I have an account?"),
     "hello": MessageLookupByLibrary.simpleMessage("Hello!"),
     "hot": MessageLookupByLibrary.simpleMessage("HOT"),
+    "income": MessageLookupByLibrary.simpleMessage("Income"),
     "incomes": MessageLookupByLibrary.simpleMessage("Incomes"),
     "instaPay": MessageLookupByLibrary.simpleMessage("INSTAPAY"),
+    "instapayPlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Instapay account",
+    ),
     "invalidAmount": MessageLookupByLibrary.simpleMessage(
       "The amount should be at least 1000!",
     ),
+    "invalidAmount2": MessageLookupByLibrary.simpleMessage(
+      "Amount must be greater than 0",
+    ),
+    "invalidCredit": MessageLookupByLibrary.simpleMessage(
+      "Invalid credit/debit card number!",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Invalid email Address!",
+    ),
+    "invalidFullname": MessageLookupByLibrary.simpleMessage(
+      "Fullname consists of at least 3 characters!",
+    ),
+    "invalidInstapay": MessageLookupByLibrary.simpleMessage(
+      "Your account must end with @instapay",
     ),
     "invalidNationalId": MessageLookupByLibrary.simpleMessage(
       "National id consists of 14 digits and doesn\'t start with zero!",
@@ -119,6 +162,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidUsername": MessageLookupByLibrary.simpleMessage(
       "Requires at least 3 characters!",
     ),
+    "invalidVodafone": MessageLookupByLibrary.simpleMessage(
+      "Vodafone numbers start with 010 and consists of 11 digits!",
+    ),
+    "investNow": MessageLookupByLibrary.simpleMessage("Invest NOW!"),
+    "investmentSuccess": MessageLookupByLibrary.simpleMessage(
+      "Investment operation is done successfully!",
+    ),
+    "kitchens": MessageLookupByLibrary.simpleMessage("Kitchens"),
     "lastNamePLaceholder": MessageLookupByLibrary.simpleMessage("Lastname"),
     "lastTransactions": MessageLookupByLibrary.simpleMessage(
       "Last Transactions :",
@@ -128,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
     "messagePlaceholder": MessageLookupByLibrary.simpleMessage("Message"),
+    "monthDay": MessageLookupByLibrary.simpleMessage("Month/Day"),
     "more": MessageLookupByLibrary.simpleMessage("More"),
     "myInvestments": MessageLookupByLibrary.simpleMessage("My Investments"),
     "nationalIdPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -136,12 +188,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "newAdded": MessageLookupByLibrary.simpleMessage("New Added"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "no": MessageLookupByLibrary.simpleMessage("No"),
+    "noNotificationsYet": MessageLookupByLibrary.simpleMessage(
+      "There are no notifications yet!",
+    ),
+    "noResults": MessageLookupByLibrary.simpleMessage("No results exist!"),
     "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
       "There is no transactions yet!",
     ),
+    "notInvestorYet": MessageLookupByLibrary.simpleMessage(
+      "You are not Investor yet! you need to become investor first.",
+    ),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "numberOfShares": MessageLookupByLibrary.simpleMessage("Number of shares"),
+    "ok": MessageLookupByLibrary.simpleMessage("Ok"),
     "onboardingTitle": MessageLookupByLibrary.simpleMessage(
       "Invest in your favourite properties",
+    ),
+    "overlayTextPart1": MessageLookupByLibrary.simpleMessage("Hey"),
+    "overlayTextPart2": MessageLookupByLibrary.simpleMessage(
+      ", ask me anything",
     ),
     "paid": MessageLookupByLibrary.simpleMessage("PAID"),
     "partners": MessageLookupByLibrary.simpleMessage("Partners"),
@@ -153,8 +218,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "paymentFormTextPart1": MessageLookupByLibrary.simpleMessage(
       "Transfer the money for the following number: 01016868492",
     ),
+    "paymentPerYear": MessageLookupByLibrary.simpleMessage("Payment per year"),
     "pending": MessageLookupByLibrary.simpleMessage("PENDING"),
     "personalProfile": MessageLookupByLibrary.simpleMessage("Personal Profile"),
+    "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
     "phonePlaceholder": MessageLookupByLibrary.simpleMessage("Phone No."),
     "pinDialog": MessageLookupByLibrary.simpleMessage(
       "The pin number changed successfully!",
@@ -165,18 +232,37 @@ class MessageLookup extends MessageLookupByLibrary {
     "pinMessage": MessageLookupByLibrary.simpleMessage(
       "Enter new PIN number for your wallet",
     ),
-    "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy & Policy"),
+    "price": MessageLookupByLibrary.simpleMessage("Price"),
+    "pricePerShare": MessageLookupByLibrary.simpleMessage("Price per share"),
+    "priceShare": MessageLookupByLibrary.simpleMessage("Price/Share"),
+    "priceSold": MessageLookupByLibrary.simpleMessage("Price Sold"),
     "profileSettings": MessageLookupByLibrary.simpleMessage("Profile Settings"),
     "properties": MessageLookupByLibrary.simpleMessage(" Properties"),
+    "propertiesOfPartners": MessageLookupByLibrary.simpleMessage(
+      "Partner\'s Properties:",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
     "registerUser": MessageLookupByLibrary.simpleMessage("register"),
     "rent": MessageLookupByLibrary.simpleMessage("Rent"),
+    "rentalIncome": MessageLookupByLibrary.simpleMessage("Rental Income"),
+    "rentalName": MessageLookupByLibrary.simpleMessage("Rental Name"),
+    "rentalSeciton": MessageLookupByLibrary.simpleMessage("Rental Incomes:"),
+    "rented": MessageLookupByLibrary.simpleMessage("Rented"),
     "requiredAmount": MessageLookupByLibrary.simpleMessage(
       "Amount field is required!",
     ),
+    "requiredCredit": MessageLookupByLibrary.simpleMessage(
+      "Credit card number is required!",
+    ),
     "requiredEmail": MessageLookupByLibrary.simpleMessage(
       "Email field is required!",
+    ),
+    "requiredFullname": MessageLookupByLibrary.simpleMessage(
+      "Fullname field is required!",
+    ),
+    "requiredInstapay": MessageLookupByLibrary.simpleMessage(
+      "Instapay account is required!",
     ),
     "requiredMessage": MessageLookupByLibrary.simpleMessage(
       "Message field is required!",
@@ -202,6 +288,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "restOfProperties": MessageLookupByLibrary.simpleMessage(
       "Rest Of Properties",
     ),
+    "rooms": MessageLookupByLibrary.simpleMessage("Rooms"),
+    "roomsSeciton": MessageLookupByLibrary.simpleMessage("Rooms:"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "savedProperties": MessageLookupByLibrary.simpleMessage("Saved Properties"),
     "screenshotPlaceholder": MessageLookupByLibrary.simpleMessage("Screenshot"),
@@ -209,7 +297,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchResults": MessageLookupByLibrary.simpleMessage("Search Results:"),
     "sendButton": MessageLookupByLibrary.simpleMessage("Send"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "shares": MessageLookupByLibrary.simpleMessage("Shares"),
+    "sharesSeciton": MessageLookupByLibrary.simpleMessage("Shares:"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "squaredMeters": MessageLookupByLibrary.simpleMessage("Squared Meters"),
     "startInvestment": MessageLookupByLibrary.simpleMessage(
       "Start Investment!",
     ),
@@ -218,6 +309,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "successfullPayment": MessageLookupByLibrary.simpleMessage(
       "Payment operation done successfully!",
     ),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "Terms & Conditions",
+    ),
+    "to": MessageLookupByLibrary.simpleMessage("To"),
+    "total": MessageLookupByLibrary.simpleMessage("Total"),
+    "totalInvestments": MessageLookupByLibrary.simpleMessage(
+      "Total Investments",
+    ),
+    "unit": MessageLookupByLibrary.simpleMessage("UNIT"),
     "uploadBill": MessageLookupByLibrary.simpleMessage("Upload Bill"),
     "uploadBillMessage": MessageLookupByLibrary.simpleMessage(
       "You must upload a screenshot for the bill!",
@@ -234,6 +334,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Verify your email to complete your registration process via sending verification email.",
     ),
     "verifyButton": MessageLookupByLibrary.simpleMessage("Verify"),
+    "visit": MessageLookupByLibrary.simpleMessage("Visit"),
     "vodafoneCash": MessageLookupByLibrary.simpleMessage("VODAFONE CASH"),
     "wallet": MessageLookupByLibrary.simpleMessage("Wallet"),
     "withdraw": MessageLookupByLibrary.simpleMessage("WITHDRAW"),

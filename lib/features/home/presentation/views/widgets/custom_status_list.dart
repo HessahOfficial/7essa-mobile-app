@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/features/home/presentation/managers/search_bloc.dart';
 import 'package:hessa/features/home/presentation/views/widgets/custom_status_button.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomStatusList extends StatelessWidget {
   const CustomStatusList({super.key});
@@ -26,7 +27,7 @@ class CustomStatusList extends StatelessWidget {
                   context.read<SearchBloc>().setStatus(index: 0);
                 }
               },
-              text: "Available",
+              text: S.of(context).available,
               color: AppColors.newAddedColor,
             ),
             CustomStatusButton(
@@ -39,7 +40,7 @@ class CustomStatusList extends StatelessWidget {
                   context.read<SearchBloc>().setStatus(index: 1);
                 }
               },
-              text: "Funded",
+              text: S.of(context).funded,
               color: AppColors.developersColor,
             ),
             CustomStatusButton(
@@ -52,7 +53,7 @@ class CustomStatusList extends StatelessWidget {
                   context.read<SearchBloc>().setStatus(index: 2);
                 }
               },
-              text: "Exited",
+              text: S.of(context).exited,
               color: AppColors.bestForYouColor,
             ),
           ],

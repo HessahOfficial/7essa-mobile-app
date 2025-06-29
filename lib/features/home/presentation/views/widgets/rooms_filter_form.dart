@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hessa/core/themes/colors/app_colors.dart';
 import 'package:hessa/core/widgets/custom_text_field.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class RoomsFilterForm extends StatelessWidget {
   final TextEditingController roomsController;
@@ -38,7 +39,7 @@ class RoomsFilterForm extends StatelessWidget {
     required this.formKey,
   });
 
-  List<CustomTextField> getRoomsFormFields() {
+  List<CustomTextField> getRoomsFormFields(BuildContext context) {
     List<CustomTextField> formFields = [];
 
     formFields.add(
@@ -49,7 +50,7 @@ class RoomsFilterForm extends StatelessWidget {
         controller: roomsController,
         icon: FontAwesomeIcons.personBooth,
         inputColor: AppColors.white2,
-        placeholder: "Rooms",
+        placeholder: S.of(context).rooms,
         type: TextInputType.number,
       ),
     );
@@ -62,7 +63,7 @@ class RoomsFilterForm extends StatelessWidget {
         controller: bedsController,
         icon: FontAwesomeIcons.bed,
         inputColor: AppColors.white2,
-        placeholder: "Bedrooms",
+        placeholder: S.of(context).bedrooms,
         type: TextInputType.number,
       ),
     );
@@ -75,7 +76,7 @@ class RoomsFilterForm extends StatelessWidget {
         controller: bathsController,
         icon: FontAwesomeIcons.bath,
         inputColor: AppColors.white2,
-        placeholder: "Bathrooms",
+        placeholder: S.of(context).bathrooms,
         type: TextInputType.number,
       ),
     );
@@ -88,7 +89,7 @@ class RoomsFilterForm extends StatelessWidget {
         controller: kitchensController,
         icon: FontAwesomeIcons.kitchenSet,
         inputColor: AppColors.white2,
-        placeholder: "Kitchens",
+        placeholder: S.of(context).kitchens,
         type: TextInputType.number,
       ),
     );
@@ -107,7 +108,7 @@ class RoomsFilterForm extends StatelessWidget {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         childAspectRatio: 4,
-        children: getRoomsFormFields(),
+        children: getRoomsFormFields(context),
       ),
     );
   }

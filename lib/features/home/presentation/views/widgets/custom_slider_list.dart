@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hessa/features/home/presentation/views/widgets/custom_range_slider.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomSliderList extends StatelessWidget {
   final double minAvailableShares;
@@ -66,7 +67,7 @@ class CustomSliderList extends StatelessWidget {
       spacing: 10,
       children: [
         CustomRangeSlider(
-          title: "Available Shares (UNIT):",
+          title: "${S.of(context).availableShares} (${S.of(context).unit}):",
           min: minAvailableShares,
           max: maxAvailableShares,
           values: availableSharesValues,
@@ -74,35 +75,35 @@ class CustomSliderList extends StatelessWidget {
           isInt: true,
         ),
         CustomRangeSlider(
-          title: "Price (EGP):",
+          title: "${S.of(context).price} (${S.of(context).egp}):",
           min: minPrice,
           max: maxPrice,
           values: priceValues,
           onChanged: priceOnchanged,
         ),
         CustomRangeSlider(
-          title: "Price per share (EGP):",
+          title: "${S.of(context).pricePerShare} (${S.of(context).egp}):",
           min: minPricePerShare,
           max: maxPricePerShare,
           values: pricePerShareValues,
           onChanged: pricePerShareOnchanged,
         ),
         CustomRangeSlider(
-          title: "Rental Income (EGP):",
+          title: "${S.of(context).rentalIncome} (${S.of(context).egp}):",
           min: minRentalIncome,
           max: maxRentalIncome,
           values: rentalIncomeValues,
           onChanged: rentalIncomeOnchanged,
         ),
         CustomRangeSlider(
-          title: "Area (Squared Meter):",
+          title: "${S.of(context).area} (${S.of(context).squaredMeters}):",
           min: minArea,
           max: maxArea,
           values: areaValues,
           onChanged: areaOnchanged,
         ),
         CustomRangeSlider(
-          title: "Yearly Payment (EGP):",
+          title: "${S.of(context).paymentPerYear} (${S.of(context).egp}):",
           min: minYearlyPayment,
           max: maxYearlyPayment,
           values: yearlyPaymentValues,

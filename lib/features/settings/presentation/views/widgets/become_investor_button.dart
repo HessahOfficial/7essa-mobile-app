@@ -12,9 +12,6 @@ class BecomeInvestorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = getIt.get<HiveHelper>().isDark ?? false;
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return Material(
       borderRadius: BorderRadius.circular(10),
       child: InkWell(

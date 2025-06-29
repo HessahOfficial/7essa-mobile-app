@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.dart';
 import 'package:hessa/features/favourite/presentation/views/widgets/custom_saved_card.dart';
 import 'package:hessa/generated/l10n.dart';
@@ -12,7 +11,6 @@ class CustomMultiSelectList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FavouriteCubit, FavouriteState>(
       builder: (bcccontext, state) {
-        double screenWidth = MediaQuery.of(context).size.width;
         final favourites = context.read<FavouriteCubit>().favourites;
 
         return favourites.isNotEmpty

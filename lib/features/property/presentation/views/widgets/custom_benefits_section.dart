@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hessa/features/home/data/models/property_model.dart';
 import 'package:hessa/features/property/presentation/views/widgets/custom_benefit_badge.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomBenefitsSection extends StatelessWidget {
   final PropertyModel property;
@@ -22,7 +23,7 @@ class CustomBenefitsSection extends StatelessWidget {
       spacing: 10,
       children: [
         Text(
-          "Benefits :",
+          S.of(context).benefitsSeciton,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         Wrap(spacing: 10, children: getBenefitBadges()),

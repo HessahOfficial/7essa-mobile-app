@@ -12,6 +12,7 @@ import 'package:hessa/features/favourite/presentation/managers/favourite_cubit.d
 import 'package:hessa/features/home/data/models/add_to_favourites_request.dart';
 import 'package:hessa/features/home/data/models/property_model.dart';
 import 'package:hessa/features/home/presentation/managers/property_bloc.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class HotPropertyCard extends StatelessWidget {
   final double screenWidth;
@@ -159,7 +160,7 @@ class HotPropertyCard extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      "${property.pricePerShare}LE / Share",
+                      "${property.pricePerShare} ${S.of(context).egpPerShare}",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],

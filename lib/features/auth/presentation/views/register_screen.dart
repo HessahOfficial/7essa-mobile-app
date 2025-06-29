@@ -232,15 +232,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             textColor: AppColors.backgroundColorLight,
                             onPressed: registerUser,
                           ),
-                      SizedBox(height: 30),
-                      CustomCircularButton(
-                        onTap: signUpWithGoogle,
-                        child: SvgPicture.asset(
-                          "assets/images/google.svg",
-                          width: 30,
-                          height: 30,
-                        ),
-                      ),
                     ],
                   ),
                 ),

@@ -9,7 +9,6 @@ class LaunchCubit extends Cubit<LaunchState> {
   LaunchCubit() : super(LaunchInitial());
 
   Future<void> launch({required BuildContext context}) async {
-    print("Launch");
     await getIt.get<HiveHelper>().storeIsFirstLaunch(isFirstLaunch: false);
     emit(LaunchActive());
   }

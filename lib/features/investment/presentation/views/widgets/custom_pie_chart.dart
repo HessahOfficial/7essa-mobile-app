@@ -5,6 +5,7 @@ import 'package:hessa/core/helpers/hive_helper.dart';
 import 'package:hessa/core/utils/service_locator.dart';
 import 'package:hessa/features/investment/data/models/investment_model.dart';
 import 'package:hessa/features/investment/presentation/managers/investment_bloc.dart';
+import 'package:hessa/generated/l10n.dart';
 
 class CustomPieChart extends StatelessWidget {
   final InvestmentModel currentInvestment;
@@ -40,24 +41,17 @@ class CustomPieChart extends StatelessWidget {
                   spacing: 5,
                   children: [
                     Text(
-                      "Total Investments",
+                      S.of(context).totalInvestments,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 15,
                       ),
                     ),
                     Text(
-                      "${currentInvestment.investmentAmount} EGP",
+                      "${currentInvestment.investmentAmount} ${S.of(context).egp}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                      ),
-                    ),
-                    Text(
-                      "65% Shares",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ],
